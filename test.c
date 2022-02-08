@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:31:34 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/08 14:58:22 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/08 16:23:50 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 //->ctr + c => SIGINT(interuption), ctrl + d => SIGHUP(fin de connexion)
 //Do you want to quit [y/n] ? ca peut etre tres cool
 // pas reussi a gerer bien ctrl=D
+// fork == 0 =>childprocess
+//attention lors dun fork la position des fichier nest pas duppliquer dou gettenv!!
+/*
+	coller un perror apres le exec pour check si le pgm a bien ete execute
+	en attendant le parent wait() que le le fils se suicide a cause du exec
+*/
 
 /*
 	1) rl_on_new_line cree une ligne vide, 
