@@ -6,21 +6,23 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:27:53 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/10 11:12:47 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/10 14:31:32 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "function.h"
 
-# define BUFFER_SIZE 55
+# define BUFFER_SIZE 46
 
+/*
 int main(void)
 {
-	char	buff[BUFFER_SIZE];
+	char	*buff = NULL;
 	char	*ret;
 	
-	chdir("/mnt/nfs/homes/gmary/Documents/TAFF/minishell/salut");
+	//chdir("/mnt/nfs/homes/gmary/Documents/TAFF/minishell/salut");
 	ret = getcwd(buff, BUFFER_SIZE);
+	//"/mnt/nfs/homes/gmary/Documents/TAFF/minishell";
 	//if (getcwd(buff, BUFFER_SIZE) == NULL)
 	if (ret == NULL)
 	{
@@ -30,8 +32,24 @@ int main(void)
 	}
 	else
 		printf("%s\n", ret);
-	ret = getcwd(buff, BUFFER_SIZE);
+	//et = getcwd(buff, BUFFER_SIZE);
 		//printf("%s\n", buff);
-	//free(buff);
+	free(buff);
+	free(ret);
 	return (0);
 }
+*/
+
+int main(int ac, char **av, char **envp)
+{
+	(void)ac;
+	(void)av;
+	int i = 0;
+
+	while (envp)
+	{
+		printf("%s\n", envp[i]);
+		i++;
+	}
+	return (0);
+} 

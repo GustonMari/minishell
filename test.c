@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:31:34 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/10 09:47:29 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/10 13:33:59 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	exit_process(int sig)
 int main()
 {
 	char	*line;
-	kill();
+	
 	while (42)
 	{
 		if (signal(SIGINT, &exit_process) == SIG_ERR)
