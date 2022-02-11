@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 07:43:18 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/11 08:08:38 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/11 14:24:07 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int main(void)
 		printf("open failed\n");
 		exit(EXIT_FAILURE);
 	}
+	printf("getenv %s\n", getenv("PWD"));
 	while ((pdirent = readdir(pdir)) != NULL)
 		printf("%s\n", pdirent->d_name);
 	closedir(pdir);
