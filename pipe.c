@@ -6,55 +6,57 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 15:42:35 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/10 17:05:00 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/11 07:17:10 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "function.h"
 
-#include <sys/wait.h>
-#include <assert.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-
-int
-main(int argc, char *argv[])
-{
-    int pipefd[2];
-    pid_t cpid;
-    char buf;
-
-    assert(argc == 2);
-
-    if (pipe(pipefd) == -1) {
-        perror("pipe");
-        exit(EXIT_FAILURE);
-    }
-
-    cpid = fork();
-    if (cpid == -1) {
-        perror("fork");
-        exit(EXIT_FAILURE);
-    }
-
-    if (cpid == 0) {    /* Le fils lit dans le tube */
-        close(pipefd[1]);  /* Ferme l'extrémité d'écriture inutilisée */
-
-        while (read(pipefd[0], &buf, 1) > 0)
-            write(STDOUT_FILENO, &buf, 1);
-
-        write(STDOUT_FILENO, "XXX\n", 4);
-        close(pipefd[0]);
-        _exit(EXIT_SUCCESS);
-
-    } 
-	else {                    /* Le père écrit argv[1] dans le tube */
-        close(pipefd[0]);       /* Ferme l'extrémité de lecture inutilisée */
-        write(pipefd[1], argv[1], strlen(argv[1]));
-        close(pipefd[1]);       /* Le lecteur verra EOF */
-        wait(NULL);             /* Attente du fils */
-        exit(EXIT_SUCCESS);
-    }
-}
+  #include <memory.h>
+  #include <unistd.h>
+ 
+  int main( int argc, char ** argv )
+  {
+       (void)argc;
+	   (void)argv;
+   /* create the pipe */
+   int pfd[2];
+   if (pipe(pfd) == -1)
+     {
+       printf("pipe failed\n");
+       return 1;
+     }
+ 
+   /* create the child */
+   int pid;
+   if ((pid = fork()) < 0)
+     {
+       printf("fork failed\n");
+       return 2;
+     }
+ 
+   if (pid == 0)
+     {
+       /* child */
+       close(pfd[1]); /* close the unused write side */
+       dup2(pfd[0], 0); /* connect the read side with stdin */
+       close(pfd[0]); /* close the read side */
+       /* execute the process (wc command) */
+       execlp("wc", "wc", (char *) 0);
+       printf("wc failed"); /* if execlp returns, it's an error */
+       return 3;
+     }
+   else
+     {
+       /* parent */
+       close(pfd[0]); /* close the unused read side */
+       dup2(pfd[1], 1); /* connect the write side with stdout */
+       close(pfd[1]); /* close the write side */
+       /* execute the process (ls command) */
+       execlp("ls", "ls", (char *)0);
+       printf("ls failed"); /* if execlp returns, it's an error */
+       return 4;
+     }
+   return 0;
+  }

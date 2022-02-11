@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:27:53 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/10 14:31:32 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/11 07:06:39 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 # define BUFFER_SIZE 46
 
-/*
+
 int main(void)
 {
 	char	*buff = NULL;
@@ -26,7 +26,7 @@ int main(void)
 	//if (getcwd(buff, BUFFER_SIZE) == NULL)
 	if (ret == NULL)
 	{
-		if (errno = ERANGE)
+		if (errno == ERANGE)
 			printf("ERANGE ERROR");
 		exit(0);
 	}
@@ -38,8 +38,8 @@ int main(void)
 	free(ret);
 	return (0);
 }
-*/
 
+/*
 int main(int ac, char **av, char **envp)
 {
 	(void)ac;
@@ -53,3 +53,4 @@ int main(int ac, char **av, char **envp)
 	}
 	return (0);
 } 
+*/
