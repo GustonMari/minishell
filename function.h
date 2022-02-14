@@ -6,14 +6,14 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/14 15:04:18 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/14 18:33:15 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FUNCTION_H
 # define FUNCTION_H
 
-# include "lexer.h"
+# include "struct.h"
 # include "colors.h"
 # include <unistd.h>
 # include <stdio.h>
@@ -31,7 +31,16 @@
 # include <termios.h>
 # define BUFFER_SIZE 200
 
+/*
+--------------- UTILS ----------------
+*/
+
 int ft_strcmp(char *s1, char *s2);
+
+/*
+--------------- ft_cd.c ----------------
+*/
+
 int	ft_cd(char *str);
 int	ft_home(void);
 
