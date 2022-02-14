@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:27:53 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/14 16:41:05 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/14 19:34:12 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,11 @@ int main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	int i = 0;
+	t_env	*env;
 
 	while (envp[i])
 	{
+		ft_lstadd_back(&env, envpi[i]);
 		printf("%s\n", envp[i]);
 		i++;
 	}
@@ -56,9 +58,16 @@ int main(int ac, char **av, char **envp)
 } 
 
 
-/*
-int main(void)
+/* int main(int ac, char **av, char **envp)
 {
-	printf("%s\n", getenv("PWD"));
-}
-*/
+	(void)ac;
+	(void)av;
+	int i = 0;
+
+	while (envp[i])
+	{
+		printf("%s\n", envp[i]);
+		i++;
+	}
+	return (0);
+}  */
