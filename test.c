@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:31:34 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/11 11:40:36 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/14 15:15:08 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ int main()
 		if (line && *line)
 		{	
 			add_history(line);
-			printf("%s\n", line);
+			//printf("%s\n", line);
+			if(ft_cd(line))
+				printf("Problem with cd\n");
 		}
 		if(line)
 			free(line);

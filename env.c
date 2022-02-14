@@ -6,14 +6,11 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:27:53 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/11 08:43:11 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/14 15:04:24 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "function.h"
-
-# define BUFFER_SIZE 46
-
 
 int main(void)
 {
