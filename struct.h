@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/14 11:14:36 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/14 14:23:48 by gmary            ###   ########.fr       */
+/*   Created: 2022/02/14 18:00:55 by gmary             #+#    #+#             */
+/*   Updated: 2022/02/14 18:01:33 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ typedef enum s_tokentype
 	CMD,
 	DOLLAR,
 	WORD,
-	SPACE
+	SPACE,
+	NO_NEW_LINE //pour le -n de echo
 }	t_tokentype;
 
 typedef struct t_token
