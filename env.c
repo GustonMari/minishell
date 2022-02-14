@@ -6,13 +6,13 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:27:53 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/14 15:04:24 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/14 15:39:25 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "function.h"
 
-int main(void)
+/* int main(void)
 {
 	char	*buff = NULL;
 	char	*ret;
@@ -38,23 +38,23 @@ int main(void)
 	free(ret);
 	return (0);
 }
+ */
 
 
-/*
 int main(int ac, char **av, char **envp)
 {
 	(void)ac;
 	(void)av;
 	int i = 0;
 
-	while (envp)
+	while (envp[i])
 	{
 		printf("%s\n", envp[i]);
 		i++;
 	}
 	return (0);
 } 
-*/
+
 
 /*
 int main(void)
