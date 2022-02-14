@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 17:59:02 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/14 18:45:29 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/14 18:52:15 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ int	ft_check_double(char *str, char c)
 			- 47 => simple quote ;)
 			- comment gerer """" "'" etc...
 			- faire en amont avec les tokens le predecoupage???
+			-surement faire pleins de petit echo, comme pour les cas comme ceci:
+			echo "salut toi" | echo "oui oui" => ou pas besoin car process situe dans le child ??
+			- dapres le tuto il faudrait plus print tant que lon tombe pas sur un | ce qui est plustot 
+			pratique sauf si lon tombe sur echo " salut toi | tu manges buen"
 */
 
 int	ft_echo(char *str, int arg)
