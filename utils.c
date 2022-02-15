@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:27:59 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/15 13:26:52 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/15 13:47:18 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,25 +67,4 @@ return(s1[i] - s2[i]);
 }
 
 
-/* UTILS 2*/
 
-char	*ft_strdup(const char *src)
-{
-	int		i;
-	char	*dest;
-
-	i = 0;
-	while (src[i])
-		i++;
-	dest = malloc(sizeof(char) * (i + 1));
-	if (!dest)
-		return (NULL);
-	i = 0;
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}

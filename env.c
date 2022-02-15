@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:27:53 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/15 13:38:37 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/15 13:59:16 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,6 @@ int		ft_print_env(char **env)
 	return (0);
 }
 
-int		ft_count_line(char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i])
-		i++;
-	return (i);
-}
 
 char	**ft_create_env(char **envp)
 {
@@ -89,6 +80,8 @@ char	**ft_create_env(char **envp)
 	env[i] = NULL;
 	return (env);
 }
+
+
 
 /* int	ft_print_env(t_list **env)
 {
