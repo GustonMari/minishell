@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:31:34 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/14 15:15:08 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/15 13:34:27 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,18 @@ void	exit_process(int sig)
 	exit(0);
 }
 
-int main()
+int main(int ac, char **av, char **envp)
 {
 	char	*line;
-	
+	char	**env;
+
+	//Changer ca, pour que ca marche
+	if (!envp)
+	{	
+		ft_putstr_fd("\n\e[1;91m- Need ENVP -\e[0m\n", 1);
+		return (0);
+	}
+	env = ft_create_env(envp);
 	while (42)
 	{
 		if (signal(SIGINT, &exit_process) == SIG_ERR)
@@ -78,16 +86,18 @@ int main()
 		{
 			free(line);
 			rl_clear_history();
-			printf("%s- EXIT OK -\n", BHRED);
+			ft_putstr_fd("\n\e[1;91m- EXIT OK -\e[0m\n", 1);
 			return (0);
 		}
-		//on ne veut pas avoir de ligne vide dans l'historique ??
 		if (line && *line)
 		{	
 			add_history(line);
-			//printf("%s\n", line);
-			if(ft_cd(line))
-				printf("Problem with cd\n");
+			if (!ft_strncmp(line, "env", 4))
+				ft_print_env(env);
+			else
+				printf("%s\n", line);
+			//if(ft_cd(line))
+			//	ft_putstr_fd("\n\e[1;91m- Problem with cd -\n", 1);
 		}
 		if(line)
 			free(line);

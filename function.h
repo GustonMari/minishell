@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/14 19:34:57 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/15 13:31:30 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,43 @@
 # include <termios.h>
 # define BUFFER_SIZE 200
 
+
+/*
+--------------- LIST UTILS ----------------
+*/
+
+t_list	*ft_lstnew(char *content);
+void	ft_lstadd_back(t_list **alst, t_list *new);
+void    print_list(t_list **begin_list);
+
 /*
 --------------- UTILS ----------------
 */
 
-int ft_strcmp(char *s1, char *s2);
-t_env	*ft_lstnew(char *content);
-void	ft_lstadd_back(t_env **alst, t_env *new);
+int		ft_strcmp(char *s1, char *s2);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strlen(char *str);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putchar_fd(char c, int fd);
+
+char	*ft_strdup(const char *src);
+
+
 
 /*
 --------------- ft_cd.c ----------------
 */
 
-int	ft_cd(char *str);
-int	ft_home(void);
+int		ft_cd(char *str);
+int		ft_home(void);
+
+/*
+------------------ ENV ----------------
+*/
+/* t_list	**ft_create_env(char **envp);
+int	ft_print_env(t_list **env); */
+char	**ft_create_env(char **envp);
+int		ft_print_env(char **env);
+
 
 #endif

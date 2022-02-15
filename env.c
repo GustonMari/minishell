@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:27:53 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/14 19:34:12 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/15 13:38:37 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,33 +41,75 @@
  */
 
 
-int main(int ac, char **av, char **envp)
+int		ft_print_env(char **env)
 {
-	(void)ac;
-	(void)av;
-	int i = 0;
-	t_env	*env;
+	int	i;
 
-	while (envp[i])
+	i = 0;
+	while (env[i])
 	{
-		ft_lstadd_back(&env, envpi[i]);
-		printf("%s\n", envp[i]);
+		ft_putstr_fd(env[i], 1);
+		ft_putchar_fd('\n', 1);
 		i++;
 	}
 	return (0);
-} 
+}
 
-
-/* int main(int ac, char **av, char **envp)
+int		ft_count_line(char **envp)
 {
-	(void)ac;
-	(void)av;
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (envp[i])
+		i++;
+	return (i);
+}
+
+char	**ft_create_env(char **envp)
+{
+	char	**env;
+	int		line;
+	int		i;
+
+	i = 0;
+	line = ft_count_line(envp);
+	env = malloc(sizeof(char *) * line + 1);
+	if (!env)
+		return (NULL);
+	while (i < line)
 	{
-		printf("%s\n", envp[i]);
+		env[i] = ft_strdup(envp[i]);
+		if (!env[i])
+		{
+			//clear le tab..
+			return (NULL);
+		}
 		i++;
 	}
+	env[i] = NULL;
+	return (env);
+}
+
+/* int	ft_print_env(t_list **env)
+{
+	print_list(env);
 	return (0);
-}  */
+}
+
+t_list	**ft_create_env(char **envp)
+{
+	int i = 0;
+	t_list	**env = NULL;
+	t_list	*temp = NULL;
+
+	env = malloc(sizeof(t_list *));
+	while (envp[i])
+	{
+		temp = ft_lstnew(envp[i]);
+		// if !temp => ft_lst_clear()
+		ft_lstadd_back(env, temp);
+		i++;
+	}
+
+	return (env);
+} */
