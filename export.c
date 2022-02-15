@@ -75,7 +75,7 @@ char	**ft_export(char **env, char *str)
 
 	i = 0;
 	line = ft_count_line(env);
-	new_env = malloc(sizeof(char *) * line + 2);
+	new_env = malloc(sizeof(char *) * (line + 2));
 	if (!new_env)
 		return (NULL);
 	while (i < line)

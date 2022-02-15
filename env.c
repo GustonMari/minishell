@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:27:53 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/15 14:32:21 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/15 17:24:35 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	**ft_create_env(char **envp)
 
 	i = 0;
 	line = ft_count_line(envp);
-	env = malloc(sizeof(char *) * line + 1);
+	env = malloc(sizeof(char *) * (line + 1));
 	if (!env)
 		return (NULL);
 	while (i < line)

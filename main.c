@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:31:34 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/15 13:34:27 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/15 17:27:55 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int main(int ac, char **av, char **envp)
 {
 	char	*line;
 	char	**env;
-
+	(void)ac;
+	(void)av;
 	//Changer ca, pour que ca marche
 	if (!envp)
 	{	
@@ -86,6 +87,7 @@ int main(int ac, char **av, char **envp)
 		{
 			free(line);
 			rl_clear_history();
+			ft_free_tab_2d(env);
 			ft_putstr_fd("\n\e[1;91m- EXIT OK -\e[0m\n", 1);
 			return (0);
 		}
@@ -94,6 +96,8 @@ int main(int ac, char **av, char **envp)
 			add_history(line);
 			if (!ft_strncmp(line, "env", 4))
 				ft_print_env(env);
+			else if (!ft_strncmp(line, "pwd", 4))
+				ft_pwd();
 			else
 				printf("%s\n", line);
 			//if(ft_cd(line))

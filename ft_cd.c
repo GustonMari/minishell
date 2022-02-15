@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 14:02:11 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/14 16:23:02 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/15 16:51:16 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	ft_home(void)
 {
 	char	*buff;
 
+	buff = NULL;
 	chdir(getenv("HOME="));
 	printf("%s\n", getcwd(buff, BUFFER_SIZE));
 	return (0);
@@ -44,6 +45,7 @@ int	ft_cd(char *str)
 {
 	char	*buff;
 
+	buff = NULL;
 	if (!*str || !ft_strcmp(str, "~"))
 		return(ft_home());
 	if (ft_check_cd(str))

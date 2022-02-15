@@ -57,6 +57,7 @@ char	**ft_unset(char **env)
 	return (new_tab);
 }
 
+/*
 int main(int ac, char **av, char **envp)
 {
 	(void)ac;
@@ -67,3 +68,4 @@ int main(int ac, char **av, char **envp)
 	ft_print_env(ft_unset(env));
 	ft_free_tab_2d(env);
 }
+*/
