@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/15 16:46:15 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/15 19:24:59 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int		ft_count_line(char **tab);
 --------------- ft_cd.c ----------------
 */
 
-int		ft_cd(char *str);
-int		ft_home(void);
+int	ft_cd(char *str, char **env);
+int	ft_home(char **env);
 
 /*
 ------------------ ENV ----------------
@@ -90,6 +90,8 @@ int		ft_free_tab_2d(char **tab);
 /*
 ------------------ UNSET ----------------
 */
+
+int	ft_ncmp_unset(char *str, char *to_del, size_t n);
 
 
 /*
