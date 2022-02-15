@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/15 13:59:45 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/15 14:40:18 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,10 @@ void	ft_putchar_fd(char c, int fd);
 --------------- UTILS 2 ----------------
 */
 
-char	*ft_strdup(const char *src);
+char	*ft_strdup(char *src);
+char	**ft_strdup_2d(char **srcs);
 char	**ft_export(char **env, char *str);
 int		ft_count_line(char **tab);
-
-
 
 
 /*

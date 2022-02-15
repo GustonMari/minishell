@@ -1,7 +1,7 @@
 #include "function.h"
 
 
-char	*ft_strdup(const char *src)
+char	*ft_strdup(char *src)
 {
 	int		i;
 	char	*dest;
@@ -19,6 +19,28 @@ char	*ft_strdup(const char *src)
 		i++;
 	}
 	dest[i] = '\0';
+	return (dest);
+}
+
+char	**ft_strdup_2d(char **srcs)
+{
+	int		i;
+	int		line;
+	char	**dest;
+
+	i = 0;
+	line = ft_count_line(srcs);
+	dest = malloc(sizeof(char *) * (line + 1));
+	if (!dest)
+		return (NULL);
+	while (i < line)
+	{
+		dest[i] = ft_strdup(srcs[i]);
+		if (!dest[i])
+			return (NULL);
+		i++;
+	}
+	dest[i] = NULL;
 	return (dest);
 }
 
