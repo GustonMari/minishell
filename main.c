@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:31:34 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/15 17:27:55 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/16 11:20:11 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,17 @@ int main(int ac, char **av, char **envp)
 		if (line && *line)
 		{	
 			add_history(line);
-			if (!ft_strncmp(line, "env", 4))
+			/* if (!ft_strncmp(line, "env", 4))
 				ft_print_env(env);
 			else if (!ft_strncmp(line, "pwd", 4))
 				ft_pwd();
 			else
-				printf("%s\n", line);
-			//if(ft_cd(line))
-			//	ft_putstr_fd("\n\e[1;91m- Problem with cd -\n", 1);
+				printf("%s\n", line); */
+			ft_cd(line, env);
+			//ft_pwd();
+			
+/* 			if(ft_cd(line))
+				ft_putstr_fd("\n\e[1;91m- Problem with cd -\n", 1); */
 		}
 		if(line)
 			free(line);

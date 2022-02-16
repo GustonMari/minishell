@@ -1,7 +1,7 @@
 #include "function.h"
 
 
-int	ft_ncmp_unset(char *str, char *to_del, size_t n)
+int	is_var_in_line(char *str, char *to_del, size_t n)
 {
 	size_t	i;
 
@@ -35,7 +35,7 @@ char	**ft_create_unset(char **srcs, char *to_del)
 		return (NULL);
 	while (j < line)
 	{
-		if (ft_ncmp_unset(srcs[j], to_del, ft_strlen(to_del)))
+		if (is_var_in_line(srcs[j], to_del, ft_strlen(to_del)))
 		{	
 			dest[i] = ft_strdup(srcs[j]);
 			if (!dest[i])

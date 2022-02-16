@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 14:02:11 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/16 10:34:45 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/16 11:40:20 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,12 @@ char	*ft_cpy_val_var_env(char *var, char *find)
 	
 }
 
-char	*ft_get_path(char **tab, char *find)
+/*
+		Cherche dans tout le tableau et retourne la valeur de find
+		exemple: find = HOME la fonction renverra /mnt/nfs/homes/gmary
+*/
+
+char	*find_val_in_tab(char **tab, char *find)
 {
 	int		i;
 	
@@ -36,7 +41,7 @@ char	*ft_get_path(char **tab, char *find)
 	while (tab[i])
 	{
 		//changer nom function en dessous
-		if (!ft_ncmp_unset(tab[i], find, ft_strlen(find)))
+		if (!is_var_in_line(tab[i], find, ft_strlen(find)))
 			return (ft_cpy_val_var_env(tab[i], find));
 		i++;
 	}
@@ -62,7 +67,7 @@ int	ft_home(char **env)
 {
 	char	*path;
 
-	path = ft_get_path(env, "HOME");
+	path = find_val_in_tab(env, "HOME");
 	if (path)
 	{
 		if (ft_check_cd(path))
@@ -71,7 +76,6 @@ int	ft_home(char **env)
 	}
 	else
 		chdir(getenv("HOME="));
-	printf("%s\n", path);
 	return (0);
 }
 
@@ -85,12 +89,12 @@ char	*ft_rpl_val_var_env(char *var, char *new_val)
 	int		i;
 	char	*ret;
 
+	i = 0;
 	while (var[i] != '=')
 		i++;
 	var[i + 1] = '\0';
 	ret = ft_strjoin(var, new_val);
 	free(var);
-	printf("ret = %s\n", ret);
 	return (ret);
 }
 
@@ -98,7 +102,7 @@ char	*ft_rpl_val_var_env(char *var, char *new_val)
 	change value de PWD et OLDPWD dans 
 */
 
-int	ft_change_pwd(char **env, char *var, char *new_val)
+int	ft_change_env_val(char **env, char *var, char *new_val)
 {
 	int		i;
 	
@@ -106,9 +110,10 @@ int	ft_change_pwd(char **env, char *var, char *new_val)
 	while (env[i])
 	{
 		//changer nom function en dessous
-		if (!ft_ncmp_unset(env[i], var, ft_strlen(var)))
+		if (!is_var_in_line(env[i], var, ft_strlen(var)))
 		{
 			env[i] = ft_rpl_val_var_env(env[i], new_val);
+			printf("%s\n", env[i]);
 			return (0);
 		}
 		i++;
@@ -118,28 +123,33 @@ int	ft_change_pwd(char **env, char *var, char *new_val)
 
 //MAIN CD FUNCTION
 
+
+
 int	ft_cd(char *str, char **env)
 {
-	char	*buff;
-
-	buff = NULL;
+	char	*old_pwd;
+	
 	if (!*str || !ft_strcmp(str, "~"))
 		return(ft_home(env));
 	if (ft_check_cd(str))
-		return (1);
+		return (-1);
+	old_pwd = find_val_in_tab(env, "PWD");
 	if (chdir(str) == -1)
 		printf("Error chdir not working");
-	printf("%s\n", getcwd(buff, BUFFER_SIZE));
 	//change PWD & OLDPWD ??
-	
+	ft_change_env_val(env, "PWD", str);
+	printf("------------------------------------------\n");
+	ft_change_env_val(env, "OLDPWD", old_pwd);
+	free(old_pwd);
 	return (0);
 }
 
-int main(int argc, char **argv, char **envp)
+
+/* int main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
 	(void)envp;
-	ft_change_pwd(ft_create_env(envp), "PWD", "/mnt/nfs/homes/");
+	ft_cd("/mnt/nfs/homes/gmary/Documents/TAFF", ft_create_env(envp));
 	return (0);
-}
+} */

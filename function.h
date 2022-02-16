@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/16 10:23:11 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/16 10:57:28 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int		ft_free_tab_2d(char **tab);
 ------------------ UNSET ----------------
 */
 
-int	ft_ncmp_unset(char *str, char *to_del, size_t n);
+int	is_var_in_line(char *str, char *to_del, size_t n);
 
 
 /*
