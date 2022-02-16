@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 14:02:11 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/16 11:40:20 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/16 14:46:56 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ char	*find_val_in_tab(char **tab, char *find)
 	i = 0;
 	while (tab[i])
 	{
-		//changer nom function en dessous
 		if (!is_var_in_line(tab[i], find, ft_strlen(find)))
 			return (ft_cpy_val_var_env(tab[i], find));
 		i++;
@@ -53,7 +52,9 @@ int	ft_check_cd(char *str)
 	if (access(str, X_OK) == -1)
 	{
 		//a changer virer fprintf
-		fprintf(stderr, "Error: %s\n", strerror(errno));
+		perror("\e[0;31mError\e[0m");
+		//perror((const char *)strerror(errno));
+		//perror("\n");
 		return (1);
 	}
 	return (0);
@@ -109,7 +110,6 @@ int	ft_change_env_val(char **env, char *var, char *new_val)
 	i = 0;
 	while (env[i])
 	{
-		//changer nom function en dessous
 		if (!is_var_in_line(env[i], var, ft_strlen(var)))
 		{
 			env[i] = ft_rpl_val_var_env(env[i], new_val);
@@ -123,8 +123,6 @@ int	ft_change_env_val(char **env, char *var, char *new_val)
 
 //MAIN CD FUNCTION
 
-
-
 int	ft_cd(char *str, char **env)
 {
 	char	*old_pwd;
@@ -136,9 +134,7 @@ int	ft_cd(char *str, char **env)
 	old_pwd = find_val_in_tab(env, "PWD");
 	if (chdir(str) == -1)
 		printf("Error chdir not working");
-	//change PWD & OLDPWD ??
-	ft_change_env_val(env, "PWD", str);
-	printf("------------------------------------------\n");
+	ft_change_env_val(env, "PWD", ft_pwd_return());
 	ft_change_env_val(env, "OLDPWD", old_pwd);
 	free(old_pwd);
 	return (0);

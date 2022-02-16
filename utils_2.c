@@ -80,3 +80,19 @@ char	*ft_strjoin(char *s1, char *s2)
 	dest[j + i] = '\0';
 	return (dest);
 }
+
+int	ft_count_slash(char *str)
+{
+	int	i;
+	int	slash;
+
+	i = 0;
+	slash = 0;
+	while (str[i])
+	{
+		if (str[i] == '/')
+			slash++;
+		i++;
+	}
+	return (slash);
+}
