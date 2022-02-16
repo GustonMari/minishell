@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/15 19:24:59 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/16 10:23:11 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	*ft_strdup(char *src);
 char	**ft_strdup_2d(char **srcs);
 char	**ft_export(char **env, char *str);
 int		ft_count_line(char **tab);
+char	*ft_strjoin(char *s1, char *s2);
 
 
 /*
