@@ -1,20 +1,7 @@
 #include "function.h"
 
 
-int	is_var_in_line(char *str, char *to_del, size_t n)
-{
-	size_t	i;
 
-	i = 0;
-	if (n == 0)
-		return (0);
-	while (str[i] && str[i] == to_del[i] && i < n - 1)
-		i++;
-	if (((unsigned char)str[i] - (unsigned char)to_del[i] == 0) && (str[i + 1] == '='))
-		return (0);
-	else
-		return (1);
-}
 
 /*
 	copie tt le tab en sautant une ligne indique au prealable (supprime la variable env envoye en param)

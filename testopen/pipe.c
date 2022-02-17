@@ -6,12 +6,15 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 15:42:35 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/16 16:27:52 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/17 15:55:42 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "function.h"
 
+
+
+/*
 #include <stdio.h>
   #include <memory.h>
   #include <unistd.h>
@@ -61,3 +64,5 @@
      }
    return 0;
   }
+
+*/

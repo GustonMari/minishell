@@ -10,6 +10,8 @@
 */
 
 
+
+
 int	redirection_to_file(char *file_name, char *str)
 {
 	int	file;
@@ -26,8 +28,10 @@ int	redirection_to_file(char *file_name, char *str)
 		file = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 00644);
 		if (file == -1)
 		{
-			perror("\e[0;31mbash: txt.txt");
-			ft_putstr_fd("\e[0m", 2);
+			ft_putstr_fd("\e[0;31mbash: " ,2);
+			ft_putstr_fd(file_name, STDERR_FILENO);
+			perror(" ");
+			ft_putstr_fd("\e[0m", STDERR_FILENO);
 			exit (1);
 		}
 		if(dup2(file, STDOUT_FILENO) == -1)
@@ -43,7 +47,7 @@ int	redirection_to_file(char *file_name, char *str)
 	return (0);
 }
 
-/*
+
 int	main(void)
 {
 	redirection_to_file("txt.txt", "lolilol");
@@ -51,4 +55,3 @@ int	main(void)
 	//fputs("salut\n", stdout);
 	return (0);
 }
-*/

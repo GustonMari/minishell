@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/17 13:50:11 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/17 17:02:21 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,15 @@ char	*ft_pwd_return(void);
 
 int	redirection_to_file(char *file_name, char *str);
 
+/*
+------------------ ENV_UTILS ----------------
+*/
+char	*ft_cpy_val_var_env(char *var, char *find);
+char	*find_val_in_tab(char **tab, char *find);
+char	*ft_rpl_val_var_env(char *var, char *new_val);
+int		ft_change_env_val(char **env, char *var, char *new_val);
+char	*ft_find_env_line(char **env, char *var);
+int		is_var_in_line(char *str, char *to_del, size_t n);
+
+char	**ft_split(char const *s, char c);
 #endif
