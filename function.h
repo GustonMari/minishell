@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/16 14:32:03 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/17 13:50:11 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <sys/resource.h>
 # include <dirent.h>
 # include <termios.h>
+# include <fcntl.h>
 # define BUFFER_SIZE 200
 
 
@@ -101,5 +102,11 @@ int	is_var_in_line(char *str, char *to_del, size_t n);
 
 int	ft_pwd(void);
 char	*ft_pwd_return(void);
+
+/*
+------------------ REDIRECTION ----------------
+*/
+
+int	redirection_to_file(char *file_name, char *str);
 
 #endif

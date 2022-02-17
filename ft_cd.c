@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 14:02:11 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/16 14:46:56 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/17 13:49:38 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	ft_check_cd(char *str)
 	if (access(str, X_OK) == -1)
 	{
 		//a changer virer fprintf
-		perror("\e[0;31mError\e[0m");
+		perror("\e[0;31mError");
+		ft_putstr_fd("\e[0m", 2);
 		//perror((const char *)strerror(errno));
 		//perror("\n");
 		return (1);
