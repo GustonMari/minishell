@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 18:00:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/15 13:13:35 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/18 11:03:58 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 
 typedef enum s_tokentype
 {
-	NO_QUOTE,
-	QUOTE,
-	DQUOTE,
-	CMD,
-	DOLLAR,
+	PIPE,
+	CHV_R,
+	CHV_L,
+	D_CHV_R,
+	D_CHV_L,
 	WORD,
 	SPACE,
-	NO_NEW_LINE //pour le -n de echo
 }	t_tokentype;
 
 typedef struct s_token
