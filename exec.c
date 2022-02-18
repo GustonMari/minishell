@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:00:48 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/17 18:34:25 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/18 15:06:49 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,22 @@ char	*find_path_cmd(char *cmd, char *tmp)
 	return (NULL);
 }
 
-int ft_exec_cmd(char **env, char *cmd)
+int	ft_exec_cmd(char **env, char *cmd, char **full_cmd)
 {
 	char	*new_cmd;
 	char	*path;
-	char	*cmd_null[2];
 	char	*tmp;
 
 	tmp = find_val_in_tab(env, "PATH");
 	if (!tmp)
 		return (-1);
-	cmd_null[0] = ft_strdup(cmd);
-	if (!cmd_null[0])
-		return (-1);
-	cmd_null[1] = NULL;
 	new_cmd = ft_strjoin("/", cmd);
 	if (!new_cmd)
 		return (-1);
 	path = find_path_cmd(new_cmd, tmp);
-	if(execve(path, cmd_null, env) < 0)
+	if(execve(path, full_cmd, env) < 0)
 		perror("execve");
-	free(cmd_null[0]);
+	ft_free_tab_2d(full_cmd);
 	free(path);
 	return (0);
 }
@@ -70,11 +65,12 @@ int	main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
-	/* char **test = malloc (2 * sizeof(char *));
+	char **test = malloc (3 * sizeof(char *));
 	test[0] = "ls";
-	test[1] = NULL;
-	 */
-	ft_exec_cmd(env, "ls");
+	test[1] = "-la";
+	test[2] = NULL;
+
+	ft_exec_cmd(env, test[0], test);
 
 	return (0);
 }
