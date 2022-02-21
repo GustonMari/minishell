@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/17 17:02:21 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/21 09:35:38 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,20 @@
 # include <fcntl.h>
 # define BUFFER_SIZE 200
 
+# define PIPE 1
+# define CHV_R 2
+# define CHV_L 3
+# define D_CHV_R 4
+# define D_CHV_L 5
+# define WORD 6
 
 /*
 --------------- LIST UTILS ----------------
 */
 
-t_list	*ft_lstnew(char *content);
-void	ft_lstadd_back(t_list **alst, t_list *new);
-void    print_list(t_list **begin_list);
+t_token	*ft_lstnew(char *content, t_tokentype type);
+void	ft_lstadd_back(t_token **alst, t_token *new);
+void    print_token(t_token **begin_list);
 
 /*
 --------------- UTILS ----------------
@@ -72,8 +78,8 @@ int	ft_home(char **env);
 /*
 ------------------ ENV ----------------
 */
-/* t_list	**ft_create_env(char **envp);
-int	ft_print_env(t_list **env); */
+/* t_token	**ft_create_env(char **envp);
+int	ft_print_env(t_token **env); */
 char	**ft_create_env(char **envp);
 int		ft_print_env(char **env);
 
@@ -88,6 +94,7 @@ char	**ft_export(char **envp, char *str);
 */
 
 int		ft_free_tab_2d(char **tab);
+void	ft_lstclear(t_token **lst, void (*del)(void *));
 
 /*
 ------------------ UNSET ----------------
