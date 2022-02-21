@@ -67,6 +67,11 @@ char	**ft_export(char **env, char *str);
 int		ft_count_line(char **tab);
 char	*ft_strjoin(char *s1, char *s2);
 
+/*
+--------------- UTILS 3 ----------------
+*/
+
+int	ft_is_space(char c);
 
 /*
 --------------- ft_cd.c ----------------
@@ -127,4 +132,12 @@ char	*ft_find_env_line(char **env, char *var);
 int		is_var_in_line(char *str, char *to_del, size_t n);
 
 char	**ft_split(char const *s, char c);
+
+/*
+------------------ LEXER ----------------
+*/
+
+int	    define_operator(char *operator);
+
+
 #endif

@@ -1,11 +1,5 @@
 #include "../function.h"
 
-int	ft_is_space(char c)
-{
-	if (c == ' ' || (c >= 9 && c <= 13))
-		return (1);
-	return (0);
-}
 
 int	create_op(t_token **begin, int op)
 {
@@ -90,6 +84,8 @@ t_token	*lexer(char *arg)
 	int	op;
 
 	i = 0;
+	//if (check_quote)
+	//	return (NULL);
 	while(arg[i])
 	{
 		op = define_operator(&arg[i]);
@@ -103,14 +99,15 @@ t_token	*lexer(char *arg)
 	return (begin);
 }
 
-int main()
+/* int main()
 {
-	char	enter[] = "hey ta mere | ca > < lol lol";
+	char	enter[] = "hey \"ta grande daronne sa\" mere | ca > < lol";
 	t_token	*begin = NULL;
 	(void)begin;
 
 	begin = lexer(enter);
 	print_token(&begin);
 	ft_lstclear(&begin, free);
-	/* print_token(&begin); */
+	//print_token(&begin);
 }
+ */
