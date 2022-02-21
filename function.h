@@ -139,5 +139,10 @@ char	**ft_split(char const *s, char c);
 
 int	    define_operator(char *operator);
 
+/*
+------------------CHECK QUOTE ----------------
+*/
+
+int check_quote(char *arg);
 
 #endif

@@ -62,16 +62,40 @@ char	*cpy_word(char *arg, int end)
 	return (word);
 }
 
+int	last_quote(char *arg)
+{
+	int	i;
+	int	place;
 
+	place = 1;
+	i = 1;
+	while (arg[i] && !define_operator(&arg[i]))
+	{
+		if (arg[i] == '\'' || arg[i] == '\"')
+			place = i;
+		i++;
+	}
+	return (place);
+}
 
 int	create_word(char *arg, t_token **begin)
 {
-	int	i;
+	int		i;
+	int		place;
 	char	*word;
 
 	i = 0;
-	while (arg[i] && !define_operator(&arg[i]) && !ft_is_space(arg[i]))
-		i++;
+	if (((arg[i] == '\"') || (arg[i] == '\'')))
+	{
+		place = last_quote(arg);
+		while (arg[i] && i <= place)
+			i++;
+	}
+	else
+	{
+		while (arg[i] && !define_operator(&arg[i]) && !ft_is_space(arg[i]))
+			i++;
+	}
 	word = cpy_word(arg, i);
 	ft_lstadd_back(begin, ft_lstnew(word, WORD));
 	return (i);
@@ -84,8 +108,8 @@ t_token	*lexer(char *arg)
 	int	op;
 
 	i = 0;
-	//if (check_quote)
-	//	return (NULL);
+	if (check_quote(arg))
+		return (NULL);
 	while(arg[i])
 	{
 		op = define_operator(&arg[i]);
@@ -99,15 +123,14 @@ t_token	*lexer(char *arg)
 	return (begin);
 }
 
-/* int main()
+int main()
 {
-	char	enter[] = "hey \"ta grande daronne sa\" mere | ca > < lol";
+	char	enter[] = "echo\"salut\" | \"ouiii \'ouii\" ";
+	/* char	enter[] = "hey \"ta grande daronne sa\" mere | ca > < lol"; */
 	t_token	*begin = NULL;
 	(void)begin;
 
 	begin = lexer(enter);
 	print_token(&begin);
 	ft_lstclear(&begin, free);
-	//print_token(&begin);
 }
- */

@@ -46,9 +46,9 @@ int check_quote(char *arg)
     return (0);
 }
 
-int main()
+/* int main()
 {
     char *str = "     \'echo\" \'  \"lol  \' pouet\'         ";
     printf("result = %d\n", check_quote(str));
     return (0);
-}
+} */
