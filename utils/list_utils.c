@@ -1,4 +1,4 @@
-#include "function.h"
+#include "../includes/function.h"
 
 void	ft_lstadd_back(t_token **alst, t_token *new)
 {

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:27:53 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/18 17:32:16 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/02/22 09:31:25 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "function.h"
-
+//#include "function.h"
+#include "../includes/function.h"
 /* int main(void)
 {
 	char	*buff = NULL;

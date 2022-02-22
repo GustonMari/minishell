@@ -1,5 +1,5 @@
 
-#include "function.h"
+#include "../includes/function.h"
 
 int	ft_free_tab_2d(char **tab)
 {

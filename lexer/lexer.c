@@ -1,4 +1,4 @@
-#include "../function.h"
+#include "../includes/function.h"
 
 
 int	create_op(t_token **begin, int op)
@@ -31,21 +31,6 @@ int	create_op(t_token **begin, int op)
 	return (0);
 }
 
-int	define_operator(char *operator)
-{
-	if (!ft_strncmp("|", operator, 1))
-		return (PIPE);
-	if (!ft_strncmp(">", operator, 1))
-		return (CHV_R);
-	if (!ft_strncmp("<", operator, 1))
-		return (CHV_L);
-	if (!ft_strncmp(">>", operator, 2))
-		return (D_CHV_R);
-	if (!ft_strncmp("<<", operator, 2))
-		return (D_CHV_L);
-	return (0);
-}
-
 char	*cpy_word(char *arg, int end)
 {
 	char	*to_cpy;
@@ -69,7 +54,7 @@ int	last_quote(char *arg)
 
 	place = 1;
 	i = 1;
-	while (arg[i] && !define_operator(&arg[i]))
+	while (arg[i] && !is_operator(&arg[i]))
 	{
 		if (arg[i] == '\'' || arg[i] == '\"')
 			place = i;
@@ -93,7 +78,7 @@ int	create_word(char *arg, t_token **begin)
 	}
 	else
 	{
-		while (arg[i] && !define_operator(&arg[i]) && !ft_is_space(arg[i]))
+		while (arg[i] && !is_operator(&arg[i]) && !ft_is_space(arg[i]))
 			i++;
 	}
 	word = cpy_word(arg, i);
@@ -112,7 +97,7 @@ t_token	*lexer(char *arg)
 		return (NULL);
 	while(arg[i])
 	{
-		op = define_operator(&arg[i]);
+		op = is_operator(&arg[i]);
 		if (op)
 			i += create_op(&begin, op);
 		else if (!op && (arg[i] != ' '))

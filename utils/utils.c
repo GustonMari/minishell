@@ -6,11 +6,11 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:27:59 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/15 13:47:18 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/22 09:29:23 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "function.h"
+#include "../includes/function.h"
 
 void	ft_putchar_fd(char c, int fd)
 {

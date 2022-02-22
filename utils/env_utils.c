@@ -1,4 +1,4 @@
-#include "function.h"
+#include "../includes/function.h"
 
 char	*ft_cpy_val_var_env(char *var, char *find)
 {
@@ -91,6 +91,8 @@ int	is_var_in_line(char *str, char *to_del, size_t n)
 	else
 		return (1);
 }
+
+/*Trouve la ligne ou est la var d'env (si elle existe), sinon renvoie NULL*/
 
 char	*ft_find_env_line(char **env, char *var)
 {

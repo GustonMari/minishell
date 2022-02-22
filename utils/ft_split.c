@@ -6,11 +6,11 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 12:05:45 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/17 17:03:36 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/22 09:32:35 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "function.h"
+#include "../includes/function.h"
 
 static int	ft_wordcount(char const *s, char c)
 {

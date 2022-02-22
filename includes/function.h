@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/21 09:35:38 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/02/22 14:13:08 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@
 # define D_CHV_L 5
 # define WORD 6
 
+# define FT_CD 1
+# define FT_PWD 2
+# define FT_ENV 3
+# define FT_UNSET 4
+# define FT_EXPORT 5
+# define FT_ECHO 6
 /*
 --------------- LIST UTILS ----------------
 */
@@ -71,14 +77,15 @@ char	*ft_strjoin(char *s1, char *s2);
 --------------- UTILS 3 ----------------
 */
 
-int	ft_is_space(char c);
+int		ft_is_space(char c);
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
 
 /*
 --------------- ft_cd.c ----------------
 */
 
-int	ft_cd(char *str, char **env);
-int	ft_home(char **env);
+int		ft_cd(char *str, char **env);
+int		ft_home(char **env);
 
 /*
 ------------------ ENV ----------------
@@ -137,12 +144,27 @@ char	**ft_split(char const *s, char c);
 ------------------ LEXER ----------------
 */
 
-int	    define_operator(char *operator);
+int	    is_operator(char *operator);
 
 /*
 ------------------CHECK QUOTE ----------------
 */
 
 int check_quote(char *arg);
+
+/*
+------------------EXEC ----------------
+*/
+
+char	*find_path_cmd(char *cmd, char *tmp);
+int	ft_exec_cmd(char **env, char *cmd, char **full_cmd);
+
+/*
+------------------CHECK ----------------
+*/
+int	is_operator(char *operator);
+int	is_built_cmd(char **env, char *cmd);
+int	is_cmd(char **env, char *cmd);
+int	is_builtin(char *builtin);
 
 #endif

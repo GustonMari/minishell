@@ -6,11 +6,11 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:00:48 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/18 15:06:49 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/22 11:06:56 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "function.h"
+# include "../includes/function.h"
 
 char	*find_path_cmd(char *cmd, char *tmp)
 {
@@ -23,8 +23,8 @@ char	*find_path_cmd(char *cmd, char *tmp)
 	if (!all_cmd_path)
 		return (NULL);
 	free(tmp);
-	i = 0;
-	while (all_cmd_path[i++])
+	i = -1;
+	while (all_cmd_path[++i])
 	{
 		path = ft_strjoin(all_cmd_path[i], cmd);
 		if (access(path, F_OK | X_OK) == 0)
@@ -60,7 +60,7 @@ int	ft_exec_cmd(char **env, char *cmd, char **full_cmd)
 	return (0);
 }
 
-
+/* 
 int	main(int ac, char **av, char **env)
 {
 	(void)ac;
@@ -73,4 +73,4 @@ int	main(int ac, char **av, char **env)
 	ft_exec_cmd(env, test[0], test);
 
 	return (0);
-}
+} */

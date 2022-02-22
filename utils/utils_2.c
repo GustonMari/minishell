@@ -1,4 +1,4 @@
-#include "function.h"
+#include "../includes/function.h"
 
 
 char	*ft_strdup(char *src)

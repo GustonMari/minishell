@@ -1,5 +1,5 @@
 
-#include "function.h"
+#include "../includes/function.h"
 
 char	*ft_pwd_return(void)
 {
