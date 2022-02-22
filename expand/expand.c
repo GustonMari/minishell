@@ -27,10 +27,12 @@ char	*cut_dollar(char *str)
 
 char	*del_dollar(char *str, char *var_name, int len)
 {
+	int		first;
 	int		i;
 	int		j;
 	char	*ret;
 
+	first = 0;
 	i = 0;
 	j = 0;
 	ret = malloc(sizeof(char) * (ft_strlen(str) - len + 1));
@@ -38,11 +40,12 @@ char	*del_dollar(char *str, char *var_name, int len)
 		return (NULL);
 	while (str[i])
 	{
-		if (str[i] == '$')
+		if (str[i] == '$' && str[i + 1] != ' ' && first == 0)
 		{
-			i++;
-			if (!strncmp(&str[i], var_name, len))
+			if (!strncmp(&str[i + 1], var_name, len))
 			{
+				first = 1;
+				i++;
 				i += len;
 			}
 		}
@@ -55,44 +58,57 @@ char	*del_dollar(char *str, char *var_name, int len)
 	return (ret);
 }
 
-char	*replace_dollar(char **env, char *str, char *var_name, int pos)
+
+char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos)
 {
 	int	i;
 	int	j;
-	char *new_var;
-	char *ret;
+	int	k;
+
 
 	i = 0;
 	j = 0;
-	new_var = find_val_in_tab(env, var_name);
-	if (!new_var)
-		return (NULL);
-	str = del_dollar(str, var_name, ft_strlen(var_name));
-	ret = malloc(sizeof(char) * ((ft_strlen(str) + ft_strlen(new_var) + 1) - (ft_strlen(var_name) + 1)));
-	if (!ret)
-		return (NULL);
+	k = 0;
 	while (str[i])
 	{
 		if (i == pos)
 		{
-			while (*new_var)
+			while (new_var[k])
 			{
-				ret[j] = *new_var;
-				new_var++;
+				ret[j] = new_var[k];
+				k++;
 				j++;
 			}
-			i++;
 		}
 		ret[j] = str[i];
 		i++;
 		j++;
 	}
-	//free(str);
+	free(new_var);
+	free(str);
 	return (ret);
 }
 
+char	*replace_dollar(char **env, char *str, char *var_name, int pos)
+{
+	char *new_var;
+	char *ret;
 
-/* char	*expand_dollar(char **env, char *str)
+	new_var = NULL;
+	ret = NULL;
+	new_var = find_val_in_tab(env, var_name);
+	if (!new_var)
+		return (NULL);
+	str = del_dollar(str, var_name, ft_strlen(var_name));
+	ret = malloc(sizeof(char) * ((ft_strlen(str) + ft_strlen(new_var) + 1)));
+	if (!ret)
+		return (NULL);
+	free(var_name);
+	return (replace_dollar_2(str, new_var, ret, pos));
+}
+
+
+char	*expand_dollar(char **env, char *str)
 {
 	int		i;
 	char	*var_name;
@@ -100,14 +116,14 @@ char	*replace_dollar(char **env, char *str, char *var_name, int pos)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '$' && str[i + 1] == ' ')
+		if (str[i] == '$' && str[i + 1] != ' ' && str[i + 1] != '\0')
 		{
 			var_name = cut_dollar(&str[i]);
 			if (!var_name)
 				return (NULL);
 			if (ft_find_env_line(env, var_name))
 			{
-				replace_dollar(env, str, var_name, i);
+				str = replace_dollar(env, str, var_name, i);
 			}
 			else
 			{
@@ -117,8 +133,9 @@ char	*replace_dollar(char **env, char *str, char *var_name, int pos)
 		}
 		i++;
 	}
+	return(str);
 }
- */
+
 /* int	expand_cmd(t_token **lexer, char **env)
 {
 
@@ -129,9 +146,15 @@ int	main(int ac, char **av, char **envp)
 	char	**env;
 	(void)ac;
 	(void)av;
+	char *str;
 
+	str = NULL;
+	env = NULL;
 	env = ft_create_env(envp);
-	printf("%s\n", replace_dollar(env, ft_strdup("salut ca va $USER et toi "), "USER", 12));
-	//ft_free_tab_2d(env);
+	//str = replace_dollar(env, ft_strdup("salut ca va $USER et toi "), ft_strdup("USER"), 12);
+	str = expand_dollar(env, ft_strdup("$ salut ca va $USER $$ $LOL toi $"));
+	printf("%s\n", str);
+	free(str);
+	ft_free_tab_2d(env);
 	return (0);
 }
