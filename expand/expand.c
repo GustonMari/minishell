@@ -11,7 +11,7 @@ char	*cut_dollar(char *str)
 	char	*var_name;
 
 	i = 1;
-	while (str[i] && str[i] != ' ' && is_operator(&str[i]) == 0)
+	while (str[i] && str[i] != ' ' && is_operator(&str[i]) == 0 && str[i] != '$')
 		i++;
 	var_name = malloc(sizeof(char) * (i));
 	if (!var_name)
@@ -25,19 +25,15 @@ char	*cut_dollar(char *str)
 	permet de supprimer une variable commenceant par $ (var_name) dans une string donne
 */
 
-char	*del_dollar(char *str, char *var_name, int len)
+char	*del_dollar_2(char *str, char *var_name, char *ret, int len)
 {
 	int		first;
 	int		i;
 	int		j;
-	char	*ret;
-
+	
 	first = 0;
 	i = 0;
 	j = 0;
-	ret = malloc(sizeof(char) * (ft_strlen(str) - len + 1));
-	if (!ret)
-		return (NULL);
 	while (str[i])
 	{
 		if (str[i] == '$' && str[i + 1] != ' ' && first == 0)
@@ -56,6 +52,16 @@ char	*del_dollar(char *str, char *var_name, int len)
 	ret[j] = '\0';
 	free(str);
 	return (ret);
+}
+
+char	*del_dollar(char *str, char *var_name, int len)
+{
+	char	*ret;
+	
+	ret = malloc(sizeof(char) * (ft_strlen(str) - len + 1));
+	if (!ret)
+		return (NULL);
+	return (del_dollar_2(str, var_name, ret, len));
 }
 
 
@@ -116,12 +122,12 @@ char	*expand_dollar(char **env, char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '$' && str[i + 1] != ' ' && str[i + 1] != '\0')
+		if (str[i] == '$' && str[i + 1] != ' ' && str[i + 1] != '\0' && str[i + 1] != '$')
 		{
 			var_name = cut_dollar(&str[i]);
 			if (!var_name)
 				return (NULL);
-			if (ft_find_env_line(env, var_name))
+			if (ft_find_env_line(env, var_name) && str[i + 1] != '$')
 			{
 				str = replace_dollar(env, str, var_name, i);
 			}
@@ -152,7 +158,7 @@ int	main(int ac, char **av, char **envp)
 	env = NULL;
 	env = ft_create_env(envp);
 	//str = replace_dollar(env, ft_strdup("salut ca va $USER et toi "), ft_strdup("USER"), 12);
-	str = expand_dollar(env, ft_strdup("$ salut ca va $USER $$ $LOL toi $"));
+	str = expand_dollar(env, ft_strdup("\"$USER$USER $$$ $LOL toi $\""));
 	printf("%s\n", str);
 	free(str);
 	ft_free_tab_2d(env);
