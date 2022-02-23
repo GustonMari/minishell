@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/22 14:13:08 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/23 11:37:47 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,5 +166,11 @@ int	is_operator(char *operator);
 int	is_built_cmd(char **env, char *cmd);
 int	is_cmd(char **env, char *cmd);
 int	is_builtin(char *builtin);
+
+/*
+------------------ $$ DOLLARZ $$ ----------------
+*/
+
+char	*expand_dollar(char **env, char *str);
 
 #endif
