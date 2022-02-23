@@ -27,7 +27,7 @@ t_token	*ft_lstnew(char *content, t_tokentype param)
 	new->content = content;
 	if (!new->content)
 		return (NULL);
-	new->content = content;
+	/* new->content = content; */
 	new->type = param;
 	new->next = NULL;
 	return (new);
