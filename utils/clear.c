@@ -26,8 +26,8 @@ void	ft_lstclear(t_token **lst, void (*del)(void *))
 		while (current)
 		{
 			previous = current;
-			current = current ->next;
-			(*del)(previous ->content);
+			current = current->next;
+			(*del)(previous->content);
 			free(previous);
 		}
 		*lst = NULL;

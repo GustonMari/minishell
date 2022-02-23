@@ -1,33 +1,6 @@
 
 #include "../includes/function.h"
 
-int	find_next_quote(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[0] == '\"')
-	{
-		i++;
-		while (str[i] != '\"' && str[i])
-			i++;
-		i++;
-	}
-	else if (str[0] == '\'')
-	{
-		i++;
-		while (str[i] != '\'' && str[i])
-			i++;
-		i++;
-	}
-	else
-	{
-		while (str[i] != '\"' && str[i] != '\'' && str[i])
-			i++;
-	}
-	return (i);
-}
-
 /*
 		permet de copier une block, par exemple un block entre "" ou ''
 */
@@ -121,6 +94,8 @@ int main(int argc, char **argv, char **envp)
 	expanded = expand_all(env, temp);
 	print_token(&expanded);
 
+	//ft_lstclear(&temp, free);
+	ft_lstclear(&expanded, free);
 	ft_free_tab_2d(env);
 }
 

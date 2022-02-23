@@ -25,7 +25,6 @@ t_token	*ft_lstnew(char *content, t_tokentype param)
 		return (NULL);
 	//new->content = malloc(sizeof(char) * (ft_strlen(content) + 1));
 	new->content = content;
-
 	if (!new->content)
 		return (NULL);
 	new->content = content;

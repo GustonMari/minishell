@@ -105,6 +105,7 @@ t_token	*lexer(char *arg)
 		else if (ft_is_space(arg[i]))
 			i++;
 	}
+	free(arg);
 	return (begin);
 }
 

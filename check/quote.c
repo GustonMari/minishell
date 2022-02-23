@@ -46,6 +46,35 @@ int check_quote(char *arg)
 	return (0);
 }
 
+/* Permet de trouver la position de la prochaine quote en fonction de la quote en str[0]*/
+
+int	find_next_quote(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[0] == '\"')
+	{
+		i++;
+		while (str[i] != '\"' && str[i])
+			i++;
+		i++;
+	}
+	else if (str[0] == '\'')
+	{
+		i++;
+		while (str[i] != '\'' && str[i])
+			i++;
+		i++;
+	}
+	else
+	{
+		while (str[i] != '\"' && str[i] != '\'' && str[i])
+			i++;
+	}
+	return (i);
+}
+
 /* int main()
 {
     char *str = "     \'echo\" \'  \"lol  \' pouet\'         ";
