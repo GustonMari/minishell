@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/23 11:37:47 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/23 14:51:51 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,16 @@ char	*ft_strdup(char *src);
 char	**ft_strdup_2d(char **srcs);
 char	**ft_export(char **env, char *str);
 int		ft_count_line(char **tab);
-char	*ft_strjoin(char *s1, char *s2);
+int		ft_is_space(char c);
 
 /*
 --------------- UTILS 3 ----------------
 */
 
-int		ft_is_space(char c);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);
+char	*ft_strjoin_free(char *s1, char *s2, int del);
+char	*ft_strjoin(char *s1, char *s2);
+
 
 /*
 --------------- ft_cd.c ----------------
@@ -145,6 +147,7 @@ char	**ft_split(char const *s, char c);
 */
 
 int	    is_operator(char *operator);
+t_token	*lexer(char *arg);
 
 /*
 ------------------CHECK QUOTE ----------------

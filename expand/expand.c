@@ -9,23 +9,22 @@ int	find_next_quote(char *str)
 	if (str[0] == '\"')
 	{
 		i++;
-		while (str[i] != '\"')
+		while (str[i] != '\"' && str[i])
 			i++;
 		i++;
 	}
 	else if (str[0] == '\'')
 	{
 		i++;
-		while (str[i] != '\'')
+		while (str[i] != '\'' && str[i])
 			i++;
 		i++;
 	}
 	else
 	{
-		while (str[i] != '\"' && str[i] != '\'')
+		while (str[i] != '\"' && str[i] != '\'' && str[i])
 			i++;
 	}
-	printf("findnext = %d\n", i);
 	return (i);
 }
 
@@ -47,22 +46,29 @@ char	*cpy_block(char	*str, int size)
 /*
 		
 */
+/*Expand un maillon */
 
-char	*expand_manager(char **env, char *str)
+char	*expand_node(char **env, char *str)
 {
-	int	i;
+	int		i;
 	char	*block;
 	char	*expanded;
 
-	expanded = NULL;
+	block = NULL;
+	expanded = ft_strdup("");
+	if (!expanded)
+		return (NULL);
 	i = 0;
 	while(str[i])
 	{
 		if (str[i] == '\"')
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
-			// leaks
+			if (!block)
+				return (NULL);
 			block = expand_dollar(env, block);
+			if (!block)
+				return (NULL);
 		}
 		else if (str[i] == '\'')
 		{
@@ -74,26 +80,70 @@ char	*expand_manager(char **env, char *str)
 			// leaks
 			block = expand_dollar(env, block);
 		}
-		expanded = ft_strjoin(expanded, block);
+		//leaks
+		expanded = ft_strjoin_free(expanded, block, 1);
 		i += find_next_quote(&str[i]);
 	}
+	free(block);
 	return (expanded);
 }
 
+t_token	*expand_all(char **env, t_token *all)
+{
+	t_token	*tmp;
 
+	tmp = all;
+	while (tmp)
+	{
+		tmp->content = expand_node(env, tmp->content);
+		if(!tmp->content)
+			return (NULL);
+		tmp = tmp->next;
+	}
+	return (all);
+}
+
+/* int main(int argc, char **argv, char **envp)
+{
+	char	**env;
+	(void)argc;
+	(void)argv;
+	t_token *temp;
+	t_token	*expanded;
+
+	char	*arg;
+	env = NULL;
+	arg = ft_strdup("salut ca va $USER ");
+	env = ft_create_env(envp);
+	temp = lexer(arg);
+	print_token(&temp);
+	printf("\n");
+	expanded = expand_all(env, temp);
+	print_token(&expanded);
+
+
+
+	ft_free_tab_2d(env);
+
+} */
 
 int main(int argc, char **argv, char **envp)
 {
-	/* char	**env; */
+	char	**env;
 	(void)argc;
 	(void)argv;
-	(void)envp;
+	//(void)envp; 
 	char *str;
+	char *ret;
 
+	ret = NULL;
 	str = NULL;
-	str = ft_strdup("salut ca va x\"ca    va\"");
-	/* env = NULL;
-	env = ft_create_env(envp); */
-	printf("%s\n", cpy_block(&str[13], find_next_quote(&str[13])));
-	
+	str = ft_strdup("ca \'va\' toi\"$USER\" \"oui\'ii\"");
+	env = NULL;
+	env = ft_create_env(envp);
+	ret = expand_node(env, str);
+	printf("%s\n", ret);
+	ft_free_tab_2d(env);
+	free(str);
+	free(ret);
 }

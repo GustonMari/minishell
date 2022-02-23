@@ -108,14 +108,14 @@ t_token	*lexer(char *arg)
 	return (begin);
 }
 
-int main()
+/* int main()
 {
 	char	enter[] = "echo\"salut\" | \"ouiii \'ouii\" ";
-	/* char	enter[] = "hey \"ta grande daronne sa\" mere | ca > < lol"; */
+	// char	enter[] = "hey \"ta grande daronne sa\" mere | ca > < lol"; 
 	t_token	*begin = NULL;
 	(void)begin;
 
 	begin = lexer(enter);
 	print_token(&begin);
 	ft_lstclear(&begin, free);
-}
+} */

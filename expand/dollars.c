@@ -11,7 +11,7 @@ char	*cut_dollar(char *str)
 	char	*var_name;
 
 	i = 1;
-	while (str[i] && str[i] != ' ' && is_operator(&str[i]) == 0 && str[i] != '$')
+	while (str[i] && str[i] != ' ' && is_operator(&str[i]) == 0 && str[i] != '$' && str[i] != '\'' && str[i] != '\"')
 		i++;
 	var_name = malloc(sizeof(char) * (i));
 	if (!var_name)
@@ -64,13 +64,31 @@ char	*del_dollar(char *str, char *var_name, int len)
 	return (del_dollar_2(str, var_name, ret, len));
 }
 
+/*
+	replace_dollar_3 sert seulment dans le cas ou str est null
+*/
+char	*replace_dollar_3(char *str, char *new_var, char *ret)
+{
+	int	i;
+
+	i = 0;
+	while (new_var[i])
+	{
+		ret[i] = new_var[i];
+		i++;
+	}
+	ret[i] = '\0';
+	free(new_var);
+	free(str);
+	return (ret);
+}
+
 
 char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos)
 {
 	int	i;
 	int	j;
 	int	k;
-
 
 	i = 0;
 	j = 0;
@@ -86,10 +104,11 @@ char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos)
 				j++;
 			}
 		}
-		ret[j] = str[i];
+		ret[j++] = str[i];
 		i++;
-		j++;
+		//j++;
 	}
+	ret[j] = '\0';
 	free(new_var);
 	free(str);
 	return (ret);
@@ -110,6 +129,10 @@ char	*replace_dollar(char **env, char *str, char *var_name, int pos)
 	if (!ret)
 		return (NULL);
 	free(var_name);
+	if (ft_strlen(str) == 0)
+	{
+		return(replace_dollar_3(str, new_var, ret));
+	}
 	return (replace_dollar_2(str, new_var, ret, pos));
 }
 
@@ -120,6 +143,7 @@ char	*expand_dollar(char **env, char *str)
 	char	*var_name;
 
 	i = 0;
+	var_name = NULL;
 	while (str[i])
 	{
 		if (str[i] == '$' && str[i + 1] != ' ' && str[i + 1] != '\0' && str[i + 1] != '$')

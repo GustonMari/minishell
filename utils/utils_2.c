@@ -54,31 +54,11 @@ int		ft_count_line(char **tab)
 	return (i);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+int	ft_is_space(char c)
 {
-	char	*dest;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	dest = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!dest)
-		return (NULL);
-	while (s1[i])
-	{
-		dest[j] = s1[i];
-		j++;
-		i++;
-	}
-	i = 0;
-	while (s2[i])
-	{
-		dest[j + i] = s2[i];
-		i++;
-	}
-	dest[j + i] = '\0';
-	return (dest);
+	if (c == ' ' || (c >= 9 && c <= 13))
+		return (1);
+	return (0);
 }
 
 int	ft_count_slash(char *str)

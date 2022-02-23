@@ -28,22 +28,22 @@ int check_quote(char *arg)
 {
     int i;
 
-    i = 0;
-    while (arg[i])
-    {
-        if (arg[i] == '\'')
-        {
-            if(check_simple_quote(arg, &i))
-                return (1);
-        }
-        else if (arg[i] == '\"')
-        {
-            if(check_double_quote(arg, &i))
-                return (1);
-        }
-        i++;
-    }
-    return (0);
+	i = 0;
+	while (arg[i])
+	{
+		if (arg[i] == '\'')
+		{
+		    if(check_simple_quote(arg, &i))
+		        return (1);
+		}
+		else if (arg[i] == '\"')
+		{
+		    if(check_double_quote(arg, &i))
+		        return (1);
+		}
+		i++;
+	}
+	return (0);
 }
 
 /* int main()
