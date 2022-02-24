@@ -78,7 +78,7 @@ t_token	*expand_all(char **env, t_token *all)
 	return (all);
 }
 
-int main(int argc, char **argv, char **envp)
+/* int main(int argc, char **argv, char **envp)
 {
 	char	**env;
 	(void)argc;
@@ -99,7 +99,7 @@ int main(int argc, char **argv, char **envp)
 	//ft_lstclear(&temp, free);
 	ft_lstclear(&expanded, free);
 	ft_free_tab_2d(env);
-}
+} */
 
 /* int main(int argc, char **argv, char **envp)
 {

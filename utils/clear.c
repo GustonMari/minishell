@@ -1,7 +1,7 @@
 
 #include "../includes/function.h"
 
-int	ft_free_tab_2d(char **tab)
+/* int	ft_free_tab_2d(char **tab)
 {
 	int	i;
 
@@ -13,6 +13,20 @@ int	ft_free_tab_2d(char **tab)
 	}
 	free(tab);
 	return (0);
+} */
+
+char	**ft_free_tab_2d(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while(tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+	return (NULL);
 }
 
 void	ft_lstclear(t_token **lst, void (*del)(void *))

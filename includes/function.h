@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/23 18:33:12 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/24 10:44:53 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 # define D_CHV_R 4
 # define D_CHV_L 5
 # define WORD 6
+# define QUOTE '\''
+# define D_QUOTE '\"'
 
 # define FT_CD 1
 # define FT_PWD 2
@@ -80,6 +82,7 @@ int		ft_is_space(char c);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);
 char	*ft_strjoin_free(char *s1, char *s2, int del);
 char	*ft_strjoin(char *s1, char *s2);
+char	*ft_substr(char *s, int start, int len);
 
 
 /*
@@ -107,7 +110,7 @@ char	**ft_export(char **envp, char *str);
 ------------------ CLEAR ----------------
 */
 
-int		ft_free_tab_2d(char **tab);
+char	**ft_free_tab_2d(char **tab);
 void	ft_lstclear(t_token **lst, void (*del)(void *));
 
 /*
@@ -177,5 +180,12 @@ int	is_builtin(char *builtin);
 */
 
 char	*expand_dollar(char **env, char *str);
+
+
+
+
+
+
+void	print_tab_2d(char **strs);
 
 #endif
