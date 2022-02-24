@@ -47,49 +47,6 @@ char	*cpy_word(char *arg, int end)
 	return (word);
 }
 
-/* 
-Ancienne fonction --> place = last_quote(arg); dans create_Word
-
-int	last_quote(char *arg)
-{
-	int	i;
-	int	place;
-
-	place = 1;
-	i = 1;
-	while (arg[i] && !is_operator(&arg[i]))
-	{
-		if (arg[i] == '\'' || arg[i] == '\"')
-			place = i;
-		i++;
-	}
-	return (place);
-} */
-
-
-/* int	create_word(char *arg, t_token **begin)
-{
-	int		i;
-	int		place;
-	char	*word;
-
-	i = 0;
-	if (((arg[i] == '\"') || (arg[i] == '\'')))
-	{
-		place = last_quote(arg);
-		while (arg[i] && i <= place)
-			i++;
-	}
-	else
-	{
-		while (arg[i] && !is_operator(&arg[i]) && !ft_is_space(arg[i]))
-			i++;
-	}
-	word = cpy_word(arg, i);
-	ft_lstadd_back(begin, ft_lstnew(word, WORD));
-	return (i);
-} */
-
 int	create_word(char *arg, t_token **begin)
 {
 	int		i;

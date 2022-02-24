@@ -1,6 +1,4 @@
-
 #include "../includes/function.h"
-
 
 char	*del_quote(char *str, int pos_a, int pos_b)
 {
@@ -8,9 +6,11 @@ char	*del_quote(char *str, int pos_a, int pos_b)
 	int	j;
 	char *ret;
 
+	ret = NULL;
 	i = 0;
 	j = 0;
-	ret = malloc(sizeof(char) * (ft_strlen(str)));
+	ret = ft_calloc(sizeof(char), (ft_strlen(str) + 2));
+	/* ret = malloc(sizeof(char) * (ft_strlen(str) + 2)); */
 	if (!ret)
 		return (NULL);
 	while (str[i])
@@ -52,9 +52,12 @@ char	*trim_quote(char *str)
 
 int	main()
 {
-	char *str = NULL;
+	char	*str = NULL;
+	char	*ret = NULL;
 	str = ft_strdup("\" \' sa\"lut\"cava\"ou i  i\" sal\"");
-
-	printf("%s\n", trim_quote(str));
+	printf("str = %s\n", str);
+	ret = trim_quote(str);
+	printf("%s\n", ret);
+	free(ret);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/24 18:34:42 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/24 19:59:08 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,10 @@ char	*trim_quote(char *str);
 char	**ft_split_special(char *str);
 char	*ft_strtrim_space(char *s1, char *set);
 
+/* 
+------------------ CALLOC ----------------
+*/
 
+void	*ft_calloc(size_t nmemb, size_t size);
 
 #endif
