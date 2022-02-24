@@ -25,7 +25,7 @@ int	create_op(t_token **begin, int op)
 	}
 	else if (op == D_CHV_L)
 	{
-		ft_lstadd_back(begin, ft_lstnew(ft_strdup("|"), D_CHV_L));
+		ft_lstadd_back(begin, ft_lstnew(ft_strdup("<<"), D_CHV_L));
 		return (2);
 	}
 	return (0);
@@ -47,6 +47,9 @@ char	*cpy_word(char *arg, int end)
 	return (word);
 }
 
+/* 
+Ancienne fonction --> place = last_quote(arg); dans create_Word
+
 int	last_quote(char *arg)
 {
 	int	i;
@@ -61,9 +64,10 @@ int	last_quote(char *arg)
 		i++;
 	}
 	return (place);
-}
+} */
 
-int	create_word(char *arg, t_token **begin)
+
+/* int	create_word(char *arg, t_token **begin)
 {
 	int		i;
 	int		place;
@@ -79,6 +83,24 @@ int	create_word(char *arg, t_token **begin)
 	else
 	{
 		while (arg[i] && !is_operator(&arg[i]) && !ft_is_space(arg[i]))
+			i++;
+	}
+	word = cpy_word(arg, i);
+	ft_lstadd_back(begin, ft_lstnew(word, WORD));
+	return (i);
+} */
+
+int	create_word(char *arg, t_token **begin)
+{
+	int		i;
+	char	*word;
+
+	i = 0;
+	while (arg[i] && !is_operator(&arg[i]) && !ft_is_space(arg[i]))
+	{
+		if (((arg[i] == '\"') || (arg[i] == '\'')))
+			i += find_next_quote(&arg[i]);
+		else
 			i++;
 	}
 	word = cpy_word(arg, i);
@@ -111,8 +133,7 @@ t_token	*lexer(char *arg)
 
 /* int main()
 {
-	char	enter[] = "echo\"salut\" | \"ouiii \'ouii\" ";
-	// char	enter[] = "hey \"ta grande daronne sa\" mere | ca > < lol"; 
+	char	*enter = ft_strdup(" \"ca\" <|> >> \'va  <<   \' << toi\"$USER\" > \"oui\'ii\"");
 	t_token	*begin = NULL;
 	(void)begin;
 

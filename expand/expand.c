@@ -83,12 +83,27 @@ t_token	*expand_all(char **env, t_token *all)
 	char	**env;
 	(void)argc;
 	(void)argv;
+	t_token	*expanded;
+	t_token	*tmp;
+
+	tmp = ft_lstnew(ft_strdup("toi\"$USER\""), 6);
+	env = ft_create_env(envp);
+	expanded = expand_all(env, tmp);
+	print_token(&expanded);
+
+} */
+
+/* int main(int argc, char **argv, char **envp)
+{
+	char	**env;
+	(void)argc;
+	(void)argv;
 	t_token *temp;
 	t_token	*expanded;
 
 	char	*arg;
 	env = NULL;
-	arg = ft_strdup("\"ca\" | \'va\'         toi\"$USER\" >       \"oui\'ii\"");
+	arg = ft_strdup(" \"ca\" | \'va\' toi\"$USER\" > \"oui\'ii\"");
 	env = ft_create_env(envp);
 	temp = lexer(arg);
 	print_token(&temp);

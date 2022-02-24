@@ -30,6 +30,11 @@ int	ft_count_word(char *str)
 	return (count);
 }
 
+/*
+	Prends la chaine de char str qui a ete lexe et la split en un tab,
+	on garde les quote & d_quote ainsi que les espaces,
+	on passera le retour dans le trimeur
+*/
 
 char	**ft_split_special(char *str)
 {
@@ -48,9 +53,6 @@ char	**ft_split_special(char *str)
 	while (++i < nb_word)
 	{
 		len_word = find_next_quote(&str[j]);
-		tab[i] = malloc(sizeof(char) * (len_word + 1));
-		if (!tab[i])
-			return (ft_free_tab_2d(tab));
 		tab[i] = ft_substr(&str[j], 0, len_word);
 		if (!tab[i])
 			return (ft_free_tab_2d(tab));
@@ -62,9 +64,9 @@ char	**ft_split_special(char *str)
 
 /* Il faudra free str qui sera alloué*/
 
-int main()
+/* int main()
 {
-	char	*str = "\'va\'         toi\"gmary\"\'pouet\'";
+	char	*str = " \"ca\" | \'va\' toi\"$USER\" > \"oui\'ii\"";
 	char	**strs;
 
 	strs = ft_split_special(str);
@@ -72,4 +74,4 @@ int main()
 	ft_free_tab_2d(strs);
 
 	return (0);
-}
+} */

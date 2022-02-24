@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/24 10:44:53 by gmary            ###   ########.fr       */
+/*   Updated: 2022/02/24 17:39:50 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,13 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n);
 char	*ft_strjoin_free(char *s1, char *s2, int del);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, int start, int len);
+void	print_tab_2d(char **strs);
+
+/*
+--------------- UTILS 4 ----------------
+*/
+
+char	*ft_strtrim(char *s1, char *set);
 
 
 /*
@@ -159,7 +166,6 @@ t_token	*lexer(char *arg);
 int check_quote(char *arg);
 int	find_next_quote(char *str);
 
-
 /*
 ------------------EXEC ----------------
 */
@@ -181,11 +187,14 @@ int	is_builtin(char *builtin);
 
 char	*expand_dollar(char **env, char *str);
 
+/*
+------------------ PARSING ----------------
+*/
+
+char **trim_quote(char **strs);
+char	**ft_split_special(char *str);
+char	*ft_strtrim_space(char *s1, char *set);
 
 
-
-
-
-void	print_tab_2d(char **strs);
 
 #endif
