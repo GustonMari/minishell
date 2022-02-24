@@ -1,68 +1,60 @@
 
 #include "../includes/function.h"
 
-/* 			tmp = ft_strtrim(strs[i], " \t\n\v\f\r");
-			free(strs[i]);
-			strs[i] = tmp; */
 
-/* char	**trim_space_one(char **strs)
+char	*del_quote(char *str, int pos_a, int pos_b)
 {
 	int	i;
-	char *tmp;
+	int	j;
+	char *ret;
 
 	i = 0;
-	tmp = NULL;
-	while (strs[i])
+	j = 0;
+	ret = malloc(sizeof(char) * (ft_strlen(str)));
+	if (!ret)
+		return (NULL);
+	while (str[i])
 	{
-		if (strs[i][0] != QUOTE && strs[i][0] != D_QUOTE)
-		{
-			tmp = ft_strtrim_space;
-		}
+		if (i == pos_a)
+			i++;
+		if (i == pos_b)
+			i++;
+		ret[j] = str[i];
 		i++;
+		j++;
 	}
-	return (strs);
-} */
-
-char	**trim_quote(char **strs)
-{
-	int	i;
-	char *tmp;
-
-	tmp = NULL;
-	i = 0;
-	while (strs[i])
-	{
-		if (strs[i][0] == QUOTE)
-		{
-			tmp = ft_strtrim(strs[i], "\'");
-			free(strs[i]);
-			strs[i] = tmp;
-		}
-		else if (strs[i][0] == D_QUOTE)
-		{
-			tmp = ft_strtrim(strs[i], "\"");
-			free(strs[i]);
-			strs[i] = tmp;
-		}
-		i++;
-	}
-	return (strs);
+	ret[j] = '\0';
+	free(str);
+	return (ret);
 }
 
-/* int	main()
+char	*trim_quote(char *str)
 {
-	char	*str = " \"salut   \"         ok LOL\'pain\'";
-	char	**strs;
-	//char 	**ret;
+	int	i;
+	int	j;
 
-	strs = ft_split_special(str);
+	i = 0;
+	j = 0;
+	while(str[i])
+	{
+		if (str[i] == QUOTE || str[i] == D_QUOTE)
+		{
+			j = find_next_quote(&str[i]);
+			str = del_quote(str, i, (j + i - 1));
+			if (!str)
+				return (NULL);
+			i += j;
+		}
+		i++;
+	}
+	return (str);
+}
 
+int	main()
+{
+	char *str = NULL;
+	str = ft_strdup("\" \' sa\"lut\"cava\"ou i  i\" sal\"");
 
-	//ret = trim_quote(strs);
-	//print_tab_2d(strs);
-	//ft_free_tab_2d(strs);
-	print_tab_2d(strs);
-	ft_free_tab_2d(strs);
+	printf("%s\n", trim_quote(str));
 	return (0);
-} */
-
+}
