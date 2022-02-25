@@ -124,7 +124,7 @@ int main(int argc, char **argv, char **envp)
 
 	char	*arg;
 	env = NULL;
-	arg = ft_strdup(" \"ca\" |<><> salut poeut");
+	arg = ft_strdup(" \"ca\" |	<	><	> \r	sal	ut poe	ut");
 	env = ft_create_env(envp);
 	temp = lexer(arg);
 	expanded = expand_all(env, temp);

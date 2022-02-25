@@ -79,7 +79,7 @@ t_token	*lexer(char *arg)
 		op = is_operator(&arg[i]);
 		if (op)
 			i += create_op(&begin, op);
-		else if (!op && (arg[i] != ' '))
+		else if (!op && (!ft_is_space(arg[i])))
 			i += create_word(&arg[i], &begin);
 		else if (ft_is_space(arg[i]))
 			i++;

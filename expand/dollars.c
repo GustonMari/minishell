@@ -11,7 +11,7 @@ char	*cut_dollar(char *str)
 	char	*var_name;
 
 	i = 1;
-	while (str[i] && str[i] != ' ' && is_operator(&str[i]) == 0 && str[i] != '$' && str[i] != '\'' && str[i] != '\"')
+	while (str[i] && !ft_is_space(str[i]) && is_operator(&str[i]) == 0 && str[i] != '$' && str[i] != '\'' && str[i] != '\"')
 		i++;
 	var_name = malloc(sizeof(char) * (i));
 	if (!var_name)
@@ -36,7 +36,7 @@ char	*del_dollar_2(char *str, char *var_name, char *ret, int len)
 	j = 0;
 	while (str[i])
 	{
-		if (str[i] == '$' && str[i + 1] != ' ' && first == 0)
+		if (str[i] == '$' && !ft_is_space(str[i + 1]) && first == 0)
 		{
 			if (!strncmp(&str[i + 1], var_name, len))
 			{
@@ -146,7 +146,7 @@ char	*expand_dollar(char **env, char *str)
 	var_name = NULL;
 	while (str[i])
 	{
-		if (str[i] == '$' && str[i + 1] != ' ' && str[i + 1] != '\0' && str[i + 1] != '$')
+		if (str[i] == '$' && !ft_is_space(str[i + 1]) && str[i + 1] != '\0' && str[i + 1] != '$')
 		{
 			var_name = cut_dollar(&str[i]);
 			if (!var_name)
