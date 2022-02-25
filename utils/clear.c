@@ -1,20 +1,6 @@
 
 #include "../includes/function.h"
 
-/* int	ft_free_tab_2d(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while(tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	return (0);
-} */
-
 char	**ft_free_tab_2d(char **tab)
 {
 	int	i;
@@ -42,6 +28,25 @@ void	ft_lstclear(t_token **lst, void (*del)(void *))
 			previous = current;
 			current = current->next;
 			(*del)(previous->content);
+			free(previous);
+		}
+		*lst = NULL;
+	}
+}
+
+void	ft_cmd_clear(t_command **lst)
+{
+	t_command	*previous;
+	t_command	*current;
+
+	if (lst && *lst)
+	{
+		current = *lst;
+		while (current)
+		{
+			previous = current;
+			current = current->next;
+			ft_free_tab_2d(previous->cmd_to_exec);
 			free(previous);
 		}
 		*lst = NULL;

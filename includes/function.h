@@ -120,6 +120,7 @@ char	**ft_export(char **envp, char *str);
 
 char	**ft_free_tab_2d(char **tab);
 void	ft_lstclear(t_token **lst, void (*del)(void *));
+void	ft_cmd_clear(t_command **lst);
 
 /*
 ------------------ UNSET ----------------

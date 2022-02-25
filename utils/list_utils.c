@@ -40,7 +40,7 @@ void    print_token(t_token **begin_list)
     {
 		printf("%s\n", current->content);
 		/* ft_putstr_fd(current->content, 1); */
-		/* printf("\ntype = %d\n", (int)current->type); */
+		printf("\ntype = %d\n", (int)current->type);
         /* ft_putchar_fd('\n', 1); */
         current = current->next;
     }
@@ -56,10 +56,8 @@ void    print_cmd(t_command **begin_list)
     {
 		/* printf("%s\n", current->cmd_to_exec); */
 		print_tab_2d(current->cmd_to_exec);
-		printf("---------------------------------\n");
-		/* ft_putstr_fd(current->content, 1); */
 		/* printf("\ntype = %d\n", (int)current->type); */
-        /* ft_putchar_fd('\n', 1); */
+		printf("---------------------------------\n");
         current = current->next;
     }
     //printf("NULL\n");

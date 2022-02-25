@@ -57,6 +57,25 @@ int	is_built_cmd(char **env, char *cmd)
 	return (0);
 }
 
+/* int	is_operator(char *operator)
+{
+	if (!ft_strcmp(">>", operator))
+		return (D_CHV_R);
+	if (!ft_strcmp("<<", operator))
+		return (D_CHV_L);
+	if (!ft_strcmp("|", operator))
+		return (PIPE);
+	if (!ft_strcmp(">", operator))
+		return (CHV_R);
+	if (!ft_strcmp("<", operator))
+		return (CHV_L);
+
+	return (0);
+} */
+
+
+//Save, working, probleme avec op <> |< ....
+
 int	is_operator(char *operator)
 {
 	if (!ft_strncmp(">>", operator, 2))

@@ -98,7 +98,8 @@ t_command   *token_to_cmd(t_token *all)
 	tmp_token = all;
     while (tmp_token)
     {	
-		ft_add_back_cmd(&cmd_all, create_new_cmd_node(token_to_tab(tmp_token), tmp_token));
+		if (!is_operator(tmp_token->content))
+			ft_add_back_cmd(&cmd_all, create_new_cmd_node(token_to_tab(tmp_token), tmp_token));
 		while (tmp_token && !is_operator(tmp_token->content))
 			tmp_token = tmp_token->next;
 		if (tmp_token && is_operator(tmp_token->content))
@@ -118,16 +119,20 @@ int main(int argc, char **argv, char **envp)
 	t_token *temp;
 	t_token	*expanded;
 	t_command *cmd_all;
+	(void)cmd_all;
+
 
 	char	*arg;
 	env = NULL;
-	arg = ft_strdup(" \"ca\" salut ca va oui | \'va\' toi\"$USER\" > \"oui\'ii\"");
+	arg = ft_strdup(" \"ca\" |<><> salut poeut");
 	env = ft_create_env(envp);
 	temp = lexer(arg);
 	expanded = expand_all(env, temp);
 	trim_all(&expanded);
+	//print_token(&expanded);
 	cmd_all = token_to_cmd(expanded);
 	print_cmd(&cmd_all);
 	ft_lstclear(&expanded, free);
+	ft_cmd_clear(&cmd_all);
 	ft_free_tab_2d(env);
 }
