@@ -17,7 +17,7 @@
 	OR
 	gcc test.c ft_strcmp.c -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
 */
-#include "function.h"
+#include "includes/function.h"
 
 //->ctr + c => SIGINT(interuption), ctrl + d => SIGHUP(fin de connexion)
 //Do you want to quit [y/n] ? ca peut etre tres cool
@@ -85,7 +85,7 @@ int main(int ac, char **av, char **envp)
 		}
 		if (!ft_strcmp(line, "exit"))
 		{
-			free(line);
+			//free(line);
 			rl_clear_history();
 			ft_free_tab_2d(env);
 			ft_putstr_fd("\n\e[1;91m- EXIT OK -\e[0m\n", 1);
@@ -94,20 +94,21 @@ int main(int ac, char **av, char **envp)
 		if (line && *line)
 		{	
 			add_history(line);
+			manage_line(env, line);
 			/* if (!ft_strncmp(line, "env", 4))
 				ft_print_env(env);
 			else if (!ft_strncmp(line, "pwd", 4))
 				ft_pwd();
 			else
 				printf("%s\n", line); */
-			ft_cd(line, env);
+			//ft_cd(line, env);
 			//ft_pwd();
 			
 /* 			if(ft_cd(line))
 				ft_putstr_fd("\n\e[1;91m- Problem with cd -\n", 1); */
 		}
-		if(line)
-			free(line);
+		/* if(line)
+			free(line); */
 	}
 	return 0;
 

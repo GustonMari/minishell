@@ -110,7 +110,9 @@ t_command   *token_to_cmd(t_token *all)
     return (cmd_all);
 }
 
-int main(int argc, char **argv, char **envp)
+
+
+/* int main(int argc, char **argv, char **envp)
 {
 
 	char	**env;
@@ -135,4 +137,4 @@ int main(int argc, char **argv, char **envp)
 	ft_lstclear(&expanded, free);
 	ft_cmd_clear(&cmd_all);
 	ft_free_tab_2d(env);
-}
+} */

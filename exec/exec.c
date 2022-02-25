@@ -18,7 +18,6 @@ char	*find_path_cmd(char *cmd, char *tmp)
 	char	*path;
 	char	**all_cmd_path;
 
-
 	all_cmd_path = ft_split(tmp, ':');
 	if (!all_cmd_path)
 		return (NULL);
@@ -40,7 +39,7 @@ char	*find_path_cmd(char *cmd, char *tmp)
 	return (NULL);
 }
 
-int	ft_exec_cmd(char **env, char *cmd, char **full_cmd)
+int	ft_exec_cmd(char **env, char **full_cmd)
 {
 	char	*new_cmd;
 	char	*path;
@@ -49,13 +48,14 @@ int	ft_exec_cmd(char **env, char *cmd, char **full_cmd)
 	tmp = find_val_in_tab(env, "PATH");
 	if (!tmp)
 		return (-1);
-	new_cmd = ft_strjoin("/", cmd);
+	new_cmd = ft_strjoin("/", full_cmd[0]);
 	if (!new_cmd)
 		return (-1);
 	path = find_path_cmd(new_cmd, tmp);
+	if (!path)
+		return (-1);
 	if(execve(path, full_cmd, env) < 0)
 		perror("execve");
-	ft_free_tab_2d(full_cmd);
 	free(path);
 	return (0);
 }
@@ -70,7 +70,7 @@ int	ft_exec_cmd(char **env, char *cmd, char **full_cmd)
 	test[1] = "-la";
 	test[2] = NULL;
 
-	ft_exec_cmd(env, test[0], test);
+	ft_exec_cmd(env, test);
 
 	return (0);
 } */

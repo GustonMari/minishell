@@ -10,8 +10,6 @@
 */
 
 
-
-
 int	redirection_to_file(char *file_name, char *str)
 {
 	int	file;

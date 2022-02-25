@@ -172,7 +172,9 @@ int	find_next_quote(char *str);
 */
 
 char	*find_path_cmd(char *cmd, char *tmp);
-int	ft_exec_cmd(char **env, char *cmd, char **full_cmd);
+int	ft_exec_cmd(char **env, char **full_cmd);
+int ft_dispatch(t_command *all, char **env);
+
 
 /*
 ------------------CHECK ----------------
@@ -208,5 +210,18 @@ t_token	*trim_all(t_token **all);
 */
 
 void	*ft_calloc(size_t nmemb, size_t size);
+
+
+/* 
+------------------ TOKEN_TO_CMD ----------------
+*/
+
+t_command   *token_to_cmd(t_token *all);
+
+/* 
+------------------ MANAGER ----------------
+*/
+
+int     manage_line(char **env, char *line);
 
 #endif
