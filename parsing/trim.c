@@ -10,17 +10,17 @@ char	*del_quote(char *str, int pos_a, int pos_b)
 	i = 0;
 	j = 0;
 	ret = ft_calloc(sizeof(char), (ft_strlen(str) + 2));
-	/* ret = malloc(sizeof(char) * (ft_strlen(str) + 2)); */
 	if (!ret)
 		return (NULL);
 	while (str[i])
 	{
-		if (i == pos_a)
+		if (i == pos_a && str[i])
 			i++;
-		if (i == pos_b)
+		if (i == pos_b && str[i])
 			i++;
 		ret[j] = str[i];
-		i++;
+		if (str[i])
+			i++;
 		j++;
 	}
 	ret[j] = '\0';
@@ -45,12 +45,50 @@ char	*trim_quote(char *str)
 				return (NULL);
 			i += j;
 		}
-		i++;
+		if (str[i])
+			i++;
 	}
 	return (str);
 }
 
-int	main()
+t_token	*trim_all(t_token **all)
+{
+	t_token	*tmp;
+
+	tmp = *all;
+	while (tmp)
+	{
+		tmp->content = trim_quote(tmp->content);
+		if(!tmp->content)
+			return (NULL);
+		tmp = tmp->next;
+	}
+	return (*all);
+}
+
+int main(int argc, char **argv, char **envp)
+{
+	char	**env;
+	(void)argc;
+	(void)argv;
+	t_token *temp;
+	t_token	*expanded;
+
+	char	*arg;
+	env = NULL;
+	arg = ft_strdup(" \"ca\" | \'va\' toi\"$USER\" > \"oui\'ii\"");
+	env = ft_create_env(envp);
+	temp = lexer(arg);
+	print_token(&temp);
+	printf("-------------------------\n");
+	expanded = expand_all(env, temp);
+	trim_all(&expanded);
+	print_token(&expanded);
+	ft_lstclear(&expanded, free);
+	ft_free_tab_2d(env);
+}
+
+/* int	main()
 {
 	char	*str = NULL;
 	char	*ret = NULL;
@@ -60,4 +98,4 @@ int	main()
 	printf("%s\n", ret);
 	free(ret);
 	return (0);
-}
+} */

@@ -188,12 +188,19 @@ int	is_builtin(char *builtin);
 char	*expand_dollar(char **env, char *str);
 
 /*
+------------------ EXPAND ----------------
+*/
+
+t_token	*expand_all(char **env, t_token *all);
+
+/*
 ------------------ PARSING ----------------
 */
 
 char	*trim_quote(char *str);
 char	**ft_split_special(char *str);
 char	*ft_strtrim_space(char *s1, char *set);
+t_token	*trim_all(t_token **all);
 
 /* 
 ------------------ CALLOC ----------------

@@ -50,16 +50,13 @@ char	*expand_node(char **env, char *str)
 		else
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
-			// leaks
 			block = expand_dollar(env, block);
 		}
-		//leaks
 		expanded = ft_strjoin_free(expanded, block, 1);
 		free(block);
 		i += find_next_quote(&str[i]);
 	}
 	free(str);
-	/* free(block); */
 	return (expanded);
 }
 
@@ -107,8 +104,9 @@ t_token	*expand_all(char **env, t_token *all)
 	env = ft_create_env(envp);
 	temp = lexer(arg);
 	print_token(&temp);
-	printf("\n");
+	printf("-------------------------\n");
 	expanded = expand_all(env, temp);
+
 	print_token(&expanded);
 	//free(arg);
 	//ft_lstclear(&temp, free);
