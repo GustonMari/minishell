@@ -21,9 +21,6 @@ typedef enum s_tokentype
 	D_CHV_R,
 	D_CHV_L,
 	WORD,
-	W_BACK_SPACE,
-	W_FRONT_SPACE,
-	W_DOUBLE_SPACE,
 	NUL,
 }	t_tokentype;
 
@@ -34,5 +31,11 @@ typedef struct s_token
 	struct s_token		*next;
 }				t_token;
 
+typedef struct s_command
+{
+	t_tokentype 	type;
+	char		**cmd_to_exec;
+	struct s_command	*next;
+}				t_command;
 
 #endif
