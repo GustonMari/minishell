@@ -64,9 +64,9 @@ int main()
     fork_pipes(cmd, "text.txt");
 
     // no redirection
-    fork_pipes(cmd, NULL);
+    /* fork_pipes(cmd, NULL); */
 
-    // another example with a longer pipe 
+    /* // another example with a longer pipe 
     {
         char *cmd1[] = {"echo", "hello world", NULL};
         char *cmd2[] = {"tee", NULL};
@@ -80,8 +80,7 @@ int main()
 
         // no redirected
         fork_pipes(cmd, NULL);
-    }
-
+    } */
     return 0;
 }
 
