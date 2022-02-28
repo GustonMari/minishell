@@ -224,4 +224,10 @@ t_command   *token_to_cmd(t_token *all);
 
 int     manage_line(char **env, char *line);
 
+/* 
+------------------ PIPE ------------------
+*/
+
+int execute_pipe(t_command *all_cmd, char **env, int nb_cmd);
+
 #endif
