@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:00:48 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/24 14:01:35 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/01 16:38:59 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,34 @@ int	ft_exec_cmd(char **env, char **full_cmd)
 	free(path);
 	return (0);
 }
+
+/* int	ft_exec_cmd(char **env, char **full_cmd)
+{
+	char	*new_cmd;
+	char	*path;
+	char	*tmp;
+	int		status;
+
+	tmp = find_val_in_tab(env, "PATH");
+	if (!tmp)
+		return (-1);
+	new_cmd = ft_strjoin("/", full_cmd[0]);
+	if (!new_cmd)
+		return (-1);
+	path = find_path_cmd(new_cmd, tmp);
+	if (!path)
+		return (-1);
+
+	int	pid = fork();
+	if (pid == 0)
+	{
+		if(execve(path, full_cmd, env) < 0)
+			perror("execve");
+		free(path);
+	}else
+		wait(&status);
+	return (0);
+} */
 
 
 /* int	main(int ac, char **av, char **env)
