@@ -52,22 +52,6 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
 
 	i = 0;
 	fd_0 = STDIN_FILENO;
-	/* if (nb_cmd == 1)
-	{
-		//pid = fork_pipe(fd_0, STDOUT_FILENO);
-		pid = fork();
-		if (pid < 0)
-		{
-			perror("c'est la D\n");
-			return (-1);
-		}
-		if (pid == 0)
-			ft_exec_cmd(env, all_cmd->cmd_to_exec);
-		else
-			wait(&status);
-		return (0);
-	} */
-	
 	while (i < nb_cmd -1 && all_cmd)
 	{
 		if (pipe(fd) < 0)
@@ -85,10 +69,12 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
 	pid = fork_pipe(fd_0, STDOUT_FILENO);
 	if (pid == 0)
 		ft_exec_cmd(env, all_cmd->cmd_to_exec);
+	i = 0;
 	while (i < nb_cmd)
 	{
-		i--;
 		wait(&status);
+		/* waitpid(pid, &status, 0); */
+		i++;
 	}
 	return (0);
 }
@@ -185,12 +171,12 @@ int main(int ac, char **av, char **envp)
 
 	
 	env = ft_create_env(envp);
-    char *line = ft_strdup("wc | ls | wc");
+    char *line = ft_strdup("ls | grep 'a' | wc -l");
 	temp = lexer(line);
 	expanded = expand_all(env, temp);
 	trim_all(&expanded);
 	cmd_all = token_to_cmd(expanded);
-    execute_pipe(cmd_all, env, 3);
+    execute_pipe(cmd_all, env, count_cmd_list(cmd_all));
     //ft_dispatch(cmd_all, env);
 	//print_cmd(&cmd_all);
 	ft_lstclear(&expanded, free);
