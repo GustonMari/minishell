@@ -1,17 +1,18 @@
 #include "../includes/function.h"
 
-/*Trouve la taille du tableau a deux dimmensions qui va etre cree pour une commande*/
+/*Trouve la taille du tableau a deux dimmensions 
+qui va etre cree pour une commande*/
 
-int cmd_len(t_token *tokens)
+int	cmd_len(t_token *tokens)
 {
-    int count;
+	int	count;
 
-    count = 0;
-    while (tokens && !is_operator(tokens->content))
-    {
-        tokens = tokens->next;
-        count++;
-    }
+	count = 0;
+	while (tokens && !is_operator(tokens->content))
+	{
+		tokens = tokens->next;
+		count++;
+	}
 	return (count);
 }
 
@@ -19,7 +20,7 @@ int cmd_len(t_token *tokens)
 
 char	**token_to_tab(t_token *tokens)
 {
-    char	**strs;
+	char	**strs;
 	int		i;
 
 	i = 0;
@@ -27,13 +28,13 @@ char	**token_to_tab(t_token *tokens)
 	if (!strs)
 		return (NULL);
 	while (tokens && !is_operator(tokens->content))
-    {
+	{
 		strs[i] = ft_strdup(tokens->content);
 		if (!strs[i])
 			return (ft_free_tab_2d(strs));
 		tokens = tokens->next;
 		i++;
-    }
+	}
 	strs[i] = NULL;
 	return (strs);
 }
@@ -42,7 +43,7 @@ char	**token_to_tab(t_token *tokens)
 
 char	**token_op_to_tab(t_token *tokens)
 {
-    char	**strs;
+	char	**strs;
 
 	strs = ft_calloc(sizeof(char *), (2));
 	if (!strs)
@@ -89,25 +90,25 @@ void	ft_add_back_cmd(t_command **alst, t_command *new)
 
 /* Transforme notre liste token en liste de cmd*/
 
-t_command   *token_to_cmd(t_token *all)
+t_command	*token_to_cmd(t_token *all)
 {
-    t_command   *cmd_all;
+	t_command	*cmd_all;
 	t_token		*tmp_token;
 
 	cmd_all = NULL;
 	tmp_token = all;
-    while (tmp_token)
-    {	
+	while (tmp_token)
+	{	
 		if (!is_operator(tmp_token->content))
 			ft_add_back_cmd(&cmd_all, create_new_cmd_node(token_to_tab(tmp_token), tmp_token));
 		while (tmp_token && !is_operator(tmp_token->content))
 			tmp_token = tmp_token->next;
 		if (tmp_token && is_operator(tmp_token->content))
 			ft_add_back_cmd(&cmd_all, create_new_cmd_node(token_op_to_tab(tmp_token), tmp_token));
-        if (tmp_token)
+		if (tmp_token)
 			tmp_token = tmp_token->next;
-    }
-    return (cmd_all);
+	}
+	return (cmd_all);
 }
 
 

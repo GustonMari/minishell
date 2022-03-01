@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:27:59 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/22 09:29:23 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/01 09:39:30 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,14 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-int ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
-      int i;
+	int	i;
 
-      i = 0;
-      while(s1[i] && s1[i] == s2[i])
-      {
-          i++;
-      }
-
-return(s1[i] - s2[i]);
+	i = 0;
+	while (s1[i] && s1[i] == s2[i])
+	{
+		i++;
+	}
+	return (s1[i] - s2[i]);
 }
-
-
-

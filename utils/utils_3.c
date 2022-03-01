@@ -84,9 +84,9 @@ static char	*ft_zero(void)
 
 char	*ft_substr(char *s, int start, int len)
 {
-	char			*new;
-	int	i;
-	int	j;
+	char	*new;
+	int		i;
+	int		j;
 
 	j = 0;
 	i = 0;
@@ -109,16 +109,4 @@ char	*ft_substr(char *s, int start, int len)
 	}
 	new[j] = '\0';
 	return (new);
-}
-
-void	print_tab_2d(char **strs)
-{
-	int	i;
-
-	i = 0;
-	while (strs[i])
-	{
-		printf("%s\n", strs[i]);
-		i++;
-	}
 }

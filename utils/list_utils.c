@@ -7,7 +7,6 @@ void	ft_lstadd_back(t_token **alst, t_token *new)
 	if (!*alst)
 	{
 		*alst = new;
-		/* printf("new %s \n", new->content); */
 		return ;
 	}
 	temp = *alst;
@@ -31,34 +30,32 @@ t_token	*ft_lstnew(char *content, t_tokentype param)
 	return (new);
 }
 
-void    print_token(t_token **begin_list)
+void	print_token(t_token **begin_list)
 {
-    t_token *current;
+	t_token	*current;
 
-    current = *begin_list;
-    while(current)
-    {
+	current = *begin_list;
+	while (current)
+	{
 		printf("%s\n", current->content);
 		/* ft_putstr_fd(current->content, 1); */
 		printf("\ntype = %d\n", (int)current->type);
-        /* ft_putchar_fd('\n', 1); */
-        current = current->next;
-    }
-    //printf("NULL\n");
+		/* ft_putchar_fd('\n', 1); */
+		current = current->next;
+	}
 }
 
-void    print_cmd(t_command **begin_list)
+void	print_cmd(t_command **begin_list)
 {
-    t_command *current;
+	t_command	*current;
 
-    current = *begin_list;
-    while(current)
-    {
+	current = *begin_list;
+	while (current)
+	{
 		/* printf("%s\n", current->cmd_to_exec); */
 		print_tab_2d(current->cmd_to_exec);
 		/* printf("\ntype = %d\n", (int)current->type); */
 		printf("---------------------------------\n");
-        current = current->next;
-    }
-    //printf("NULL\n");
+		current = current->next;
+	}
 }

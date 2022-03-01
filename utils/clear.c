@@ -1,4 +1,3 @@
-
 #include "../includes/function.h"
 
 char	**ft_free_tab_2d(char **tab)
@@ -6,7 +5,7 @@ char	**ft_free_tab_2d(char **tab)
 	int	i;
 
 	i = 0;
-	while(tab[i])
+	while (tab[i])
 	{
 		free(tab[i]);
 		i++;

@@ -10,7 +10,6 @@ char	*ft_cpy_val_var_env(char *var, char *find)
 	if (!val_var)
 		return (NULL);
 	return (val_var);
-	
 }
 
 /*
@@ -20,8 +19,8 @@ char	*ft_cpy_val_var_env(char *var, char *find)
 
 char	*find_val_in_tab(char **tab, char *find)
 {
-	int		i;
-	
+	int	i;
+
 	i = 0;
 	while (tab[i])
 	{
@@ -32,9 +31,9 @@ char	*find_val_in_tab(char **tab, char *find)
 	return (NULL);
 }
 
-
 /*
-	remplace la valeur de la variable d'environement par exmple si on veut remplacer pwd
+	remplace la valeur de la variable d'environement 
+	par exmple si on veut remplacer pwd
 	ou autre
 */
 
@@ -59,7 +58,7 @@ char	*ft_rpl_val_var_env(char *var, char *new_val)
 int	ft_change_env_val(char **env, char *var, char *new_val)
 {
 	int		i;
-	
+
 	i = 0;
 	while (env[i])
 	{
@@ -86,24 +85,9 @@ int	is_var_in_line(char *str, char *to_del, size_t n)
 		return (0);
 	while (str[i] && str[i] == to_del[i] && i < n - 1)
 		i++;
-	if (((unsigned char)str[i] - (unsigned char)to_del[i] == 0) && (str[i + 1] == '='))
+	if (((unsigned char)str[i] - (unsigned char)to_del[i] == 0)
+		&& (str[i + 1] == '='))
 		return (0);
 	else
 		return (1);
-}
-
-/*Trouve la ligne ou est la var d'env (si elle existe), sinon renvoie NULL*/
-
-char	*ft_find_env_line(char **env, char *var)
-{
-	int		i;
-	
-	i = 0;
-	while (env[i])
-	{
-		if (!is_var_in_line(env[i], var, ft_strlen(var)))
-			return (env[i]);
-		i++;
-	}
-	return (NULL);
 }

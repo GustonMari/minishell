@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 12:05:45 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/24 09:18:46 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/01 09:18:01 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,3 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	return (ft_cut(s, split, c, i));
 }
-
