@@ -42,6 +42,13 @@ pid_t	fork_pipe(int fd_0, int fd_1)
 	return (pid);
 }
 
+void	exit_NTM(int sig)
+{
+	(void)sig;
+	write(1, "\n", 1);
+	/* printf("exited NTM\n"); */
+}
+
 int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
 {
 	int		fd[2];
@@ -70,6 +77,10 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
 	i = 0;
 	while (i < nb_cmd)
 	{
+		if (signal(SIGINT, &exit_NTM) == SIG_ERR)
+			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
+		//if (signal(SIGHUP, &exit_NTM) == SIG_ERR)
+		//	return (fprintf(stderr, "Error: %s\n", strerror(errno)));
 		wait(&status);
 		/* waitpid(pid, &status, 0); */
 		i++;

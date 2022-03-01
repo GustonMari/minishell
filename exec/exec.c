@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:00:48 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/01 16:38:59 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/01 18:25:31 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,11 @@ int	ft_exec_cmd(char **env, char **full_cmd)
 		return (-1);
 	path = find_path_cmd(new_cmd, tmp);
 	if (!path)
+	{
+		fprintf(stderr, "command not found\n");
 		return (-1);
+	}
+		
 	if(execve(path, full_cmd, env) < 0)
 		perror("execve");
 	free(path);
