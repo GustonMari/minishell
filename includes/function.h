@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/01 09:35:54 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/01 10:31:37 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,7 @@ char	*trim_quote(char *str);
 char	**ft_split_special(char *str);
 char	*ft_strtrim_space(char *s1, char *set);
 t_token	*trim_all(t_token **all);
+t_command	*token_to_cmd(t_token *all);
 
 /* 
 ------------------ CALLOC ----------------

@@ -16,7 +16,8 @@ int	cmd_len(t_token *tokens)
 	return (count);
 }
 
-/* Cree un tab a deux dimmensions avec un NULL a la fin pour une commande et ses arguments*/
+/* Cree un tab a deux dimmensions avec un NULL
+ a la fin pour une commande et ses arguments*/
 
 char	**token_to_tab(t_token *tokens)
 {
@@ -55,11 +56,12 @@ char	**token_op_to_tab(t_token *tokens)
 	return (strs);
 }
 
-/*Cree un Node de cmd, assigne le type et fait pointer vers son tab a deux dimmensions*/
+/*Cree un Node de cmd, assigne le type 
+et fait pointer vers son tab a deux dimmensions*/
 
 t_command	*create_new_cmd_node(char **strs, t_token *all)
 {
-	t_command *new_cmd;
+	t_command	*new_cmd;
 
 	new_cmd = malloc(sizeof(t_command));
 	if (!new_cmd)
@@ -71,7 +73,6 @@ t_command	*create_new_cmd_node(char **strs, t_token *all)
 	new_cmd->next = NULL;
 	return (new_cmd);
 }
-
 
 void	ft_add_back_cmd(t_command **alst, t_command *new)
 {
@@ -88,28 +89,6 @@ void	ft_add_back_cmd(t_command **alst, t_command *new)
 	temp->next = new;
 }
 
-/* Transforme notre liste token en liste de cmd*/
-
-t_command	*token_to_cmd(t_token *all)
-{
-	t_command	*cmd_all;
-	t_token		*tmp_token;
-
-	cmd_all = NULL;
-	tmp_token = all;
-	while (tmp_token)
-	{	
-		if (!is_operator(tmp_token->content))
-			ft_add_back_cmd(&cmd_all, create_new_cmd_node(token_to_tab(tmp_token), tmp_token));
-		while (tmp_token && !is_operator(tmp_token->content))
-			tmp_token = tmp_token->next;
-		if (tmp_token && is_operator(tmp_token->content))
-			ft_add_back_cmd(&cmd_all, create_new_cmd_node(token_op_to_tab(tmp_token), tmp_token));
-		if (tmp_token)
-			tmp_token = tmp_token->next;
-	}
-	return (cmd_all);
-}
 
 
 
