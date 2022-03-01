@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/01 10:31:37 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/01 13:32:10 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,12 @@ char	**ft_split_special(char *str);
 char	*ft_strtrim_space(char *s1, char *set);
 t_token	*trim_all(t_token **all);
 t_command	*token_to_cmd(t_token *all);
+int	cmd_len(t_token *tokens);
+char	**token_to_tab(t_token *tokens);
+char	**token_op_to_tab(t_token *tokens);
+t_command	*create_new_cmd_node(char **strs, t_token *all);
+void	ft_add_back_cmd(t_command **alst, t_command *new);
+
 
 /* 
 ------------------ CALLOC ----------------
@@ -230,5 +236,6 @@ int     manage_line(char **env, char *line);
 */
 
 int execute_pipe(t_command *all_cmd, char **env, int nb_cmd);
+int	count_cmd_list(t_command *all_cmd);
 
 #endif

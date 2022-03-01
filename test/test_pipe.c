@@ -26,6 +26,7 @@ void fork_pipes (char** cmd[], const char *redirection) {
   int i, n;
   int in, out, fd[2];
 
+  /* The first process should get its input from the original file descriptor 0.  */
   in = 0;
 
   // obtain n from the NULL terminated cmd array
@@ -35,8 +36,11 @@ void fork_pipes (char** cmd[], const char *redirection) {
   // process all but the last elemet of the pipe
     for (i = 0; i < n-1; ++i) {
         pipe(fd);
+      /* f [1] is the write end of the pipe, we carry `in` from the prev iteration.  */
         spawn_proc(in, fd[1], cmd[i]);
+		/* No need for the write end of the pipe, the child will write here.  */
         close(fd [1]);
+		/* Keep the read end of the pipe, the next child will read from there.  */
         in = fd [0];
   }
 
@@ -46,10 +50,11 @@ void fork_pipes (char** cmd[], const char *redirection) {
         fchmod(out, 0666);
     } else
         out = STDOUT_FILENO;
-
+/* Last stage of the pipeline - set stdin be the read end of the previous pipe
+     and output to the original file descriptor 1. */  
     if (in != 0)
         dup2(in, 0);
-
+  /* Execute the last stage with the current process. */
     spawn_proc(in, out, cmd[i]);
 }
 
@@ -57,8 +62,9 @@ int main()
 {
 
     char *cmd1[] = {"ls", NULL};
-    char *cmd2[] = {"tr", "a", "b", NULL};
-    char **cmd[] = { cmd1, cmd2, NULL};
+    char *cmd2[] = {"text.txt", NULL};
+    char *cmd3[] = {"wc",  NULL};
+    char **cmd[] = { cmd1, cmd2, cmd3, NULL};
 
     // redirected to text.txt
     fork_pipes(cmd, "text.txt");
