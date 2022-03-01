@@ -95,17 +95,6 @@ int main(int ac, char **av, char **envp)
 		{	
 			add_history(line);
 			manage_line(env, line);
-			/* if (!ft_strncmp(line, "env", 4))
-				ft_print_env(env);
-			else if (!ft_strncmp(line, "pwd", 4))
-				ft_pwd();
-			else
-				printf("%s\n", line); */
-			//ft_cd(line, env);
-			//ft_pwd();
-			
-/* 			if(ft_cd(line))
-				ft_putstr_fd("\n\e[1;91m- Problem with cd -\n", 1); */
 		}
 		/* if(line)
 			free(line); */

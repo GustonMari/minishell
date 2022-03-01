@@ -64,8 +64,6 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
 		all_cmd = all_cmd->next->next;
 		i++;
 	}
-	if (fd_0 != 0)
-		dup2(fd_0, 0);
 	pid = fork_pipe(fd_0, STDOUT_FILENO);
 	if (pid == 0)
 		ft_exec_cmd(env, all_cmd->cmd_to_exec);
@@ -159,7 +157,7 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
 
 
 
-int main(int ac, char **av, char **envp)
+/* int main(int ac, char **av, char **envp)
 {
     (void)ac;
     (void)av;
@@ -168,10 +166,9 @@ int main(int ac, char **av, char **envp)
 	t_command *cmd_all;
 	(void)cmd_all;
     char **env;
-
 	
 	env = ft_create_env(envp);
-    char *line = ft_strdup("ls | grep 'a' | wc -l");
+    char *line = ft_strdup("ls | ls");
 	temp = lexer(line);
 	expanded = expand_all(env, temp);
 	trim_all(&expanded);
@@ -182,8 +179,8 @@ int main(int ac, char **av, char **envp)
 	ft_lstclear(&expanded, free);
 	ft_cmd_clear(&cmd_all);
 
-	//int	test = 0;
-	//scanf("%d", &test);
-	//printf("test = %d\n", test);
+	int	test = 0;
+	scanf("%d", &test);
+	printf("test = %d\n", test);
     return (0);
-}
+} */
