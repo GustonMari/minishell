@@ -65,7 +65,6 @@ int	ft_change_env_val(char **env, char *var, char *new_val)
 		if (!is_var_in_line(env[i], var, ft_strlen(var)))
 		{
 			env[i] = ft_rpl_val_var_env(env[i], new_val);
-			printf("%s\n", env[i]);
 			return (0);
 		}
 		i++;

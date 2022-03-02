@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:00:48 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/02 11:59:52 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/02 17:05:18 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,26 @@ int	ft_exec_cmd(char **env, char **full_cmd)
 	return (0);
 }
 
-int	ft_exec_builtin(char **env, char **full_cmd, int builtin)
+char	**ft_exec_builtin(char **env, char **full_cmd, int builtin)
 {
+	if (builtin == FT_CD)
+		ft_cd(full_cmd, env);
+	if (builtin == FT_UNSET)
+	{
+		env = ft_unset(env, full_cmd);
+		if (!env)
+			return (NULL); 
+	}
+	if (builtin == FT_EXPORT)
+		env = ft_export(env, full_cmd[1]);
+	if (builtin == FT_PWD)
+		ft_pwd();
+	if (builtin == FT_ENV)
+		ft_print_env(env);
 	
+		
+	
+	return (env);
 }
 
 int	ft_exec(char **env, char **full_cmd)
@@ -75,7 +92,8 @@ int	ft_exec(char **env, char **full_cmd)
 	builtin = is_builtin(full_cmd[0]);
 	if (builtin)
 	{
-		ft_exec_builtin(env, full_cmd, builtin);
+		env = ft_exec_builtin(env, full_cmd, builtin);
+		exit(1);
 		return (0);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/02 11:49:24 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/02 16:53:38 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	print_tab_2d(char **strs);
 --------------- ft_cd.c ----------------
 */
 
-int		ft_cd(char *str, char **env);
+int	ft_cd(char **full_cmd, char **env);
 int		ft_home(char **env);
 
 /*
@@ -128,6 +128,7 @@ void	ft_cmd_clear(t_command **lst);
 */
 
 int	is_var_in_line(char *str, char *to_del, size_t n);
+char	**ft_unset(char **env, char **full_cmd);
 
 
 /*
@@ -172,10 +173,15 @@ int	find_next_quote(char *str);
 */
 
 char	*find_path_cmd(char *cmd, char *tmp);
+int	ft_exec(char **env, char **full_cmd);
 int	ft_exec_cmd(char **env, char **full_cmd);
 int ft_dispatch(t_command *all, char **env);
 
+/*
+------------------EXECUTE 1 ----------------
+*/
 
+char	**execute_one_cmd(char **env, t_command *all);
 /*
 ------------------CHECK ----------------
 */
@@ -251,5 +257,6 @@ int	count_cmd_list(t_command *all_cmd);
 */
 
 void	ft_print_error(int minishell, char *cmd_name, char *error, char *token);
+void	cd_error(char *cmd, int to_many_arg);
 
 #endif

@@ -6,17 +6,17 @@ au builtin*/
 
 int	is_builtin(char *builtin)
 {
-	if (ft_strcmp("cd", builtin))
+	if (!ft_strcmp("cd", builtin))
 		return (FT_CD);
-	if (ft_strcmp("pwd", builtin))
+	if (!ft_strcmp("pwd", builtin))
 		return (FT_PWD);
-	if (ft_strcmp("env", builtin))
+	if (!ft_strcmp("env", builtin))
 		return (FT_ENV);
-	if (ft_strcmp("unset", builtin))
+	if (!ft_strcmp("unset", builtin))
 		return (FT_UNSET);
-	if (ft_strcmp("export", builtin))
+	if (!ft_strcmp("export", builtin))
 		return (FT_EXPORT);
-	if (ft_strcmp("echo", builtin))
+	if (!ft_strcmp("echo", builtin))
 		return (FT_ECHO);
 	return (0);
 }
