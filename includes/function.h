@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/01 13:32:10 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/02 11:49:24 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,14 @@ int	is_operator(char *operator);
 int	is_built_cmd(char **env, char *cmd);
 int	is_cmd(char **env, char *cmd);
 int	is_builtin(char *builtin);
+int	check_cmd_list(t_command *all);
+int	is_operator_type(t_command *op);
+
+/*
+------------------CHECK CMD----------------
+*/
+
+int	check_t_cmd(char **env, t_command *all);
 
 /*
 ------------------ $$ DOLLARZ $$ ----------------
@@ -237,5 +245,11 @@ int     manage_line(char **env, char *line);
 
 int execute_pipe(t_command *all_cmd, char **env, int nb_cmd);
 int	count_cmd_list(t_command *all_cmd);
+
+/* 
+------------------ ERROR ------------------
+*/
+
+void	ft_print_error(int minishell, char *cmd_name, char *error, char *token);
 
 #endif

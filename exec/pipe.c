@@ -65,7 +65,7 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
 			return (-1);
 		pid = fork_pipe(fd_0, fd[1]);
 		if (pid == 0)
-			ft_exec_cmd(env, all_cmd->cmd_to_exec);
+			ft_exec(env, all_cmd->cmd_to_exec);
 		close(fd[1]);
 		fd_0 = fd[0];
 		all_cmd = all_cmd->next->next;
@@ -73,16 +73,13 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
 	}
 	pid = fork_pipe(fd_0, STDOUT_FILENO);
 	if (pid == 0)
-		ft_exec_cmd(env, all_cmd->cmd_to_exec);
+		ft_exec(env, all_cmd->cmd_to_exec);
 	i = 0;
 	while (i < nb_cmd)
 	{
 		if (signal(SIGINT, &exit_NTM) == SIG_ERR)
 			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-		//if (signal(SIGHUP, &exit_NTM) == SIG_ERR)
-		//	return (fprintf(stderr, "Error: %s\n", strerror(errno)));
 		wait(&status);
-		/* waitpid(pid, &status, 0); */
 		i++;
 	}
 	return (0);

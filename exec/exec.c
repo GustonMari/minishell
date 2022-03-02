@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:00:48 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/01 18:25:31 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/02 11:59:52 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,32 @@ int	ft_exec_cmd(char **env, char **full_cmd)
 	path = find_path_cmd(new_cmd, tmp);
 	if (!path)
 	{
-		fprintf(stderr, "command not found\n");
-		return (-1);
+		ft_print_error(0, full_cmd[0], ": command not found", NULL);
+		exit(1);
 	}
-		
 	if(execve(path, full_cmd, env) < 0)
 		perror("execve");
 	free(path);
+	return (0);
+}
+
+int	ft_exec_builtin(char **env, char **full_cmd, int builtin)
+{
+	
+}
+
+int	ft_exec(char **env, char **full_cmd)
+{
+	int	builtin;
+
+	builtin = is_builtin(full_cmd[0]);
+	if (builtin)
+	{
+		ft_exec_builtin(env, full_cmd, builtin);
+		return (0);
+	}
+	else
+		ft_exec_cmd(env, full_cmd);
 	return (0);
 }
 
@@ -102,7 +121,20 @@ int	ft_exec_cmd(char **env, char **full_cmd)
 	test[1] = "-la";
 	test[2] = NULL;
 
-	ft_exec_cmd(env, test);
+	ft_exec_cmd(envint	check_t_cmd(char **env, t_command *all)
+{
+	t_command *tmp;
 
+	tmp = all;
+	while (tmp)
+	{
+		if (is_valid_cmd(env, tmp->cmd_to_exec) == -1)
+		{
+			ft_putstr_fd(BRED tmp->cmd_to_exec[0] CRESET, 2);
+			perror(BRED ": command not found" CRESET);
+			return (-1);
+		}
+		tmp = tmp->next;
+	}
 	return (0);
-} */
+}*/
