@@ -94,7 +94,7 @@ int main(int ac, char **av, char **envp)
 		if (line && *line)
 		{	
 			add_history(line);
-			manage_line(env, line);
+			env = manage_line(env, line);
 		}
 		/* if(line)
 			free(line); */

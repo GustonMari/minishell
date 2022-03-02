@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 14:02:11 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/02 15:11:11 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/02 17:55:40 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int	ft_cd(char **full_cmd, char **env)
 	if (chdir(full_cmd[1]) == -1)
 		printf("Error chdir not working");
 	ft_change_env_val(env, "PWD", ft_pwd_return());
-	ft_change_env_val(env, "OLDPWD", old_pwd);
+	if (old_pwd)
+		ft_change_env_val(env, "OLDPWD", old_pwd);
 	free(old_pwd);
 	//exit (0);
 	return (0);
@@ -83,6 +84,16 @@ int	ft_cd(char **full_cmd, char **env)
 	(void)argc;
 	(void)argv;
 	(void)envp;
-	ft_cd("/mnt/nfs/homes/gmary/Documents/TAFF", ft_create_env(envp));
+
+	char	**env;
+	char *full_cmd[] = {"unset", "PWD", NULL};
+	char *path[] = {"cd", "test", NULL};
+	env = ft_create_env(envp);
+	env = ft_unset(env, full_cmd);
+	//ft_print_env(env);
+	//ft_print_env(ft_unset(env, full_cmd));
+	ft_cd(path, env);
+	ft_free_tab_2d(env);
 	return (0);
-} */
+}
+ */

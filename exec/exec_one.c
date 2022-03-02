@@ -20,5 +20,4 @@ char	**execute_one_cmd(char **env, t_command *all)
 	if (builtin == FT_ENV)
 		ft_print_env(env);
 	return (env);
-	//return (0);
 }
