@@ -79,9 +79,8 @@ char	**ft_exec_builtin(char **env, char **full_cmd, int builtin)
 		ft_pwd();
 	if (builtin == FT_ENV)
 		ft_print_env(env);
-	
-		
-	
+	if (builtin == FT_ECHO)
+		ft_echo(full_cmd);
 	return (env);
 }
 
