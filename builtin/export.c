@@ -17,7 +17,7 @@ int		ft_print_export_no_arg(char **env)
 	i = 0;
 	while (env[i])
 	{
-		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd("export ", 1);
 		ft_putstr_fd(env[i], 1);
 		ft_putchar_fd('\n', 1);
 		i++;
@@ -67,9 +67,8 @@ void	ft_export_no_arg(char **env)
 	ft_free_tab_2d(env_sorted);
 }
 
-//ft_export_add
 
-char	**ft_export(char **env, char *str)
+char	**ft_export_add(char **env, char *str)
 {
 	char	**new_env;
 	int		line;
@@ -108,7 +107,7 @@ char	*find_name_val(char *str)
 
 	i = 0;
 	j = 0;
-	while (str[i] != '=')
+	while (str[i] && str[i] != '=')
 		i++;
 	name = malloc(sizeof(char) * (i + 1));
 	if (!name)
@@ -135,7 +134,7 @@ char	*find_val_in_line(char *str)
 
 	i = 0;
 	j = 0;
-	while (str[i] != '=')
+	while (str[i] && str[i] != '=')
 		i++;
 	i++;
 	val = malloc(sizeof(char) * (ft_strlen(&str[i]) + 2));
@@ -151,22 +150,58 @@ char	*find_val_in_line(char *str)
 	return (val);
 }
 
-/* char	**ft_export_change(char **env, char *str)
+char	**ft_export_change(char **env, char *str, char *name)
 {
+	char	*val;
+	char	*ret;
 
+	val = find_val_in_line(str);
+	ret = find_val_in_tab(env, name);
+	ft_change_env_val(env, name, val);
+	free(name);
+	free(val);
+	free(ret);
+	return (env);
+}
+
+int	ft_check_export(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (0);
+		i++;
+	}
+	return (0);
 }
 
 char	**ft_export(char **env, char *str)
 {
-	if (find_val_in_tab(env, str) != NULL)
+	char	*name;
+	char	*ret;
+
+	if (str == NULL)
 	{
-		env = ft_export_change(env, str);
+		ft_export_no_arg(env);
+		return (env);
 	}
-	else
+	name = find_name_val(str);
+	ret = find_val_in_tab(env, name);
+	if (ret == NULL)
 	{
 		env = ft_export_add(env, str);
 	}
-} */
+	else
+	{
+		env = ft_export_change(env, str, name);
+		
+	}
+	free(ret);
+	return (env);
+}
 
 /* int main(int ac, char **av, char **envp)
 {

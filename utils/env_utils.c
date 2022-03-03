@@ -91,7 +91,7 @@ int	is_var_in_line(char *str, char *to_del, size_t n)
 		return (1);
 }
 
-int main(int argc, char **argv, char **envp)
+/* int main(int argc, char **argv, char **envp)
 {
 	char	**env;
 	(void)argc;
@@ -111,4 +111,4 @@ int main(int argc, char **argv, char **envp)
 	free(val);
 	free(ret);
 	ft_free_tab_2d(env);
-}
+} */
