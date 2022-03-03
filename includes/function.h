@@ -114,6 +114,8 @@ int		ft_print_env(char **env);
 */
 
 char	**ft_export(char **envp, char *str);
+char	*find_name_val(char *str);
+char	*find_val_in_line(char *str);
 
 /*
 ------------------ CLEAR ----------------
@@ -258,5 +260,6 @@ int	count_cmd_list(t_command *all_cmd);
 
 void	ft_print_error(int minishell, char *cmd_name, char *error, char *token);
 void	cd_error(char *cmd, int to_many_arg);
+
 
 #endif

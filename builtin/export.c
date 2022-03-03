@@ -67,6 +67,8 @@ void	ft_export_no_arg(char **env)
 	ft_free_tab_2d(env_sorted);
 }
 
+//ft_export_add
+
 char	**ft_export(char **env, char *str)
 {
 	char	**new_env;
@@ -94,7 +96,77 @@ char	**ft_export(char **env, char *str)
 	return (new_env);
 }
 
+/* Trouve le nom de la variable d'environemment passe en parametre
+exemple : si str --> PWD=lolilol
+on va retourner PWD */
 
+char	*find_name_val(char *str)
+{
+	int		i;
+	int		j;
+	char	*name;
+
+	i = 0;
+	j = 0;
+	while (str[i] != '=')
+		i++;
+	name = malloc(sizeof(char) * (i + 1));
+	if (!name)
+		return (NULL);
+	while (j < i)
+	{
+		name[j] = str[j];
+		j++;
+	}
+	name[j] = '\0';
+	return (name);
+}
+
+/* Cette fonction va renvoyer la valeur d'une ligne d'une
+variable d'environnement donnee, exemple :
+str --> PWD=lolilol
+ON renvoie --> lolilol*/
+
+char	*find_val_in_line(char *str)
+{
+	int		i;
+	int		j;
+	char	*val;
+
+	i = 0;
+	j = 0;
+	while (str[i] != '=')
+		i++;
+	i++;
+	val = malloc(sizeof(char) * (ft_strlen(&str[i]) + 2));
+	if (!val)
+		return (NULL);
+	while (str[i])
+	{
+		val[j] = str[i];
+		i++;
+		j++;
+	}
+	val[j] = '\0';
+	return (val);
+}
+
+/* char	**ft_export_change(char **env, char *str)
+{
+
+}
+
+char	**ft_export(char **env, char *str)
+{
+	if (find_val_in_tab(env, str) != NULL)
+	{
+		env = ft_export_change(env, str);
+	}
+	else
+	{
+		env = ft_export_add(env, str);
+	}
+} */
 
 /* int main(int ac, char **av, char **envp)
 {
