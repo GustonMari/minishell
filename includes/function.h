@@ -72,7 +72,7 @@ void	ft_putchar_fd(char c, int fd);
 
 char	*ft_strdup(char *src);
 char	**ft_strdup_2d(char **srcs);
-char	**ft_export(char **env, char *str);
+//char	**ft_export(char **env, char *str);
 int		ft_count_line(char **tab);
 int		ft_is_space(char c);
 
@@ -116,7 +116,7 @@ int		ft_print_env(char **env);
 char	**ft_export(char **envp, char *str);
 char	*find_name_val(char *str);
 char	*find_val_in_line(char *str);
-
+char	**manage_export(char **env, char **full_cmd);
 /*
 ------------------ CLEAR ----------------
 */

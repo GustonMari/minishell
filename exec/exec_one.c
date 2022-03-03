@@ -14,7 +14,7 @@ char	**execute_one_cmd(char **env, t_command *all)
 			return (NULL); 
 	}
 	if (builtin == FT_EXPORT)
-		env = ft_export(env, all->cmd_to_exec[1]);
+		env = manage_export(env, all->cmd_to_exec);
 	if (builtin == FT_PWD)
 		ft_pwd();
 	if (builtin == FT_ENV)

@@ -183,11 +183,6 @@ char	**ft_export(char **env, char *str)
 	char	*name;
 	char	*ret;
 
-	if (str == NULL)
-	{
-		ft_export_no_arg(env);
-		return (env);
-	}
 	name = find_name_val(str);
 	ret = find_val_in_tab(env, name);
 	if (ret == NULL)
@@ -203,6 +198,23 @@ char	**ft_export(char **env, char *str)
 	return (env);
 }
 
+char	**manage_export(char **env, char **full_cmd)
+{
+	int	i;
+
+	i = 1;
+	if (ft_count_line(full_cmd) == 1)
+	{
+		ft_export_no_arg(env);
+		return (env);
+	}
+	while (full_cmd[i])
+	{
+		env = ft_export(env, full_cmd[i]);
+		i++;
+	}
+	return (env);
+}
 /* int main(int ac, char **av, char **envp)
 {
 	(void)ac;

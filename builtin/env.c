@@ -39,6 +39,22 @@
 	return (0);
 }
  */
+/* Permet de trouver le PREMIER egal dans une ligne mais*/
+
+int	find_equal_in_line(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if(str[i] == '=')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 
 int		ft_print_env(char **env)
 {
@@ -47,8 +63,11 @@ int		ft_print_env(char **env)
 	i = 0;
 	while (env[i])
 	{
-		ft_putstr_fd(env[i], 1);
-		ft_putchar_fd('\n', 1);
+		if (!find_equal_in_line(env[i]))
+		{
+			ft_putstr_fd(env[i], 1);
+			ft_putchar_fd('\n', 1);
+		}
 		i++;
 	}
 	return (0);
