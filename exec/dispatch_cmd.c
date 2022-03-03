@@ -1,12 +1,5 @@
 #include "../includes/function.h"
 
-
-
-/* int ft_count_cmd(t_command *all)
-{
-
-} */
-
 char	**ft_dispatch(t_command *all, char **env)
 {
 	t_command	*tmp;
@@ -18,6 +11,7 @@ char	**ft_dispatch(t_command *all, char **env)
 		env = execute_one_cmd(env, all);
 	else
 		execute_pipe(tmp, env, count_cmd_list(tmp));
+	//ft_redirection_chv_r("pouetpouetpizza");
 	//ft_exec_cmd(env, tmp->cmd_to_exec);
 	return (env);
 }

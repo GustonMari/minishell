@@ -9,7 +9,7 @@ int	count_cmd_list(t_command *all_cmd)
 
 	tmp = all_cmd;
 	count = 0;
-	while (tmp && (tmp->type == WORD || tmp->type == PIPE))
+	while (tmp /* && (tmp->type == WORD || tmp->type == PIPE) */)
 	{
 		if (tmp->type == WORD)
 			count++;
@@ -42,128 +42,98 @@ pid_t	fork_pipe(int fd_0, int fd_1)
 	return (pid);
 }
 
-void	exit_NTM(int sig)
+
+
+int	execute_last(t_command *all_cmd, char **env, int fd_0, int fd_1)
 {
-	(void)sig;
-	write(1, "\n", 1);
-	/* printf("exited NTM\n"); */
+	int	pid;
+
+	pid = fork_pipe(fd_0, fd_1);
+	if (pid == 0)
+		ft_exec(env, all_cmd->cmd_to_exec);
+	return (0);
 }
 
 int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
 {
 	int		fd[2];
 	int		fd_0;
+	int		fd_1;
 	int		i;
-	int		status;
+	pid_t	pid;
+
+	i = 0;
+	fd_0 = STDIN_FILENO;
+	while (all_cmd && i < nb_cmd /* - 1 */)
+	{
+		
+		if (pipe(fd) < 0)
+			return (-1);
+		if(all_cmd->next && all_cmd->next->type == CHV_R)
+		{
+			fd_1 = open(all_cmd->next->next->cmd_to_exec[0], O_WRONLY | O_CREAT | O_TRUNC, 00777);
+			execute_last(all_cmd, env, fd_0, fd_1);
+			if (all_cmd->next->next)
+				all_cmd = all_cmd->next->next;
+		}
+		else
+		{
+			fd_1 = fd[1];
+			pid = fork_pipe(fd_0, fd_1);
+			if (pid == 0)
+				ft_exec(env, all_cmd->cmd_to_exec);
+			close(fd[1]);
+			fd_0 = fd[0];
+		}
+		if (all_cmd && all_cmd->next && all_cmd->next->next)
+			all_cmd = all_cmd->next->next;
+		i++;
+	}
+	execute_last(all_cmd, env, fd_0, STDOUT_FILENO);
+	wait_pipe(nb_cmd);
+	return (0);
+}
+
+/* int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
+{
+	int		fd[2];
+	int		fd_0;
+	int		fd_1;
+	int		i;
 	pid_t	pid;
 
 	i = 0;
 	fd_0 = STDIN_FILENO;
 	while (i < nb_cmd -1 && all_cmd)
 	{
+		
 		if (pipe(fd) < 0)
 			return (-1);
-		pid = fork_pipe(fd_0, fd[1]);
+		if(all_cmd->next && all_cmd->next->type == CHV_R)
+		{
+			printf("all_cmd->next = %d\n", (int)all_cmd->next->type);
+			printf("On est dedans \n");
+			fd_1 = open(all_cmd->next->next->cmd_to_exec[0], O_WRONLY | O_CREAT | O_TRUNC, 00777);
+			execute_last(all_cmd, env, fd_0, fd_1);
+			//all_cmd = all_cmd->next->next;
+		}
+		else
+			fd_1 = fd[1];
+		pid = fork_pipe(fd_0, fd_1);
 		if (pid == 0)
 			ft_exec(env, all_cmd->cmd_to_exec);
 		close(fd[1]);
 		fd_0 = fd[0];
+
 		all_cmd = all_cmd->next->next;
 		i++;
 	}
-	pid = fork_pipe(fd_0, STDOUT_FILENO);
-	if (pid == 0)
-		ft_exec(env, all_cmd->cmd_to_exec);
-	i = 0;
-	while (i < nb_cmd)
-	{
-		if (signal(SIGINT, &exit_NTM) == SIG_ERR)
-			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-		wait(&status);
-		i++;
-	}
-	return (0);
-}
-
-
-
-
-
-
-
-/* int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
-{
-	int			i;
-	int			fd[2];
-	pid_t		pid1;
-	pid_t		pid2;
-	int			status;
-	t_command	*tmp;
-	int			fd_file; 
-
-	fd_file = open("pouet", O_CREAT | O_WRONLY | O_TRUNC, 00666);
-	if (fd_file < 0)
-	{
-		printf("Pb open file\n");
-		return (-1);
-	}
-	tmp = all_cmd;
-	i = 0;
-	while (i < nb_cmd - 1 && tmp)
-	{
-		if (pipe(fd) < 0)
-			return (-1);
-		pid1 = fork();
-		if (pid1 < 0)
-			return (-1);
-		if (pid1 == 0)
-		{
-			//child 1
-			//close(STDIN_FILENO);
-			close(fd[1]);
-			dup2(fd[0], STDIN_FILENO);
-			close(fd[0]);
-			ft_exec_cmd(env, tmp->next->next->cmd_to_exec);
-		}
-		else
-		{pid = fork();
-		if (pid < 0)
-		{
-			perror("c'est la D\n");
-			return (-1);
-		}
-		if (pid == 0)
-			pid2 = fork();
-			if (pid2 < 0)
-				return (-1);
-			if (pid2 == 0)
-			{
-				//child2 (le premier exec)
-				//close(STDOUT_FILENO);
-				close(fd[0]);
-				dup2(fd[1], STDOUT_FILENO);	if (fd_0 != 0)
-		dup2(fd_0, 0);
-				close(fd[0]);
-				close(fd[1]);
-				
-				//Ce qu'on veut utiliser pour ecrire dans le fichier
-				//dup2(fd_file, STDIN_FILENO);
-				//close(fd_file);
-		}
-		i++;
-		tmp = tmp->next->next;
-	}
-	while (i < nb_cmd - 1)
-	{
-		i--;
-		waitpid(pid1, &status, 0);
-	}
+	//fd_1 = open("pouetpouetpizza", O_WRONLY | O_CREAT | O_TRUNC, 00644);
+	//Mettre erreur si on peut pas ouvrir
+	execute_last(all_cmd, env, fd_0, fd_1);
+	wait_pipe(nb_cmd);
 	return (0);
 } */
-
-
-
-
 
 /* int main(int ac, char **av, char **envp)
 {

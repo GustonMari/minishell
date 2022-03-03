@@ -145,6 +145,8 @@ char	*ft_pwd_return(void);
 */
 
 int	redirection_to_file(char *file_name, char *str);
+int    ft_redirection_chv_r(char *str);
+
 
 /*
 ------------------ ENV_UTILS ----------------
@@ -266,5 +268,11 @@ void	cd_error(char *cmd, int to_many_arg);
 */
 
 void ft_echo(char **full_cmd);
+
+/* 
+------------------ WAIT ------------------
+*/
+
+int	wait_pipe(int nb_cmd);
 
 #endif
