@@ -50,8 +50,8 @@ int	redirection(t_command *all_cmd, int *fd_0, int *fd_1)
 	}
 	if (manage_chv_l(all_cmd, fd_0) == -1)
 		return (-1);
-	//if (manage_chv_r(all_cmd, fd_1) == -1)
-	//	return (-1);
+	if (manage_chv_r(all_cmd, fd_1) == -1)
+		return (-1);
 	if (*fd_1 == -1)
 		return (-1);
 	return (0);
