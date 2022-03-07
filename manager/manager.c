@@ -9,7 +9,11 @@ char	**manage_line(char **env, char *line)
 
 	temp = lexer(line);
 	expanded = expand_all(env, temp);
+	//REMOVE
+	//print_token(&expanded);
 	trim_all(&expanded);
+	//REMOVE
+	//print_token(&expanded);
 	cmd_all = token_to_cmd(expanded);
 	env = ft_dispatch(cmd_all, env);
 	//print_cmd(&cmd_all);

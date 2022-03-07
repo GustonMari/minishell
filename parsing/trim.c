@@ -66,7 +66,7 @@ t_token	*trim_all(t_token **all)
 	return (*all);
 }
 
-/* int main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
 	char	**env;
 	(void)argc;
@@ -76,7 +76,7 @@ t_token	*trim_all(t_token **all)
 
 	char	*arg;
 	env = NULL;
-	arg = ft_strdup(" \"ca\" | \'va\' toi\"$USER\" > \"oui\'ii\"");
+	arg = ft_strdup("\"$USER\"\'oui\'\"$USER\"");
 	env = ft_create_env(envp);
 	temp = lexer(arg);
 	print_token(&temp);
@@ -86,7 +86,7 @@ t_token	*trim_all(t_token **all)
 	print_token(&expanded);
 	ft_lstclear(&expanded, free);
 	ft_free_tab_2d(env);
-} */
+}
 
 /* int	main()
 {

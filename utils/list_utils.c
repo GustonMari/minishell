@@ -39,7 +39,7 @@ void	print_token(t_token **begin_list)
 	{
 		printf("%s\n", current->content);
 		/* ft_putstr_fd(current->content, 1); */
-		printf("\ntype = %d\n", (int)current->type);
+		//printf("\ntype = %d\n", (int)current->type);
 		/* ft_putchar_fd('\n', 1); */
 		current = current->next;
 	}
