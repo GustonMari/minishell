@@ -89,9 +89,6 @@ void	ft_add_back_cmd(t_command **alst, t_command *new)
 	temp->next = new;
 }
 
-
-
-
 /* int main(int argc, char **argv, char **envp)
 {
 

@@ -7,18 +7,19 @@ USER et le renvoyer.
 
 char	*cut_dollar(char *str)
 {
-	int	i;
+	int		i;
 	char	*var_name;
 
 	i = 1;
-	while (str[i] && !ft_is_space(str[i]) && is_operator(&str[i]) == 0 && str[i] != '$' && str[i] != '\'' && str[i] != '\"')
+	while (str[i] && !ft_is_space(str[i])
+		&& is_operator(&str[i]) == 0
+		&& str[i] != '$' && str[i] != '\'' && str[i] != '\"')
 		i++;
 	var_name = malloc(sizeof(char) * (i));
 	if (!var_name)
 		return (NULL);
 	var_name = ft_strncpy(var_name, &str[1], i - 1);
 	return (var_name);
-
 }
 
 /*
@@ -57,7 +58,7 @@ char	*del_dollar_2(char *str, char *var_name, char *ret, int len)
 char	*del_dollar(char *str, char *var_name, int len)
 {
 	char	*ret;
-	
+
 	ret = malloc(sizeof(char) * (ft_strlen(str) - len + 1));
 	if (!ret)
 		return (NULL);
@@ -82,7 +83,6 @@ char	*replace_dollar_3(char *str, char *new_var, char *ret)
 	free(str);
 	return (ret);
 }
-
 
 char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos)
 {
@@ -116,8 +116,8 @@ char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos)
 
 char	*replace_dollar(char **env, char *str, char *var_name, int pos)
 {
-	char *new_var;
-	char *ret;
+	char	*new_var;
+	char	*ret;
 
 	new_var = NULL;
 	ret = NULL;
@@ -131,11 +131,10 @@ char	*replace_dollar(char **env, char *str, char *var_name, int pos)
 	free(var_name);
 	if (ft_strlen(str) == 0)
 	{
-		return(replace_dollar_3(str, new_var, ret));
+		return (replace_dollar_3(str, new_var, ret));
 	}
 	return (replace_dollar_2(str, new_var, ret, pos));
 }
-
 
 char	*expand_dollar(char **env, char *str)
 {
@@ -146,7 +145,8 @@ char	*expand_dollar(char **env, char *str)
 	var_name = NULL;
 	while (str[i])
 	{
-		if (str[i] == '$' && !ft_is_space(str[i + 1]) && str[i + 1] != '\0' && str[i + 1] != '$')
+		if (str[i] == '$' && !ft_is_space(str[i + 1])
+			&& str[i + 1] != '\0' && str[i + 1] != '$')
 		{
 			var_name = cut_dollar(&str[i]);
 			if (!var_name)
@@ -163,7 +163,7 @@ char	*expand_dollar(char **env, char *str)
 		}
 		i++;
 	}
-	return(str);
+	return (str);
 }
 
 /* int	expand_cmd(t_token **lexer, char **env)

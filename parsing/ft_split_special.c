@@ -8,7 +8,7 @@ int	ft_count_word(char *str)
 
 	i = 0;
 	count = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == QUOTE)
 		{

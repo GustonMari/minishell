@@ -1,6 +1,5 @@
 #include "../includes/function.h"
 
-
 int	create_op(t_token **begin, int op)
 {
 	if (op == PIPE)
@@ -68,13 +67,13 @@ int	create_word(char *arg, t_token **begin)
 t_token	*lexer(char *arg)
 {
 	t_token	*begin = NULL;
-	int	i;
-	int	op;
+	int		i;
+	int		op;
 
 	i = 0;
 	if (check_quote(arg))
 		return (NULL);
-	while(arg[i])
+	while (arg[i])
 	{
 		op = is_operator(&arg[i]);
 		if (op)

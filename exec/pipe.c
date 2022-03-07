@@ -58,13 +58,43 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
 {
 	int		fd[2];
 	int		fd_0;
+	int		i;
+	//int		status;
+	pid_t	pid;
+
+	i = 0;
+	fd_0 = STDIN_FILENO;
+	while (all_cmd && (i < nb_cmd -1))
+	{
+		if (pipe(fd) < 0)
+			return (-1);
+		pid = fork_pipe(fd_0, fd[1]);
+		if (pid == 0)
+			ft_exec_cmd(env, all_cmd->cmd_to_exec);
+		close(fd[1]);
+		fd_0 = fd[0];
+		all_cmd = all_cmd->next->next;
+		i++;
+	}
+
+	//redir_left
+	//redir_right
+	execute_last(all_cmd, env, fd_0, STDOUT_FILENO);
+	wait_pipe(nb_cmd);
+	return (0);
+}
+
+/* int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
+{
+	int		fd[2];
+	int		fd_0;
 	int		fd_1;
 	int		i;
 	pid_t	pid;
 
 	i = 0;
 	fd_0 = STDIN_FILENO;
-	while (all_cmd && i < nb_cmd /* - 1 */)
+	while (all_cmd && i < nb_cmd)
 	{
 		
 		if (pipe(fd) < 0)
@@ -90,47 +120,6 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
 		i++;
 	}
 	execute_last(all_cmd, env, fd_0, STDOUT_FILENO);
-	wait_pipe(nb_cmd);
-	return (0);
-}
-
-/* int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
-{
-	int		fd[2];
-	int		fd_0;
-	int		fd_1;
-	int		i;
-	pid_t	pid;
-
-	i = 0;
-	fd_0 = STDIN_FILENO;
-	while (i < nb_cmd -1 && all_cmd)
-	{
-		
-		if (pipe(fd) < 0)
-			return (-1);
-		if(all_cmd->next && all_cmd->next->type == CHV_R)
-		{
-			printf("all_cmd->next = %d\n", (int)all_cmd->next->type);
-			printf("On est dedans \n");
-			fd_1 = open(all_cmd->next->next->cmd_to_exec[0], O_WRONLY | O_CREAT | O_TRUNC, 00777);
-			execute_last(all_cmd, env, fd_0, fd_1);
-			//all_cmd = all_cmd->next->next;
-		}
-		else
-			fd_1 = fd[1];
-		pid = fork_pipe(fd_0, fd_1);
-		if (pid == 0)
-			ft_exec(env, all_cmd->cmd_to_exec);
-		close(fd[1]);
-		fd_0 = fd[0];
-
-		all_cmd = all_cmd->next->next;
-		i++;
-	}
-	//fd_1 = open("pouetpouetpizza", O_WRONLY | O_CREAT | O_TRUNC, 00644);
-	//Mettre erreur si on peut pas ouvrir
-	execute_last(all_cmd, env, fd_0, fd_1);
 	wait_pipe(nb_cmd);
 	return (0);
 } */

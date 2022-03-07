@@ -2,9 +2,9 @@
 
 char	*del_quote(char *str, int pos_a, int pos_b)
 {
-	int	i;
-	int	j;
-	char *ret;
+	int		i;
+	int		j;
+	char	*ret;
 
 	ret = NULL;
 	i = 0;
@@ -35,7 +35,7 @@ char	*trim_quote(char *str)
 
 	i = 0;
 	j = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == QUOTE || str[i] == D_QUOTE)
 		{
@@ -59,7 +59,7 @@ t_token	*trim_all(t_token **all)
 	while (tmp)
 	{
 		tmp->content = trim_quote(tmp->content);
-		if(!tmp->content)
+		if (!tmp->content)
 			return (NULL);
 		tmp = tmp->next;
 	}

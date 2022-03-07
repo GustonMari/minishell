@@ -32,7 +32,7 @@ char	*expand_node(char **env, char *str)
 	if (!expanded)
 		return (NULL);
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == '\"')
 		{
@@ -68,7 +68,7 @@ t_token	*expand_all(char **env, t_token *all)
 	while (tmp)
 	{
 		tmp->content = expand_node(env, tmp->content);
-		if(!tmp->content)
+		if (!tmp->content)
 			return (NULL);
 		tmp = tmp->next;
 	}
