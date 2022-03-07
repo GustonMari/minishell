@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/07 11:03:34 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/07 16:37:59 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,9 +144,11 @@ char	*ft_pwd_return(void);
 ------------------ REDIRECTION ----------------
 */
 
-int	redirection_to_file(char *file_name, char *str);
-
-
+int		redirection_to_file(char *file_name, char *str);
+int		manage_chv_l(t_command *all_cmd, int *fd_0);
+int		manage_chv_r(t_command *all_cmd, int *fd_1);
+int		redirection(t_command *all_cmd, int *fd_0, int *fd_1);
+int		is_redirection_type(t_command *op);
 /*
 ------------------ ENV_UTILS ----------------
 */

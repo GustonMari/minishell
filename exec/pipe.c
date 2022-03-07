@@ -9,7 +9,7 @@ int	count_cmd_list(t_command *all_cmd)
 
 	tmp = all_cmd;
 	count = 0;
-	while (tmp /* && (tmp->type == WORD || tmp->type == PIPE) */)
+	while (tmp && is_redirection_type(tmp))
 	{
 		if (tmp->type == WORD)
 			count++;
@@ -58,28 +58,28 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
 {
 	int		fd[2];
 	int		fd_0;
+	int		fd_1;
 	int		i;
 	//int		status;
 	pid_t	pid;
 
 	i = 0;
 	fd_0 = STDIN_FILENO;
+	fd_1 = STDOUT_FILENO;
 	while (all_cmd && (i < nb_cmd -1))
 	{
 		if (pipe(fd) < 0)
 			return (-1);
 		pid = fork_pipe(fd_0, fd[1]);
 		if (pid == 0)
-			ft_exec_cmd(env, all_cmd->cmd_to_exec);
+			ft_exec(env, all_cmd->cmd_to_exec);
 		close(fd[1]);
 		fd_0 = fd[0];
 		all_cmd = all_cmd->next->next;
 		i++;
 	}
-
-	//redir_left
-	//redir_right
-	execute_last(all_cmd, env, fd_0, STDOUT_FILENO);
+	//redirection(all_cmd, &fd_0, &fd_1);
+	execute_last(all_cmd, env, fd_0, fd_1);
 	wait_pipe(nb_cmd);
 	return (0);
 }

@@ -33,92 +33,31 @@ int	count_redir(t_command *all_cmd)
 	return (nb_redir);
 }
 
-/* Va creer les fichiers apres les chevrons droits si ils n'existent pas 
-et les effacer si ce n'est pas la derniere redirection droite (last_redir), retourne le 
-fd du fichier dans lequel on va rediriger la cmd*/
-
-int	manage_chv_r(t_command *all_cmd, char *last_redir)
-{
-	t_command	*tmp;
-	int			is_chv_r;
-	int			fd;
-
-	is_chv_r = 0;
-	tmp = all_cmd;
-	while (tmp && tmp->type != PIPE)
-	{
-		if (tmp->type == CHV_R)
-			is_chv_r = 1;
-		if (tmp->type == WORD && is_chv_r == 1)
-		{
-			fd = open(tmp->cmd_to_exec[0], O_CREAT | O_WRONLY | O_TRUNC, 00644);
-			if (fd < 0)
-				return (-1);
-			//Inclure Errno
-			close(fd);
-			is_chv_r = 0;
-		}
-		tmp = tmp->next;
-		if (!ft_strcmp(tmp->cmd_to_exec[0], last_redir))
-			break ;
-	}
-	fd = open(tmp->cmd_to_exec[0], O_CREAT | O_WRONLY | O_TRUNC, 00644);
-	if (fd < 0)
-		return (-1);
-	//Inclure Errno
-	return (fd);
-}
-
-/* Trouve la derniere redirection en fonction de chv (on met droite ou gauche)
-et renvoi le nom du fichier correspondant a la derniere redirection*/
-
-char	*find_last_redir(t_command *all_cmd, t_tokentype chv_l)
-{
-	t_command	*tmp;
-	char		*file_name;
-	int			is_redir;
-
-	is_redir = 0;
-	file_name = NULL;
-	tmp = all_cmd;
-	while (tmp && tmp->type != PIPE)
-	{
-		if (tmp->type == chv_l)
-			is_redir = 1;
-		if (tmp->type == WORD && is_redir == 1)
-		{
-			free(file_name);
-			file_name = ft_strdup(tmp->cmd_to_exec[0]);
-			if (!file_name)
-				return (NULL);
-			is_redir = 0;
-		}
-		tmp = tmp->next;
-	}
-	return (file_name);
-}
-
 /* Retourne le fd_1, necessaire pour execute last, si il n'y a pas de 
 redirection retourne STDOUT*/
 
-/* int	redirection(t_command *all_cmd)
+int	redirection(t_command *all_cmd, int *fd_0, int *fd_1)
 {
 	t_command	*tmp;
 	int			nb_redir;
 
 	tmp = all_cmd;
 	nb_redir = count_redir(tmp);
-	if (tmp->next->next)
+	if (nb_redir < 1)
 	{
-		while (tmp && tmp->type != PIPE)
-		{
-			
-		}
+		*fd_1 = STDOUT_FILENO;
+		return (1);
 	}
-	return (STDOUT_FILENO);
-} */
+	if (manage_chv_l(all_cmd, fd_0) == -1)
+		return (-1);
+	//if (manage_chv_r(all_cmd, fd_1) == -1)
+	//	return (-1);
+	if (*fd_1 == -1)
+		return (-1);
+	return (0);
+}
 
-int main(int ac, char **av, char **envp)
+/* int main(int ac, char **av, char **envp)
 {
     (void)ac;
     (void)av;
@@ -132,14 +71,14 @@ int main(int ac, char **av, char **envp)
 	(void)fd;
 
 	env = ft_create_env(envp);
-    char *line = ft_strdup("wc < lol > salut < sushi > moldu | > ok");
+    char *line = ft_strdup("echo salut > prout >> nice > oui >> hahah");
 	temp = lexer(line);
 	expanded = expand_all(env, temp);
 	trim_all(&expanded);
 	cmd_all = token_to_cmd(expanded);
     
-	last_redir = find_last_redir(cmd_all, CHV_R);
-	fd = manage_chv_r(cmd_all, last_redir);
+	last_redir = find_last_redir_r(cmd_all);
+	fd = manage_open_r(cmd_all, last_redir);
 	printf("last_redir = %s\n", last_redir);
 	write(fd, "salut\n", 6);
 	free(last_redir);
@@ -147,4 +86,4 @@ int main(int ac, char **av, char **envp)
 	ft_cmd_clear(&cmd_all);
 
     return (0);
-}
+} */
