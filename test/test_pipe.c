@@ -61,23 +61,23 @@ void fork_pipes (char** cmd[], const char *redirection) {
 int main()
 {
 
-    char *cmd1[] = {"wc", NULL};
+    //char *cmd1[] = {"wc", NULL};
     //char *cmd2[] = {"text.txt", NULL};
     //char *cmd3[] = {"wc",  NULL};
-    char **cmd[] = { cmd1, NULL};
+    //char **cmd[] = { cmd1, NULL};
 
     // redirected to text.txt
     //fork_pipes(cmd, "text.txt");
 
     // no redirection
-    fork_pipes(cmd, NULL);
+    //fork_pipes(cmd, NULL);
 
-    /* // another example with a longer pipe 
+    // another example with a longer pipe 
     {
-        char *cmd1[] = {"echo", "hello world", NULL};
-        char *cmd2[] = {"tee", NULL};
-        char *cmd3[] = {"tee", NULL};
-        char *cmd4[] = {"tr", "lo", "10", NULL};
+        //char *cmd1[] = {"echo", "hello world", NULL};
+        char *cmd2[] = {"ls", NULL};
+        char *cmd3[] = {"ls", NULL};
+        //char *cmd4[] = {"tr", "lo", "10", NULL};
 
         char **cmd[] = {cmd1, cmd2, cmd3, cmd4, NULL};
 
@@ -86,7 +86,7 @@ int main()
 
         // no redirected
         fork_pipes(cmd, NULL);
-    } */
+    }
     return 0;
 }
 

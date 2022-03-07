@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/07 16:37:59 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/07 17:08:08 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,8 @@ int		manage_chv_l(t_command *all_cmd, int *fd_0);
 int		manage_chv_r(t_command *all_cmd, int *fd_1);
 int		redirection(t_command *all_cmd, int *fd_0, int *fd_1);
 int		is_redirection_type(t_command *op);
+int	count_cmd_between_pipe(t_command *all_cmd);
+
 /*
 ------------------ ENV_UTILS ----------------
 */
