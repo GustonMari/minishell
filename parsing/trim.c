@@ -43,9 +43,9 @@ char	*trim_quote(char *str)
 			str = del_quote(str, i, (j + i - 1));
 			if (!str)
 				return (NULL);
-			i += j;
+			i += (j - 2);
 		}
-		if (str[i])
+		else if (str[i])
 			i++;
 	}
 	return (str);
@@ -66,7 +66,7 @@ t_token	*trim_all(t_token **all)
 	return (*all);
 }
 
-int main(int argc, char **argv, char **envp)
+/* int main(int argc, char **argv, char **envp)
 {
 	char	**env;
 	(void)argc;
@@ -76,7 +76,7 @@ int main(int argc, char **argv, char **envp)
 
 	char	*arg;
 	env = NULL;
-	arg = ft_strdup("\"$USER\"\'oui\'\"$USER\"");
+	arg = ft_strdup("\"$USER \'$USER\' \'\' \"\'$USER\'");
 	env = ft_create_env(envp);
 	temp = lexer(arg);
 	print_token(&temp);
@@ -86,7 +86,7 @@ int main(int argc, char **argv, char **envp)
 	print_token(&expanded);
 	ft_lstclear(&expanded, free);
 	ft_free_tab_2d(env);
-}
+} */
 
 /* int	main()
 {

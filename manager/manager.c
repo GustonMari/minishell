@@ -8,6 +8,8 @@ char	**manage_line(char **env, char *line)
 	(void)cmd_all;
 
 	temp = lexer(line);
+	printf("LEXER :\n");
+	print_token(&temp);
 	expanded = expand_all(env, temp);
 	//REMOVE
 	//print_token(&expanded);
@@ -15,6 +17,8 @@ char	**manage_line(char **env, char *line)
 	//REMOVE
 	//print_token(&expanded);
 	cmd_all = token_to_cmd(expanded);
+	printf("EXPAND :\n");
+	print_cmd(&cmd_all);
 	env = ft_dispatch(cmd_all, env);
 	//print_cmd(&cmd_all);
 	ft_lstclear(&expanded, free);
