@@ -8,9 +8,9 @@ char	**manage_line(char **env, char *line)
 	(void)cmd_all;
 
 	temp = lexer(line);
-	printf("LEXER :\n");
-	print_token(&temp);
-	printf("---------------\n");
+	//printf("LEXER :\n");
+	//print_token(&temp);
+	//printf("---------------\n");
 
 	expanded = expand_all(env, temp);
 	//REMOVE

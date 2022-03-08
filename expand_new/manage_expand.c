@@ -111,7 +111,7 @@ char	*expand_node(char **env, char *str)
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
 			//Trim nos double quote
 			block = trim_quote(block, &i);
-			printf("block D_QUOTE = %s\n", block);
+			//printf("block D_QUOTE = %s\n", block);
 			//Expand nos dollars dans notre block
 			block = expand_dollar(env, block);
 		}
@@ -120,7 +120,7 @@ char	*expand_node(char **env, char *str)
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
 			if (str[i + 1] != '\0')
 				block = expand_single_dollar(env, block);
-			printf("block DOLLAR = %s\n", block);
+			//printf("block DOLLAR = %s\n", block);
 			i += find_next_quote(&str[i]);
 			//Expand notre dollars
 			//block = expand_dollar(env, block);
@@ -156,7 +156,7 @@ t_token	*expand_all(char **env, t_token *all)
 	return (all);
 }
 
-int main(int argc, char **argv, char **envp)
+/* int main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
@@ -177,7 +177,7 @@ int main(int argc, char **argv, char **envp)
 	ft_lstclear(&expanded, free);
 	ft_cmd_clear(&cmd_all);
 	return (0);
-}
+} */
 
 /* int main(int argc, char **argv, char **envp)
 {
