@@ -21,6 +21,8 @@ char	*del_quote(char *str, int pos_a, int pos_b)
 		ret[j] = str[i];
 		if (str[i])
 			i++;
+		/* if (str[i] == '$') */
+
 		j++;
 	}
 	ret[j] = '\0';

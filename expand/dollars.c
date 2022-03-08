@@ -166,9 +166,31 @@ char	*expand_dollar(char **env, char *str)
 	return (str);
 }
 
-/* int	expand_cmd(t_token **lexer, char **env)
+/* int main(int ac, char **av, char **envp)
 {
+    (void)ac;
+    (void)av;
+    t_token *temp;
+	t_token	*expanded;
+	t_command *cmd_all;
+	(void)cmd_all;
+    char **env;
+	
+	env = ft_create_env(envp);
+    char *line = ft_strdup("\"$USER \'$USER\' \' \'\"\'$USER\'");
+	temp = lexer(line);
+	expanded = expand_all(env, temp);
+	trim_all(&expanded);
+	cmd_all = token_to_cmd(expanded);
 
+
+	ft_lstclear(&expanded, free);
+	ft_cmd_clear(&cmd_all);
+
+	int	test = 0;
+	scanf("%d", &test);
+	printf("test = %d\n", test);
+    return (0);
 } */
 
 /* int	main(int ac, char **av, char **envp)
@@ -182,8 +204,10 @@ char	*expand_dollar(char **env, char *str)
 	env = NULL;
 	env = ft_create_env(envp);
 	//str = replace_dollar(env, ft_strdup("salut ca va $USER et toi "), ft_strdup("USER"), 12);
-	str = expand_dollar(env, ft_strdup("\"$USER$USER $$$ $LOL toi $\""));
-	printf("%s\n", str);
+	str = expand_dollar(env, ft_strdup("\"$USER \'$USER\' \' \'\"\'$USER\'"));
+	printf("1) %s\n", str);
+	str = expand_dollar(env, ft_strdup("\"$USER \'$USER\' \' \'\"\'$USER\'"));
+	printf("2) %s\n", str);
 	free(str);
 	ft_free_tab_2d(env);
 	return (0);
