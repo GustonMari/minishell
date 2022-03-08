@@ -108,6 +108,15 @@ char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos)
 		i++;
 		//j++;
 	}
+	if (i == pos)
+	{
+		while (new_var[k])
+		{
+			ret[j] = new_var[k];
+			k++;
+			j++;
+		}
+	}
 	ret[j] = '\0';
 	free(new_var);
 	free(str);
@@ -136,6 +145,28 @@ char	*replace_dollar(char **env, char *str, char *var_name, int pos)
 	return (replace_dollar_2(str, new_var, ret, pos));
 }
 
+char	*expand_single_dollar(char **env, char *str)
+{
+	int		i;
+	char	*var_name;
+
+	i = 0;
+	var_name = NULL;
+	var_name = cut_dollar(&str[i]);
+	if (!var_name)
+		return (NULL);
+	if (ft_strlen(str) == 1)
+	{
+		str = del_dollar(str, var_name, ft_strlen(var_name));
+		return (str);
+	}
+	if (ft_find_env_line(env, var_name) && str[i + 1] != '$')
+		str = replace_dollar(env, str, var_name, i);
+	else
+		str = del_dollar(str, var_name, ft_strlen(var_name));
+	return (str);
+}
+
 char	*expand_dollar(char **env, char *str)
 {
 	int		i;
@@ -149,6 +180,7 @@ char	*expand_dollar(char **env, char *str)
 			&& str[i + 1] != '\0' && str[i + 1] != '$')
 		{
 			var_name = cut_dollar(&str[i]);
+			
 			if (!var_name)
 				return (NULL);
 			if (ft_find_env_line(env, var_name) && str[i + 1] != '$')

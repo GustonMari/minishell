@@ -12,7 +12,7 @@ char	**manage_line(char **env, char *line)
 	print_token(&temp);
 	printf("---------------\n");
 
-	//expanded = expand_all(env, temp);
+	expanded = expand_all(env, temp);
 	//REMOVE
 	//printf("----------------------\n");
 	//print_token(&expanded);

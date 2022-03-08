@@ -68,6 +68,23 @@ char	*cpy_block(char	*str, int size)
 	return (block);
 }
 
+/*Trouve le prochain block qui commence par un $ ou Quote ou DQuote ou se termine par '\0'
+et renvoie sa position*/
+
+int	find_next_block(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == QUOTE || str[i] == D_QUOTE || str[i] == '$')
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
 /*Expand un maillon */
 
 char	*expand_node(char **env, char *str)
@@ -92,12 +109,19 @@ char	*expand_node(char **env, char *str)
 		else if (str[i] == D_QUOTE)
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
-			//Expand nos dollars
 			//Trim nos double quote
 			block = trim_quote(block, &i);
+			printf("block D_QUOTE = %s\n", block);
+			//Expand nos dollars dans notre block
+			block = expand_dollar(env, block);
 		}
 		else if (str[i] == '$')
 		{
+			block = cpy_block(&str[i], find_next_quote(&str[i]));
+			if (str[i + 1] != '\0')
+				block = expand_single_dollar(env, block);
+			printf("block DOLLAR = %s\n", block);
+			i += find_next_quote(&str[i]);
 			//Expand notre dollars
 			//block = expand_dollar(env, block);
 		}
@@ -105,7 +129,8 @@ char	*expand_node(char **env, char *str)
 		{
 			//join 1 par 1 (jusqu a ce qu on rencontre quote Dquote ou $, mais la 
 			//boucle le fait tout seul)
-			//i++;
+			block = cpy_block(&str[i], find_next_block(&str[i]));
+			i += find_next_block(&str[i]);
 		}
 		expanded = ft_strjoin_free(expanded, block, 1);
 		free(block);
@@ -133,6 +158,29 @@ t_token	*expand_all(char **env, t_token *all)
 
 int main(int argc, char **argv, char **envp)
 {
+	(void)argc;
+	(void)argv;
+	t_token		*temp;
+	t_token		*expanded;
+	t_command	*cmd_all;
+	(void)cmd_all;
+
+	temp = lexer(ft_strdup("echo  $\"$USER\"$"));
+	printf("LEXER :\n");
+
+	expanded = expand_all(envp, temp);
+	print_token(&expanded);
+	cmd_all = token_to_cmd(expanded);
+	//printf("EXPAND :\n");
+	//print_cmd(&cmd_all);
+	//print_cmd(&cmd_all);
+	ft_lstclear(&expanded, free);
+	ft_cmd_clear(&cmd_all);
+	return (0);
+}
+
+/* int main(int argc, char **argv, char **envp)
+{
 	char	**env;
 	(void)argc;
 	(void)argv;
@@ -142,9 +190,9 @@ int main(int argc, char **argv, char **envp)
 
 	char	*arg;
 	env = NULL;
-	arg = ft_strdup("\'salut\'\"\"\'ok\'\'\'");
+	arg = ft_strdup("\"$USER   \'$USER\' \' \' \"\'$USER\'");
 	env = ft_create_env(envp);
 	ret_trim = expand_node(env, arg);
 	printf("ret_trim = |%s|\n", ret_trim);
 	ft_free_tab_2d(env);
-}
+} */
