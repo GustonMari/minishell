@@ -8,13 +8,15 @@ char	**manage_line(char **env, char *line)
 	(void)cmd_all;
 
 	temp = lexer(line);
-	//printf("LEXER :\n");
-	//print_token(&temp);
-	expanded = expand_all(env, temp);
+	printf("LEXER :\n");
+	print_token(&temp);
+	printf("---------------\n");
+
+	//expanded = expand_all(env, temp);
 	//REMOVE
 	//printf("----------------------\n");
 	//print_token(&expanded);
-	trim_all(&expanded);
+	//trim_all(&expanded);
 	//REMOVE
 	//print_token(&expanded);
 	cmd_all = token_to_cmd(expanded);

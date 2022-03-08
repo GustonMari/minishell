@@ -34,7 +34,7 @@ char	*expand_node(char **env, char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\"')
+		if (str[i] == D_QUOTE)
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
 			if (!block)
@@ -43,7 +43,7 @@ char	*expand_node(char **env, char *str)
 			if (!block)
 				return (NULL);
 		}
-		else if (str[i] == '\'')
+		else if (str[i] == QUOTE)
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
 		}
@@ -52,8 +52,7 @@ char	*expand_node(char **env, char *str)
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
 			block = expand_dollar(env, block);
 		}
-		expanded = ft_strjoin_free(expanded, block, 1);
-		free(block);
+		
 		i += find_next_quote(&str[i]);
 	}
 	free(str);

@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/07 17:08:08 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/08 14:07:41 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,10 @@ t_token	*expand_all(char **env, t_token *all);
 ------------------ PARSING ----------------
 */
 
-char	*trim_quote(char *str);
+//NEW TRIM QUOTE
+char	*trim_quote(char *str, int *i);
+
+//char	*trim_quote(char *str);
 char	**ft_split_special(char *str);
 char	*ft_strtrim_space(char *s1, char *set);
 t_token	*trim_all(t_token **all);
