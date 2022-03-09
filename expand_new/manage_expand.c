@@ -137,6 +137,8 @@ char	*expand_node(char **env, char *str)
 		//i++;
 
 	}
+	//ATTENTION LE FREE
+	free(str);
 	return (expanded);
 
 }

@@ -111,22 +111,21 @@ int main(int ac, char **av, char **envp)
 {
     (void)ac;
     (void)av;
-    t_token *temp;
-	t_token	*expanded;
-	t_command *cmd_all;
-	(void)cmd_all;
-    char **env;
+    t_token *temp = NULL;
+	t_token	*expanded = NULL;
+	t_command *cmd_all = NULL;
+	cmd_all = NULL;
+    char **env = NULL;
 	
 	env = ft_create_env(envp);
-    char *line = ft_strdup("ls | wc > pouet | ls | wc");
+    char *line = ft_strdup("ls >> ls > pouet > lol");
 	temp = lexer(line);
 	expanded = expand_all(env, temp);
 
 	cmd_all = token_to_cmd(expanded);
     ft_dispatch(cmd_all, env);
-    //ft_dispatch(cmd_all, env);
-	//print_cmd(&cmd_all);
-	//ft_lstclear(&expanded, free);
-	//t_cmd_clear(&cmd_all);
+	ft_lstclear(&expanded, free);
+	ft_cmd_clear(&cmd_all);
+	ft_free_tab_2d(env);
     return (0);
 }

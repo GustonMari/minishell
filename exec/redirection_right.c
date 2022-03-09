@@ -29,9 +29,11 @@ int	manage_open_r(t_command *all_cmd, char *last_redir)
 	int			is_chv_r;
 	int			fd;
 
+	//ATTENTION RAJOUT
+	is_chv_r = 0;
+	//
 	fd = -1;
 	tmp = all_cmd;
-	
 	while (tmp && tmp->type != PIPE)
 	{
 		if (tmp->next && tmp->type == CHV_R)
