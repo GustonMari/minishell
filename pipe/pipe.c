@@ -107,7 +107,7 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 }
 
 
-int main(int ac, char **av, char **envp)
+/* int main(int ac, char **av, char **envp)
 {
     (void)ac;
     (void)av;
@@ -128,4 +128,4 @@ int main(int ac, char **av, char **envp)
 	ft_cmd_clear(&cmd_all);
 	ft_free_tab_2d(env);
     return (0);
-}
+} */
