@@ -118,6 +118,11 @@ char	**ft_export(char **envp, char *str);
 char	*find_name_val(char *str);
 char	*find_val_in_line(char *str);
 char	**manage_export(char **env, char **full_cmd);
+int		ft_print_export_no_arg(char **env);
+int     ft_check_export(char *str);
+char	**bubble_sort_tab_2d(char **tab);
+char	*find_name_val(char *str);
+char	*find_val_in_line(char *str);
 /*
 ------------------ CLEAR ----------------
 */
