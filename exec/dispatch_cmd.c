@@ -13,7 +13,7 @@ char	**ft_dispatch(t_command *all, char **env)
 	else
 	{
 		// refaire grande boucle pour avoir toute les cmd en different pipe
-		execute_pipe(tmp, env, count_cmd_between_pipe(tmp));
+		execute_pipe(tmp, env, count_cmd_between_pipe(tmp), STDIN_FILENO);
 	}
 	//ft_redirection_chv_r("pouetpouetpizza");
 	//ft_exec_cmd(env, tmp->cmd_to_exec);

@@ -151,9 +151,9 @@ char	*ft_pwd_return(void);
 */
 
 int		redirection_to_file(char *file_name, char *str);
-int		manage_chv_l(t_command *all_cmd, int *fd_0);
-int		manage_chv_r(t_command *all_cmd, int *fd_1);
-int		redirection(t_command *all_cmd, int *fd_0, int *fd_1);
+int		manage_chv_l(t_command *all_cmd, int *in);
+int		manage_chv_r(t_command *all_cmd, int *out);
+int		redirection(t_command *all_cmd, int *in, int *out);
 int		is_redirection_type(t_command *op);
 int	    count_cmd_between_pipe(t_command *all_cmd);
 
@@ -266,7 +266,8 @@ char	**manage_line(char **env, char *line);
 ------------------ PIPE ------------------
 */
 
-int execute_pipe(t_command *all_cmd, char **env, int nb_cmd);
+//int execute_pipe(t_command *all_cmd, char **env, int nb_cmd);
+int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in);
 int	count_cmd_list(t_command *all_cmd);
 
 /* 

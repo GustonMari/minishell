@@ -34,7 +34,7 @@ int	count_cmd_between_pipe(t_command *all_cmd)
 	return (count);
 }
 
-pid_t	fork_pipe(int fd_0, int fd_1)
+pid_t	fork_pipe(int in, int out)
 {
 	pid_t	pid;
 
@@ -43,15 +43,20 @@ pid_t	fork_pipe(int fd_0, int fd_1)
 		return (-1);
 	if (pid == 0)
 	{
-		if (fd_0 != 0)
+		/* if (in != 0)
 		{
-			dup2(fd_0, STDIN_FILENO);
-			close(fd_0);
+			dup2(in, STDIN_FILENO);
+			close(in);
+		} */
+		if (in != 0)
+		{
+			dup2(in, STDIN_FILENO);
+			close(in);
 		}
-		if (fd_1 != 1)
+		if (out != 1)
 		{
-			dup2(fd_1, STDOUT_FILENO);
-			close(fd_1);
+			dup2(out, STDOUT_FILENO);
+			close(out);
 		}
 	}
 	return (pid);
@@ -59,87 +64,53 @@ pid_t	fork_pipe(int fd_0, int fd_1)
 
 
 
-int	execute_last(t_command *all_cmd, char **env, int fd_0, int fd_1)
+int	execute_last(t_command *all_cmd, char **env, int in, int out)
 {
 	int	pid;
 
-	pid = fork_pipe(fd_0, fd_1);
+	pid = fork_pipe(in, out);
 	if (pid == 0)
 		ft_exec(env, all_cmd->cmd_to_exec);
 	return (0);
 }
 
-int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
+int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 {
 	int		fd[2];
-	int		fd_0;
-	int		fd_1;
+	//int		in;
+	int		out;
 	int		i;
 	//int		status;
 	pid_t	pid;
 
 	i = 0;
-	fd_0 = STDIN_FILENO;
-	fd_1 = STDOUT_FILENO;
+	//in = STDIN_FILENO;
+	if (!all_cmd)
+		return (0);
+	out = STDOUT_FILENO;
 	while (all_cmd && (i < nb_cmd -1))
 	{
 		if (pipe(fd) < 0)
 			return (-1);
-		pid = fork_pipe(fd_0, fd[1]);
+		pid = fork_pipe(in, fd[1]);
 		if (pid == 0)
 			ft_exec(env, all_cmd->cmd_to_exec);
 		close(fd[1]);
-		fd_0 = fd[0];
+		in = fd[0];
 		all_cmd = all_cmd->next->next;
 		i++;
 	}
-	redirection(all_cmd, &fd_0, &fd_1);
-	execute_last(all_cmd, env, fd_0, fd_1);
+	redirection(all_cmd, &in, &out);
+	execute_last(all_cmd, env, in, out);
+	//printf("lst = %s\n", all_cmd->cmd_to_exec[0]);
 	wait_pipe(nb_cmd);
+	if (all_cmd->next->next->next->next)
+		execute_pipe(all_cmd->next->next->next->next, env, 1, in);
 	return (0);
 }
 
-/* int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
-{
-	int		fd[2];
-	int		fd_0;
-	int		fd_1;
-	int		i;
-	pid_t	pid;
 
-	i = 0;
-	fd_0 = STDIN_FILENO;
-	while (all_cmd && i < nb_cmd)
-	{
-		
-		if (pipe(fd) < 0)
-			return (-1);
-		if(all_cmd->next && all_cmd->next->type == CHV_R)
-		{
-			fd_1 = open(all_cmd->next->next->cmd_to_exec[0], O_WRONLY | O_CREAT | O_TRUNC, 00777);
-			execute_last(all_cmd, env, fd_0, fd_1);
-			if (all_cmd->next->next)
-				all_cmd = all_cmd->next->next;
-		}
-		else
-		{
-			fd_1 = fd[1];
-			pid = fork_pipe(fd_0, fd_1);
-			if (pid == 0)
-				ft_exec(env, all_cmd->cmd_to_exec);
-			close(fd[1]);
-			fd_0 = fd[0];
-		}
-		if (all_cmd && all_cmd->next && all_cmd->next->next)
-			all_cmd = all_cmd->next->next;
-		i++;
-	}
-	execute_last(all_cmd, env, fd_0, STDOUT_FILENO);
-	wait_pipe(nb_cmd);
-	return (0);
-} */
-
-/* int main(int ac, char **av, char **envp)
+int main(int ac, char **av, char **envp)
 {
     (void)ac;
     (void)av;
@@ -150,19 +121,15 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd)
     char **env;
 	
 	env = ft_create_env(envp);
-    char *line = ft_strdup("ls | ls");
+    char *line = ft_strdup("ls | wc > pouet | wc");
 	temp = lexer(line);
 	expanded = expand_all(env, temp);
-	trim_all(&expanded);
+
 	cmd_all = token_to_cmd(expanded);
-    execute_pipe(cmd_all, env, count_cmd_list(cmd_all));
+    ft_dispatch(cmd_all, env);
     //ft_dispatch(cmd_all, env);
 	//print_cmd(&cmd_all);
-	ft_lstclear(&expanded, free);
-	ft_cmd_clear(&cmd_all);
-
-	int	test = 0;
-	scanf("%d", &test);
-	printf("test = %d\n", test);
+	//ft_lstclear(&expanded, free);
+	//t_cmd_clear(&cmd_all);
     return (0);
-} */
+}

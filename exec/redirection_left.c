@@ -47,7 +47,7 @@ char	*find_last_redir_l(t_command *all_cmd)
 	return (file_name);
 }
 
-int	manage_chv_l(t_command *all_cmd, int *fd_0)
+int	manage_chv_l(t_command *all_cmd, int *in)
 {
 	char		*file_name;
 
@@ -56,8 +56,8 @@ int	manage_chv_l(t_command *all_cmd, int *fd_0)
 	file_name = find_last_redir_l(all_cmd);
 	if (!file_name)
 		return (-1);
-	*fd_0 = open(file_name, O_RDONLY);
-	if (*fd_0 == -1)
+	*in = open(file_name, O_RDONLY);
+	if (*in == -1)
 		return (-1);
 	free(file_name);
 	return (0);

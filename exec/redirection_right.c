@@ -98,20 +98,20 @@ char	*find_last_redir_r(t_command *all_cmd)
 	return (file_name);
 }
 
-int	manage_chv_r(t_command *all_cmd, int *fd_1)
+int	manage_chv_r(t_command *all_cmd, int *out)
 {
 	char		*file_name;
 
 	if (count_redir_r(all_cmd) == 0)
 	{
-		*fd_1 = STDOUT_FILENO;
+		*out = STDOUT_FILENO;
 		return (1);
 	}
 	file_name = find_last_redir_r(all_cmd);
 	if (!file_name)
 		return (-1);
-	*fd_1 = manage_open_r(all_cmd, file_name);
-	if (*fd_1 == -1)
+	*out = manage_open_r(all_cmd, file_name);
+	if (*out == -1)
 		return (-1);
 	free(file_name);
 	return (0);
