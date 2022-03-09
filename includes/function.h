@@ -156,6 +156,7 @@ int		manage_chv_r(t_command *all_cmd, int *out);
 int		redirection(t_command *all_cmd, int *in, int *out);
 int		is_redirection_type(t_command *op);
 int	    count_cmd_between_pipe(t_command *all_cmd);
+int     count_redir(t_command *all_cmd);
 
 /*
 ------------------ ENV_UTILS ----------------
@@ -267,8 +268,9 @@ char	**manage_line(char **env, char *line);
 */
 
 //int execute_pipe(t_command *all_cmd, char **env, int nb_cmd);
-int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in);
-int	count_cmd_list(t_command *all_cmd);
+int		execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in);
+int		count_cmd_list(t_command *all_cmd);
+int		count_all_between_pipe(t_command **all_cmd);
 
 /* 
 ------------------ ERROR ------------------

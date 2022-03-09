@@ -1,4 +1,3 @@
-
 #include "../includes/function.h"
 
 
@@ -77,14 +76,12 @@ int	execute_last(t_command *all_cmd, char **env, int in, int out)
 int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 {
 	int		fd[2];
-	//int		in;
 	int		out;
 	int		i;
 	//int		status;
 	pid_t	pid;
 
 	i = 0;
-	//in = STDIN_FILENO;
 	if (!all_cmd)
 		return (0);
 	out = STDOUT_FILENO;
@@ -102,10 +99,10 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 	}
 	redirection(all_cmd, &in, &out);
 	execute_last(all_cmd, env, in, out);
-	//printf("lst = %s\n", all_cmd->cmd_to_exec[0]);
 	wait_pipe(nb_cmd);
-	if (all_cmd->next->next->next->next)
-		execute_pipe(all_cmd->next->next->next->next, env, 1, in);
+	count_all_between_pipe(&all_cmd);
+	if (all_cmd)
+		execute_pipe(all_cmd, env, count_cmd_between_pipe(all_cmd), in);
 	return (0);
 }
 
@@ -121,7 +118,7 @@ int main(int ac, char **av, char **envp)
     char **env;
 	
 	env = ft_create_env(envp);
-    char *line = ft_strdup("ls | wc > pouet | wc");
+    char *line = ft_strdup("ls | wc > pouet | ls | wc");
 	temp = lexer(line);
 	expanded = expand_all(env, temp);
 
