@@ -15,7 +15,6 @@
 
 # include "struct.h"
 # include "colors.h"
-# include "get_next_line.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -293,10 +292,11 @@ void ft_echo(char **full_cmd);
 int	wait_pipe(int nb_cmd);
 
 /* 
------------------- GNL ------------------
+------------------ HEREDOC ------------------
 */
-char	*get_next_line(int fd);
-char	*ft_gnl_strjoin(char *s1, char *s2);
-char	*ft_strchr(const char *s, int c);
+
+int	priorities_D_CHV_L(t_command *all_cmd);
+int	launch_heredoc(t_command *all_cmd);
+int	count_nb_D_CHV_L_between_pipe(t_command *all_cmd);
 
 #endif

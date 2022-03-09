@@ -42,11 +42,6 @@ pid_t	fork_pipe(int in, int out)
 		return (-1);
 	if (pid == 0)
 	{
-		/* if (in != 0)
-		{
-			dup2(in, STDIN_FILENO);
-			close(in);
-		} */
 		if (in != 0)
 		{
 			dup2(in, STDIN_FILENO);

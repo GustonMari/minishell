@@ -10,7 +10,7 @@
 */
 
 
-int	redirection_to_file(char *file_name, char *str)
+/* int	redirection_to_file(char *file_name, char *str)
 {
 	int	file;
 	pid_t pid;
@@ -43,13 +43,13 @@ int	redirection_to_file(char *file_name, char *str)
 		wait(NULL);
 	}
 	return (0);
-}
+} */
 
-
+/* 
 int	main(void)
 {
 	redirection_to_file("txt.txt", "lolilol");
 	write(1, "bjr\n", 4);
 	//fputs("salut\n", stdout);
 	return (0);
-}
+} */

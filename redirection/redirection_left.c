@@ -19,7 +19,8 @@ int	count_redir_l(t_command *all_cmd)
 }
 
 /* Trouve la derniere redirection gauche
-et renvoi le nom du fichier correspondant a la derniere redirection*/
+et renvoi le nom du fichier correspondant a la derniere redirection
+(cmd plutot ?)*/
 
 char	*find_last_redir_l(t_command *all_cmd)
 {
@@ -44,6 +45,8 @@ char	*find_last_redir_l(t_command *all_cmd)
 		}
 		tmp = tmp->next;
 	}
+	//if (!priorities_D_CHV_L(all_cmd))
+	//	return (ft_strdup(".heredoc"));
 	return (file_name);
 }
 
@@ -53,7 +56,10 @@ int	manage_chv_l(t_command *all_cmd, int *in)
 
 	if (count_redir_l(all_cmd) == 0)
 		return (1);
+	
 	file_name = find_last_redir_l(all_cmd);
+	//if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
+	//	launch_heredoc(all_cmd);
 	if (!file_name)
 		return (-1);
 	*in = open(file_name, O_RDONLY);
