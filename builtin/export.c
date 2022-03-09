@@ -10,6 +10,26 @@
 
 } */
 
+void	ft_putstr_export_no_arg(char *str)
+{
+	int	i;
+	int	first_equal;
+
+	i = 0;
+	first_equal = 0;
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		if((str[i] == '=') && first_equal == 0)
+		{
+			write(1, "\"", 1);
+			first_equal = 1;
+		}
+		i++;
+	}
+	write(1, "\"", 1);
+}
+
 int		ft_print_export_no_arg(char **env)
 {
 	int	i;
@@ -18,7 +38,7 @@ int		ft_print_export_no_arg(char **env)
 	while (env[i])
 	{
 		ft_putstr_fd("export ", 1);
-		ft_putstr_fd(env[i], 1);
+		ft_putstr_export_no_arg(env[i]);
 		ft_putchar_fd('\n', 1);
 		i++;
 	}
