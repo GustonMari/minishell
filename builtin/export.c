@@ -27,7 +27,8 @@ void	ft_putstr_export_no_arg(char *str)
 		}
 		i++;
 	}
-	write(1, "\"", 1);
+	if (first_equal == 1)
+		write(1, "\"", 1);
 }
 
 int		ft_print_export_no_arg(char **env)
@@ -192,7 +193,14 @@ int	ft_check_export(char *str)
 	while (str[i])
 	{
 		if (str[i] == '=')
-			return (0);
+			break ;
+		if (!ft_isalnum(str[i]))
+		{
+			ft_putstr_fd("bash: export: `", 2);
+			ft_putstr_fd(str, 2);
+			ft_putstr_fd("\': not a valid identifier\n", 2);
+			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -203,17 +211,14 @@ char	**ft_export(char **env, char *str)
 	char	*name;
 	char	*ret;
 
+	if (ft_check_export(str))
+		return (env);
 	name = find_name_val(str);
 	ret = find_val_in_tab(env, name);
 	if (ret == NULL)
-	{
 		env = ft_export_add(env, str);
-	}
 	else
-	{
 		env = ft_export_change(env, str, name);
-		
-	}
 	free(ret);
 	return (env);
 }

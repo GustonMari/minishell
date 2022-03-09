@@ -92,6 +92,7 @@ void	print_tab_2d(char **strs);
 
 char	*ft_strtrim(char *s1, char *set);
 void	print_tab_2d(char **strs);
+int	    ft_isalnum(int c);
 
 
 /*
@@ -149,7 +150,7 @@ int		manage_chv_l(t_command *all_cmd, int *fd_0);
 int		manage_chv_r(t_command *all_cmd, int *fd_1);
 int		redirection(t_command *all_cmd, int *fd_0, int *fd_1);
 int		is_redirection_type(t_command *op);
-int	count_cmd_between_pipe(t_command *all_cmd);
+int	    count_cmd_between_pipe(t_command *all_cmd);
 
 /*
 ------------------ ENV_UTILS ----------------
