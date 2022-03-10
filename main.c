@@ -35,7 +35,7 @@
 	 (ici rien "")
 	3) rl_redisplay permet de faire apparaitre le prompt 
 	et dinserer apres le text de replace 
-	AVANT DAVOIR ECRI SUR LE CLAVIER
+	AVANT DAVOIR ECRIT SUR LE CLAVIER
 */
 
 void	exit_process(int sig)
@@ -51,7 +51,14 @@ void	exit_process(int sig)
 		return ;
 	}
 	if (sig == SIGQUIT)
-		write(1, "\n\e[1;91m- SIGQUIT -\n", 20);
+	{
+		//Utiliser termcaps/termios pour ne pas faire apparaitre le Ctrl backslash
+		//rl_on_new_line();
+		//rl_replace_line("", 0);
+		//rl_redisplay();
+		//write(1, "\n\e[1;91m- SIGQUIT -\e[0m\n", 20);
+		return ;
+	}
 	exit(0);
 }
 

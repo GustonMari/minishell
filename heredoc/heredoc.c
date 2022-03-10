@@ -42,11 +42,34 @@ int	start_heredoc_more(char **stop, int i)
 	return (0);
 }
 
-/* void	fill_heredoc_file_2(char **stop, char *line, int)
+void	exit_heredoc(int sig)
 {
+	exit(0);
 
+	/* if (sig == SIGINT)
+		return (0);
+	return (1); */
 }
- */
+
+int	signal_heredoc(char **stop, char *line)
+{
+	//int		status;
+	(void)stop;
+	// gerer ctrl backslash et status aussi !!!!!!
+	if (signal(SIGINT, &exit_heredoc) == 0)
+	{
+		printf("SIGINT");
+		return (1);
+	}
+	if (!line)
+	{
+		//clear history si il y en avait un
+		//write(2, "\n\e[0;35mctrl+D used\n", 21);
+		write(1, "\n", 1);
+		return (1);
+	}
+	return (0);
+}
 /*Cette fonction permet de remplir le fichier 
 temporaire tout en respecant les regles de priorite du heredoc*/
 
@@ -65,6 +88,8 @@ void	fill_heredoc_file(char **stop)
 	{
 		line = readline("> ");
 		//Gerer les signaux
+		if (signal_heredoc(stop, line))
+			break ;
 		if (stop[i] && !ft_strcmp(line, stop[i]))
 		{
 			if (stop[i + 1] == NULL)
