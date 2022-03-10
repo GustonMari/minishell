@@ -36,7 +36,7 @@ int	count_redir(t_command *all_cmd)
 /* Retourne le out, necessaire pour execute last, si il n'y a pas de 
 redirection retourne STDOUT*/
 
-int	redirection(t_command *all_cmd, int *in, int *out)
+int	redirection(t_command *all_cmd, int *in, int *out, char **env)
 {
 	t_command	*tmp;
 	int			nb_redir;
@@ -48,7 +48,7 @@ int	redirection(t_command *all_cmd, int *in, int *out)
 		*out = STDOUT_FILENO;
 		return (1);
 	}
-	if (manage_chv_l(all_cmd, in) == -1)
+	if (manage_chv_l(all_cmd, in, env) == -1)
 		return (-1);
 	if (manage_chv_r(all_cmd, out) == -1)
 		return (-1);

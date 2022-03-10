@@ -50,7 +50,7 @@ char	*find_last_redir_l(t_command *all_cmd)
 	return (file_name);
 }
 
-int	manage_chv_l(t_command *all_cmd, int *in)
+int	manage_chv_l(t_command *all_cmd, int *in, char **env)
 {
 	char		*file_name;
 
@@ -59,7 +59,7 @@ int	manage_chv_l(t_command *all_cmd, int *in)
 	
 	file_name = find_last_redir_l(all_cmd);
 	if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
-		launch_heredoc(all_cmd);
+		launch_heredoc(all_cmd, env);
 	if (!file_name)
 		return (-1);
 	*in = open(file_name, O_RDONLY);

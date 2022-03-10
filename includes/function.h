@@ -151,9 +151,9 @@ char	*ft_pwd_return(void);
 */
 
 int		redirection_to_file(char *file_name, char *str);
-int		manage_chv_l(t_command *all_cmd, int *in);
+int		manage_chv_l(t_command *all_cmd, int *in, char **env);
 int		manage_chv_r(t_command *all_cmd, int *out);
-int		redirection(t_command *all_cmd, int *in, int *out);
+int		redirection(t_command *all_cmd, int *in, int *out, char **env);
 int		is_redirection_type(t_command *op);
 int	    count_cmd_between_pipe(t_command *all_cmd);
 int     count_redir(t_command *all_cmd);
@@ -296,7 +296,12 @@ int	wait_pipe(int nb_cmd);
 */
 
 int	priorities_D_CHV_L(t_command *all_cmd);
-int	launch_heredoc(t_command *all_cmd);
+int	launch_heredoc(t_command *all_cmd, char **env);
 int	count_nb_D_CHV_L_between_pipe(t_command *all_cmd);
+int	create_heredoc_file(void);
+int	start_heredoc_one(char **stop, int begin);
+int	start_heredoc_more(char **stop, int i);
+void	exit_heredoc(int sig);
+int	signal_heredoc(char **stop, char *line);
 
 #endif

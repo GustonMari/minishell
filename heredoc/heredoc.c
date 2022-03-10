@@ -1,79 +1,11 @@
 #include "../includes/function.h"
 
 
-/*Permet de creer le fichier .heredoc ou que l'on va
-utiliser pour sotcker ce qu'on met dans heredoc*/
 
-int	create_heredoc_file(void)
-{
-	int	file;
-
-	file = open(".heredoc", O_CREAT | O_RDWR | O_TRUNC, 00777);
-	if (file < 0)
-		return (-1);
-	return (file);
-}
-
-/*Permet de savoir quand debuter ou pas l'ecriture dans le fichier
-heredoc*/
-
-int	start_heredoc_one(char **stop, int begin)
-{
-	int	start;
-	start = 0;
-	
-	if (begin == 1)
-		return (1);
-	start = ft_count_line(stop);
-	if (start == 1)
-		return (1);
-	return (0);
-}
-
-int	start_heredoc_more(char **stop, int i)
-{
-	int	start;
-	
-	start = ft_count_line(stop);
-/* 	if (start == 1)
-		return (1); */
-	if (i == start - 1)
-		return (1);
-	return (0);
-}
-
-void	exit_heredoc(int sig)
-{
-	exit(0);
-
-	/* if (sig == SIGINT)
-		return (0);
-	return (1); */
-}
-
-int	signal_heredoc(char **stop, char *line)
-{
-	//int		status;
-	(void)stop;
-	// gerer ctrl backslash et status aussi !!!!!!
-	if (signal(SIGINT, &exit_heredoc) == 0)
-	{
-		printf("SIGINT");
-		return (1);
-	}
-	if (!line)
-	{
-		//clear history si il y en avait un
-		//write(2, "\n\e[0;35mctrl+D used\n", 21);
-		write(1, "\n", 1);
-		return (1);
-	}
-	return (0);
-}
 /*Cette fonction permet de remplir le fichier 
 temporaire tout en respecant les regles de priorite du heredoc*/
 
-void	fill_heredoc_file(char **stop)
+void	fill_heredoc_file(char **stop, char **env)
 {
 	char	*line;
 	int		fd;
@@ -87,6 +19,7 @@ void	fill_heredoc_file(char **stop)
 	while (1)
 	{
 		line = readline("> ");
+		line = expand_dollar(env, line);
 		//Gerer les signaux
 		if (signal_heredoc(stop, line))
 			break ;
@@ -161,7 +94,7 @@ char	**create_tab_stop(t_command *all_cmd)
 	return (stop);
 }
 
-int	launch_heredoc(t_command *all_cmd)
+int	launch_heredoc(t_command *all_cmd, char **env)
 {
 	char		**stop;
 
@@ -169,7 +102,7 @@ int	launch_heredoc(t_command *all_cmd)
 	stop = create_tab_stop(all_cmd);
 	if (!stop)
 		return (-1);
-	fill_heredoc_file(stop);
+	fill_heredoc_file(stop, env);
 	return (0);
 }
 

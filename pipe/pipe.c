@@ -92,7 +92,7 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 		all_cmd = all_cmd->next->next;
 		i++;
 	}
-	redirection(all_cmd, &in, &out);
+	redirection(all_cmd, &in, &out, env);
 	execute_last(all_cmd, env, in, out);
 	wait_pipe(nb_cmd);
 	count_all_between_pipe(&all_cmd);
