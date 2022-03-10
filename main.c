@@ -62,6 +62,8 @@ int main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	//Changer ca, pour que ca marche
+	env = NULL;
+	line = NULL;
 	if (!envp)
 	{	
 		ft_putstr_fd("\n\e[1;91m- Need ENVP -\e[0m\n", 1);

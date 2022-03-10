@@ -17,18 +17,36 @@ int	create_heredoc_file(void)
 /*Permet de savoir quand debuter ou pas l'ecriture dans le fichier
 heredoc*/
 
-int	start_heredoc(char **stop, int i)
+int	start_heredoc_one(char **stop, int begin)
+{
+	int	start;
+	start = 0;
+	
+	if (begin == 1)
+		return (1);
+	start = ft_count_line(stop);
+	if (start == 1)
+		return (1);
+	return (0);
+}
+
+int	start_heredoc_more(char **stop, int i)
 {
 	int	start;
 	
 	start = ft_count_line(stop);
-	if (start == 1)
-		return (1);
+/* 	if (start == 1)
+		return (1); */
 	if (i == start - 1)
 		return (1);
 	return (0);
 }
 
+/* void	fill_heredoc_file_2(char **stop, char *line, int)
+{
+
+}
+ */
 /*Cette fonction permet de remplir le fichier 
 temporaire tout en respecant les regles de priorite du heredoc*/
 
@@ -42,13 +60,12 @@ void	fill_heredoc_file(char **stop)
 	begin = 0;
 	i = 0;
 	fd = create_heredoc_file();
-	line = NULL;
+	//line = NULL;
 	while (1)
 	{
-		printf("lolilol\n");
 		line = readline("> ");
 		//Gerer les signaux
-		if (!ft_strcmp(line, stop[i]))
+		if (stop[i] && !ft_strcmp(line, stop[i]))
 		{
 			if (stop[i + 1] == NULL)
 			{
@@ -57,6 +74,7 @@ void	fill_heredoc_file(char **stop)
 			}
 			i++;
 		}
+		begin = start_heredoc_one(stop, begin);
 		if (begin == 1)
 		{
 			write(fd, line, ft_strlen(line));
@@ -64,9 +82,10 @@ void	fill_heredoc_file(char **stop)
 		}
 		if (line)
 			free(line);
-		begin = start_heredoc(stop, i);
+		begin = start_heredoc_more(stop, i);
 	}
 	ft_free_tab_2d(stop);
+	close(fd);
 }
 
 /*Compte le nombre de D_CHV_L entre deux pipe*/
@@ -82,6 +101,7 @@ int	count_nb_D_CHV_L_between_pipe(t_command *all_cmd)
 	{
 		if (tmp->type == D_CHV_L)
 			i++;
+		tmp = tmp->next;
 	}
 	return (i);
 }
@@ -97,6 +117,7 @@ char	**create_tab_stop(t_command *all_cmd)
 
 	i = 0;
 	tmp = all_cmd;
+	stop = NULL;
 	stop = malloc(sizeof(char *) * (count_nb_D_CHV_L_between_pipe(tmp) + 1));
 	if (!stop)
 		return (NULL);
@@ -111,6 +132,7 @@ char	**create_tab_stop(t_command *all_cmd)
 		}
 		tmp = tmp->next;
 	}
+	stop[i] = NULL;
 	return (stop);
 }
 
@@ -118,6 +140,7 @@ int	launch_heredoc(t_command *all_cmd)
 {
 	char		**stop;
 
+	stop = NULL;
 	stop = create_tab_stop(all_cmd);
 	if (!stop)
 		return (-1);
