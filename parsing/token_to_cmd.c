@@ -107,7 +107,7 @@ void	ft_add_back_cmd(t_command **alst, t_command *new)
 	env = ft_create_env(envp);
 	temp = lexer(arg);
 	expanded = expand_all(env, temp);
-	trim_all(&expanded);
+	//trim_all(&expanded);
 	//print_token(&expanded);
 	cmd_all = token_to_cmd(expanded);
 	print_cmd(&cmd_all);

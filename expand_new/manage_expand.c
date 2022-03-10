@@ -19,7 +19,6 @@ char	*del_quote(char *str, int pos_a, int pos_b)
 		if (i == pos_b && str[i])
 		{
 			i++;
-			//ajout
 			j++;
 			break ;
 		}
@@ -30,7 +29,6 @@ char	*del_quote(char *str, int pos_a, int pos_b)
 		j++;
 	}
 	ret[j] = '\0';
-	//free(str);
 	return (ret);
 }
 
@@ -48,7 +46,7 @@ char	*trim_quote(char *str, int *i)
 		if (!str)
 			return (NULL);
 		
-		*i += (j /* - 2 */);
+		*i += (j);
 	}
 	return (str);
 }
@@ -146,6 +144,29 @@ char	*expand_node(char **env, char *str)
 t_token	*expand_all(char **env, t_token *all)
 {
 	t_token	*tmp;
+	int		expand;
+
+	expand = 1;
+	tmp = all;
+	while (tmp)
+	{
+		if (expand)
+		{
+			tmp->content = expand_node(env, tmp->content);
+			if (!tmp->content)
+				return (NULL);
+		}
+		expand = 1;
+		if (tmp->type == D_CHV_L)
+			expand = 0;
+		tmp = tmp->next;
+	}
+	return (all);
+}
+
+/* t_token	*expand_all(char **env, t_token *all)
+{
+	t_token	*tmp;
 
 	tmp = all;
 	while (tmp)
@@ -156,7 +177,7 @@ t_token	*expand_all(char **env, t_token *all)
 		tmp = tmp->next;
 	}
 	return (all);
-}
+} */
 
 /* int main(int argc, char **argv, char **envp)
 {

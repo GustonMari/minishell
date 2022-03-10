@@ -223,6 +223,7 @@ char	*expand_dollar(char **env, char *str);
 */
 
 t_token	*expand_all(char **env, t_token *all);
+char	*cpy_block(char	*str, int size);
 
 /*
 ------------------ PARSING ----------------
@@ -303,5 +304,6 @@ int	start_heredoc_one(char **stop, int begin);
 int	start_heredoc_more(char **stop, int i);
 void	exit_heredoc(int sig);
 int	signal_heredoc(char **stop, char *line);
+char	**create_tab_stop(t_command *all_cmd);
 
 #endif

@@ -11,6 +11,7 @@ void	fill_heredoc_file(char **stop, char **env)
 	int		fd;
 	int		i;
 	int 	begin;
+	(void)env;
 
 	begin = 0;
 	i = 0;
@@ -19,7 +20,7 @@ void	fill_heredoc_file(char **stop, char **env)
 	while (1)
 	{
 		line = readline("> ");
-		line = expand_dollar(env, line);
+		//line = expand_dollar(env, line);
 		//Gerer les signaux
 		if (signal_heredoc(stop, line))
 			break ;
