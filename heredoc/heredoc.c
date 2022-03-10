@@ -5,14 +5,13 @@
 /*Cette fonction permet de remplir le fichier 
 temporaire tout en respecant les regles de priorite du heredoc*/
 
-void	fill_heredoc_file(char **stop, char **env)
+void	fill_heredoc_file(char **stop, char **env, int is_expand)
 {
 	char	*line;
 	int		fd;
 	int		i;
 	int 	begin;
-	(void)env;
-
+	
 	begin = 0;
 	i = 0;
 	fd = create_heredoc_file();
@@ -20,10 +19,12 @@ void	fill_heredoc_file(char **stop, char **env)
 	while (1)
 	{
 		line = readline("> ");
-		//line = expand_dollar(env, line);
+
 		//Gerer les signaux
 		if (signal_heredoc(stop, line))
 			break ;
+		//printf("line %s\n", line);
+		//printf("stop = %s\n", stop[i]);
 		if (stop[i] && !ft_strcmp(line, stop[i]))
 		{
 			if (stop[i + 1] == NULL)
@@ -33,6 +34,8 @@ void	fill_heredoc_file(char **stop, char **env)
 			}
 			i++;
 		}
+		if (is_expand == TRUE)
+			line = expand_dollar(env, line);
 		begin = start_heredoc_one(stop, begin);
 		if (begin == 1)
 		{
@@ -97,13 +100,21 @@ char	**create_tab_stop(t_command *all_cmd)
 
 int	launch_heredoc(t_command *all_cmd, char **env)
 {
-	char		**stop;
+	char	**stop;
+	int		is_expand;
 
 	stop = NULL;
 	stop = create_tab_stop(all_cmd);
 	if (!stop)
 		return (-1);
-	fill_heredoc_file(stop, env);
+	if(is_expand_heredoc(stop) == TRUE)
+		is_expand = TRUE;
+	else
+		is_expand = FALSE;
+	stop = trim_quote_stop(stop);
+	if (!stop)
+		return (-1);
+	fill_heredoc_file(stop, env, is_expand);
 	return (0);
 }
 

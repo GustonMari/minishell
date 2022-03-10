@@ -30,7 +30,9 @@
 # include <dirent.h>
 # include <termios.h>
 # include <fcntl.h>
-# define BUFFER_SIZE 200
+# define BUFFER_SIZE 20000
+# define FALSE 1
+# define TRUE 0
 
 # define PIPE 1
 # define CHV_R 2
@@ -296,14 +298,17 @@ int	wait_pipe(int nb_cmd);
 ------------------ HEREDOC ------------------
 */
 
-int	priorities_D_CHV_L(t_command *all_cmd);
-int	launch_heredoc(t_command *all_cmd, char **env);
-int	count_nb_D_CHV_L_between_pipe(t_command *all_cmd);
-int	create_heredoc_file(void);
-int	start_heredoc_one(char **stop, int begin);
-int	start_heredoc_more(char **stop, int i);
+int		priorities_D_CHV_L(t_command *all_cmd);
+int		launch_heredoc(t_command *all_cmd, char **env);
+int		count_nb_D_CHV_L_between_pipe(t_command *all_cmd);
+int		create_heredoc_file(void);
+int		start_heredoc_one(char **stop, int begin);
+int		start_heredoc_more(char **stop, int i);
 void	exit_heredoc(int sig);
-int	signal_heredoc(char **stop, char *line);
+int		signal_heredoc(char **stop, char *line);
 char	**create_tab_stop(t_command *all_cmd);
+char	**trim_quote_stop(char **strs);
+int		is_expand_heredoc(char **stop);
+
 
 #endif
