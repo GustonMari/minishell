@@ -12,16 +12,46 @@
 
 # include "../includes/function.h"
 
-char	*find_path_cmd(char *cmd, char *tmp)
+/*Trouve si la cmd en parametre est une cmd
+avec un chemin absolut*/
+
+char	*find_absolute_path_cmd(char *cmd, char *tmp)
 {
 	int		i;
-	char	*path;
 	char	**all_cmd_path;
 
 	all_cmd_path = ft_split(tmp, ':');
 	if (!all_cmd_path)
 		return (NULL);
-	free(tmp);
+	i = -1;
+	while (all_cmd_path[++i])
+	{
+		if (access(cmd, F_OK | X_OK) == 0)
+		{
+			ft_free_tab_2d(all_cmd_path);
+			return (ft_strdup(cmd));
+		}
+	}
+	ft_free_tab_2d(all_cmd_path);
+	return (NULL);
+}
+
+/*Trouve si la cmd en parametre est une cmd
+avec un chemin relatif*/
+
+char	*find_path_cmd(char *cmd_to_join, char *tmp)
+{
+	int		i;
+	char	*path;
+	char	**all_cmd_path;
+	char	*cmd;
+
+	cmd = ft_strjoin("/", cmd_to_join);
+	if (!cmd)
+		return (NULL);
+	all_cmd_path = ft_split(tmp, ':');
+	if (!all_cmd_path)
+		return (NULL);
 	i = -1;
 	while (all_cmd_path[++i])
 	{
@@ -39,26 +69,44 @@ char	*find_path_cmd(char *cmd, char *tmp)
 	return (NULL);
 }
 
+/*Va regarder si la commande est une commande
+avec un chemin absolut ou relatif, renvoi le path
+si il y avait un chemin absolut ou relatif, renvoie
+NULL si il n'y avait aucun des deux*/
+
+char	*chose_ath_cmd(char *cmd, char *tmp)
+{
+	char	*path;
+
+	path = find_path_cmd(cmd, tmp);
+	if (path == NULL)
+		path = find_absolute_path_cmd(cmd, tmp);
+	free(tmp);
+	return (path);
+}
+
 int	ft_exec_cmd(char **env, char **full_cmd)
 {
-	char	*new_cmd;
 	char	*path;
 	char	*tmp;
 
+	g_status = 0;
 	tmp = find_val_in_tab(env, "PATH");
 	if (!tmp)
 		return (-1);
-	new_cmd = ft_strjoin("/", full_cmd[0]);
-	if (!new_cmd)
-		return (-1);
-	path = find_path_cmd(new_cmd, tmp);
+	path = chose_ath_cmd(full_cmd[0], tmp);
 	if (!path)
 	{
 		ft_print_error(0, full_cmd[0], ": command not found", NULL);
-		exit(1);
+		g_status = 127;
+		exit(127);
 	}
 	if(execve(path, full_cmd, env) < 0)
+	{
 		perror("execve");
+		g_status = errno;
+		exit(1);
+	}
 	free(path);
 	return (0);
 }
@@ -92,42 +140,12 @@ int	ft_exec(char **env, char **full_cmd)
 	if (builtin)
 	{
 		env = ft_exec_builtin(env, full_cmd, builtin);
-		exit(1);
-		return (0);
+		exit(0);
 	}
 	else
 		ft_exec_cmd(env, full_cmd);
 	return (0);
 }
-
-/* int	ft_exec_cmd(char **env, char **full_cmd)
-{
-	char	*new_cmd;
-	char	*path;
-	char	*tmp;
-	int		status;
-
-	tmp = find_val_in_tab(env, "PATH");
-	if (!tmp)
-		return (-1);
-	new_cmd = ft_strjoin("/", full_cmd[0]);
-	if (!new_cmd)
-		return (-1);
-	path = find_path_cmd(new_cmd, tmp);
-	if (!path)
-		return (-1);
-
-	int	pid = fork();
-	if (pid == 0)
-	{
-		if(execve(path, full_cmd, env) < 0)
-			perror("execve");
-		free(path);
-	}else
-		wait(&status);
-	return (0);
-} */
-
 
 /* int	main(int ac, char **av, char **env)
 {

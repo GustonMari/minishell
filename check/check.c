@@ -25,23 +25,20 @@ int	is_builtin(char *builtin)
 
 int	is_cmd(char **env, char *cmd)
 {
-	char	*new_cmd;
 	char	*path;
 	char	*tmp;
 
 	tmp = find_val_in_tab(env, "PATH");
 	if (!tmp)
 		return (-1);
-	new_cmd = ft_strjoin("/", cmd);
-	if (!new_cmd)
-		return (-1);
-	path = find_path_cmd(new_cmd, tmp);
+	path = chose_ath_cmd(cmd, tmp);
 	if(!path)
 	{
 		free(path);
-		ft_putstr_fd(BRED"bash: ", 2);
+		ft_putstr_fd(BRED"minishell: ", 2);
 		ft_putstr_fd(cmd, 2);
 		ft_putstr_fd(": command not found\n"CRESET, 2);
+		g_status = 127;
 		return (1);
 	}
 	free(path);

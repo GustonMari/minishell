@@ -156,7 +156,8 @@ int	find_next_quote(char *str);
 ------------------EXEC ----------------
 */
 
-char	*find_path_cmd(char *cmd, char *tmp);
+char	*find_path_cmd(char *cmd_to_join, char *tmp);
+char	*chose_ath_cmd(char *cmd, char *tmp);
 int	ft_exec(char **env, char **full_cmd);
 int	ft_exec_cmd(char **env, char **full_cmd);
 char	**ft_dispatch(t_command *all, char **env);

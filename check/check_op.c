@@ -29,6 +29,7 @@ int	check_cmd_list(t_command *all)
 			if (is_operator_type(tmp->next))
 			{
 				ft_print_error(1, NULL, "syntax error near unexpected token ", tmp->cmd_to_exec[0]);
+				g_status = 2;
 				return (-1);
 			}
 		}

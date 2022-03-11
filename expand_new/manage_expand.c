@@ -22,7 +22,6 @@ char	*del_quote(char *str, int pos_a, int pos_b)
 			j++;
 			break ;
 		}
-			
 		ret[j] = str[i];
 		if (str[i])
 			i++;
@@ -163,21 +162,6 @@ t_token	*expand_all(char **env, t_token *all)
 	}
 	return (all);
 }
-
-/* t_token	*expand_all(char **env, t_token *all)
-{
-	t_token	*tmp;
-
-	tmp = all;
-	while (tmp)
-	{
-		tmp->content = expand_node(env, tmp->content);
-		if (!tmp->content)
-			return (NULL);
-		tmp = tmp->next;
-	}
-	return (all);
-} */
 
 /* int main(int argc, char **argv, char **envp)
 {

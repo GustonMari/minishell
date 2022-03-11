@@ -67,7 +67,7 @@ int	ft_check_unset(char *str)
 		} */
 		if ((!ft_isalnum(str[i])))
 		{
-			ft_putstr_fd(BRED"bash: export: `", 2);
+			ft_putstr_fd(BRED"minishell: export: `", 2);
 			ft_putstr_fd(str, 2);
 			ft_putstr_fd("\': not a valid identifier\n"CRESET, 2);
 			g_status = 1;

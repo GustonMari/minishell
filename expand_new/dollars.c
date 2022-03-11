@@ -106,7 +106,6 @@ char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos)
 		}
 		ret[j++] = str[i];
 		i++;
-		//j++;
 	}
 	if (i == pos)
 	{
@@ -180,17 +179,12 @@ char	*expand_dollar(char **env, char *str)
 			&& str[i + 1] != '\0' && str[i + 1] != '$')
 		{
 			var_name = cut_dollar(&str[i]);
-			
 			if (!var_name)
 				return (NULL);
 			if (ft_find_env_line(env, var_name) && str[i + 1] != '$')
-			{
 				str = replace_dollar(env, str, var_name, i);
-			}
 			else
-			{
 				str = del_dollar(str, var_name, ft_strlen(var_name));
-			}
 			i = 0;
 		}
 		i++;

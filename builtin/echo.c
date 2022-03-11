@@ -25,6 +25,11 @@ void ft_echo(char **full_cmd)
     int n;
 
     g_status = 0;
+    if (ft_count_line(full_cmd) == 1)
+    {
+        ft_putchar_fd('\n', 1);
+        return ;
+    }
     n = ft_echo_n(full_cmd[1]);
     i = 1;
     if (n == 0) 

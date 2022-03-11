@@ -64,6 +64,20 @@ int	create_word(char *arg, t_token **begin)
 	return (i);
 }
 
+/* int	is_empty(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_is_space(str[i]) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+} */
+
 t_token	*lexer(char *arg)
 {
 	t_token	*begin = NULL;
@@ -72,7 +86,11 @@ t_token	*lexer(char *arg)
 
 	i = 0;
 	if (check_quote(arg))
+	{
+		ft_putstr_fd(BRED"minishell: you should close quote\n"CRESET, 2);
+		g_status = 1;
 		return (NULL);
+	}
 	while (arg[i])
 	{
 		op = is_operator(&arg[i]);
