@@ -10,17 +10,17 @@ int	ft_check_export(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '=')
-			break ;
-		if (!ft_isalnum(str[i]))
+		if ((!ft_isalnum(str[i])))
 		{
-			ft_putstr_fd("bash: export: `", 2);
+			ft_putstr_fd(BRED"bash: export: `", 2);
 			ft_putstr_fd(str, 2);
-			ft_putstr_fd("\': not a valid identifier\n", 2);
+			ft_putstr_fd("\': not a valid identifier\n"CRESET, 2);
 			g_status = 1;
 			return (1);
 		}
 		i++;
+		if (str[i] && str[i] == '=')
+			break ;
 	}
 	return (0);
 }
