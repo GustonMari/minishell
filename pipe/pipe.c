@@ -8,7 +8,7 @@ int	count_cmd_list(t_command *all_cmd)
 
 	tmp = all_cmd;
 	count = 0;
-	while (tmp /* && is_redirection_type(tmp) */)
+	while (tmp)
 	{
 		if (tmp->type == WORD)
 			count++;
@@ -16,6 +16,9 @@ int	count_cmd_list(t_command *all_cmd)
 	}
 	return (count);
 }
+
+/*Compte le nombre de commande entre avant qu'il y ai
+une redirection*/
 
 int	count_cmd_between_pipe(t_command *all_cmd)
 {
@@ -92,8 +95,10 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 		all_cmd = all_cmd->next->next;
 		i++;
 	}
-	redirection(all_cmd, &in, &out, env);
-	execute_last(all_cmd, env, in, out);
+	if (redirection(all_cmd, &in, &out, env) != -1)
+		execute_last(all_cmd, env, in, out);
+	else
+		in = open(".tmp", O_CREAT | O_RDWR | O_TRUNC, 00777);
 	wait_pipe(nb_cmd);
 	count_all_between_pipe(&all_cmd);
 	if (all_cmd)
@@ -101,6 +106,39 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 	return (0);
 }
 
+
+/* int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
+{
+	int		fd[2];
+	int		out;
+	int		i;
+	//int		status;
+	pid_t	pid;
+
+	i = 0;
+	if (!all_cmd)
+		return (0);
+	out = STDOUT_FILENO;
+	while (all_cmd && (i < nb_cmd -1))
+	{
+		if (pipe(fd) < 0)
+			return (-1);
+		pid = fork_pipe(in, fd[1]);
+		if (pid == 0)
+			ft_exec(env, all_cmd->cmd_to_exec);
+		close(fd[1]);
+		in = fd[0];
+		all_cmd = all_cmd->next->next;
+		i++;
+	}
+	redirection(all_cmd, &in, &out, env);
+	execute_last(all_cmd, env, in, out);
+	wait_pipe(nb_cmd);
+	count_all_between_pipe(&all_cmd);
+	if (all_cmd)
+		execute_pipe(all_cmd, env, count_cmd_between_pipe(all_cmd), in);
+	return (0);
+} */
 
 /* int main(int ac, char **av, char **envp)
 {
