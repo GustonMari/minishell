@@ -3,6 +3,7 @@
 		"random": "c",
 		"function.h": "c",
 		"stdlib.h": "c",
-		"history.h": "c"
+		"history.h": "c",
+		"struct.h": "c"
 	}
 }

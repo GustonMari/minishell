@@ -28,9 +28,12 @@ void	cd_error(char *cmd, int to_many_arg)
 	{
 		ft_putstr_fd(cmd, STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);
-		perror(BRED""CRESET);
+		perror("");
+		ft_putstr_fd(""CRESET, STDERR_FILENO);
 	}
 	else
+	{	
 		ft_putstr_fd("too many arguments"CRESET, 2);
-	ft_putstr_fd("\n", 2);
+		ft_putstr_fd("\n", 2);
+	}
 }

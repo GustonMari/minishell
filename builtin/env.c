@@ -61,6 +61,7 @@ int		ft_print_env(char **env)
 	int	i;
 
 	i = 0;
+	g_status = 0;
 	while (env[i])
 	{
 		if (!find_equal_in_line(env[i]))
@@ -89,7 +90,7 @@ char	**ft_create_env(char **envp)
 		env[i] = ft_strdup(envp[i]);
 		if (!env[i])
 		{
-			//clear le tab..
+			ft_free_tab_2d(env);
 			return (NULL);
 		}
 		i++;

@@ -21,6 +21,7 @@ int	ft_check_cd(char *str)
 	if (access(str, X_OK) == -1)
 	{
 		cd_error(str, 0);
+		g_status = 1;
 		return (-1);
 		/* exit(1); */
 	}
@@ -62,6 +63,8 @@ int	ft_cd(char **full_cmd, char **env)
 	if (ft_count_line(full_cmd) > 2)
 	{
 		cd_error(full_cmd[1], 1);
+		g_status = 1;
+		return (-1);
 	}
 	if (ft_count_line(full_cmd) ==1 || !ft_strcmp(full_cmd[1], "~"))
 		return(ft_home(env));
@@ -69,12 +72,11 @@ int	ft_cd(char **full_cmd, char **env)
 		return (-1);
 	old_pwd = find_val_in_tab(env, "PWD");
 	if (chdir(full_cmd[1]) == -1)
-		printf("Error chdir not working");
+		ft_putstr_fd("Error chdir not working", 2);
 	ft_change_env_val(env, "PWD", ft_pwd_return());
 	if (old_pwd)
 		ft_change_env_val(env, "OLDPWD", old_pwd);
 	free(old_pwd);
-	//exit (0);
 	return (0);
 }
 

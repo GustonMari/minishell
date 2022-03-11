@@ -75,6 +75,7 @@ char	**manage_export(char **env, char **full_cmd)
 	int	i;
 
 	i = 1;
+	g_status = 0;
 	if (ft_count_line(full_cmd) == 1)
 	{
 		ft_export_no_arg(env);

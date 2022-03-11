@@ -74,6 +74,7 @@ int main(int ac, char **av, char **envp)
 	if (!envp)
 	{	
 		ft_putstr_fd("\n\e[1;91m- Need ENVP -\e[0m\n", 1);
+		g_status = 0;
 		return (0);
 	}
 	env = ft_create_env(envp);

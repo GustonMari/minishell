@@ -24,6 +24,7 @@ void ft_echo(char **full_cmd)
     int i;
     int n;
 
+    g_status = 0;
     n = ft_echo_n(full_cmd[1]);
     i = 1;
     if (n == 0) 

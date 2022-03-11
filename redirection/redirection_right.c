@@ -29,9 +29,7 @@ int	manage_open_r(t_command *all_cmd, char *last_redir)
 	int			is_chv_r;
 	int			fd;
 
-	//ATTENTION RAJOUT
 	is_chv_r = 0;
-	//
 	fd = -1;
 	tmp = all_cmd;
 	while (tmp && tmp->type != PIPE)
@@ -114,7 +112,14 @@ int	manage_chv_r(t_command *all_cmd, int *out)
 		return (-1);
 	*out = manage_open_r(all_cmd, file_name);
 	if (*out == -1)
+	{
+		ft_putstr_fd(BRED"minishell: ", 2);
+		ft_putstr_fd(file_name, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n"CRESET, 2);
 		return (-1);
+	}	
 	free(file_name);
 	return (0);
 }
