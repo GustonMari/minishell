@@ -91,7 +91,7 @@ char	**trim_quote_stop(char **strs)
 		i++;
 	}
 	ft_free_tab_2d(strs);
-    return (ret);
+	return (ret);
 }
 
 /* int	main(int ac, char **av, char **envp)

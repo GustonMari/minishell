@@ -11,7 +11,6 @@ void	ft_export_no_arg(char **env)
 	ft_free_tab_2d(env_sorted);
 }
 
-
 char	**ft_export_add(char **env, char *str)
 {
 	char	**new_env;

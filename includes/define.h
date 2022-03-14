@@ -37,6 +37,6 @@
 # include <termios.h>
 # include <fcntl.h>
 
-int	g_status;
+extern int	g_status;
 
 #endif

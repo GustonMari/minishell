@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/08 17:22:04 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/14 10:39:06 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,6 +250,7 @@ int		count_all_between_pipe(t_command **all_cmd);
 
 void	ft_print_error(int minishell, char *cmd_name, char *error, char *token);
 void	cd_error(char *cmd, int to_many_arg);
+int	redirection_error(char *file_name);
 
 /* 
 ------------------ ECHO ------------------

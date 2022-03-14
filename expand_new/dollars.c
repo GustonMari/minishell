@@ -23,7 +23,8 @@ char	*cut_dollar(char *str)
 }
 
 /*
-	permet de supprimer une variable commenceant par $ (var_name) dans une string donne
+	permet de supprimer une variable commenceant par $ (var_name)
+	dans une string donne
 */
 
 char	*del_dollar_2(char *str, char *var_name, char *ret, int len)

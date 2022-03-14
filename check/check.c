@@ -32,7 +32,7 @@ int	is_cmd(char **env, char *cmd)
 	if (!tmp)
 		return (-1);
 	path = chose_ath_cmd(cmd, tmp);
-	if(!path)
+	if (!path)
 	{
 		free(path);
 		ft_putstr_fd(BRED"minishell: ", 2);
@@ -70,7 +70,6 @@ int	is_built_cmd(char **env, char *cmd)
 	return (0);
 } */
 
-
 //Save, working, probleme avec op <> |< ....
 
 int	is_operator(char *operator)
@@ -85,7 +84,6 @@ int	is_operator(char *operator)
 		return (CHV_R);
 	if (!ft_strncmp("<", operator, 1))
 		return (CHV_L);
-
 	return (0);
 }
 

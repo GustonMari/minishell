@@ -6,12 +6,11 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 14:02:11 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/02 17:55:40 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/14 09:22:25 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
-
 
 /*
 	X_OK check si file existe + tte les permisions
@@ -53,21 +52,20 @@ int	ft_home(char **env)
 	return (0);
 }
 
-
 //MAIN CD FUNCTION
 
 int	ft_cd(char **full_cmd, char **env)
 {
 	char	*old_pwd;
-	
+
 	if (ft_count_line(full_cmd) > 2)
 	{
 		cd_error(full_cmd[1], 1);
 		g_status = 1;
 		return (-1);
 	}
-	if (ft_count_line(full_cmd) ==1 || !ft_strcmp(full_cmd[1], "~"))
-		return(ft_home(env));
+	if (ft_count_line(full_cmd) == 1 || !ft_strcmp(full_cmd[1], "~"))
+		return (ft_home(env));
 	if (ft_check_cd(full_cmd[1]))
 		return (-1);
 	old_pwd = find_val_in_tab(env, "PWD");
@@ -79,7 +77,6 @@ int	ft_cd(char **full_cmd, char **env)
 	free(old_pwd);
 	return (0);
 }
-
 
 /* int main(int argc, char **argv, char **envp)
 {

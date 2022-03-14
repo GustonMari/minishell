@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:27:53 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/22 09:31:25 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/14 09:19:12 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 	char	*buff = NULL;
 	char	*ret;
 	
-	if (chdir("/Users/gustavemary/Documents/ProjetCode/VIM/CURSUS/r3/minishell/testopen") == -1)
+	if (chdir("/Users/gustavemary/Documents
+		/ProjetCode/VIM/CURSUS/r3/minishell/testopen") == -1)
 		printf("Error");
 	ret = getcwd(buff, BUFFER_SIZE);
 	//"/mnt/nfs/homes/gmary/Documents/TAFF/minishell";
@@ -48,15 +49,14 @@ int	find_equal_in_line(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if(str[i] == '=')
+		if (str[i] == '=')
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-
-int		ft_print_env(char **env)
+int	ft_print_env(char **env)
 {
 	int	i;
 
@@ -98,4 +98,3 @@ char	**ft_create_env(char **envp)
 	env[i] = NULL;
 	return (env);
 }
-

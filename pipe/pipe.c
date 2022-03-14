@@ -96,9 +96,15 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 		i++;
 	}
 	if (redirection(all_cmd, &in, &out, env) != -1)
+	{
 		execute_last(all_cmd, env, in, out);
-	else
 		in = open(".tmp", O_CREAT | O_RDWR | O_TRUNC, 00777);
+	}
+/* 	else
+	{
+		printf("salut\n");
+		in = open(".tmp", O_CREAT | O_RDWR | O_TRUNC, 00777);
+	} */
 	wait_pipe(nb_cmd);
 	count_all_between_pipe(&all_cmd);
 	if (all_cmd)

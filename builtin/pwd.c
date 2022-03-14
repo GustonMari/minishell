@@ -1,4 +1,3 @@
-
 #include "../includes/function.h"
 
 char	*ft_pwd_return(void)
@@ -13,7 +12,7 @@ char	*ft_pwd_return(void)
 		if (errno == ERANGE)
 			ft_putstr_fd("ERANGE ERROR\n", 2);
 		g_status = errno;
-		return(NULL);
+		return (NULL);
 	}
 	free(buff);
 	return (ret);
@@ -32,7 +31,7 @@ int	ft_pwd(void)
 		if (errno == ERANGE)
 			ft_putstr_fd("ERANGE ERROR\n", 2);
 		g_status = errno;
-		return(-1);
+		return (-1);
 	}
 	else
 	{

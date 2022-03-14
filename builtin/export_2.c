@@ -39,7 +39,7 @@ void	ft_putstr_export_no_arg(char *str)
 	while (str[i])
 	{
 		write(1, &str[i], 1);
-		if((str[i] == '=') && first_equal == 0)
+		if ((str[i] == '=') && first_equal == 0)
 		{
 			write(1, "\"", 1);
 			first_equal = 1;
@@ -53,7 +53,7 @@ void	ft_putstr_export_no_arg(char *str)
 /*Affiche export quand on ne met aucun argument devant
 (c'est l'environnement printe avec quelques modifs)*/
 
-int		ft_print_export_no_arg(char **env)
+int	ft_print_export_no_arg(char **env)
 {
 	int	i;
 

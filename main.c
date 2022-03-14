@@ -62,6 +62,8 @@ void	exit_process(int sig)
 	exit(0);
 }
 
+int g_status;
+
 int main(int ac, char **av, char **envp)
 {
 	char	*line;

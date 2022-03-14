@@ -1,5 +1,17 @@
 # include "../includes/function.h"
 
+int	redirection_error(char *file_name)
+{
+
+		ft_putstr_fd(BRED"minishell: ", 2);
+		ft_putstr_fd(file_name, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n"CRESET, 2);
+		g_status = errno;
+		return (-1);
+}
+
 void	ft_print_error(int minishell, char *cmd_name, char *error, char *token)
 {
 	if (minishell == 1)

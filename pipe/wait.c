@@ -9,11 +9,11 @@ void	exit_pipe_process(int sig)
 
 int	wait_pipe(int nb_cmd)
 {
-    int		status;
-    int		i;
+	int		status;
+	int		i;
 
-    i = 0;
-    while (i < nb_cmd)
+	i = 0;
+	while (i < nb_cmd)
 	{
 		if (signal(SIGINT, &exit_pipe_process) == SIG_ERR)
 			return (fprintf(stderr, "Error: %s\n", strerror(errno)));

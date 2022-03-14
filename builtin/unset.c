@@ -17,7 +17,8 @@ int	is_var_in_line_unset(char *str, char *to_del, size_t n)
 }
 
 /*
-	copie tt le tab en sautant une ligne indique au prealable (supprime la variable env envoye en param)
+	copie tt le tab en sautant une ligne indique au prealable
+	 (supprime la variable env envoye en param)
 	et return le nouveau tab d'env
 */
 
@@ -28,7 +29,6 @@ char	**ft_unset_line(char **env, char *to_del)
 	char	**dest;
 	int		j;
 
-	
 	i = 0;
 	line = ft_count_line(env);
 	dest = malloc(sizeof(char *) * (line));

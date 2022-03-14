@@ -11,7 +11,7 @@ char	**execute_one_cmd(char **env, t_command *all)
 	{
 		env = ft_unset(env, all->cmd_to_exec);
 		if (!env)
-			return (NULL); 
+			return (NULL);
 	}
 	if (builtin == FT_EXPORT)
 		env = manage_export(env, all->cmd_to_exec);
