@@ -100,15 +100,11 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 		execute_last(all_cmd, env, in, out);
 		in = open(".tmp", O_CREAT | O_RDWR | O_TRUNC, 00777);
 	}
-/* 	else
-	{
-		printf("salut\n");
-		in = open(".tmp", O_CREAT | O_RDWR | O_TRUNC, 00777);
-	} */
-	wait_pipe(nb_cmd);
+	//wait_pipe(nb_cmd);
 	count_all_between_pipe(&all_cmd);
 	if (all_cmd)
 		execute_pipe(all_cmd, env, count_cmd_between_pipe(all_cmd), in);
+	wait_pipe(nb_cmd);
 	return (0);
 }
 

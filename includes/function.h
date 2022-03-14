@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/14 10:39:06 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/14 17:32:11 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ void	print_tab_2d(char **strs);
 
 char	*ft_strtrim(char *s1, char *set);
 void	print_tab_2d(char **strs);
-int	    ft_isalnum(int c);
+int		ft_isalnum(int c);
+
+
 
 
 /*
@@ -188,6 +190,11 @@ int	check_t_cmd(char **env, t_command *all);
 */
 
 char	*expand_dollar(char **env, char *str);
+char	*replace_dollar_3(char *str, char *new_var, char *ret);
+char	*replace_interrogation(char *str, int pos);
+char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos);
+
+
 
 /*
 ------------------ EXPAND ----------------
@@ -281,4 +288,9 @@ char	**trim_quote_stop(char **strs);
 int		is_expand_heredoc(char **stop);
 
 
+/* 
+------------------ ITOA ------------------
+*/
+char	*ft_itoa(int n);
+int		ft_lennum(int n);
 #endif
