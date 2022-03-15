@@ -54,6 +54,28 @@ int	manage_chv_l(t_command *all_cmd, int *in, char **env)
 {
 	char		*file_name;
 
+	file_name = NULL;
+	g_status = 0;
+	if (count_redir_l(all_cmd) == 0)
+		return (1);
+	file_name = find_last_redir_l(all_cmd);
+	if (!file_name)
+		return (-1);
+	if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
+		launch_heredoc(all_cmd, env);
+	*in = open(file_name, O_RDONLY);
+	if (*in == -1)
+		return (redirection_error(file_name));
+	
+	free(file_name);
+	return (0);
+}
+
+/* int	manage_chv_l(t_command *all_cmd, int *in, char **env)
+{
+	char		*file_name;
+
+	file_name = NULL;
 	g_status = 0;
 	if (count_redir_l(all_cmd) == 0)
 		return (1);
@@ -67,4 +89,4 @@ int	manage_chv_l(t_command *all_cmd, int *in, char **env)
 		return (redirection_error(file_name));
 	free(file_name);
 	return (0);
-}
+} */

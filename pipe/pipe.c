@@ -97,6 +97,7 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 	}
 	if (redirection(all_cmd, &in, &out, env) != -1)
 	{
+		
 		execute_last(all_cmd, env, in, out);
 		in = open(".tmp", O_CREAT | O_RDWR | O_TRUNC, 00777);
 	}

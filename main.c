@@ -48,6 +48,7 @@ void	exit_process(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		g_status = 130;
 		return ;
 	}
 	if (sig == SIGQUIT)
@@ -103,7 +104,7 @@ int main(int ac, char **av, char **envp)
 			rl_clear_history();
 			ft_free_tab_2d(env);
 			ft_putstr_fd("\n\e[1;91m- EXIT OK -\e[0m\n", 1);
-			return (0);
+			exit(g_status);
 		}
 		if (line && *line)
 		{	
@@ -113,6 +114,5 @@ int main(int ac, char **av, char **envp)
 		/* if(line)
 			free(line); */
 	}
-	return 0;
-
+	exit (g_status);
 }

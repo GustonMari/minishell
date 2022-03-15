@@ -18,6 +18,8 @@ int	wait_pipe(int nb_cmd)
 		if (signal(SIGINT, &exit_pipe_process) == SIG_ERR)
 			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
 		wait(&status);
+		if (WIFEXITED(status))
+			g_status = WEXITSTATUS(status);
 		i++;
 	}
 	return (0);
