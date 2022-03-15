@@ -79,7 +79,8 @@ int main(int ac, char **av, char **envp)
 		g_status = 1;
 		return (0);
 	}
-	g_status = 0;
+	g_status = errno;
+	//g_status = 0;
 	env = ft_create_env(envp);
 	while (42)
 	{

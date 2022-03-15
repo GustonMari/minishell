@@ -1,5 +1,12 @@
 # include "../includes/function.h"
 
+void	exit_error(char *filename)
+{
+	ft_putstr_fd(BRED"exit\nminishell: exit: ", 2);
+	ft_putstr_fd(filename, 2);
+	ft_putstr_fd(": numeric argument required\n"CRESET, 2);
+}
+
 int	redirection_error(char *file_name)
 {
 

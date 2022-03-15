@@ -20,6 +20,7 @@
 # define FT_UNSET 4
 # define FT_EXPORT 5
 # define FT_ECHO 6
+# define FT_EXIT 7
 
 # include <unistd.h>
 # include <stdio.h>

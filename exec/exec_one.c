@@ -21,5 +21,7 @@ char	**execute_one_cmd(char **env, t_command *all)
 		ft_print_env(env);
 	if (builtin == FT_ECHO)
 		ft_echo(all->cmd_to_exec);
+	if (builtin == FT_EXIT)
+		ft_exit(all->cmd_to_exec);
 	return (env);
 }
