@@ -93,8 +93,8 @@ int	manage_chv_r(t_command *all_cmd)
 {
 	char		*file_name;
 	int			fd;
-	(void)fd;
 
+	file_name = NULL;
 	if (count_redir_r(all_cmd) == 0)
 		return (1);
 	file_name = find_last_redir_r(all_cmd);
@@ -102,7 +102,12 @@ int	manage_chv_r(t_command *all_cmd)
 		return (-1);
 	fd = manage_open_r(all_cmd, file_name);
 	if (fd == -1)
+	{
+		dup2(fd, 1);
+		close(fd);
+		free(file_name);
 		return (redirection_error(file_name));
+	}
 	dup2(fd, 1);
 	close(fd);
 	free(file_name);
