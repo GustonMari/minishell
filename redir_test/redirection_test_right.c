@@ -40,11 +40,17 @@ int	manage_open_r(t_command *all_cmd, char *last_redir)
 	while (tmp && tmp->type != PIPE)
 	{
 		if (tmp->type == CHV_R)
+		{
 			fd = open(tmp->next->cmd_to_exec[0], O_CREAT | O_WRONLY | O_TRUNC, 00644);
+			if (fd < 0)
+				return (-1);
+		}
 		else if (tmp->type == D_CHV_R)
+		{
 			fd = open(tmp->next->cmd_to_exec[0], O_CREAT | O_WRONLY | O_APPEND, 00644);
-		if (fd < 0)
-			return (-1);
+			if (fd < 0)
+				return (-1);
+		}
 		if (!ft_strcmp(tmp->next->cmd_to_exec[0], last_redir))
 			return (fd);
 		if (tmp->next->next)

@@ -47,7 +47,7 @@ void ft_pipe(int first, int last, int *sortie)
 	}
 	if (!last)
 	{
-		fprintf(stderr, "pouet\n");
+		//fprintf(stderr, "pouet\n");
 		if (pipe(pfd) == -1)
 			ft_putstr_fd("Erreur pipe\n", 2);
 		else
@@ -57,6 +57,23 @@ void ft_pipe(int first, int last, int *sortie)
 			*sortie = pfd[0];
 		}
 	}
+}
+
+/*Retourne 1 si c'est la derniere commande et qu'il n'y a pas de chevron droit
+*/
+
+int	is_last_cmd(t_command *all_cmd)
+{
+	t_command	*tmp;
+
+	tmp = all_cmd;
+	while (tmp)
+	{
+		if (tmp->type == PIPE || tmp->type == CHV_R || tmp->type == D_CHV_R)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
 }
 
 int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
@@ -77,13 +94,14 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 	{
 		save[0] = dup(0);
 		save[1] = dup(1);
-		ft_pipe(i == 0, 1, &out);
+		ft_pipe(i == 0, is_last_cmd(all_cmd), &out);
+		//ft_pipe(i == 0, 1, &out);
 		//ft_pipe(i == 0, !all_cmd->next, &out);
 		//redirection(all_cmd, &in, &out, env);
-		//manage_chv_r(all_cmd, &out);
 		manage_chv_l(all_cmd, &in, env);
+		manage_chv_r(all_cmd, &out);
 		ft_exec(env, all_cmd->cmd_to_exec, out);
-		fprintf(stderr, "all->cmd = %s\n", all_cmd->cmd_to_exec[0]);
+		//fprintf(stderr, "all->cmd = %s\n", all_cmd->cmd_to_exec[0]);
 		count_all_between_pipe(&all_cmd);
 		dup2(save[0], 0);
 		close(save[0]);
