@@ -123,13 +123,13 @@ char	*ft_pwd_return(void);
 */
 
 int		redirection_to_file(char *file_name, char *str);
-int		manage_chv_l(t_command *all_cmd, int *in, char **env);
-int		manage_chv_r(t_command *all_cmd, int *out);
+int		manage_chv_l(t_command *all_cmd);
+int		manage_chv_r(t_command *all_cmd);
 int		redirection(t_command *all_cmd, int *in, int *out, char **env);
 int		is_redirection_type(t_command *op);
 int	    count_cmd_between_pipe(t_command *all_cmd);
 int     count_redir(t_command *all_cmd);
-
+int		redirection_manager(t_command *all_cmd);
 /*
 ------------------ ENV_UTILS ----------------
 */
@@ -312,9 +312,16 @@ void	exit_error(char *filename);
 int	ft_atoi(const char *str);
 
 /* 
------------------- EXPORT ------------------
+------------------ EXIT ------------------
 */
 
 void	ft_exit(char **full_cmd);
+
+/* 
+------------------ SIGNAL ------------------
+*/
+
+void	signal_in_cmd(void);
+
 
 #endif

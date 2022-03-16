@@ -53,11 +53,12 @@ void	exit_process(int sig)
 	}
 	if (sig == SIGQUIT)
 	{
+		//write(1, "\n\e[1;91m- SIGQUIT -\e[0m\n", 20);
 		//Utiliser termcaps/termios pour ne pas faire apparaitre le Ctrl backslash
 		//rl_on_new_line();
 		//rl_replace_line("", 0);
 		//rl_redisplay();
-		//write(1, "\n\e[1;91m- SIGQUIT -\e[0m\n", 20);
+		write(1, "\b \b\b", 4);
 		return ;
 	}
 	exit(0);
@@ -87,9 +88,9 @@ int main(int ac, char **av, char **envp)
 	{
 		if (signal(SIGINT, &exit_process) == SIG_ERR)
 			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-		if (signal(SIGQUIT, &exit_process) == SIG_ERR)
+		if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-		else
+		else 
 			line = readline(BBLU "minishell> " CRESET);
 		//obligatoire sinon segfault pour ctrl D est-ce que lon peut considerer ceci comme un sighandler
 		if (!line)

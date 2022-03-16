@@ -50,13 +50,10 @@ char	*find_last_redir_l(t_command *all_cmd)
 	return (file_name);
 }
 
-int	manage_chv_l(t_command *all_cmd, int *in, char **env)
+int	manage_chv_l(t_command *all_cmd)
 {
 	char		*file_name;
 	int			fd;
-	(void)in;
-	(void)fd;
-	(void)env;
 
 	file_name = NULL;
 	g_status = 0;

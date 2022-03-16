@@ -94,13 +94,16 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 	{
 		save[0] = dup(0);
 		save[1] = dup(1);
-		if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
-			launch_heredoc(all_cmd, env);
+		//if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
+		//	launch_heredoc(all_cmd, env);
 		ft_pipe(i == 0, is_last_cmd(all_cmd), &out);
-		manage_chv_l(all_cmd, &in, env);
-		manage_chv_r(all_cmd, &out);
-		if (signal(SIGINT, &exit_pipe_process) == SIG_ERR)
-			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
+		if (redirection_manager(all_cmd) == FALSE)
+		{
+			return (FALSE);
+		}
+		//manage_chv_l(all_cmd);
+		//manage_chv_r(all_cmd);
+		signal_in_cmd();
 		ft_exec(env, all_cmd->cmd_to_exec, out);
 		count_all_between_pipe(&all_cmd);
 		dup2(save[0], 0);

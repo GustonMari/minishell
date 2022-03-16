@@ -43,9 +43,16 @@ int	start_heredoc_more(char **stop, int i)
 
 void	exit_heredoc(int sig)
 {
-	exit(0);
-	(void)sig;
+	//printf("salut\n");
 
+	(void)sig;
+		//printf("\n");
+		//rl_on_new_line();
+		//rl_replace_line("", 0);
+		//rl_redisplay();
+		g_status = 130;
+	// changer valeur de lexit
+	//exit(0);
 	/* if (sig == SIGINT)
 		return (0);
 	return (1); */
@@ -56,7 +63,8 @@ int	signal_heredoc(char **stop, char *line)
 	//int		status;
 	(void)stop;
 	// gerer ctrl backslash et status aussi !!!!!!
-	if (signal(SIGINT, &exit_heredoc) == 0)
+	printf("salut\n");
+	if (signal(SIGINT, &exit_heredoc) == SIG_ERR)
 	{
 		printf("SIGINT");
 		return (1);

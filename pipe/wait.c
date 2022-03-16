@@ -1,11 +1,6 @@
 #include "../includes/function.h"
 
-void	exit_pipe_process(int sig)
-{
-	(void)sig;
-	write(1, "\n", 1);
-	/* printf("exited NTM\n"); */
-}
+
 
 int	wait_pipe(void)
 {
@@ -13,8 +8,10 @@ int	wait_pipe(void)
 
 	while (waitpid(-1, &status, 0) != -1)
 	{
-		if (signal(SIGINT, &exit_pipe_process) == SIG_ERR)
-			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
+		//if (signal(SIGINT, &exit_pipe_process) == SIG_ERR)
+		//	return (fprintf(stderr, "Error: %s\n", strerror(errno)));
+		//if (signal(SIGQUIT, &exit_pipe_process) == SIG_ERR)
+		//	return (fprintf(stderr, "Error: %s\n", strerror(errno)));
 		if (WIFEXITED(status))
 			g_status = WEXITSTATUS(status);
 	}

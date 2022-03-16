@@ -89,12 +89,11 @@ char	*find_last_redir_r(t_command *all_cmd)
 
 //faire gestion derreur
 
-int	manage_chv_r(t_command *all_cmd, int *out)
+int	manage_chv_r(t_command *all_cmd)
 {
 	char		*file_name;
 	int			fd;
 	(void)fd;
-	(void)out;
 
 	if (count_redir_r(all_cmd) == 0)
 		return (1);

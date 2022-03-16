@@ -50,7 +50,7 @@ char	*find_last_redir_l(t_command *all_cmd)
 	return (file_name);
 }
 
-int	manage_chv_l(t_command *all_cmd, int *in, char **env)
+/* int	manage_chv_l(t_command *all_cmd, int *in, char **env)
 {
 	char		*file_name;
 
@@ -69,7 +69,7 @@ int	manage_chv_l(t_command *all_cmd, int *in, char **env)
 	
 	free(file_name);
 	return (0);
-}
+} */
 
 /* int	manage_chv_l(t_command *all_cmd, int *in, char **env)
 {

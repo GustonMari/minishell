@@ -83,7 +83,7 @@ char	*find_last_redir_r(t_command *all_cmd)
 
 //faire gestion derreur
 
-int	manage_chv_r(t_command *all_cmd, int *out)
+/* int	manage_chv_r(t_command *all_cmd, int *out)
 {
 	char		*file_name;
 
@@ -100,4 +100,4 @@ int	manage_chv_r(t_command *all_cmd, int *out)
 		return (redirection_error(file_name));
 	free(file_name);
 	return (0);
-}
+} */
