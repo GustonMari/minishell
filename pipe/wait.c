@@ -7,7 +7,21 @@ void	exit_pipe_process(int sig)
 	/* printf("exited NTM\n"); */
 }
 
-int	wait_pipe(int nb_cmd)
+int	wait_pipe(void)
+{
+	int		status;
+
+	while (waitpid(-1, &status, 0) != -1)
+	{
+		if (signal(SIGINT, &exit_pipe_process) == SIG_ERR)
+			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
+		if (WIFEXITED(status))
+			g_status = WEXITSTATUS(status);
+	}
+	return (0);
+}
+
+/* int	wait_pipe(int nb_cmd)
 {
 	int		status;
 	int		i;
@@ -23,4 +37,4 @@ int	wait_pipe(int nb_cmd)
 		i++;
 	}
 	return (0);
-}
+} */

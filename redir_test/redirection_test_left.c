@@ -65,11 +65,11 @@ int	manage_chv_l(t_command *all_cmd, int *in, char **env)
 	file_name = find_last_redir_l(all_cmd);
 	if (!file_name)
 		return (-1);
-	if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
-		launch_heredoc(all_cmd, env);
+	//if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
+	//	launch_heredoc(all_cmd, env);
 	fd = open(file_name, O_RDONLY);
-	//if (*in == -1)
-	//	return (redirection_error(file_name));
+	if (fd == -1)
+		return (redirection_error(file_name));
 	dup2(fd, 0);
 	close(fd);
 	free(file_name);

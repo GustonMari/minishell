@@ -94,14 +94,14 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 	{
 		save[0] = dup(0);
 		save[1] = dup(1);
+		if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
+			launch_heredoc(all_cmd, env);
 		ft_pipe(i == 0, is_last_cmd(all_cmd), &out);
-		//ft_pipe(i == 0, 1, &out);
-		//ft_pipe(i == 0, !all_cmd->next, &out);
-		//redirection(all_cmd, &in, &out, env);
 		manage_chv_l(all_cmd, &in, env);
 		manage_chv_r(all_cmd, &out);
+		if (signal(SIGINT, &exit_pipe_process) == SIG_ERR)
+			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
 		ft_exec(env, all_cmd->cmd_to_exec, out);
-		//fprintf(stderr, "all->cmd = %s\n", all_cmd->cmd_to_exec[0]);
 		count_all_between_pipe(&all_cmd);
 		dup2(save[0], 0);
 		close(save[0]);
@@ -109,9 +109,7 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 		close(save[1]);
 		i++;
 	}
-	//wait_pipe(2);
-	while (waitpid(-1, &status, 0) != -1)
-		;
+	wait_pipe();
 	return (0);
 }
 

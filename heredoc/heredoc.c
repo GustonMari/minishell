@@ -102,7 +102,43 @@ int	launch_heredoc(t_command *all_cmd, char **env)
 {
 	char	**stop;
 	int		is_expand;
+	pid_t	pid;
+	int		status;
 
+	status = 0;
+	pid = fork();
+	if (pid == 0)
+	{
+		stop = NULL;
+		stop = create_tab_stop(all_cmd);
+		if (!stop)
+			return (-1);
+		if(is_expand_heredoc(stop) == TRUE)
+			is_expand = TRUE;
+		else
+			is_expand = FALSE;
+		stop = trim_quote_stop(stop);
+		if (!stop)
+			return (-1);
+		fill_heredoc_file(stop, env, is_expand);
+		exit(0);
+	}
+	else
+	{
+		//fprintf(stderr, "on rentre\n");
+		waitpid(pid, &status, 0);
+		//fprintf(stderr, "ON sort\n");
+	}
+		
+	return (0);
+}
+
+/* int	launch_heredoc(t_command *all_cmd, char **env)
+{
+	char	**stop;
+	int		is_expand;
+	pid_t	pid;
+	
 	stop = NULL;
 	stop = create_tab_stop(all_cmd);
 	if (!stop)
@@ -116,7 +152,8 @@ int	launch_heredoc(t_command *all_cmd, char **env)
 		return (-1);
 	fill_heredoc_file(stop, env, is_expand);
 	return (0);
-}
+} */
+
 
 /*Fonction qui nous permet de savoir si la derniere redirection
 est un double chevron a gauche.

@@ -102,7 +102,8 @@ int	manage_chv_r(t_command *all_cmd, int *out)
 	if (!file_name)
 		return (-1);
 	fd = manage_open_r(all_cmd, file_name);
-	//Gerer ereurs de redir (voir sur ancien file)
+	if (fd == -1)
+		return (redirection_error(file_name));
 	dup2(fd, 1);
 	close(fd);
 	free(file_name);

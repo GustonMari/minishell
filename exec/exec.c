@@ -101,6 +101,7 @@ static void signal_handler2(int sig)
 	if (sig == SIGINT)
 	{
 		// rl_replace_line("", 0);
+		ft_putstr_fd("\n", 1);
 		g_status = 130;
 	}
 	if (sig == SIGQUIT)

@@ -269,7 +269,8 @@ void ft_echo(char **full_cmd);
 ------------------ WAIT ------------------
 */
 
-int	wait_pipe(int nb_cmd);
+int	wait_pipe(void);
+void	exit_pipe_process(int sig);
 
 /* 
 ------------------ HEREDOC ------------------
