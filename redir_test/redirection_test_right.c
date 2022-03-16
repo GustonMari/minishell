@@ -96,9 +96,9 @@ int	manage_chv_r(t_command *all_cmd, int *out)
 	if (!file_name)
 		return (-1);
 	fd = manage_open_r(all_cmd, file_name);
+	//Gerer ereurs de redir (voir sur ancien file)
 	dup2(fd, 1);
 	close(fd);
-	printf("pouet\n");
 	free(file_name);
 	return (0);
 }
