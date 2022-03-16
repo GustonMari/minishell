@@ -160,8 +160,8 @@ int	find_next_quote(char *str);
 
 char	*find_path_cmd(char *cmd_to_join, char *tmp);
 char	*chose_ath_cmd(char *cmd, char *tmp);
-int	ft_exec(char **env, char **full_cmd);
-int	ft_exec_cmd(char **env, char **full_cmd);
+int	ft_exec(char **env, char **full_cmd, int out);
+int	ft_exec_cmd(char **env, char **full_cmd, int out);
 char	**ft_dispatch(t_command *all, char **env);
 
 /*

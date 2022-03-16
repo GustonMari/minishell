@@ -85,30 +85,85 @@ char	*chose_ath_cmd(char *cmd, char *tmp)
 	return (path);
 }
 
-int	ft_exec_cmd(char **env, char **full_cmd)
+/* static void signal_handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		// rl_replace_line("", 0);
+		write(1, "\nminishell $> ", 14);
+		g_status = 130;
+	}
+	return;
+}
+
+static void signal_handler2(int sig)
+{
+	if (sig == SIGINT)
+	{
+		// rl_replace_line("", 0);
+		g_status = 130;
+	}
+	if (sig == SIGQUIT)
+	{
+		ft_putstr_fd("Quit\n", 1);
+		g_status = 131;
+	}
+	return;
+}
+
+void signal_manager(void)
+{
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGTTIN, SIG_IGN);
+	signal(SIGTTOU, SIG_IGN);
+}
+
+void signal_manager2(void)
+{
+	signal(SIGINT, signal_handler2);
+	signal(SIGQUIT, signal_handler2);
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGTTIN, SIG_IGN);
+	signal(SIGTTOU, SIG_IGN);
+} */
+
+int	ft_exec_cmd(char **env, char **full_cmd, int out)
 {
 	char	*path;
 	char	*tmp;
+	int		pid;
+	(void)out;
 
-	g_status = 0;
-	tmp = find_val_in_tab(env, "PATH");
-	if (!tmp)
-		return (-1);
-	path = chose_ath_cmd(full_cmd[0], tmp);
-	if (!path)
+	pid = fork();
+	//signal_manager2();
+	if (pid == 0)
 	{
-		ft_print_error(0, full_cmd[0], ": command not found", NULL);
-		g_status = 127;
-		exit(127);
+		if (out != -1)
+			close(out);
+		g_status = 0;
+		tmp = find_val_in_tab(env, "PATH");
+		if (!tmp)
+			return (-1);
+		path = chose_ath_cmd(full_cmd[0], tmp);
+		if (!path)
+		{
+			ft_print_error(0, full_cmd[0], ": command not found", NULL);
+			g_status = 127;
+			exit(127);
+		}
+		if (execve(path, full_cmd, env) < 0)
+		{
+			perror("execve");
+			g_status = errno;
+			exit(1);
+		}
+		free(path);
+		return (0);
 	}
-	if (execve(path, full_cmd, env) < 0)
-	{
-		perror("execve");
-		g_status = errno;
-		exit(1);
-	}
-	free(path);
 	return (0);
+	
 }
 
 char	**ft_exec_builtin(char **env, char **full_cmd, int builtin)
@@ -132,7 +187,7 @@ char	**ft_exec_builtin(char **env, char **full_cmd, int builtin)
 	return (env);
 }
 
-int	ft_exec(char **env, char **full_cmd)
+int	ft_exec(char **env, char **full_cmd, int out)
 {
 	int	builtin;
 
@@ -143,7 +198,7 @@ int	ft_exec(char **env, char **full_cmd)
 		exit(0);
 	}
 	else
-		ft_exec_cmd(env, full_cmd);
+		ft_exec_cmd(env, full_cmd, out);
 	return (0);
 }
 

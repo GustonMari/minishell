@@ -36,76 +36,62 @@ int	count_cmd_between_pipe(t_command *all_cmd)
 	return (count);
 }
 
-pid_t	fork_pipe(int in, int out)
+void ft_pipe(int first, int last, int *sortie)
 {
-	pid_t	pid;
+	int pfd[2];
 
-	pid = fork();
-	if (pid < 0)
-		return (-1);
-	if (pid == 0)
+	if (!first)
 	{
-		if (in != 0)
+		dup2(*sortie, 0);
+		close(*sortie);
+	}
+	if (!last)
+	{
+		if (pipe(pfd) == -1)
+			ft_putstr_fd("Erreur pipe\n", 2);
+		else
 		{
-			dup2(in, STDIN_FILENO);
-			close(in);
-		}
-		if (out != 1)
-		{
-			dup2(out, STDOUT_FILENO);
-			close(out);
+			dup2(pfd[1], 1);
+			close(pfd[1]);
+			*sortie = pfd[0];
 		}
 	}
-	return (pid);
-}
-
-
-
-int	execute_last(t_command *all_cmd, char **env, int in, int out)
-{
-	int	pid;
-
-	pid = fork_pipe(in, out);
-	if (pid == 0)
-		ft_exec(env, all_cmd->cmd_to_exec);
-	return (0);
 }
 
 int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 {
-	int		fd[2];
+	int			status;
+	(void)status;
 	int		out;
 	int		i;
-	//int		status;
-	pid_t	pid;
+	int		save[2];
+	(void)in;
+	(void)nb_cmd;
 
 	i = 0;
 	if (!all_cmd)
 		return (0);
-	out = STDOUT_FILENO;
-	while (all_cmd && (i < nb_cmd -1))
+	out = -1;
+	while (all_cmd)
 	{
-		if (pipe(fd) < 0)
-			return (-1);
-		pid = fork_pipe(in, fd[1]);
-		if (pid == 0)
-			ft_exec(env, all_cmd->cmd_to_exec);
-		close(fd[1]);
-		in = fd[0];
-		all_cmd = all_cmd->next->next;
+		save[0] = dup(0);
+		save[1] = dup(1);
+
+		ft_pipe(i == 0, !all_cmd->next, &out);
+		//redirection(all_cmd, &in, &out, env);
+		manage_chv_r(all_cmd, &out);
+		printf("%d out =%d\n", i, out);
+		ft_exec(env, all_cmd->cmd_to_exec, out);
+		count_all_between_pipe(&all_cmd);
+		dup2(save[0], 0);
+		close(save[0]);
+		dup2(save[1], 1);
+		close(save[1]);
 		i++;
 	}
-	if (redirection(all_cmd, &in, &out, env) != -1)
-	{
-		
-		execute_last(all_cmd, env, in, out);
-		in = open(".tmp", O_CREAT | O_RDWR | O_TRUNC, 00777);
-	}
-	//wait_pipe(nb_cmd);
-	count_all_between_pipe(&all_cmd);
-	if (all_cmd)
-		execute_pipe(all_cmd, env, count_cmd_between_pipe(all_cmd), in);
-	wait_pipe(nb_cmd);
+	//wait_pipe(2);
+	while (waitpid(-1, &status, 0) != -1)
+		;
 	return (0);
 }
 
