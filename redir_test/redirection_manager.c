@@ -1,4 +1,5 @@
 #include "../includes/function.h"
+#include <time.h>
 
 int	erase_file(t_command *all_cmd, char *file_error)
 {
@@ -14,7 +15,8 @@ int	erase_file(t_command *all_cmd, char *file_error)
 	{
 		if (tmp->type == WORD && (previous->type == CHV_R || previous->type == D_CHV_R))
 		{
-			fd = open(tmp->cmd_to_exec[0], O_TRUNC);
+			unlink(tmp->cmd_to_exec[0]);
+			fd = open(tmp->cmd_to_exec[0], O_CREAT | O_WRONLY | O_TRUNC, 00644);
 			close(fd);
 		}
 		else 
@@ -24,13 +26,12 @@ int	erase_file(t_command *all_cmd, char *file_error)
 	while (tmp && tmp->type != PIPE)
 	{
 		if (tmp->type == WORD && (previous->type == CHV_R || previous->type == D_CHV_R))
-		{
 			unlink(tmp->cmd_to_exec[0]);
-		}
 		else 
 			previous = tmp;
 		tmp = tmp->next;
 	}
+	return (0);
 }
 
 /* Count le nombre de redirection qu'il y a entre deux pipe*/
@@ -77,7 +78,7 @@ int	redirection_clean(t_command *all_cmd)
 				if (!file_error)
 					return (-1);
 				//fprintf(stderr, "file_error = %s\n", file_error);
-				//erase_file(all_cmd, file_error);
+				erase_file(all_cmd, file_error);
 				return (1);
 			}
 		}
