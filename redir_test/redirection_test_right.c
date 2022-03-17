@@ -105,7 +105,6 @@ int	manage_chv_r(t_command *all_cmd)
 	{
 		dup2(fd, 1);
 		close(fd);
-		free(file_name);
 		return (redirection_error(file_name));
 	}
 	dup2(fd, 1);

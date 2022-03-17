@@ -99,11 +99,12 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 		ft_pipe(i == 0, is_last_cmd(all_cmd), &out);
 		if (redirection_manager(all_cmd) == FALSE)
 		{
-			
 		}
 		//signal_in_cmd();
 		else
 			ft_exec(env, all_cmd->cmd_to_exec, out);
+		//fprintf(stderr, "salut\n");
+		redirection_clean(all_cmd);
 		count_all_between_pipe(&all_cmd);
 		dup2(save[0], 0);
 		close(save[0]);

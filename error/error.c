@@ -15,8 +15,9 @@ int	redirection_error(char *file_name)
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(strerror(errno), 2);
 		ft_putstr_fd("\n"CRESET, 2);
+		free(file_name);
 		g_status = errno;
-		return (-1);
+		return (1);
 }
 
 void	ft_print_error(int minishell, char *cmd_name, char *error, char *token)

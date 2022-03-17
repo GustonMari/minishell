@@ -130,6 +130,8 @@ int		is_redirection_type(t_command *op);
 int	    count_cmd_between_pipe(t_command *all_cmd);
 int     count_redir(t_command *all_cmd);
 int		redirection_manager(t_command *all_cmd);
+int		redirection_clean(t_command *all_cmd);
+
 /*
 ------------------ ENV_UTILS ----------------
 */
