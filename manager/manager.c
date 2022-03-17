@@ -2,16 +2,23 @@
 
 char	**manage_line(char **env, char *line)
 {
-	t_token		*temp;
+	t_token		*tmp;
 	t_token		*expanded;
 	t_command	*cmd_all;
 	(void)cmd_all;
 
-	temp = lexer(line);
-	if (!temp)
+	tmp = lexer(line);
+	if (!tmp)
 		return (env);
-	expanded = expand_all(env, temp);
+	//tmp = remix_lexer(tmp);
+	expanded = expand_all(env, tmp);
+	/* printf("------------------\n");
+	print_token(&expanded);
+	printf("------------------\n"); */
 	cmd_all = token_to_cmd(expanded);
+	/* printf("AFTER------------------\n");
+	print_cmd(&cmd_all);
+	printf("------------------\n"); */
 	env = ft_dispatch(cmd_all, env);
 	ft_lstclear(&expanded, free);
 	ft_cmd_clear(&cmd_all);

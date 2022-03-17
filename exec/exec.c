@@ -50,6 +50,7 @@ char	*find_path_cmd(char *cmd_to_join, char *tmp)
 	if (!cmd)
 		return (NULL);
 	all_cmd_path = ft_split(tmp, ':');
+	/* printf("cmdtojoin = %s\n", cmd_to_join); */
 	if (!all_cmd_path)
 		return (NULL);
 	i = -1;
@@ -85,51 +86,6 @@ char	*chose_ath_cmd(char *cmd, char *tmp)
 	return (path);
 }
 
-/* static void signal_handler(int sig)
-{
-	if (sig == SIGINT)
-	{
-		// rl_replace_line("", 0);
-		write(1, "\nminishell $> ", 14);
-		g_status = 130;
-	}
-	return;
-}
-
-static void signal_handler2(int sig)
-{
-	if (sig == SIGINT)
-	{
-		// rl_replace_line("", 0);
-		ft_putstr_fd("\n", 1);
-		g_status = 130;
-	}
-	if (sig == SIGQUIT)
-	{
-		ft_putstr_fd("Quit\n", 1);
-		g_status = 131;
-	}
-	return;
-}
-
-void signal_manager(void)
-{
-	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTSTP, SIG_IGN);
-	signal(SIGTTIN, SIG_IGN);
-	signal(SIGTTOU, SIG_IGN);
-}
-
-void signal_manager2(void)
-{
-	signal(SIGINT, signal_handler2);
-	signal(SIGQUIT, signal_handler2);
-	signal(SIGTSTP, SIG_IGN);
-	signal(SIGTTIN, SIG_IGN);
-	signal(SIGTTOU, SIG_IGN);
-} */
-
 int	ft_exec_cmd(char **env, char **full_cmd, int out)
 {
 	char	*path;
@@ -154,6 +110,9 @@ int	ft_exec_cmd(char **env, char **full_cmd, int out)
 			g_status = 127;
 			exit(127);
 		}
+		/* printf("------------------\n");
+		print_tab_2d(full_cmd);
+		printf("------------------\n"); */
 		if (execve(path, full_cmd, env) < 0)
 		{
 			perror("execve");
@@ -196,7 +155,7 @@ int	ft_exec(char **env, char **full_cmd, int out)
 	if (builtin)
 	{
 		env = ft_exec_builtin(env, full_cmd, builtin);
-		exit(0);
+		//exit(0);
 	}
 	else
 		ft_exec_cmd(env, full_cmd, out);

@@ -8,13 +8,26 @@ int	cmd_len(t_token *tokens)
 	int	count;
 
 	count = 0;
-	while (tokens && !is_operator(tokens->content))
+	while (tokens && !token_is_operator(tokens))
 	{
 		tokens = tokens->next;
 		count++;
 	}
 	return (count);
 }
+
+/* int	cmd_len(t_token *tokens)
+{
+	int	count;
+
+	count = 0;
+	while (tokens && !is_operator(tokens->content))
+	{
+		tokens = tokens->next;
+		count++;
+	}
+	return (count);
+} */
 
 /* Cree un tab a deux dimmensions avec un NULL
  a la fin pour une commande et ses arguments*/
@@ -28,7 +41,7 @@ char	**token_to_tab(t_token *tokens)
 	strs = ft_calloc(sizeof(char *), (cmd_len(tokens) + 1));
 	if (!strs)
 		return (NULL);
-	while (tokens && !is_operator(tokens->content))
+	while (tokens && !token_is_operator(tokens))
 	{
 		strs[i] = ft_strdup(tokens->content);
 		if (!strs[i])

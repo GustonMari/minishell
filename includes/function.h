@@ -223,6 +223,8 @@ char	**token_to_tab(t_token *tokens);
 char	**token_op_to_tab(t_token *tokens);
 t_command	*create_new_cmd_node(char **strs, t_token *all);
 void	ft_add_back_cmd(t_command **alst, t_command *new);
+int		token_is_operator(t_token *tmp_token);
+
 
 
 /* 
