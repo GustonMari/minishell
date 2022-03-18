@@ -7,7 +7,7 @@ temporaire tout en respecant les regles de priorite du heredoc*/
 
 void	fill_heredoc_file(char **stop, char **env, int is_expand)
 {
-	char	*line;
+	char	*line = NULL;
 	int		fd;
 	int		i;
 	int 	begin;
