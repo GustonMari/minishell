@@ -91,10 +91,16 @@ int	redirection_clean(t_command *all_cmd)
 
 int	redirection_manager(t_command *all_cmd)
 {
+	int value;
+	int	ret;
 
-	if (manage_chv_l(all_cmd) == -1)
-		return (FALSE);
-	if (manage_chv_r(all_cmd) == -1)
-		return (FALSE);
-	return (TRUE);
+	ret = 0;
+	value = TRUE;
+	ret = manage_chv_l(all_cmd);
+	if (ret < 0)
+		value = ret;
+	ret = manage_chv_r(all_cmd);
+	if (ret < 0)
+		value = ret;
+	return (value);
 }

@@ -154,7 +154,7 @@ int	count_word_btw_two_op(t_token *all);
 void	mv_word_left(t_token *all);
 void	mv_chv_l(t_token *all);
 int	count_word_btw_two_op(t_token *all);
-void	remix_manager(t_token *all);
+void	remix_manager(t_token **all);
 
 /*
 ------------------QUOTE ----------------

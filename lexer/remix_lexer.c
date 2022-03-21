@@ -53,10 +53,10 @@ void	ft_sa(t_token **head)
 void	remix_lexer(t_token **all)
 {
 
-	//t_token	*tmp;
+	t_token	*tmp;
 	t_token	*before_chv_l;
 
-	//tmp = *all;
+	tmp = *all;
 	//function si < en premier position de cmd_line
 	if (tmp->type == CHV_L && (count_word_btw_two_op(tmp) > 1))
 	{
@@ -117,22 +117,22 @@ int	ft_need_remix(t_token **all)
 	manage le remix 
 */
 
-void	remix_manager(t_token *all)
+void	remix_manager(t_token **all)
 {
 	//t_token *tmp;
 
 	//tmp = all;
-	if (ft_need_remix(&all) == 0)
+	if (ft_need_remix(all) == 0)
 		return ;
 	else
 	{
-		while (ft_need_remix(&all) == 1)
-			remix_lexer(&all);
+		while (ft_need_remix(all) == 1)
+			remix_lexer(all);
 	}
 }
 
 
-int	g_status;
+/* int	g_status;
 
 int main(int ac, char **av, char **envp)
 {
@@ -154,9 +154,9 @@ int main(int ac, char **av, char **envp)
 	printf("------------------\n");
 	
 	//remix_lexer(&temp);
-	 //remix_lexer(&temp);
 	//remix_lexer(&temp);
-	remix_manager(temp);
+	//remix_lexer(&temp);
+	//remix_manager(&temp);
 
 	printf("------- AFTER -----------\n");
 	print_token(&temp);
@@ -165,4 +165,4 @@ int main(int ac, char **av, char **envp)
 	//ft_cmd_clear(&cmd_all);
 	ft_free_tab_2d(env);
     return (0);
-}
+} */

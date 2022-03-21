@@ -70,7 +70,8 @@ int	manage_chv_l(t_command *all_cmd)
 		fd = open(".tmp", O_RDONLY, 00777);
 		dup2(fd, 1);
 		close(fd);
-		return (redirection_error(file_name));
+		redirection_error(file_name);
+		return (-2);
 	}
 	dup2(fd, 0);
 	close(fd);

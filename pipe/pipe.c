@@ -83,9 +83,11 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 	int		out;
 	int		i;
 	int		save[2];
+	int		ret;
 	(void)in;
 	(void)nb_cmd;
 
+	ret = -1;
 	i = 0;
 	if (!all_cmd)
 		return (0);
@@ -97,9 +99,26 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 		//if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
 		//	launch_heredoc(all_cmd, env);
 		ft_pipe(i == 0, is_last_cmd(all_cmd), &out);
-		if (redirection_manager(all_cmd) == FALSE)
+		ret = redirection_manager(all_cmd);
+		if (ret == -1)
 		{
+			dup2(save[0], 0);
+			close(save[0]);
+			dup2(save[1], 1);
+			close(save[1]);
+			//Il faut exit, le malloc s'est mal passe
+			exit(1);
 		}
+		else if (ret == -2)
+		{
+			//regarder g_status
+			dup2(save[0], 0);
+			close(save[0]);
+			dup2(save[1], 1);
+			close(save[1]);
+			g_status = 1;
+		}
+			
 		//signal_in_cmd();
 		else
 			ft_exec(env, all_cmd->cmd_to_exec, out);
