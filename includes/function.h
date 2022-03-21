@@ -25,6 +25,8 @@ t_token	*ft_lstnew(char *content, t_tokentype type);
 void	ft_lstadd_back(t_token **alst, t_token *new);
 void    print_token(t_token **begin_list);
 void    print_cmd(t_command **begin_list);
+int	ft_lstsize(t_token *lst);
+
 
 /*
 --------------- UTILS ----------------

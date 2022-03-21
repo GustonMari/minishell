@@ -20,3 +20,15 @@ int	ft_isalnum(int c)
 		return (1);
 }
 
+int	ft_lstsize(t_token *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}

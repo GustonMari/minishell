@@ -1,6 +1,29 @@
 #include "../includes/function.h"
 
 /*
+	check la taille si lon commence par un < jusqua a la fin de la liste ou au prochain op
+*/
+
+int	remix_size_three(t_token *lst)
+{
+	// int	i;
+
+	// i = 1;
+	if (lst->next)
+		lst = lst->next;
+	if (lst->type == CHV_L && count_word_btw_two_op(lst) ==1)
+		return (1);
+	else
+		return (0);
+	/* while (lst && lst->type != CHV_L)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i); */
+}
+
+/*
 	fonction de push_swap intervertit 1 et 2
 */
 void	ft_sa(t_token **head)
@@ -30,18 +53,20 @@ void	ft_sa(t_token **head)
 void	remix_lexer(t_token **all)
 {
 
-	t_token	*tmp;
+	//t_token	*tmp;
 	t_token	*before_chv_l;
 
-	tmp = *all;
+	//tmp = *all;
 	//function si < en premier position de cmd_line
 	if (tmp->type == CHV_L && (count_word_btw_two_op(tmp) > 1))
 	{
 		//ft_sa(&tmp);
 		mv_word_left(tmp);
 		ft_sa(&tmp);
-		mv_chv_l(tmp);
+		if (!remix_size_three(tmp))
+			mv_chv_l(tmp);
 		*all = tmp;
+		return ;
 	}
 	// printf("------- AFTER rmeix -----------\n");
 	// print_token(all);
@@ -88,22 +113,26 @@ int	ft_need_remix(t_token **all)
 	return (0);
 }
 
+/*
+	manage le remix 
+*/
+
 void	remix_manager(t_token *all)
 {
-	t_token *tmp;
+	//t_token *tmp;
 
-	tmp = all;
-	if (ft_need_remix(&tmp) == 0)
+	//tmp = all;
+	if (ft_need_remix(&all) == 0)
 		return ;
 	else
 	{
-		while (ft_need_remix(&tmp) == 1)
-			remix_lexer(&tmp);
+		while (ft_need_remix(&all) == 1)
+			remix_lexer(&all);
 	}
 }
 
 
-/* int	g_status;
+int	g_status;
 
 int main(int ac, char **av, char **envp)
 {
@@ -117,15 +146,16 @@ int main(int ac, char **av, char **envp)
 	char *line = NULL;
 
 	env = ft_create_env(envp);
-	line = ft_strdup("wc < ok -l -c < ok -e");
+	line = ft_strdup("< ok wc -l < yes -c");
 	temp = lexer(line);
 	//mv_word_left(temp);
 	printf("------- BEFORE -----------\n");
 	print_token(&temp);
 	printf("------------------\n");
 	
-	// remix_lexer(&temp);
-	// remix_lexer(&temp);
+	//remix_lexer(&temp);
+	 //remix_lexer(&temp);
+	//remix_lexer(&temp);
 	remix_manager(temp);
 
 	printf("------- AFTER -----------\n");
@@ -135,4 +165,4 @@ int main(int ac, char **av, char **envp)
 	//ft_cmd_clear(&cmd_all);
 	ft_free_tab_2d(env);
     return (0);
-} */
+}

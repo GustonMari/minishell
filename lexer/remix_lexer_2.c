@@ -91,14 +91,17 @@ void	mv_chv_l(t_token *all)
 	tmp = tmp->next;
 	while (tmp /* && !token_is_operator(tmp) */)
 	{
-		if ((tmp->next->next == NULL) || (token_is_operator(tmp->next->next)))
+		if (tmp->next)
 		{
-			if (tmp->next)
-				word->next = tmp->next;
-			else
-				word->next = NULL;
-			tmp->next = word;
-			break ;
+			if ((tmp->next->next == NULL) || (token_is_operator(tmp->next->next)))
+			{
+				if (tmp->next)
+					word->next = tmp->next;
+				else
+					word->next = NULL;
+				tmp->next = word;
+				break ;
+			}
 		}
 		tmp = tmp->next;
 	}
