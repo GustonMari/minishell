@@ -43,9 +43,9 @@ void	remix_lexer(t_token **all)
 		mv_chv_l(tmp);
 		*all = tmp;
 	}
-	printf("------- AFTER rmeix -----------\n");
-	print_token(all);
-	printf("------------------\n");
+	// printf("------- AFTER rmeix -----------\n");
+	// print_token(all);
+	// printf("------------------\n");
 	before_chv_l = *all;
 	while (tmp)
 	{
@@ -71,7 +71,39 @@ void	remix_lexer(t_token **all)
 	// printf("------------------\n");
 }
 
-int	g_status;
+int	ft_need_remix(t_token **all)
+{
+	t_token *tmp;
+
+	tmp = *all;
+	while(tmp)
+	{
+		if (tmp->type == CHV_L)
+		{
+				if (count_word_btw_two_op(tmp) > 1)
+					return (1);
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+void	remix_manager(t_token *all)
+{
+	t_token *tmp;
+
+	tmp = all;
+	if (ft_need_remix(&tmp) == 0)
+		return ;
+	else
+	{
+		while (ft_need_remix(&tmp) == 1)
+			remix_lexer(&tmp);
+	}
+}
+
+
+/* int	g_status;
 
 int main(int ac, char **av, char **envp)
 {
@@ -92,8 +124,10 @@ int main(int ac, char **av, char **envp)
 	print_token(&temp);
 	printf("------------------\n");
 	
-	remix_lexer(&temp);
-	
+	// remix_lexer(&temp);
+	// remix_lexer(&temp);
+	remix_manager(temp);
+
 	printf("------- AFTER -----------\n");
 	print_token(&temp);
 	printf("------------------\n");
@@ -101,4 +135,4 @@ int main(int ac, char **av, char **envp)
 	//ft_cmd_clear(&cmd_all);
 	ft_free_tab_2d(env);
     return (0);
-}
+} */

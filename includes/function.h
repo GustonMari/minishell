@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/18 16:44:19 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/21 12:02:10 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,8 @@ t_token	*lexer(char *arg);
 int	count_word_btw_two_op(t_token *all);
 void	mv_word_left(t_token *all);
 void	mv_chv_l(t_token *all);
+int	count_word_btw_two_op(t_token *all);
+void	remix_manager(t_token *all);
 
 /*
 ------------------QUOTE ----------------

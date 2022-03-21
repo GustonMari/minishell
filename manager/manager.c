@@ -11,6 +11,7 @@ char	**manage_line(char **env, char *line)
 	if (!tmp)
 		return (env);
 	//tmp = remix_lexer(tmp);
+	remix_manager(tmp);
 	expanded = expand_all(env, tmp);
 	/* printf("------------------\n");
 	print_token(&expanded);

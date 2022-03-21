@@ -27,8 +27,6 @@ int	count_word_btw_two_op(t_token *all)
 /*
 	permet de bouger le mot apres le CHV_L
 	on est dans le cas wc < ok -l
-
-	ATTENTION NE MARCHE PAS ENCORE POUR LE CAS < ok wc
 */
 
 void	mv_word_left(t_token *all)
