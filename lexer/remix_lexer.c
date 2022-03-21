@@ -11,7 +11,7 @@ int	remix_size_three(t_token *lst)
 	// i = 1;
 	if (lst->next)
 		lst = lst->next;
-	if (lst->type == CHV_L && count_word_btw_two_op(lst) ==1)
+	if ((lst->type == CHV_L || lst->type == D_CHV_L) && count_word_btw_two_op(lst) ==1)
 		return (1);
 	else
 		return (0);
@@ -58,7 +58,7 @@ void	remix_lexer(t_token **all)
 
 	tmp = *all;
 	//function si < en premier position de cmd_line
-	if (tmp->type == CHV_L && (count_word_btw_two_op(tmp) > 1))
+	if ((tmp->type == CHV_L || tmp->type == D_CHV_L) && (count_word_btw_two_op(tmp) > 1))
 	{
 		//ft_sa(&tmp);
 		mv_word_left(tmp);
@@ -74,7 +74,7 @@ void	remix_lexer(t_token **all)
 	before_chv_l = *all;
 	while (tmp)
 	{
-		if (tmp->type == CHV_L)
+		if (tmp->type == CHV_L || tmp->type == D_CHV_L)
 		{
 				if (count_word_btw_two_op(tmp) > 1)
 				{
@@ -83,7 +83,8 @@ void	remix_lexer(t_token **all)
 					mv_chv_l(before_chv_l);
 					//tmp = mv_redir_left(before_chv_l);
 					// on se retrouve apres substitution au noed avant lancienne position de chvr_l
-					while (tmp && tmp->type != CHV_L)
+					//while (tmp && tmp->type != CHV_L)
+					while (tmp && !token_is_operator(tmp))
 						tmp = tmp->next;
 				}
 		}
@@ -103,7 +104,7 @@ int	ft_need_remix(t_token **all)
 	tmp = *all;
 	while(tmp)
 	{
-		if (tmp->type == CHV_L)
+		if (tmp->type == CHV_L || tmp->type == D_CHV_L)
 		{
 				if (count_word_btw_two_op(tmp) > 1)
 					return (1);
@@ -132,7 +133,7 @@ void	remix_manager(t_token **all)
 }
 
 
-/* int	g_status;
+int	g_status;
 
 int main(int ac, char **av, char **envp)
 {
@@ -146,7 +147,7 @@ int main(int ac, char **av, char **envp)
 	char *line = NULL;
 
 	env = ft_create_env(envp);
-	line = ft_strdup("< ok wc -l < yes -c");
+	line = ft_strdup("<< ok wc < yes -c | ls -la");
 	temp = lexer(line);
 	//mv_word_left(temp);
 	printf("------- BEFORE -----------\n");
@@ -156,7 +157,7 @@ int main(int ac, char **av, char **envp)
 	//remix_lexer(&temp);
 	//remix_lexer(&temp);
 	//remix_lexer(&temp);
-	//remix_manager(&temp);
+	remix_manager(&temp);
 
 	printf("------- AFTER -----------\n");
 	print_token(&temp);
@@ -165,4 +166,4 @@ int main(int ac, char **av, char **envp)
 	//ft_cmd_clear(&cmd_all);
 	ft_free_tab_2d(env);
     return (0);
-} */
+}
