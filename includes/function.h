@@ -155,6 +155,8 @@ void	mv_word_left(t_token *all);
 void	mv_chv_l(t_token *all);
 int	count_word_btw_two_op(t_token *all);
 void	remix_manager(t_token **all);
+int	token_is_redir(t_token *tmp_token);
+
 
 /*
 ------------------QUOTE ----------------
@@ -202,7 +204,6 @@ char	*expand_dollar(char **env, char *str);
 char	*replace_dollar_3(char *str, char *new_var, char *ret);
 char	*replace_interrogation(char *str, int pos);
 char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos);
-
 
 
 /*

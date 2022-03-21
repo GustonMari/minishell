@@ -1,6 +1,19 @@
 #include "../includes/function.h"
 
 
+int	token_is_redir(t_token *tmp_token)
+{
+	if (tmp_token->type == CHV_L)
+		return (1);
+	if (tmp_token->type == D_CHV_L)
+		return (1);
+	if (tmp_token->type == CHV_R)
+		return (1);
+	if (tmp_token->type == D_CHV_R)
+		return (1);
+	return (0);
+}
+
 int	token_is_operator(t_token *tmp_token)
 {
 	if (tmp_token->type == PIPE)

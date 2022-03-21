@@ -11,8 +11,10 @@ int	remix_size_three(t_token *lst)
 	// i = 1;
 	if (lst->next)
 		lst = lst->next;
-	if ((lst->type == CHV_L || lst->type == D_CHV_L) && count_word_btw_two_op(lst) ==1)
+	if (token_is_redir(lst) && count_word_btw_two_op(lst) == 1)
 		return (1);
+	/* if ((lst->type == CHV_L || lst->type == D_CHV_L) && count_word_btw_two_op(lst) ==1)
+		return (1); */
 	else
 		return (0);
 	/* while (lst && lst->type != CHV_L)
@@ -58,7 +60,7 @@ void	remix_lexer(t_token **all)
 
 	tmp = *all;
 	//function si < en premier position de cmd_line
-	if ((tmp->type == CHV_L || tmp->type == D_CHV_L) && (count_word_btw_two_op(tmp) > 1))
+	if (token_is_redir(tmp) && (count_word_btw_two_op(tmp) > 1))
 	{
 		//ft_sa(&tmp);
 		mv_word_left(tmp);
@@ -74,7 +76,7 @@ void	remix_lexer(t_token **all)
 	before_chv_l = *all;
 	while (tmp)
 	{
-		if (tmp->type == CHV_L || tmp->type == D_CHV_L)
+		if (token_is_redir(tmp))
 		{
 				if (count_word_btw_two_op(tmp) > 1)
 				{
@@ -104,7 +106,7 @@ int	ft_need_remix(t_token **all)
 	tmp = *all;
 	while(tmp)
 	{
-		if (tmp->type == CHV_L || tmp->type == D_CHV_L)
+		if (token_is_redir(tmp))
 		{
 				if (count_word_btw_two_op(tmp) > 1)
 					return (1);
