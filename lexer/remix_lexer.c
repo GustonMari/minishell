@@ -133,7 +133,7 @@ void	remix_manager(t_token **all)
 }
 
 
-int	g_status;
+/* int	g_status;
 
 int main(int ac, char **av, char **envp)
 {
@@ -147,7 +147,7 @@ int main(int ac, char **av, char **envp)
 	char *line = NULL;
 
 	env = ft_create_env(envp);
-	line = ft_strdup("<< ok wc < yes -c | ls -la");
+	line = ft_strdup("<< ok wc < yes -c | < ok cat");
 	temp = lexer(line);
 	//mv_word_left(temp);
 	printf("------- BEFORE -----------\n");
@@ -166,4 +166,4 @@ int main(int ac, char **av, char **envp)
 	//ft_cmd_clear(&cmd_all);
 	ft_free_tab_2d(env);
     return (0);
-}
+} */
