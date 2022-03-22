@@ -45,6 +45,13 @@ char	*expand_node_single(char **env, char *str)
 			//Expand notre dollars
 			//block = expand_dollar(env, block);
 		}
+		else if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
+		{
+			i++;
+			block = cpy_block(&str[i], find_next_block(&str[i]));
+			fprintf(stderr, "block = %s\n", block);
+			i += find_next_block(&str[i]);
+		}
 		else
 		{
 			//join 1 par 1 (jusqu a ce qu on rencontre quote Dquote ou $, mais la 

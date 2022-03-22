@@ -48,7 +48,8 @@ char	*del_dollar_2(char *str, char *var_name, char *ret, int len)
 			}
 		}
 		ret[j] = str[i];
-		i++;
+		if (str[i])
+			i++;
 		j++;
 	}
 	ret[j] = '\0';
@@ -60,6 +61,7 @@ char	*del_dollar(char *str, char *var_name, int len)
 {
 	char	*ret;
 
+	ret = NULL;
 	ret = malloc(sizeof(char) * (ft_strlen(str) - len + 1));
 	if (!ret)
 		return (NULL);
@@ -164,6 +166,7 @@ char	*expand_single_dollar(char **env, char *str)
 		str = replace_interrogation(str, i);
 	else
 	{
+		//(void)env;
 		if (ft_find_env_line(env, var_name) && str[i + 1] != '$')
 			str = replace_dollar(env, str, var_name, i);
 		else

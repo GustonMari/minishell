@@ -7,14 +7,14 @@ char	**manage_line(char **env, char *line)
 	t_command	*cmd_all;
 	(void)cmd_all;
 
-	line = expand_node_single(env, line);
+	cmd_all = NULL;
+	tmp = NULL;
+	//line = expand_node_single(env, line);
+	printf("line = %s\n", line);
 	tmp = lexer(line);
 	if (!tmp)
 		return (env);
-	//tmp = remix_lexer(tmp);
-	/* printf("------------------\n");
-	print_token(&tmp);
-	printf("------------------\n"); */
+
 	remix_manager(&tmp);
 	if(check_cmd_list(tmp) == -1)
 	{
@@ -25,15 +25,15 @@ char	**manage_line(char **env, char *line)
 	print_token(&tmp);
 	printf("------------------\n"); */
 	expanded = expand_all(env, tmp);
-	/* printf("------------------\n");
-	print_token(&expanded);
-	printf("------------------\n"); */
-	cmd_all = token_to_cmd(expanded);
 	/* printf("AFTER------------------\n");
-	print_cmd(&cmd_all);
+	print_token(&tmp);
 	printf("------------------\n"); */
-	env = ft_dispatch(cmd_all, env);
+	//cmd_all = token_to_cmd(expanded);
+	//printf("AFTER------------------\n");
+	//print_cmd(&cmd_all);
+	//printf("------------------\n");
+	//env = ft_dispatch(cmd_all, env);
 	ft_lstclear(&expanded, free);
-	ft_cmd_clear(&cmd_all);
+	//ft_cmd_clear(&cmd_all);
 	return (env);
 }

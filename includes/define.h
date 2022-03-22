@@ -13,6 +13,7 @@
 # define WORD 6
 # define QUOTE '\''
 # define D_QUOTE '\"'
+# define BACK_SLASH 92
 
 # define FT_CD 1
 # define FT_PWD 2
