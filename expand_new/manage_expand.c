@@ -123,7 +123,7 @@ char	*expand_node(char **env, char *str)
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
 			block = trim_quote(block, &i);
-			//block = add_echapment(block);
+			block = add_echapment(block);
 			//printf("block = %s\n", block);
 		}
 		else if (str[i] == D_QUOTE)

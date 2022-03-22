@@ -7,6 +7,7 @@ char	**manage_line(char **env, char *line)
 	t_command	*cmd_all;
 	(void)cmd_all;
 
+	line = expand_node_single(env, line);
 	tmp = lexer(line);
 	if (!tmp)
 		return (env);

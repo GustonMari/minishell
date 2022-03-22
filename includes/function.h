@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/22 10:18:46 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/22 13:47:25 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,8 @@ char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos);
 
 t_token	*expand_all(char **env, t_token *all);
 char	*cpy_block(char	*str, int size);
+char	*expand_node_single(char **env, char *str);
+int	find_next_block(char *str);
 
 /*
 ------------------ PARSING ----------------
