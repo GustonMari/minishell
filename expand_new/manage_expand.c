@@ -209,17 +209,14 @@ char	*expand_node(char **env, char *str)
 		if (str[i] == QUOTE)
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
-			printf("before %s\n", block);
 			block = trim_quote(block, &i);
 			block = add_echapment(block);
-			printf("after %s\n", block);
 		}
 		else if (str[i] == D_QUOTE)
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
 			block = trim_quote(block, &i);
 			block = expand_dollar(env, block);
-			printf("block D_QUOTE = %s\n", block);
 		}
 		else if (str[i] == '$')
 		{
@@ -233,7 +230,6 @@ char	*expand_node(char **env, char *str)
 		{
 			i++;
 			block = cpy_block_special(&str[i], find_next_block(&str[i]));
-			fprintf(stderr, "block = %s\n", block);
 			i += find_next_block(&str[i]);
 		}
 		else

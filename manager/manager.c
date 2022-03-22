@@ -10,7 +10,6 @@ char	**manage_line(char **env, char *line)
 	cmd_all = NULL;
 	tmp = NULL;
 	line = expand_node_single(env, line);
-	printf("line = %s\n", line);
 	tmp = lexer(line);
 	if (!tmp)
 		return (env);

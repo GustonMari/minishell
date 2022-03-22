@@ -133,7 +133,6 @@ char	*replace_dollar(char **env, char *str, char *var_name, int pos)
 	new_var = NULL;
 	ret = NULL;
 	new_var = find_val_in_tab(env, var_name);
-	printf("new var = %s\n", new_var);
 	if (!new_var)
 		return (NULL);
 	str = del_dollar(str, var_name, ft_strlen(var_name));
@@ -154,7 +153,6 @@ char	*expand_single_dollar(char **env, char *str)
 	char	*var_name;
 
 	i = 0;
-	printf("str = %s\n", str);
 	var_name = NULL;
 	var_name = cut_dollar(&str[i]);
 	if (!var_name)
@@ -215,7 +213,7 @@ char	*expand_dollar(char **env, char *str)
 
 	i = 0;
 	var_name = NULL;
-	printf("str expand = %s\n", str);
+
 	while (str[i])
 	{
 		if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')

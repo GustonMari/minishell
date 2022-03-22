@@ -19,6 +19,7 @@ int	ft_echo_n(char *str)
 void	ft_echo(char **full_cmd)
 {
 	int	i;
+	int	j;
 	int	n;
 
 	g_status = 0;
@@ -33,7 +34,16 @@ void	ft_echo(char **full_cmd)
 		i++;
 	while (full_cmd[i])
 	{
-		ft_putstr_fd(full_cmd[i], 1);
+		j = 0;
+		while (full_cmd[i][j])
+		{
+			if (full_cmd[i][j] == BACK_SLASH && full_cmd[i][j + 1] && full_cmd[i][j + 1] == '$')
+				j++;
+			ft_putchar_fd(full_cmd[i][j], 1);
+			if (full_cmd[i][j])
+				j++;
+		}
+		//ft_putstr_fd(full_cmd[i], 1);
 		if (full_cmd[i + 1] != NULL)
 			ft_putchar_fd(' ', 1);
 		i++;
