@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:27:53 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/14 09:19:12 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/22 16:29:58 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,22 @@ int	find_equal_in_line(char *str)
 int	ft_print_env(char **env)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	
 	g_status = 0;
 	while (env[i])
 	{
+		j = 0;
 		if (!find_equal_in_line(env[i]))
 		{
-			ft_putstr_fd(env[i], 1);
+			while (env[i][j])
+			{
+				if (env[i][j] != BACK_SLASH)
+					ft_putchar_fd(env[i][j], 1);
+				j++;
+			}
 			ft_putchar_fd('\n', 1);
 		}
 		i++;
