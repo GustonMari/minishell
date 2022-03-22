@@ -96,6 +96,39 @@ int	find_next_block(char *str)
 	return (i);
 }
 
+
+int	nb_back_slash(char *str)
+{
+	int	nb;
+	int	i;
+
+	i = 0;
+	nb = 0;
+	while (str[i])
+	{
+		if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
+			nb ++;
+		i++;
+	}
+	return (nb);
+}
+
+int	nb_dollar(char *str)
+{
+	int	i;
+	int	nb;
+
+	i = 0;
+	nb = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+			nb++;
+		i++;
+	}
+	return (nb);
+}
+
 char	*add_echapment(char *str)
 {
 	char	*new;
@@ -103,11 +136,15 @@ char	*add_echapment(char *str)
 	int		j;
 
 	i = 0;
-	j = 1;
-	new = malloc(sizeof(char) * (ft_strlen(str) + 2));
-	new[0] = 92;
+	j = 0;
+	new = malloc(sizeof(char) * (ft_strlen(str) + nb_dollar(str) + 1));
 	while (str[i])
 	{
+		if (str[i] == '$')
+		{
+			new[j] = BACK_SLASH;
+			j++;
+		}
 		new[j] = str[i];
 		i++;
 		j++;
@@ -117,7 +154,7 @@ char	*add_echapment(char *str)
 	return (new);
 }
 
-/*Supprime les backslash devant un dollar*/
+/*Supprime tous les backslash devant un dollar dans la string*/
 
 char	*del_back_slash(char *str)
 {
@@ -129,12 +166,13 @@ char	*del_back_slash(char *str)
 	i = 0;
 	j = 0;
 	nb = 0;
-	while (str[i])
-	{
-		if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
-			nb ++;
-		i++;
-	}
+	nb = nb_back_slash(str);
+	//while (str[i])
+	//{
+	//	if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
+	//		nb ++;
+	//	i++;
+	//}
 	block = malloc(sizeof(char) * (ft_strlen(str) + 1 - nb));
 	if (!block)
 		return (NULL);
@@ -171,14 +209,17 @@ char	*expand_node(char **env, char *str)
 		if (str[i] == QUOTE)
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
+			printf("before %s\n", block);
 			block = trim_quote(block, &i);
 			block = add_echapment(block);
+			printf("after %s\n", block);
 		}
 		else if (str[i] == D_QUOTE)
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
 			block = trim_quote(block, &i);
 			block = expand_dollar(env, block);
+			printf("block D_QUOTE = %s\n", block);
 		}
 		else if (str[i] == '$')
 		{
@@ -199,7 +240,6 @@ char	*expand_node(char **env, char *str)
 		{
 			block = cpy_block(&str[i], find_next_block(&str[i]));
 			i += find_next_block(&str[i]);
-			printf("a partir -> %s\n", &str[i]);
 		}
 		expanded = ft_strjoin_free(expanded, block, 1);
 		free(block);
