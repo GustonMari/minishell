@@ -1,5 +1,20 @@
 #include "../includes/function.h"
 
+int	find_next_single_block(char *str)
+{
+	int	i;
+
+	i = 0;
+/* 	if (str[0] && str[0] == '$')
+		i++; */
+	while (str[i])
+	{
+		if (str[i] == QUOTE || str[i] == D_QUOTE || str[i] == '$'/*  || str[i] == BACK_SLASH */)
+			return (i);
+		i++;
+	}
+	return (i);
+}
 
 char	*expand_node_single(char **env, char *str)
 {
@@ -26,6 +41,7 @@ char	*expand_node_single(char **env, char *str)
 		}
 		else if (str[i] == D_QUOTE)
 		{
+			fprintf(stderr, "poisson\n");
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
 			//Trim nos double quote
 			//block = trim_quote(block, &i);
@@ -37,6 +53,7 @@ char	*expand_node_single(char **env, char *str)
 		}
 		else if (str[i] == '$')
 		{
+			fprintf(stderr, "moto\n");
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
 			if (str[i + 1] != '\0')
 				block = expand_single_dollar(env, block);
@@ -47,6 +64,7 @@ char	*expand_node_single(char **env, char *str)
 		}
 		else if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
 		{
+			fprintf(stderr, "yooooooo\n");
 			i++;
 			block = cpy_block(&str[i], find_next_block(&str[i]));
 			fprintf(stderr, "block = %s\n", block);
@@ -56,14 +74,17 @@ char	*expand_node_single(char **env, char *str)
 		{
 			//join 1 par 1 (jusqu a ce qu on rencontre quote Dquote ou $, mais la 
 			//boucle le fait tout seul)
+			
 			block = cpy_block(&str[i], find_next_block(&str[i]));
-			i += find_next_block(&str[i]);
+			fprintf(stderr, "eueue block = %s\n", block);
+			i += find_next_single_block(&str[i]);
 		}
 		expanded = ft_strjoin_free(expanded, block, 1);
 		free(block);
 		//i++;
 
 	}
+	printf("expandddd %s\n", expanded);
 	//ATTENTION LE FREE
 	free(str);
 	return (expanded);

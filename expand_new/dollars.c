@@ -153,6 +153,7 @@ char	*expand_single_dollar(char **env, char *str)
 	char	*var_name;
 
 	i = 0;
+	printf("str = %s\n", str);
 	var_name = NULL;
 	var_name = cut_dollar(&str[i]);
 	if (!var_name)
@@ -166,7 +167,6 @@ char	*expand_single_dollar(char **env, char *str)
 		str = replace_interrogation(str, i);
 	else
 	{
-		//(void)env;
 		if (ft_find_env_line(env, var_name) && str[i + 1] != '$')
 			str = replace_dollar(env, str, var_name, i);
 		else

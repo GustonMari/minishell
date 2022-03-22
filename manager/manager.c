@@ -10,7 +10,7 @@ char	**manage_line(char **env, char *line)
 	cmd_all = NULL;
 	tmp = NULL;
 	line = expand_node_single(env, line);
-	//printf("line = %s\n", line);
+	printf("line = %s\n", line);
 	tmp = lexer(line);
 	if (!tmp)
 		return (env);
@@ -25,7 +25,7 @@ char	**manage_line(char **env, char *line)
 	print_token(&tmp);
 	printf("------------------\n"); */
 	expanded = expand_all(env, tmp);
-	/* printf("AFTER------------------\n");
+/* 	printf("AFTER------------------\n");
 	print_token(&tmp);
 	printf("------------------\n"); */
 	cmd_all = token_to_cmd(expanded);
