@@ -82,6 +82,27 @@ int	find_next_block(char *str)
 	return (i);
 }
 
+char	*add_echapment(char *str)
+{
+	char	*new;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 1;
+	new = malloc(sizeof(char) * (ft_strlen(str) + 2));
+	new[0] = 92;
+	while (str[i])
+	{
+		new[j] = str[i];
+		i++;
+		j++;
+	}
+	new[j] = '\0';
+	free(str);
+	return (new);
+}
+
 /*Expand un maillon */
 
 char	*expand_node(char **env, char *str)
@@ -102,6 +123,8 @@ char	*expand_node(char **env, char *str)
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
 			block = trim_quote(block, &i);
+			//block = add_echapment(block);
+			//printf("block = %s\n", block);
 		}
 		else if (str[i] == D_QUOTE)
 		{

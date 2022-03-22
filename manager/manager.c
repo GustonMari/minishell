@@ -15,6 +15,11 @@ char	**manage_line(char **env, char *line)
 	print_token(&tmp);
 	printf("------------------\n"); */
 	remix_manager(&tmp);
+	if(check_cmd_list(tmp) == -1)
+	{
+		ft_lstclear(&tmp, free);
+		return (env);
+	}
 	/* printf("------------------\n");
 	print_token(&tmp);
 	printf("------------------\n"); */
