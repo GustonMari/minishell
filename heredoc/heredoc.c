@@ -18,7 +18,7 @@ void	fill_heredoc_file(char **stop, char **env, int is_expand)
 	//line = NULL;
 	while (1)
 	{
-/* 		if (signal_heredoc(stop, line))
+/* 		if (signal_heredoc())
 		{
 			ft_free_tab_2d(stop);
 			close(fd);
@@ -26,7 +26,9 @@ void	fill_heredoc_file(char **stop, char **env, int is_expand)
 			exit(g_status);
 		}
 		else */
-			line = readline("> ");
+		line = readline("> ");
+		//else
+			
 
 		//Gerer les signaux et bien check la valeur de retour de exit
 
@@ -58,6 +60,60 @@ void	fill_heredoc_file(char **stop, char **env, int is_expand)
 	ft_free_tab_2d(stop);
 	close(fd);
 }
+
+/* void	fill_heredoc_file(char **stop, char **env, int is_expand)
+{
+	char	*line = NULL;
+	int		fd;
+	int		i;
+	int 	begin;
+	
+	begin = 0;
+	i = 0;
+	fd = create_heredoc_file();
+	//line = NULL;
+	while (1)
+	{
+		if (signal_heredoc())
+		{
+			ft_free_tab_2d(stop);
+			close(fd);
+			printf("on exit\n");
+			exit(g_status);
+		}
+		else
+			line = readline("> ");
+
+		//Gerer les signaux et bien check la valeur de retour de exit
+
+		//if (signal_heredoc(stop, line))
+		//	break ;
+		//printf("line %s\n", line);
+		//printf("stop = %s\n", stop[i]);
+		if (stop[i] && !ft_strcmp(line, stop[i]))
+		{
+			if (stop[i + 1] == NULL)
+			{
+				free(line);
+				break ;
+			}
+			i++;
+		}
+		if (is_expand == TRUE)
+			line = expand_dollar(env, line);
+		begin = start_heredoc_one(stop, begin);
+		if (begin == 1)
+		{
+			write(fd, line, ft_strlen(line));
+			write(fd, "\n", 1);
+		}
+		if (line)
+			free(line);
+		begin = start_heredoc_more(stop, i);
+	}
+	ft_free_tab_2d(stop);
+	close(fd);
+} */
 
 /*Compte le nombre de D_CHV_L entre deux pipe*/
 
@@ -115,9 +171,16 @@ int	launch_heredoc(t_command *all_cmd, char **env)
 	int		status;
 
 	status = 0;
+	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
+		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
+	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
 	pid = fork();
+	//peut etre a decaler dans pid == 0
+	
 	if (pid == 0)
 	{
+		signal_heredoc();
 		stop = NULL;
 		stop = create_tab_stop(all_cmd);
 		if (!stop)
@@ -134,11 +197,16 @@ int	launch_heredoc(t_command *all_cmd, char **env)
 	}
 	else
 	{
-		//fprintf(stderr, "on rentre\n");
-		waitpid(pid, &status, 0);
-		//fprintf(stderr, "ON sort\n");
+		fprintf(stderr, "on rentre\n");
+		//waitpid(-1, &status, 0);
+		//waitpid(pid, &status, 0);
+		fprintf(stderr, "ON sort\n");
 	}
-		
+
+		if (signal(SIGINT, SIG_DFL) == SIG_ERR)
+			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
+		if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
+			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
 	return (0);
 }
 

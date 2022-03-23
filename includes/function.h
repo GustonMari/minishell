@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/23 15:55:02 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/03/23 18:04:28 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,7 +299,7 @@ int		create_heredoc_file(void);
 int		start_heredoc_one(char **stop, int begin);
 int		start_heredoc_more(char **stop, int i);
 void	exit_heredoc(int sig);
-int		signal_heredoc(char **stop, char *line);
+int		signal_heredoc(void);
 char	**create_tab_stop(t_command *all_cmd);
 char	**trim_quote_stop(char **strs);
 int		is_expand_heredoc(char **stop);
@@ -338,6 +338,9 @@ void	ft_exit(char **full_cmd);
 */
 
 void	signal_in_cmd(void);
+void	signal_manager2(void);
+void	signal_cmd(int sig);
+
 
 
 #endif

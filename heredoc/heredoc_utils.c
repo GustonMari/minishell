@@ -58,7 +58,38 @@ void	exit_heredoc(int sig)
 	return (1); */
 }
 
-int	signal_heredoc(char **stop, char *line)
+
+void	manage_heredoc_signal(int sig)
+{
+	if (sig == SIGINT)
+	{
+		//write(1, "\n\e[1;91m- SIGINT -\n", 20);
+		//printf("prout\n");
+		//rl_on_new_line();
+		//rl_replace_line("", 0);
+		//rl_redisplay();
+		g_status = 130;
+		exit(g_status);
+	}
+	if (sig == SIGQUIT)
+	{
+		ft_putstr_fd("Quit (core dumped)\n", 2);
+	}
+}
+
+int	signal_heredoc(void)
+{
+	if (signal(SIGINT, &manage_heredoc_signal) == SIG_ERR)
+		return (1);
+		//fprintf(stderr, "Error: %s\n", strerror(errno));
+	if (signal(SIGQUIT, &manage_heredoc_signal) == SIG_ERR)
+		return (1);
+		//fprintf(stderr, "Error: %s\n", strerror(errno));
+	//int		status;
+	return (0);
+}
+
+/* int	signal_heredoc(char **stop, char *line)
 {
 	//int		status;
 	(void)stop;
@@ -77,4 +108,4 @@ int	signal_heredoc(char **stop, char *line)
 		return (1);
 	}
 	return (0);
-}
+} */
