@@ -18,14 +18,14 @@ void	fill_heredoc_file(char **stop, char **env, int is_expand)
 	//line = NULL;
 	while (1)
 	{
-		if (signal_heredoc(stop, line))
+/* 		if (signal_heredoc(stop, line))
 		{
 			ft_free_tab_2d(stop);
 			close(fd);
 			printf("on exit\n");
 			exit(g_status);
 		}
-		else
+		else */
 			line = readline("> ");
 
 		//Gerer les signaux et bien check la valeur de retour de exit

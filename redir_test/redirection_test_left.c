@@ -50,10 +50,26 @@ char	*find_last_redir_l(t_command *all_cmd)
 	return (file_name);
 }
 
-int	manage_chv_l(t_command *all_cmd)
+int	manage_single_chv_l(t_command *all_cmd)
+{
+	if (all_cmd->type == CHV_L)
+	{
+		if (all_cmd->next && (access((all_cmd->next->cmd_to_exec[0]), F_OK | R_OK) < 0))
+		{
+			ft_putstr_fd(BRED"minishell: ", 2);
+			ft_putstr_fd(all_cmd->next->cmd_to_exec[0], 2);
+			ft_putstr_fd(BRED": No such file or directory\n"CRESET, 2);
+			return (-1);
+		}
+	}
+	return (0);
+}
+
+int	manage_chv_l(t_command *all_cmd, char **env)
 {
 	char		*file_name;
 	int			fd;
+	(void)env;
 
 	file_name = NULL;
 	g_status = 0;
@@ -62,6 +78,8 @@ int	manage_chv_l(t_command *all_cmd)
 	file_name = find_last_redir_l(all_cmd);
 	if (!file_name)
 		return (-1);
+	if (manage_single_chv_l(all_cmd) < 0)
+		return (-2);
 	//if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
 	//	launch_heredoc(all_cmd, env);
 	fd = open(file_name, O_RDONLY);

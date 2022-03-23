@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/23 14:19:58 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/03/23 15:55:02 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,13 +125,13 @@ char	*ft_pwd_return(void);
 */
 
 int		redirection_to_file(char *file_name, char *str);
-int		manage_chv_l(t_command *all_cmd);
+int		manage_chv_l(t_command *all_cmd, char **env);
 int		manage_chv_r(t_command **all_cmd);
 int		redirection(t_command *all_cmd, int *in, int *out, char **env);
 int		is_redirection_type(t_command *op);
 int	    count_cmd_between_pipe(t_command *all_cmd);
 int     count_redir(t_command *all_cmd);
-int		redirection_manager(t_command **all_cmd);
+int		redirection_manager(t_command **all_cmd, char **env);
 int		redirection_clean(t_command *all_cmd);
 
 /*

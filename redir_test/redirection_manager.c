@@ -89,14 +89,14 @@ int	redirection_clean(t_command *all_cmd)
 	return (0);
 }
 
-int	redirection_manager(t_command **all_cmd)
+int	redirection_manager(t_command **all_cmd, char **env)
 {
 	int value;
 	int	ret;
 
 	ret = 0;
 	value = TRUE;
-	ret = manage_chv_l(*all_cmd);
+	ret = manage_chv_l(*all_cmd, env);
 	if (ret < 0)
 		value = ret;
 	ret = manage_chv_r(all_cmd);

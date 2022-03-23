@@ -97,7 +97,7 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 		//if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
 		//	launch_heredoc(all_cmd, env);
 		ft_pipe(i == 0, is_last_cmd(all_cmd), &out);
-		ret = redirection_manager(&all_cmd);
+		ret = redirection_manager(&all_cmd, env);
 		//fprintf(stderr, "allcmd = %s\n", all_cmd->cmd_to_exec[0]);
 		if (ret == -1)
 		{
@@ -116,7 +116,8 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 			g_status = 1;
 		}
 		//signal_in_cmd();
-		else if (all_cmd && all_cmd->type != CHV_R && all_cmd->type != D_CHV_R)
+		else if (all_cmd && all_cmd->type != CHV_R && all_cmd->type != D_CHV_R
+			&& all_cmd->type != CHV_L && all_cmd->type != D_CHV_L)
 			ft_exec(env, all_cmd->cmd_to_exec, out);
 		redirection_clean(all_cmd);
 		count_all_between_pipe(&all_cmd);
