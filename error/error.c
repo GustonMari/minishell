@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:09:42 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/23 10:10:27 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/03/23 11:26:51 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,13 @@ void	cd_error(char *cmd, int to_many_arg)
 		ft_putstr_fd("too many arguments"CRESET, 2);
 		ft_putstr_fd("\n", 2);
 	}
+}
+
+int	print_cmd_error(char *str)
+{
+	ft_putstr_fd(BRED"minishell: syntax error near unexpected token `", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("'\n"CRESET, 2);
+	g_status = 2;
+	return (-1);
 }

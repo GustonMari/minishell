@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:06:24 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/23 10:36:48 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/03/23 12:56:19 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,61 @@ int	is_operator_type(t_command *op)
 	return (0);
 }
 
-int	check_cmd_list(t_token *all)
+int	check_edge(t_token *all)
 {
 	t_token	*tmp;
 
 	tmp = all;
-	if (token_is_operator(tmp))
-		return (-1);
+	if (token_is_redir(tmp) && (ft_lstsize(tmp) == 1))
+		return (print_cmd_error("newline"));
+	else if (tmp->type == PIPE && (ft_lstsize(tmp) == 1))
+		return (print_cmd_error("|"));
+	else if (tmp->type == PIPE && tmp->next
+		&& tmp->next->type == PIPE && (ft_lstsize(tmp) == 2))
+		return (print_cmd_error("||"));
+	while (tmp->next)
+		tmp = tmp->next;
+	if (token_is_redir(tmp))
+		return (print_cmd_error("newline"));
+	else if (tmp->type == PIPE)
+	{
+		ft_putstr_fd(BRED"minishell: you should have something after pipe\n"CRESET, 2);
+		return (-2);
+	}
+	return (0);
+}
+
+int	check_middle(t_token *all)
+{
+	t_token	*tmp;
+
+	tmp = all;
 	while (tmp->next)
 	{
-		if (token_is_operator(tmp))
+		if (tmp->type == PIPE && tmp->next && tmp->next->type == PIPE)
+		{
+			ft_putstr_fd(BRED "minishell: syntax error near unexpected token `|'\n"CRESET, 2);
+			g_status = 2;
+			return (-1);
+		}
+		if (token_is_redir(tmp))
 		{
 			if (token_is_operator(tmp->next))
 			{
-				ft_print_error(1, NULL,
-					"syntax error near unexpected token ", tmp->next->content);
 				g_status = 2;
-				return (-1);
+				return (print_cmd_error(tmp->next->content));
 			}
 		}
 		tmp = tmp->next;
 	}
-	if (token_is_operator(tmp))
+	return (0);
+}
+
+int	check_cmd_list(t_token *all)
+{
+	if (check_edge(all) < 0)
+		return (-1);
+	if (check_middle(all) < 0)
 		return (-1);
 	return (0);
 }
@@ -78,30 +111,3 @@ int	check_cmd_list(t_token *all)
 		return (-1);
 	return (0);
 } */
-
-/* int	check_cmd_list(t_command *all)
-{
-	t_command	*tmp;
-
-	tmp = all;
-	if (is_operator_type(tmp))
-		return (-1);
-	while (tmp->next)
-	{
-		if (is_operator_type(tmp))
-		{
-			if (is_operator_type(tmp->next))
-			{
-				ft_print_error(1, NULL,
-					"syntax error near unexpected token ", tmp->cmd_to_exec[0]);
-				g_status = 2;
-				return (-1);
-			}
-		}
-		tmp = tmp->next;
-	}
-	if (is_operator_type(tmp))
-		return (-1);
-	return (0);
-}
- */

@@ -15,7 +15,7 @@ char	**manage_line(char **env, char *line)
 		return (env);
 
 	remix_manager(&tmp);
-	if(check_cmd_list(tmp) == -1)
+	if(check_cmd_list(tmp) < 0)
 	{
 		ft_lstclear(&tmp, free);
 		return (env);
