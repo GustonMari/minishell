@@ -1,4 +1,16 @@
-# include "../includes/function.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/23 10:09:42 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/03/23 10:10:27 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/function.h"
 
 void	exit_error(char *filename)
 {
@@ -9,15 +21,14 @@ void	exit_error(char *filename)
 
 int	redirection_error(char *file_name)
 {
-
-		ft_putstr_fd(BRED"minishell: ", 2);
-		ft_putstr_fd(file_name, 2);
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(strerror(errno), 2);
-		ft_putstr_fd("\n"CRESET, 2);
-		free(file_name);
-		g_status = errno;
-		return (1);
+	ft_putstr_fd(BRED"minishell: ", 2);
+	ft_putstr_fd(file_name, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(strerror(errno), 2);
+	ft_putstr_fd("\n"CRESET, 2);
+	free(file_name);
+	g_status = errno;
+	return (1);
 }
 
 void	ft_print_error(int minishell, char *cmd_name, char *error, char *token)

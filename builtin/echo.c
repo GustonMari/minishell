@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/23 09:46:57 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/03/23 09:47:34 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 int	ft_echo_n(char *str)
@@ -37,13 +49,13 @@ void	ft_echo(char **full_cmd)
 		j = 0;
 		while (full_cmd[i][j])
 		{
-			if (full_cmd[i][j] == BACK_SLASH && full_cmd[i][j + 1] && full_cmd[i][j + 1] == '$')
+			if (full_cmd[i][j] == BACK_SLASH && full_cmd[i][j + 1]
+				&& full_cmd[i][j + 1] == '$')
 				j++;
 			ft_putchar_fd(full_cmd[i][j], 1);
 			if (full_cmd[i][j])
 				j++;
 		}
-		//ft_putstr_fd(full_cmd[i], 1);
 		if (full_cmd[i + 1] != NULL)
 			ft_putchar_fd(' ', 1);
 		i++;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/23 09:46:12 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/03/23 09:46:48 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 int	is_var_in_line_unset(char *str, char *to_del, size_t n)
@@ -46,7 +58,6 @@ char	**ft_unset_line(char **env, char *to_del)
 		}
 	}
 	dest[i] = NULL;
-	//ft_free_tab_2d(env);
 	return (dest);
 }
 
@@ -57,14 +68,6 @@ int	ft_check_unset(char *str)
 	i = 0;
 	while (str[i])
 	{
-		/* if ((!ft_isalnum(str[i]) && str[i] != '=')|| str[0] == '=')
-		{
-			ft_putstr_fd("bash: unset: `", 2);
-			ft_putstr_fd(str, 2);
-			ft_putstr_fd("\': not a valid identifier\n", 2);
-			g_status = 1;
-			return (1);
-		} */
 		if ((!ft_isalnum(str[i])))
 		{
 			ft_putstr_fd(BRED"minishell: export: `", 2);

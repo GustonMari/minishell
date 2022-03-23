@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:00:48 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/22 14:32:55 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/23 10:21:51 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/function.h"
+#include "../includes/function.h"
 
 /*Trouve si la cmd en parametre est une cmd
 avec un chemin absolut*/
@@ -50,7 +50,6 @@ char	*find_path_cmd(char *cmd_to_join, char *tmp)
 	if (!cmd)
 		return (NULL);
 	all_cmd_path = ft_split(tmp, ':');
-	/* printf("cmdtojoin = %s\n", cmd_to_join); */
 	if (!all_cmd_path)
 		return (NULL);
 	i = -1;
@@ -91,7 +90,6 @@ int	ft_exec_cmd(char **env, char **full_cmd, int out)
 	char	*path;
 	char	*tmp;
 	int		pid;
-	(void)out;
 
 	pid = fork();
 	//signal_manager2();
@@ -106,13 +104,10 @@ int	ft_exec_cmd(char **env, char **full_cmd, int out)
 		path = chose_ath_cmd(full_cmd[0], tmp);
 		if (!path)
 		{
-			ft_print_error(0, full_cmd[0], ": command not found", NULL);
+			ft_print_error(1, full_cmd[0], ": command not found", NULL);
 			g_status = 127;
 			exit(127);
 		}
-		/* printf("------------------\n");
-		print_tab_2d(full_cmd);
-		printf("------------------\n"); */
 		if (execve(path, full_cmd, env) < 0)
 		{
 			perror("execve");
@@ -123,7 +118,6 @@ int	ft_exec_cmd(char **env, char **full_cmd, int out)
 		return (0);
 	}
 	return (0);
-	
 }
 
 char	**ft_exec_builtin(char **env, char **full_cmd, int builtin)

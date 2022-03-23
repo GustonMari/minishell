@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/23 09:48:33 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/03/23 09:50:12 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 void	ft_exit_2(char **full_cmd)
@@ -8,7 +20,6 @@ void	ft_exit_2(char **full_cmd)
 		if (g_status == 0)
 			g_status = 1;
 		printf("g_status = %d\n", g_status);
-		//exit(g_status);
 	}
 	else
 	{
@@ -18,6 +29,7 @@ void	ft_exit_2(char **full_cmd)
 		exit(2);
 	}
 }
+
 void	ft_exit(char **full_cmd)
 {
 	if (ft_count_line(full_cmd) == 1)

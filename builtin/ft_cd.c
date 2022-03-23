@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 14:02:11 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/14 09:22:25 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/23 09:48:21 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 	X_OK check si file existe + tte les permisions
 */
+
 int	ft_check_cd(char *str)
 {
 	if (access(str, X_OK) == -1)
@@ -22,7 +23,6 @@ int	ft_check_cd(char *str)
 		cd_error(str, 0);
 		g_status = 1;
 		return (-1);
-		/* exit(1); */
 	}
 	return (0);
 }
