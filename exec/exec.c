@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:00:48 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/23 10:21:51 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/03/23 16:58:16 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ int	ft_exec_cmd(char **env, char **full_cmd, int out)
 	char	*path;
 	char	*tmp;
 	int		pid;
-
+	
+	
 	pid = fork();
 	//signal_manager2();
 	if (pid == 0)

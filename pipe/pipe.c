@@ -94,8 +94,8 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 	{
 		save[0] = dup(0);
 		save[1] = dup(1);
-		//if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
-		//	launch_heredoc(all_cmd, env);
+		if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
+			launch_heredoc(all_cmd, env);
 		ft_pipe(i == 0, is_last_cmd(all_cmd), &out);
 		ret = redirection_manager(&all_cmd, env);
 		//fprintf(stderr, "allcmd = %s\n", all_cmd->cmd_to_exec[0]);
