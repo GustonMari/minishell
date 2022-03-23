@@ -42,15 +42,6 @@ int  manage_single_chv_r(t_command **all_cmd)
 			close(fd);
 			return (-2);
 		}
-		//count_all_between_pipe(all_cmd);
-		fprintf(stderr, "%s\n", (*all_cmd)->cmd_to_exec[0]);
-	/* 	if ((*all_cmd)->next && (*all_cmd)->next)
-		{
-			(*all_cmd) = (*all_cmd)->next->next;
-			//if ((*all_cmd)->type == PIPE)
-			//	*all_cmd = (*all_cmd)->next;
-		} */
-			
 		return (fd);
 	}
 	else if ((*all_cmd)->type == D_CHV_R)
@@ -61,8 +52,6 @@ int  manage_single_chv_r(t_command **all_cmd)
 			close(fd);
 			return (-2);
 		}
-		if ((*all_cmd)->next && (*all_cmd)->next)
-			(*all_cmd) = (*all_cmd)->next->next;
 		return (fd);
 	}
 	return (-1);

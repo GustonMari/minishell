@@ -116,7 +116,7 @@ int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
 			g_status = 1;
 		}
 		//signal_in_cmd();
-		else if (all_cmd && all_cmd->type != CHV_R)
+		else if (all_cmd && all_cmd->type != CHV_R && all_cmd->type != D_CHV_R)
 			ft_exec(env, all_cmd->cmd_to_exec, out);
 		redirection_clean(all_cmd);
 		count_all_between_pipe(&all_cmd);
