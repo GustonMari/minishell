@@ -34,11 +34,28 @@ int  manage_single_chv_r(t_command **all_cmd)
 	int	fd;
 
 	fd = -1;
-	fprintf(stderr, "allllezz %s\n", (*all_cmd)->cmd_to_exec[0]);
 	if ((*all_cmd)->type == CHV_R)
 	{
-		unlink((*all_cmd)->next->cmd_to_exec[0]);
-		fd = open((*all_cmd)->next->cmd_to_exec[0], O_CREAT | O_TRUNC, 00644);
+		fd = open((*all_cmd)->next->cmd_to_exec[0], O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		if (fd < 0)
+		{
+			close(fd);
+			return (-2);
+		}
+		//count_all_between_pipe(all_cmd);
+		fprintf(stderr, "%s\n", (*all_cmd)->cmd_to_exec[0]);
+	/* 	if ((*all_cmd)->next && (*all_cmd)->next)
+		{
+			(*all_cmd) = (*all_cmd)->next->next;
+			//if ((*all_cmd)->type == PIPE)
+			//	*all_cmd = (*all_cmd)->next;
+		} */
+			
+		return (fd);
+	}
+	else if ((*all_cmd)->type == D_CHV_R)
+	{
+		fd = open((*all_cmd)->next->cmd_to_exec[0], O_CREAT | O_APPEND| O_WRONLY, 0644);
 		if (fd < 0)
 		{
 			close(fd);
@@ -46,36 +63,21 @@ int  manage_single_chv_r(t_command **all_cmd)
 		}
 		if ((*all_cmd)->next && (*all_cmd)->next)
 			(*all_cmd) = (*all_cmd)->next->next;
-		//fprintf(stderr, "inside %s\n", (*all_cmd)->cmd_to_exec[0]);
-		return (fd);
-	}
-	else if ((*all_cmd)->type == D_CHV_R)
-	{
-		fd = open((*all_cmd)->next->cmd_to_exec[0], O_CREAT | O_APPEND, 00644);
-		if (fd < 0)
-		{
-			close(fd);
-			return (-2);
-		}
-
-		if ((*all_cmd)->next && (*all_cmd)->next->next)
-			(*all_cmd) = (*all_cmd)->next->next;
 		return (fd);
 	}
 	return (-1);
 }
 
-int	manage_open_r(t_command *all_cmd, char *last_redir)
+int	manage_open_r(t_command **all_cmd, char *last_redir)
 {
 	t_command	*tmp;
 	int			fd;
 
 	fd = -1;
-	fd = manage_single_chv_r(&all_cmd);
+	fd = manage_single_chv_r(all_cmd);
 	if (fd != -1 || fd == -2)
 		return (fd);
-	fprintf(stderr, "zgegg \n");
-	tmp = all_cmd;
+	tmp = *all_cmd;
 	//fprintf(stderr, "begin last redir %s\n", last_redir);
 	//fprintf(stderr, "tmp = %s\n", tmp->cmd_to_exec[0]);
 	tmp = tmp->next;
@@ -83,13 +85,13 @@ int	manage_open_r(t_command *all_cmd, char *last_redir)
 	{
 		if (tmp->type == CHV_R)
 		{
-			fd = open(tmp->next->cmd_to_exec[0], O_CREAT | O_WRONLY | O_TRUNC, 00644);
+			fd = open(tmp->next->cmd_to_exec[0], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 			if (fd < 0)
 				return (-1);
 		}
 		else if (tmp->type == D_CHV_R)
 		{
-			fd = open(tmp->next->cmd_to_exec[0], O_CREAT | O_WRONLY | O_APPEND, 00644);
+			fd = open(tmp->next->cmd_to_exec[0], O_CREAT | O_WRONLY | O_APPEND, 0644);
 			if (fd < 0)
 				return (-1);
 		}
@@ -131,15 +133,15 @@ char	*find_last_redir_r(t_command *all_cmd)
 
 //faire gestion derreur
 
-int	manage_chv_r(t_command *all_cmd)
+int	manage_chv_r(t_command **all_cmd)
 {
 	char		*file_name;
 	int			fd;
 
 	file_name = NULL;
-	if (count_redir_r(all_cmd) == 0)
+	if (count_redir_r(*all_cmd) == 0)
 		return (1);
-	file_name = find_last_redir_r(all_cmd);
+	file_name = find_last_redir_r(*all_cmd);
 	if (!file_name)
 		return (-1);
 	fd = manage_open_r(all_cmd, file_name);

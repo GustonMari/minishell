@@ -16,7 +16,7 @@ int	erase_file(t_command *all_cmd, char *file_error)
 		if (tmp->type == WORD && (previous->type == CHV_R || previous->type == D_CHV_R))
 		{
 			unlink(tmp->cmd_to_exec[0]);
-			fd = open(tmp->cmd_to_exec[0], O_CREAT | O_WRONLY | O_TRUNC, 00644);
+			fd = open(tmp->cmd_to_exec[0], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 			close(fd);
 		}
 		else 
@@ -89,14 +89,14 @@ int	redirection_clean(t_command *all_cmd)
 	return (0);
 }
 
-int	redirection_manager(t_command *all_cmd)
+int	redirection_manager(t_command **all_cmd)
 {
 	int value;
 	int	ret;
 
 	ret = 0;
 	value = TRUE;
-	ret = manage_chv_l(all_cmd);
+	ret = manage_chv_l(*all_cmd);
 	if (ret < 0)
 		value = ret;
 	ret = manage_chv_r(all_cmd);
