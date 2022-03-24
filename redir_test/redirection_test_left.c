@@ -11,7 +11,7 @@ int	count_redir_l(t_command *all_cmd)
 	tmp = all_cmd;
 	while (tmp && tmp->type != PIPE)
 	{
-		if (tmp->type == CHV_L || tmp->type == D_CHV_L)
+		if (tmp->type == CHV_L/*  || tmp->type == D_CHV_L */)
 			nb_redir++;
 		tmp = tmp->next;
 	}
@@ -45,8 +45,6 @@ char	*find_last_redir_l(t_command *all_cmd)
 		}
 		tmp = tmp->next;
 	}
-	//if (!priorities_D_CHV_L(all_cmd))
-	//	return (ft_strdup(".heredoc"));
 	return (file_name);
 }
 

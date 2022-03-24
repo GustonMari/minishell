@@ -55,8 +55,8 @@ void	print_cmd(t_command **begin_list)
 	{
 		/* printf("%s\n", current->cmd_to_exec); */
 		print_tab_2d(current->cmd_to_exec);
-		printf("\ntype = %d\n", (int)current->type);
-		printf("---------------------------------\n");
+		fprintf(stderr,"\ntype = %d\n", (int)current->type);
+		fprintf(stderr,"---------------------------------\n");
 		current = current->next;
 	}
 }

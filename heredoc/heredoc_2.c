@@ -1,5 +1,24 @@
 #include "../includes/function.h"
 
+/*Permet de supprimer les fichiers temporaires .heredoc*/
+
+int	delete_heredoc_file(t_command *all_cmd)
+{
+	t_command	*tmp;
+
+	tmp = all_cmd;
+	while(tmp)
+	{
+		if (tmp->to_del == 1)
+		{
+			if (unlink(tmp->cmd_to_exec[0]) < 0)
+				return (-1);
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 /*Permet de savoir si le dernier element du tableau stop
 possede des quotes ou non. Si il possede des quote on renvoie
 0, et on expandra pas. Si il n'en possede pas on revoie 1 et 

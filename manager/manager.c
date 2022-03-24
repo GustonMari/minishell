@@ -32,10 +32,15 @@ char	**manage_line(char **env, char *line)
 		//On doit exit, erreur malloc
 		return (env);
 	}
-	printf("AFTER------------------\n");
+	/* printf("AFTER------------------\n");
 	print_cmd(&cmd_all);
-	printf("------------------\n");
+	printf("------------------\n"); */
 	env = ft_dispatch(cmd_all, env);
+	if (delete_heredoc_file(cmd_all) < 0)
+	{
+		//On doit exit, erreur malloc
+		return (env);
+	}
 	ft_lstclear(&expanded, free);
 	ft_cmd_clear(&cmd_all);
 	return (env);

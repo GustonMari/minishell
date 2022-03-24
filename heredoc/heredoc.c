@@ -124,7 +124,6 @@ int	launch_heredoc(t_command **all_cmd, char **env, char *name)
 	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
 	pid = fork();
-	//peut etre a decaler dans pid == 0
 	if (pid == 0)
 	{
 		signal_heredoc();
@@ -143,17 +142,11 @@ int	launch_heredoc(t_command **all_cmd, char **env, char *name)
 		exit(0);
 	}
 	else
-	{
-		//fprintf(stderr, "on rentre\n");
-		//waitpid(-1, &status, 0);
 		waitpid(pid, &status, 0);
-		//fprintf(stderr, "ON sort\n");
-	}
-
-		if (signal(SIGINT, SIG_DFL) == SIG_ERR)
-			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-		if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
-			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
+	if (signal(SIGINT, SIG_DFL) == SIG_ERR)
+		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
+	if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
+		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
 	return (0);
 }
 
@@ -235,9 +228,10 @@ int	manage_heredoc(t_command **all_cmd, char **env)
 				return (-1);
 			launch_heredoc(&tmp, env, name);
 			replace_heredoc(&tmp, name);
-			//free(name);
+			count_all_between_pipe(&tmp);
 		}
-		tmp = tmp->next;
+		else
+			tmp = tmp->next;
 	}
 	return(0);
 }

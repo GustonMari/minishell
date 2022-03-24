@@ -7,7 +7,8 @@ void	print_tab_2d(char **strs)
 	i = 0;
 	while (strs[i])
 	{
-		printf("%s\n", strs[i]);
+
+		fprintf(stderr,"%s\n", strs[i]);
 		i++;
 	}
 }
