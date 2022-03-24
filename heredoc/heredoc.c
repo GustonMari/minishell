@@ -144,10 +144,10 @@ int	launch_heredoc(t_command **all_cmd, char **env, char *name)
 	}
 	else
 	{
-		fprintf(stderr, "on rentre\n");
+		//fprintf(stderr, "on rentre\n");
 		//waitpid(-1, &status, 0);
 		waitpid(pid, &status, 0);
-		fprintf(stderr, "ON sort\n");
+		//fprintf(stderr, "ON sort\n");
 	}
 
 		if (signal(SIGINT, SIG_DFL) == SIG_ERR)
@@ -189,7 +189,7 @@ int	replace_heredoc(t_command **all_cmd, char *name)
 
 	ft_free_tab_2d((*all_cmd)->cmd_to_exec);
 	(*all_cmd)->type = CHV_L;
-	d_chv = malloc(sizeof(char *) * 2);
+	d_chv = ft_calloc(sizeof(char *), 2);
 	if (!d_chv)
 		return (-1);
 	d_chv[0] = ft_strdup("<");
@@ -199,13 +199,14 @@ int	replace_heredoc(t_command **all_cmd, char *name)
 		return (-1);
 	}
 	d_chv[1] = NULL;
+	(*all_cmd)->cmd_to_exec = d_chv;
 	
 	if ((*all_cmd) && (*all_cmd)->next)
 	{
 		ft_free_tab_2d((*all_cmd)->next->cmd_to_exec);
-		(*all_cmd)->type = WORD;
-		(*all_cmd)->to_del = 1;
-		name_2d = malloc(sizeof(char *) * 2);
+		(*all_cmd)->next->type = WORD;
+		(*all_cmd)->next->to_del = 1;
+		name_2d = ft_calloc(sizeof(char *), 2);
 		if (!name_2d)
 			return (-1);
 		name_2d[0] = name;
@@ -234,6 +235,7 @@ int	manage_heredoc(t_command **all_cmd, char **env)
 				return (-1);
 			launch_heredoc(&tmp, env, name);
 			replace_heredoc(&tmp, name);
+			//free(name);
 		}
 		tmp = tmp->next;
 	}

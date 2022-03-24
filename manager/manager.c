@@ -35,7 +35,7 @@ char	**manage_line(char **env, char *line)
 	printf("AFTER------------------\n");
 	print_cmd(&cmd_all);
 	printf("------------------\n");
-	//env = ft_dispatch(cmd_all, env);
+	env = ft_dispatch(cmd_all, env);
 	ft_lstclear(&expanded, free);
 	ft_cmd_clear(&cmd_all);
 	return (env);
