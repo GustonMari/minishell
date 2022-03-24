@@ -28,6 +28,13 @@ void	fill_heredoc_file(char **stop, char **env, int is_expand, char *name)
 		}
 		else */
 		line = readline("> ");
+		if (!line)
+		{
+			ft_putstr_fd("Quit (core dumped)\n", 2);
+			g_status = 0;
+			exit(g_status);
+			//break ;
+		}
 		//else
 			
 
@@ -116,13 +123,14 @@ int	launch_heredoc(t_command **all_cmd, char **env, char *name)
 	char	**stop;
 	int		is_expand;
 	pid_t	pid;
-	int		status;
+	//int		status;
 
-	status = 0;
+	//status = 0;
 	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
 		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
 	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
+
 	pid = fork();
 	if (pid == 0)
 	{
@@ -139,14 +147,17 @@ int	launch_heredoc(t_command **all_cmd, char **env, char *name)
 		if (!stop)
 			return (-1);
 		fill_heredoc_file(stop, env, is_expand, name);
-		exit(0);
+		fprintf(stderr, "1) g_status = %d\n", g_status);
+		exit(g_status);
 	}
 	else
-		waitpid(pid, &status, 0);
-	if (signal(SIGINT, SIG_DFL) == SIG_ERR)
-		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-	if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
-		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
+		wait_pipe();
+	if (g_status == 130)
+		return (-2);
+	//if (signal(SIGINT, SIG_DFL) == SIG_ERR)
+	//	return (fprintf(stderr, "Error: %s\n", strerror(errno)));
+	//if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
+	//	return (fprintf(stderr, "Error: %s\n", strerror(errno)));
 	return (0);
 }
 
@@ -226,7 +237,8 @@ int	manage_heredoc(t_command **all_cmd, char **env)
 			name = find_heredoc_name();
 			if (!name)
 				return (-1);
-			launch_heredoc(&tmp, env, name);
+			if (launch_heredoc(&tmp, env, name) == -2)
+				return (-2);
 			replace_heredoc(&tmp, name);
 			count_all_between_pipe(&tmp);
 		}

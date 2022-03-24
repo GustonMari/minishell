@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:00:48 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/23 17:31:47 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/03/24 19:17:51 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,8 @@ int	ft_exec_cmd(char **env, char **full_cmd, int out)
 	char	*tmp;
 	int		pid;
 	
-	
-	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
-		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
-		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-	pid = fork();
-	//peut etre a decaler dans pid == 0
 	signal_manager2();
+	pid = fork();
 	if (pid == 0)
 	{
 		if (out != -1)

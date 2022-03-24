@@ -63,27 +63,41 @@ void	manage_heredoc_signal(int sig)
 {
 	if (sig == SIGINT)
 	{
-		//write(1, "\n\e[1;91m- SIGINT -\n", 20);
+		//write(2, "\n\e[1;91m- SIGINT -\n", 20);
 		//printf("prout\n");
 		//rl_on_new_line();
 		//rl_replace_line("", 0);
 		//rl_redisplay();
 		g_status = 130;
+		write(1, "\n", 1);
+		//kill(0, SIGUSR2);
 		exit(g_status);
 	}
-	if (sig == SIGQUIT)
-	{
-		ft_putstr_fd("Quit (core dumped)\n", 2);
-	}
+	// else if (sig == SIGHUP)
+	// {
+	// 	ft_putstr_fd("Quit (core dumped)\n", 2);
+	// 	//g_status = 0;
+	// 	exit(g_status);
+	// }
 }
 
 int	signal_heredoc(void)
 {
 	if (signal(SIGINT, &manage_heredoc_signal) == SIG_ERR)
 		return (1);
+	//fprintf(stderr, "dhjskfkjshdkfjhkdfjhkdjhfkdhfkjhfkdjhfk  %d\n", g_status);
+
+	//if (signal(SIGINT, &manage_heredoc_signal) == SIG_ERR)
+	//	return (1);
 		//fprintf(stderr, "Error: %s\n", strerror(errno));
-	if (signal(SIGQUIT, &manage_heredoc_signal) == SIG_ERR)
+	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 		return (1);
+	// if (signal(SIGHUP, &manage_heredoc_signal) == SIG_ERR)
+	// {
+	// 	fprintf(stderr, "saluttuututut\n");
+	// 	return (1);
+	// }
+
 		//fprintf(stderr, "Error: %s\n", strerror(errno));
 	//int		status;
 	return (0);

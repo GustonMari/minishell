@@ -32,6 +32,7 @@ char	**manage_line(char **env, char *line)
 		//On doit exit, erreur malloc
 		return (env);
 	}
+
 	/* printf("AFTER------------------\n");
 	print_cmd(&cmd_all);
 	printf("------------------\n"); */
