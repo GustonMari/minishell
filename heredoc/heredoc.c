@@ -187,7 +187,7 @@ int	replace_heredoc(t_command **all_cmd, char *name)
 	char	**d_chv;
 	char	**name_2d;
 
-	//ft_free_tab_2d((*all_cmd)->cmd_to_exec);
+	ft_free_tab_2d((*all_cmd)->cmd_to_exec);
 	(*all_cmd)->type = CHV_L;
 	d_chv = malloc(sizeof(char *) * 2);
 	if (!d_chv)
@@ -232,7 +232,7 @@ int	manage_heredoc(t_command **all_cmd, char **env)
 			name = find_heredoc_name();
 			if (!name)
 				return (-1);
-			launch_heredoc(all_cmd, env, name);
+			launch_heredoc(&tmp, env, name);
 			replace_heredoc(&tmp, name);
 		}
 		tmp = tmp->next;
