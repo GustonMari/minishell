@@ -5,7 +5,7 @@
 /*Cette fonction permet de remplir le fichier 
 temporaire tout en respecant les regles de priorite du heredoc*/
 
-void	fill_heredoc_file(char **stop, char **env, int is_expand)
+void	fill_heredoc_file(char **stop, char **env, int is_expand, char *name)
 {
 	char	*line = NULL;
 	int		fd;
@@ -14,7 +14,8 @@ void	fill_heredoc_file(char **stop, char **env, int is_expand)
 	
 	begin = 0;
 	i = 0;
-	fd = create_heredoc_file();
+	//Ajouter en arg de cette fonction le nom du heredoc a remplir
+	fd = create_heredoc_file(name);
 	//line = NULL;
 	while (1)
 	{
@@ -61,59 +62,6 @@ void	fill_heredoc_file(char **stop, char **env, int is_expand)
 	close(fd);
 }
 
-/* void	fill_heredoc_file(char **stop, char **env, int is_expand)
-{
-	char	*line = NULL;
-	int		fd;
-	int		i;
-	int 	begin;
-	
-	begin = 0;
-	i = 0;
-	fd = create_heredoc_file();
-	//line = NULL;
-	while (1)
-	{
-		if (signal_heredoc())
-		{
-			ft_free_tab_2d(stop);
-			close(fd);
-			printf("on exit\n");
-			exit(g_status);
-		}
-		else
-			line = readline("> ");
-
-		//Gerer les signaux et bien check la valeur de retour de exit
-
-		//if (signal_heredoc(stop, line))
-		//	break ;
-		//printf("line %s\n", line);
-		//printf("stop = %s\n", stop[i]);
-		if (stop[i] && !ft_strcmp(line, stop[i]))
-		{
-			if (stop[i + 1] == NULL)
-			{
-				free(line);
-				break ;
-			}
-			i++;
-		}
-		if (is_expand == TRUE)
-			line = expand_dollar(env, line);
-		begin = start_heredoc_one(stop, begin);
-		if (begin == 1)
-		{
-			write(fd, line, ft_strlen(line));
-			write(fd, "\n", 1);
-		}
-		if (line)
-			free(line);
-		begin = start_heredoc_more(stop, i);
-	}
-	ft_free_tab_2d(stop);
-	close(fd);
-} */
 
 /*Compte le nombre de D_CHV_L entre deux pipe*/
 
@@ -163,7 +111,7 @@ char	**create_tab_stop(t_command *all_cmd)
 	return (stop);
 }
 
-int	launch_heredoc(t_command *all_cmd, char **env)
+int	launch_heredoc(t_command **all_cmd, char **env, char *name)
 {
 	char	**stop;
 	int		is_expand;
@@ -177,12 +125,11 @@ int	launch_heredoc(t_command *all_cmd, char **env)
 		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
 	pid = fork();
 	//peut etre a decaler dans pid == 0
-	
 	if (pid == 0)
 	{
 		signal_heredoc();
 		stop = NULL;
-		stop = create_tab_stop(all_cmd);
+		stop = create_tab_stop(*all_cmd);
 		if (!stop)
 			return (-1);
 		if(is_expand_heredoc(stop) == TRUE)
@@ -192,14 +139,14 @@ int	launch_heredoc(t_command *all_cmd, char **env)
 		stop = trim_quote_stop(stop);
 		if (!stop)
 			return (-1);
-		fill_heredoc_file(stop, env, is_expand);
+		fill_heredoc_file(stop, env, is_expand, name);
 		exit(0);
 	}
 	else
 	{
 		fprintf(stderr, "on rentre\n");
 		//waitpid(-1, &status, 0);
-		//waitpid(pid, &status, 0);
+		waitpid(pid, &status, 0);
 		fprintf(stderr, "ON sort\n");
 	}
 
@@ -210,26 +157,88 @@ int	launch_heredoc(t_command *all_cmd, char **env)
 	return (0);
 }
 
-/* int	launch_heredoc(t_command *all_cmd, char **env)
+/*Trouve un nom de heredoc valide*/
+
+char	*find_heredoc_name(void)
 {
-	char	**stop;
-	int		is_expand;
-	pid_t	pid;
+	static int i = 0;
+	char	*name;
+
+	name = NULL;
+	while (1)
+	{
+		name = ft_strjoin_free(".heredoc", ft_itoa(i), 2);
+		if (!name)
+			return (NULL);
+		if (access(name, F_OK) < 0)
+			return (name);
+		free(name);
+		i++;
+	}
+	return (NULL);
+}
+
+
+/*Permet de remplacer << par < et le word suivant par
+le nom du heredoc qui etait dispo*/
+
+int	replace_heredoc(t_command **all_cmd, char *name)
+{
+	char	**d_chv;
+	char	**name_2d;
+
+	//ft_free_tab_2d((*all_cmd)->cmd_to_exec);
+	(*all_cmd)->type = CHV_L;
+	d_chv = malloc(sizeof(char *) * 2);
+	if (!d_chv)
+		return (-1);
+	d_chv[0] = ft_strdup("<");
+	if (!d_chv[0])
+	{
+		free(d_chv);
+		return (-1);
+	}
+	d_chv[1] = NULL;
 	
-	stop = NULL;
-	stop = create_tab_stop(all_cmd);
-	if (!stop)
-		return (-1);
-	if(is_expand_heredoc(stop) == TRUE)
-		is_expand = TRUE;
+	if ((*all_cmd) && (*all_cmd)->next)
+	{
+		ft_free_tab_2d((*all_cmd)->next->cmd_to_exec);
+		(*all_cmd)->type = WORD;
+		(*all_cmd)->to_del = 1;
+		name_2d = malloc(sizeof(char *) * 2);
+		if (!name_2d)
+			return (-1);
+		name_2d[0] = name;
+		name_2d[1] = NULL;
+		(*all_cmd)->next->cmd_to_exec = name_2d;
+	}
 	else
-		is_expand = FALSE;
-	stop = trim_quote_stop(stop);
-	if (!stop)
 		return (-1);
-	fill_heredoc_file(stop, env, is_expand);
 	return (0);
-} */
+}
+
+/*Fonction qui manage le heredoc*/
+
+int	manage_heredoc(t_command **all_cmd, char **env)
+{
+	t_command	*tmp;
+	char		*name;
+
+	tmp = *all_cmd;
+	while (tmp)
+	{
+		if (tmp->type == D_CHV_L && tmp->next && tmp->next->type == WORD)
+		{
+			name = find_heredoc_name();
+			if (!name)
+				return (-1);
+			launch_heredoc(all_cmd, env, name);
+			replace_heredoc(&tmp, name);
+		}
+		tmp = tmp->next;
+	}
+	return(0);
+}
 
 
 /*Fonction qui nous permet de savoir si la derniere redirection

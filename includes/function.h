@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/23 18:04:28 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/03/24 10:46:22 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,9 +293,10 @@ void	exit_pipe_process(int sig);
 */
 
 int		priorities_D_CHV_L(t_command *all_cmd);
-int		launch_heredoc(t_command *all_cmd, char **env);
+int		launch_heredoc(t_command **all_cmd, char **env, char *name);
+int		manage_heredoc(t_command **all_cmd, char **env);
 int		count_nb_D_CHV_L_between_pipe(t_command *all_cmd);
-int		create_heredoc_file(void);
+int		create_heredoc_file(char *name);
 int		start_heredoc_one(char **stop, int begin);
 int		start_heredoc_more(char **stop, int i);
 void	exit_heredoc(int sig);

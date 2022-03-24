@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirection_test_right.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/24 09:39:43 by gmary             #+#    #+#             */
+/*   Updated: 2022/03/24 09:44:03 by gmary            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 int	is_redirection_type(t_command *op)
@@ -29,14 +41,15 @@ int	count_redir_r(t_command *all_cmd)
 	return (nb_redir);
 }
 
-int  manage_single_chv_r(t_command **all_cmd)
+int	manage_single_chv_r(t_command **all_cmd)
 {
 	int	fd;
 
 	fd = -1;
 	if ((*all_cmd)->type == CHV_R)
 	{
-		fd = open((*all_cmd)->next->cmd_to_exec[0], O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		fd = open((*all_cmd)->next->cmd_to_exec[0],
+				O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		if (fd < 0)
 		{
 			close(fd);
@@ -46,7 +59,8 @@ int  manage_single_chv_r(t_command **all_cmd)
 	}
 	else if ((*all_cmd)->type == D_CHV_R)
 	{
-		fd = open((*all_cmd)->next->cmd_to_exec[0], O_CREAT | O_APPEND| O_WRONLY, 0644);
+		fd = open((*all_cmd)->next->cmd_to_exec[0],
+				O_CREAT | O_APPEND | O_WRONLY, 0644);
 		if (fd < 0)
 		{
 			close(fd);
@@ -74,13 +88,15 @@ int	manage_open_r(t_command **all_cmd, char *last_redir)
 	{
 		if (tmp->type == CHV_R)
 		{
-			fd = open(tmp->next->cmd_to_exec[0], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			fd = open(tmp->next->cmd_to_exec[0],
+					O_CREAT | O_WRONLY | O_TRUNC, 0644);
 			if (fd < 0)
 				return (-1);
 		}
 		else if (tmp->type == D_CHV_R)
 		{
-			fd = open(tmp->next->cmd_to_exec[0], O_CREAT | O_WRONLY | O_APPEND, 0644);
+			fd = open(tmp->next->cmd_to_exec[0],
+					O_CREAT | O_WRONLY | O_APPEND, 0644);
 			if (fd < 0)
 				return (-1);
 		}

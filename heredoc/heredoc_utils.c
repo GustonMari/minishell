@@ -3,11 +3,11 @@
 /*Permet de creer le fichier .heredoc ou que l'on va
 utiliser pour sotcker ce qu'on met dans heredoc*/
 
-int	create_heredoc_file(void)
+int	create_heredoc_file(char *name)
 {
 	int	file;
 
-	file = open(".heredoc", O_CREAT | O_RDWR | O_TRUNC, 00777);
+	file = open(name, O_CREAT | O_RDWR | O_TRUNC, 00777);
 	if (file < 0)
 		return (-1);
 	return (file);

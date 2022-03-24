@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signals.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/24 09:38:07 by gmary             #+#    #+#             */
+/*   Updated: 2022/03/24 09:39:16 by gmary            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 void	exit_pipe_process(int sig)
@@ -15,19 +27,16 @@ void	signal_in_cmd(void)
 	if (signal(SIGQUIT, &exit_pipe_process) == SIG_ERR)
 		ft_putstr_fd("Signal Error\n", 2);
 	if (signal(SIGINT, &exit_pipe_process) == SIG_ERR)
-		ft_putstr_fd("Signal Error\n", 2);	
+		ft_putstr_fd("Signal Error\n", 2);
 }
-
 
 void	signal_cmd(int sig)
 {
 	if (sig == SIGINT)
 	{
-		//write(1, "\n\e[1;91m- SIGINT -\n", 20);
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		//rl_redisplay();
 		g_status = 130;
 		exit(g_status);
 	}

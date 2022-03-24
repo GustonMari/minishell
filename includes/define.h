@@ -38,6 +38,7 @@
 # include <dirent.h>
 # include <termios.h>
 # include <fcntl.h>
+# include <time.h>
 
 extern int	g_status;
 

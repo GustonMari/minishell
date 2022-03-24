@@ -83,6 +83,7 @@ t_command	*create_new_cmd_node(char **strs, t_token *all)
 	if (!new_cmd->cmd_to_exec)
 		return (NULL);
 	new_cmd->type = all->type;
+	new_cmd->to_del = 0;
 	new_cmd->next = NULL;
 	return (new_cmd);
 }

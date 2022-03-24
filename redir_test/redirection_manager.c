@@ -1,5 +1,4 @@
 #include "../includes/function.h"
-#include <time.h>
 
 int	erase_file(t_command *all_cmd, char *file_error)
 {

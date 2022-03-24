@@ -13,7 +13,6 @@ char	**manage_line(char **env, char *line)
 	tmp = lexer(line);
 	if (!tmp)
 		return (env);
-
 	remix_manager(&tmp);
 	if(check_cmd_list(tmp) < 0)
 	{
@@ -24,14 +23,19 @@ char	**manage_line(char **env, char *line)
 	print_token(&tmp);
 	printf("------------------\n"); */
 	expanded = expand_all(env, tmp);
-/* 	printf("AFTER------------------\n");
+	/* printf("AFTER------------------\n");
 	print_token(&tmp);
 	printf("------------------\n"); */
 	cmd_all = token_to_cmd(expanded);
-	//printf("AFTER------------------\n");
-	//print_cmd(&cmd_all);
-	//printf("------------------\n");
-	env = ft_dispatch(cmd_all, env);
+	if (manage_heredoc(&cmd_all, env) < 0)
+	{
+		//On doit exit, erreur malloc
+		return (env);
+	}
+	printf("AFTER------------------\n");
+	print_cmd(&cmd_all);
+	printf("------------------\n");
+	//env = ft_dispatch(cmd_all, env);
 	ft_lstclear(&expanded, free);
 	ft_cmd_clear(&cmd_all);
 	return (env);

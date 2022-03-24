@@ -45,8 +45,8 @@ char	*find_last_redir_l(t_command *all_cmd)
 		}
 		tmp = tmp->next;
 	}
-	if (!priorities_D_CHV_L(all_cmd))
-		return (ft_strdup(".heredoc"));
+	//if (!priorities_D_CHV_L(all_cmd))
+	//	return (ft_strdup(".heredoc"));
 	return (file_name);
 }
 
@@ -80,8 +80,8 @@ int	manage_chv_l(t_command *all_cmd, char **env)
 		return (-1);
 	if (manage_single_chv_l(all_cmd) < 0)
 		return (-2);
-	if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
-		launch_heredoc(all_cmd, env);
+	//if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
+	//	launch_heredoc(all_cmd, env);
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 	{
