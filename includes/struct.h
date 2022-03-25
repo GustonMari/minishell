@@ -40,4 +40,10 @@ typedef struct s_command
 	struct s_command	*next;
 }				t_command;
 
+typedef struct s_to_clean
+{
+	t_token		*token_begin;
+	t_command	*command_begin;
+}				t_to_clean;
+
 #endif

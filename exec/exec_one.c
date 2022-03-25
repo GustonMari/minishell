@@ -12,7 +12,7 @@
 
 #include "../includes/function.h"
 
-char	**execute_one_cmd(char **env, t_command *all)
+char	**execute_one_cmd(char **env, t_to_clean *clean, t_command *all)
 {
 	int	builtin;
 
@@ -34,6 +34,6 @@ char	**execute_one_cmd(char **env, t_command *all)
 	if (builtin == FT_ECHO)
 		ft_echo(all->cmd_to_exec);
 	if (builtin == FT_EXIT)
-		ft_exit(all->cmd_to_exec);
+		ft_exit(all->cmd_to_exec, clean);
 	return (env);
 }

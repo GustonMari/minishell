@@ -5,10 +5,11 @@ char	**manage_line(char **env, char *line)
 	t_token		*tmp;
 	t_token		*expanded;
 	t_command	*cmd_all;
-	(void)cmd_all;
+	t_to_clean	*clean;
 
 	cmd_all = NULL;
 	tmp = NULL;
+	clean = NULL;
 	line = expand_node_single(env, line);
 	tmp = lexer(line);
 	if (!tmp)
@@ -36,7 +37,10 @@ char	**manage_line(char **env, char *line)
 	/* printf("AFTER------------------\n");
 	print_cmd(&cmd_all);
 	printf("------------------\n"); */
-	env = ft_dispatch(cmd_all, expanded, env);
+	clean = malloc(sizeof(clean));
+	clean->token_begin = expanded;
+	clean->command_begin = cmd_all;
+	env = ft_dispatch(cmd_all, clean, env);
 	if (delete_heredoc_file(cmd_all) < 0)
 	{
 		//On doit exit, erreur malloc

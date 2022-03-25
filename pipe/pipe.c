@@ -76,14 +76,14 @@ int	is_last_cmd(t_command *all_cmd)
 	return (1);
 }
 
-int execute_pipe(t_command *all_cmd, t_token *expanded, char **env, int in)
+int execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env, int in)
 {
 	int		out;
 	int		i;
 	int		save[2];
 	int		ret;
 	(void)in;
-	(void)expanded;
+	(void)clean;
 
 	ret = -1;
 	i = 0;
@@ -117,7 +117,7 @@ int execute_pipe(t_command *all_cmd, t_token *expanded, char **env, int in)
 		}
 		else if (all_cmd && all_cmd->type != CHV_R && all_cmd->type != D_CHV_R
 			&& all_cmd->type != CHV_L && all_cmd->type != D_CHV_L)
-			ft_exec(env, all_cmd->cmd_to_exec, out);
+			ft_exec(env, all_cmd, clean, out);
 		redirection_clean(all_cmd);
 		count_all_between_pipe(&all_cmd);
 		dup2(save[0], 0);

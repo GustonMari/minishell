@@ -1,18 +1,14 @@
 #include "../includes/function.h"
 
-char	**ft_dispatch(t_command *all, t_token *expanded, char **env)
+char	**ft_dispatch(t_command *all, t_to_clean *clean, char **env)
 {
 	t_command	*tmp;
 
 	tmp = all;
 
-	// a mettre ailleurs
-	//if(check_cmd_list(tmp) == -1)
-	//		return (env);
-	
 	if (count_cmd_list(tmp) == 1 && is_builtin(tmp->cmd_to_exec[0]))
-		env = execute_one_cmd(env, all);
+		env = execute_one_cmd(env, clean, all);
 	else
-		execute_pipe(tmp, expanded, env,  STDIN_FILENO);
+		execute_pipe(tmp, clean, env,  STDIN_FILENO);
 	return (env);
 }

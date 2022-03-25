@@ -171,15 +171,15 @@ int	find_next_quote(char *str);
 
 char	*find_path_cmd(char *cmd_to_join, char *tmp);
 char	*chose_ath_cmd(char *cmd, char *tmp);
-int	ft_exec(char **env, char **full_cmd, int out);
-int	ft_exec_cmd(char **env, char **full_cmd, int out);
-char	**ft_dispatch(t_command *all, t_token *expanded, char **env);
+int	ft_exec(char **env, t_command *all_cmd, t_to_clean *clean, int out);
+int	ft_exec_cmd(char **env, t_to_clean *clean, char **full_cmd, int out);
+char	**ft_dispatch(t_command *all, t_to_clean *clean, char **env);
 
 /*
 ------------------EXECUTE 1 ----------------
 */
 
-char	**execute_one_cmd(char **env, t_command *all);
+char	**execute_one_cmd(char **env, t_to_clean *clean, t_command *all);
 /*
 ------------------CHECK ----------------
 */
@@ -261,7 +261,7 @@ char	**manage_line(char **env, char *line);
 */
 
 //int execute_pipe(t_command *all_cmd, char **env, int nb_cmd);
-int 	execute_pipe(t_command *all_cmd, t_token *expanded, char **env, int in);
+int 	execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env, int in);
 int		count_cmd_list(t_command *all_cmd);
 int		count_all_between_pipe(t_command **all_cmd);
 
@@ -333,7 +333,7 @@ int	ft_atoi(const char *str);
 ------------------ EXIT ------------------
 */
 
-void	ft_exit(char **full_cmd);
+void	ft_exit(char **full_cmd, t_to_clean *clean);
 
 /* 
 ------------------ SIGNAL ------------------

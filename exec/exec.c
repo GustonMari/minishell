@@ -85,11 +85,12 @@ char	*chose_ath_cmd(char *cmd, char *tmp)
 	return (path);
 }
 
-int	ft_exec_cmd(char **env, char **full_cmd, int out)
+int	ft_exec_cmd(char **env, t_to_clean *clean, char **full_cmd, int out)
 {
 	char	*path;
 	char	*tmp;
 	int		pid;
+	(void)clean;
 
 	signal_manager2();
 	pid = fork();
@@ -120,7 +121,7 @@ int	ft_exec_cmd(char **env, char **full_cmd, int out)
 	return (0);
 }
 
-char	**ft_exec_builtin(char **env, char **full_cmd, int builtin)
+char	**ft_exec_builtin(char **env, t_to_clean *clean, char **full_cmd, int builtin)
 {
 	if (builtin == FT_CD)
 		ft_cd(full_cmd, env);
@@ -139,22 +140,22 @@ char	**ft_exec_builtin(char **env, char **full_cmd, int builtin)
 	if (builtin == FT_ECHO)
 		ft_echo(full_cmd);
 	if (builtin == FT_EXIT)
-		ft_exit(full_cmd);
+		ft_exit(full_cmd, clean);
 	return (env);
 }
 
-int	ft_exec(char **env, char **full_cmd, int out)
+int	ft_exec(char **env, t_command *all_cmd, t_to_clean *clean, int out)
 {
 	int	builtin;
 
-	builtin = is_builtin(full_cmd[0]);
+	builtin = is_builtin(all_cmd->cmd_to_exec[0]);
 	if (builtin)
 	{
-		env = ft_exec_builtin(env, full_cmd, builtin);
+		env = ft_exec_builtin(env, clean, all_cmd->cmd_to_exec, builtin);
 		//exit(0);
 	}
 	else
-		ft_exec_cmd(env, full_cmd, out);
+		ft_exec_cmd(env, clean, all_cmd->cmd_to_exec, out);
 	return (0);
 }
 
