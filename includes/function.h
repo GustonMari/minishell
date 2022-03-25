@@ -97,6 +97,11 @@ int     ft_check_export(char *str);
 char	**bubble_sort_tab_2d(char **tab);
 char	*find_name_val(char *str);
 char	*find_val_in_line(char *str);
+int		is_var_in_line_export(char *str, char *var, size_t n);
+int		is_var_in_env_export(char **env, char *var, size_t n);
+int		ft_change_env_val_export(char **env, char *var, char *new_val);
+int		is_var_in_env_export_2(char **env, char *var, size_t n);
+
 /*
 ------------------ CLEAR ----------------
 */
@@ -109,8 +114,9 @@ void	ft_cmd_clear(t_command **lst);
 ------------------ UNSET ----------------
 */
 
-int	is_var_in_line(char *str, char *to_del, size_t n);
+int		is_var_in_line(char *str, char *to_del, size_t n);
 char	**ft_unset(char **env, char **full_cmd);
+int		is_var_in_line_unset(char *str, char *to_del, size_t n);
 
 
 /*

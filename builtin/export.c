@@ -53,14 +53,18 @@ char	**ft_export_add(char **env, char *str)
 char	**ft_export_change(char **env, char *str, char *name)
 {
 	char	*val;
-	char	*ret;
+	//char	*ret;
 
+	printf("export change\n");
 	val = find_val_in_line(str);
-	ret = find_val_in_tab(env, name);
-	ft_change_env_val(env, name, val);
+	printf("val = %s\n", val);
+	//ret = find_val_in_tab(env, name);
+	//printf("ret = %s\n", ret);
+	//ft_change_env_val(env, name, val);
+	ft_change_env_val_export(env, name, val);
 	free(name);
 	free(val);
-	free(ret);
+	//free(ret);
 	return (env);
 }
 
@@ -71,9 +75,18 @@ char	**ft_export(char **env, char *str)
 
 	if (ft_check_export(str))
 		return (env);
+	printf("str = %s\n", str);
 	name = find_name_val(str);
+	printf("name = %s\n", name);
+	if (is_var_in_env_export_2(env, str, ft_strlen(str)) == 0)
+	{
+		free(name);
+		return (env);
+	}
 	ret = find_val_in_tab(env, name);
-	if (ret == NULL)
+	printf("ret = %s\n", ret);
+	if (ret == NULL
+		&& !is_var_in_env_export(env, name, ft_strlen(name)) == 0)
 		env = ft_export_add(env, str);
 	else
 		env = ft_export_change(env, str, name);
