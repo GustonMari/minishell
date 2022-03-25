@@ -173,7 +173,7 @@ char	*find_path_cmd(char *cmd_to_join, char *tmp);
 char	*chose_ath_cmd(char *cmd, char *tmp);
 int	ft_exec(char **env, char **full_cmd, int out);
 int	ft_exec_cmd(char **env, char **full_cmd, int out);
-char	**ft_dispatch(t_command *all, char **env);
+char	**ft_dispatch(t_command *all, t_token *expanded, char **env);
 
 /*
 ------------------EXECUTE 1 ----------------
@@ -261,7 +261,7 @@ char	**manage_line(char **env, char *line);
 */
 
 //int execute_pipe(t_command *all_cmd, char **env, int nb_cmd);
-int		execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in);
+int 	execute_pipe(t_command *all_cmd, t_token *expanded, char **env, int in);
 int		count_cmd_list(t_command *all_cmd);
 int		count_all_between_pipe(t_command **all_cmd);
 

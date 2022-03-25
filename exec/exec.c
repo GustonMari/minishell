@@ -138,6 +138,8 @@ char	**ft_exec_builtin(char **env, char **full_cmd, int builtin)
 		ft_print_env(env);
 	if (builtin == FT_ECHO)
 		ft_echo(full_cmd);
+	if (builtin == FT_EXIT)
+		ft_exit(full_cmd);
 	return (env);
 }
 

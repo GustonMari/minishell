@@ -76,14 +76,14 @@ int	is_last_cmd(t_command *all_cmd)
 	return (1);
 }
 
-int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
+int execute_pipe(t_command *all_cmd, t_token *expanded, char **env, int in)
 {
 	int		out;
 	int		i;
 	int		save[2];
 	int		ret;
 	(void)in;
-	(void)nb_cmd;
+	(void)expanded;
 
 	ret = -1;
 	i = 0;

@@ -36,7 +36,7 @@ char	**manage_line(char **env, char *line)
 	/* printf("AFTER------------------\n");
 	print_cmd(&cmd_all);
 	printf("------------------\n"); */
-	env = ft_dispatch(cmd_all, env);
+	env = ft_dispatch(cmd_all, expanded, env);
 	if (delete_heredoc_file(cmd_all) < 0)
 	{
 		//On doit exit, erreur malloc
