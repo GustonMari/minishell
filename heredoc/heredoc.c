@@ -129,8 +129,12 @@ int	launch_heredoc(t_command **all_cmd, char **env, char *name)
 	}
 	else
 		wait_pipe();
-	if (g_status == 130)
+	if (g_status == 255)
+	{
+		g_status = 130;
 		return (-2);
+	}
+		
 	return (0);
 }
 

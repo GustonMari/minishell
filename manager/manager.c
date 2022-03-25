@@ -33,7 +33,6 @@ char	**manage_line(char **env, char *line)
 		delete_heredoc_file(cmd_all);
 		return (env);
 	}
-
 	/* printf("AFTER------------------\n");
 	print_cmd(&cmd_all);
 	printf("------------------\n"); */

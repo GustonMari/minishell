@@ -63,22 +63,11 @@ void	manage_heredoc_signal(int sig)
 {
 	if (sig == SIGINT)
 	{
-		//write(2, "\n\e[1;91m- SIGINT -\n", 20);
-		//printf("prout\n");
-		//rl_on_new_line();
-		//rl_replace_line("", 0);
-		//rl_redisplay();
+		//rl_redisplay();g_status = 130;
 		g_status = 130;
 		write(1, "\n", 1);
-		//kill(0, SIGUSR2);
-		exit(g_status);
+		exit(255);
 	}
-	// else if (sig == SIGHUP)
-	// {
-	// 	ft_putstr_fd("Quit (core dumped)\n", 2);
-	// 	//g_status = 0;
-	// 	exit(g_status);
-	// }
 }
 
 int	signal_heredoc(void)
