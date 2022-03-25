@@ -12,6 +12,11 @@
 
 #include "../includes/function.h"
 
+/*Permet de savoir si la variable to_del existe
+dans la chaine de caractere str
+renvoie 0 si a la fin de la variable on a un \0
+ou si on a un =*/
+
 int	is_var_in_line_unset(char *str, char *to_del, size_t n)
 {
 	size_t	i;
@@ -26,6 +31,24 @@ int	is_var_in_line_unset(char *str, char *to_del, size_t n)
 		return (0);
 	else
 		return (1);
+}
+
+/*Permet de savoir si la variable existe dans l'environnement,
+on retourne 0 si elle existe*/
+
+int	check_already_exists(char **env, char *to_del, size_t n)
+{
+	int		j;
+	int		line;
+
+	j = -1;
+	line = ft_count_line(env);
+	while (++j < line)
+	{
+		if (!is_var_in_line_unset(env[j], to_del, n))
+			return (0);
+	}
+	return (1);
 }
 
 /*
@@ -43,6 +66,8 @@ char	**ft_unset_line(char **env, char *to_del)
 
 	i = 0;
 	line = ft_count_line(env);
+	if (check_already_exists(env, to_del, ft_strlen(to_del)) == 1)
+		return (env);
 	dest = malloc(sizeof(char *) * (line));
 	if (!dest)
 		return (NULL);
@@ -87,6 +112,8 @@ char	**ft_unset(char **env, char **full_cmd)
 
 	i = 1;
 	g_status = 0;
+	if (ft_count_line(full_cmd) == 1)
+		return (env);
 	while (full_cmd[i])
 	{
 		ft_check_unset(full_cmd[i]);
