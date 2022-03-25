@@ -171,8 +171,8 @@ int	find_next_quote(char *str);
 
 char	*find_path_cmd(char *cmd_to_join, char *tmp);
 char	*chose_ath_cmd(char *cmd, char *tmp);
-int	ft_exec(char **env, t_command *all_cmd, t_to_clean *clean, int out);
-int	ft_exec_cmd(char **env, t_to_clean *clean, char **full_cmd, int out);
+int		ft_exec(char **env, t_command *all_cmd, t_to_clean *clean, int out);
+int		ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out);
 char	**ft_dispatch(t_command *all, t_to_clean *clean, char **env);
 
 /*
@@ -333,7 +333,8 @@ int	ft_atoi(const char *str);
 ------------------ EXIT ------------------
 */
 
-void	ft_exit(char **full_cmd, t_to_clean *clean);
+void	ft_exit(t_command *all, t_to_clean *clean);
+void	ft_clean_exit(t_to_clean *clean);
 
 /* 
 ------------------ SIGNAL ------------------
@@ -344,5 +345,9 @@ void	signal_manager2(void);
 void	signal_cmd(int sig);
 
 
+
+
+
+int	prio_exit(t_command *all);
 
 #endif

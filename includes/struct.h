@@ -44,6 +44,7 @@ typedef struct s_to_clean
 {
 	t_token		*token_begin;
 	t_command	*command_begin;
+	char		**env;
 }				t_to_clean;
 
 #endif

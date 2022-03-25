@@ -85,33 +85,40 @@ char	*chose_ath_cmd(char *cmd, char *tmp)
 	return (path);
 }
 
-int	ft_exec_cmd(char **env, t_to_clean *clean, char **full_cmd, int out)
+int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 {
 	char	*path;
 	char	*tmp;
 	int		pid;
 	(void)clean;
 
+	prio_exit(all);
 	signal_manager2();
 	pid = fork();
 	if (pid == 0)
 	{
 		if (out != -1)
 			close(out);
-		if (ft_strcmp(full_cmd[0], "exit") == 0)
-			ft_exit(full_cmd, clean);
+		if (ft_strcmp(all->cmd_to_exec[0], "exit") == 0)
+		{
+			ft_exit(all, clean);
+			ft_clean_exit(clean);
+			exit(g_status);
+		}
 		g_status = 0;
 		tmp = find_val_in_tab(env, "PATH");
 		if (!tmp)
 			return (-1);
-		path = chose_ath_cmd(full_cmd[0], tmp);
+		path = chose_ath_cmd(all->cmd_to_exec[0], tmp);
 		if (!path)
 		{
-			ft_print_error(1, full_cmd[0], ": command not found", NULL);
+			ft_print_error(1, all->cmd_to_exec[0], ": command not found", NULL);
 			g_status = 127;
 			exit(127);
+			//g_status = 112;
+			//exit(112);
 		}
-		if (execve(path, full_cmd, env) < 0)
+		if (execve(path, all->cmd_to_exec, env) < 0)
 		{
 			perror("execve");
 			g_status = errno;
@@ -192,7 +199,7 @@ int	ft_exec(char **env, t_command *all_cmd, t_to_clean *clean, int out)
 		//exit(0);
 	}
 	else
-		ft_exec_cmd(env, clean, all_cmd->cmd_to_exec, out);
+		ft_exec_cmd(env, clean, all_cmd, out);
 	return (0);
 }
 

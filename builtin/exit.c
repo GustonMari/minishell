@@ -12,48 +12,75 @@
 
 #include "../includes/function.h"
 
-void	ft_exit_2(char **full_cmd)
+void	ft_clean_exit(t_to_clean *clean)
+{
+	ft_lstclear(&(clean->token_begin), free);
+	ft_cmd_clear(&(clean->command_begin));
+	ft_free_tab_2d(clean->env);
+	free(clean);
+	rl_clear_history();
+}
+
+void	ft_exit_2(char **full_cmd, t_to_clean *clean)
 {
 	if (!is_str_digit(full_cmd[1]))
 	{
 		ft_putstr_fd(BRED"exit\nminishell: exit: too many arguments\n"CRESET, 2);
 		if (g_status == 0)
 			g_status = 1;
-		printf("g_status = %d\n", g_status);
 	}
 	else
 	{
 		exit_error(full_cmd[1]);
 		g_status = 2;
-		printf("g_status = %d\n", g_status);
+		ft_clean_exit(clean);
 		exit(2);
 	}
 }
 
-void	ft_exit(char **full_cmd, t_to_clean *clean)
-{
-	if (ft_count_line(full_cmd) == 1)
+int	prio_exit(t_command *all)
+{	
+	t_command	*tmp;
+	t_command	*last;
+
+	tmp = all;
+	while(tmp)
+	{	
+		last = tmp;
+		tmp = tmp->next;
+	}
+	if (ft_strcmp("exit", last->cmd_to_exec[0]) == 0
+		&& last->cmd_to_exec[1] && !is_str_digit(last->cmd_to_exec[1])
+			&& ft_count_line(last->cmd_to_exec) == 2)
 	{
-		printf("g_status = %d\n", g_status);
+		g_status = ft_atoi(last->cmd_to_exec[1]);
+		return (TRUE);
+	}
+		
+	return (FALSE);
+}
+
+void	ft_exit(t_command *all, t_to_clean *clean)
+{
+	if (ft_count_line(all->cmd_to_exec) == 1)
+	{
+		ft_clean_exit(clean);
 		exit (g_status);
 	}
-	else if (ft_count_line(full_cmd) == 2)
+	else if (ft_count_line(all->cmd_to_exec) == 2)
 	{
-		if (is_str_digit(full_cmd[1]))
+		if (is_str_digit(all->cmd_to_exec[1]))
 		{
-			exit_error(full_cmd[1]);
+			exit_error(all->cmd_to_exec[1]);
 			g_status = 2;
-			printf("g_status = %d\n", g_status);
-			ft_lstclear(&(clean->token_begin), free);
-			ft_cmd_clear(&(clean->command_begin));
+			ft_clean_exit(clean);
 			exit(2);
 		}
-		g_status = ft_atoi(full_cmd[1]);
-		printf("g_status = %d\n", g_status);
+		ft_clean_exit(clean);
 		exit(g_status);
 	}
 	else
-		ft_exit_2(full_cmd);
+		ft_exit_2(all->cmd_to_exec, clean);
 	return ;
 }
 

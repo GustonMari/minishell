@@ -34,6 +34,12 @@ char	**execute_one_cmd(char **env, t_to_clean *clean, t_command *all)
 	if (builtin == FT_ECHO)
 		ft_echo(all->cmd_to_exec);
 	if (ft_strcmp(all->cmd_to_exec[0], "exit") == 0)
-		ft_exit(all->cmd_to_exec, clean);
+	{
+		//A voir si c'est pas mauvais
+		//if (all->cmd_to_exec[1])
+		//	g_status = ft_atoi(all->cmd_to_exec[1]);
+		ft_exit(all, clean);
+	}
+		
 	return (env);
 }

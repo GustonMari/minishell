@@ -37,9 +37,10 @@ char	**manage_line(char **env, char *line)
 	/* printf("AFTER------------------\n");
 	print_cmd(&cmd_all);
 	printf("------------------\n"); */
-	clean = malloc(sizeof(clean));
+	clean = malloc(sizeof(clean) * 3);
 	clean->token_begin = expanded;
 	clean->command_begin = cmd_all;
+	clean->env = env;
 	env = ft_dispatch(cmd_all, clean, env);
 	if (delete_heredoc_file(cmd_all) < 0)
 	{
@@ -48,5 +49,6 @@ char	**manage_line(char **env, char *line)
 	}
 	ft_lstclear(&expanded, free);
 	ft_cmd_clear(&cmd_all);
+	free(clean);
 	return (env);
 }

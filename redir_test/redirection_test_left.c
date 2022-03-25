@@ -70,12 +70,12 @@ int	manage_chv_l(t_command *all_cmd, char **env)
 	(void)env;
 
 	file_name = NULL;
-	g_status = 0;
 	if (count_redir_l(all_cmd) == 0)
 		return (1);
 	file_name = find_last_redir_l(all_cmd);
 	if (!file_name)
 		return (-1);
+	g_status = 0;
 	if (manage_single_chv_l(all_cmd) < 0)
 		return (-2);
 	//if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
