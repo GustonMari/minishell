@@ -29,8 +29,6 @@ int	is_builtin(char *builtin)
 		return (FT_EXPORT);
 	if (!ft_strcmp("echo", builtin))
 		return (FT_ECHO);
-	if (!ft_strcmp("exit", builtin))
-		return (FT_EXIT);
 	return (0);
 }
 

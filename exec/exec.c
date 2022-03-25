@@ -98,6 +98,8 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, char **full_cmd, int out)
 	{
 		if (out != -1)
 			close(out);
+		if (ft_strcmp(full_cmd[0], "exit") == 0)
+			ft_exit(full_cmd, clean);
 		g_status = 0;
 		tmp = find_val_in_tab(env, "PATH");
 		if (!tmp)
@@ -121,8 +123,45 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, char **full_cmd, int out)
 	return (0);
 }
 
+/* int	ft_exec_cmd(char **env, t_to_clean *clean, char **full_cmd, int out)
+{
+	char	*path;
+	char	*tmp;
+	int		pid;
+	(void)clean;
+
+	signal_manager2();
+	pid = fork();
+	if (pid == 0)
+	{
+		if (out != -1)
+			close(out);
+		g_status = 0;
+		tmp = find_val_in_tab(env, "PATH");
+		if (!tmp)
+			return (-1);
+		path = chose_ath_cmd(full_cmd[0], tmp);
+		if (!path)
+		{
+			ft_print_error(1, full_cmd[0], ": command not found", NULL);
+			g_status = 127;
+			exit(127);
+		}
+		if (execve(path, full_cmd, env) < 0)
+		{
+			perror("execve");
+			g_status = errno;
+			exit(1);
+		}
+		free(path);
+		return (0);
+	}
+	return (0);
+} */
+
 char	**ft_exec_builtin(char **env, t_to_clean *clean, char **full_cmd, int builtin)
 {
+	(void)clean;
 	if (builtin == FT_CD)
 		ft_cd(full_cmd, env);
 	if (builtin == FT_UNSET)
@@ -139,8 +178,6 @@ char	**ft_exec_builtin(char **env, t_to_clean *clean, char **full_cmd, int built
 		ft_print_env(env);
 	if (builtin == FT_ECHO)
 		ft_echo(full_cmd);
-	if (builtin == FT_EXIT)
-		ft_exit(full_cmd, clean);
 	return (env);
 }
 

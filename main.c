@@ -89,14 +89,14 @@ int main(int ac, char **av, char **envp)
 			write(2, "\n\e[0;35mctrl+D used\n", 21);
 			break ;
 		}
-		if (!ft_strcmp(line, "exit"))
+/* 		if (!ft_strcmp(line, "exit"))
 		{
 			//free(line);
 			rl_clear_history();
 			ft_free_tab_2d(env);
 			ft_putstr_fd("\n\e[1;91m- EXIT OK -\e[0m\n", 1);
 			exit(g_status);
-		}
+		} */
 		if (line && *line)
 		{	
 			add_history(line);

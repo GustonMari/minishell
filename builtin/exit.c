@@ -32,7 +32,6 @@ void	ft_exit_2(char **full_cmd)
 
 void	ft_exit(char **full_cmd, t_to_clean *clean)
 {
-	fprintf(stderr, "popopopo\n");
 	if (ft_count_line(full_cmd) == 1)
 	{
 		printf("g_status = %d\n", g_status);
