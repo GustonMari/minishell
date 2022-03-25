@@ -7,43 +7,24 @@ temporaire tout en respecant les regles de priorite du heredoc*/
 
 void	fill_heredoc_file(char **stop, char **env, int is_expand, char *name)
 {
-	char	*line = NULL;
+	char	*line;
 	int		fd;
 	int		i;
 	int 	begin;
 	
 	begin = 0;
 	i = 0;
-	//Ajouter en arg de cette fonction le nom du heredoc a remplir
+	line = NULL;
 	fd = create_heredoc_file(name);
-	//line = NULL;
 	while (1)
 	{
-/* 		if (signal_heredoc())
-		{
-			ft_free_tab_2d(stop);
-			close(fd);
-			printf("on exit\n");
-			exit(g_status);
-		}
-		else */
 		line = readline("> ");
 		if (!line)
 		{
 			ft_putstr_fd("Quit (core dumped)\n", 2);
 			g_status = 0;
 			exit(g_status);
-			//break ;
 		}
-		//else
-			
-
-		//Gerer les signaux et bien check la valeur de retour de exit
-
-		//if (signal_heredoc(stop, line))
-		//	break ;
-		//printf("line %s\n", line);
-		//printf("stop = %s\n", stop[i]);
 		if (stop[i] && !ft_strcmp(line, stop[i]))
 		{
 			if (stop[i + 1] == NULL)
@@ -123,14 +104,11 @@ int	launch_heredoc(t_command **all_cmd, char **env, char *name)
 	char	**stop;
 	int		is_expand;
 	pid_t	pid;
-	//int		status;
 
-	//status = 0;
 	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
 		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
 	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-
 	pid = fork();
 	if (pid == 0)
 	{
@@ -147,17 +125,12 @@ int	launch_heredoc(t_command **all_cmd, char **env, char *name)
 		if (!stop)
 			return (-1);
 		fill_heredoc_file(stop, env, is_expand, name);
-		fprintf(stderr, "1) g_status = %d\n", g_status);
 		exit(g_status);
 	}
 	else
 		wait_pipe();
 	if (g_status == 130)
 		return (-2);
-	//if (signal(SIGINT, SIG_DFL) == SIG_ERR)
-	//	return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-	//if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
-	//	return (fprintf(stderr, "Error: %s\n", strerror(errno)));
 	return (0);
 }
 
@@ -204,7 +177,6 @@ int	replace_heredoc(t_command **all_cmd, char *name)
 	}
 	d_chv[1] = NULL;
 	(*all_cmd)->cmd_to_exec = d_chv;
-	
 	if ((*all_cmd) && (*all_cmd)->next)
 	{
 		ft_free_tab_2d((*all_cmd)->next->cmd_to_exec);
@@ -226,9 +198,11 @@ int	replace_heredoc(t_command **all_cmd, char *name)
 
 int	manage_heredoc(t_command **all_cmd, char **env)
 {
+	int			ret;
 	t_command	*tmp;
 	char		*name;
 
+	ret = 0;
 	tmp = *all_cmd;
 	while (tmp)
 	{
@@ -237,9 +211,10 @@ int	manage_heredoc(t_command **all_cmd, char **env)
 			name = find_heredoc_name();
 			if (!name)
 				return (-1);
-			if (launch_heredoc(&tmp, env, name) == -2)
-				return (-2);
+			ret = launch_heredoc(&tmp, env, name);
 			replace_heredoc(&tmp, name);
+			if (ret < 0)
+				return (ret);
 			count_all_between_pipe(&tmp);
 		}
 		else

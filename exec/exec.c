@@ -90,7 +90,7 @@ int	ft_exec_cmd(char **env, char **full_cmd, int out)
 	char	*path;
 	char	*tmp;
 	int		pid;
-	
+
 	signal_manager2();
 	pid = fork();
 	if (pid == 0)

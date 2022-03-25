@@ -30,6 +30,7 @@ char	**manage_line(char **env, char *line)
 	if (manage_heredoc(&cmd_all, env) < 0)
 	{
 		//On doit exit, erreur malloc
+		delete_heredoc_file(cmd_all);
 		return (env);
 	}
 
