@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:50:23 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/23 09:50:24 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/03/28 10:21:22 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ char	*ft_rpl_val_var_env_export(char *var, char *new_val)
 		ret = ft_strjoin(var, "=");
 		ret = ft_strjoin_free(ret, new_val, 1);
 	}
-	printf("aoaoa ret = %s\n", ret);
-	
 	free(var);
 	return (ret);
 }
@@ -62,7 +60,6 @@ int	ft_change_env_val_export(char **env, char *var, char *new_val)
 		if (!is_var_in_line_unset(env[i], var, ft_strlen(var)))
 		{
 			env[i] = ft_rpl_val_var_env_export(env[i], new_val);
-			printf("env = %s\n", env[i]);
 			return (0);
 		}
 		i++;

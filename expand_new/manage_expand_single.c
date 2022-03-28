@@ -5,8 +5,6 @@ int	find_next_single_block(char *str)
 	int	i;
 
 	i = 0;
-/* 	if (str[0] && str[0] == '$')
-		i++; */
 	while (str[i])
 	{
 		if (str[i] == QUOTE || str[i] == D_QUOTE || str[i] == '$'/*  || str[i] == BACK_SLASH */)
@@ -33,21 +31,11 @@ char	*expand_node_single(char **env, char *str)
 		if (str[i] == QUOTE)
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
-			//block = trim_quote(block, &i);
-			//block = add_echapment(block);
-			//printf("block = %s\n", block);
-
 			i += find_next_quote(&str[i]);
 		}
 		else if (str[i] == D_QUOTE)
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
-			//Trim nos double quote
-			//block = trim_quote(block, &i);
-			//printf("block D_QUOTE = %s\n", block);
-			//Expand nos dollars dans notre block
-			//block = expand_dollar(env, block);
-
 			i += find_next_quote(&str[i]);
 		}
 		else if (str[i] == '$')
@@ -55,10 +43,7 @@ char	*expand_node_single(char **env, char *str)
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
 			if (str[i + 1] != '\0')
 				block = expand_single_dollar(env, block);
-			//printf("block DOLLAR = %s\n", block);
 			i += find_next_quote(&str[i]);
-			//Expand notre dollars
-			//block = expand_dollar(env, block);
 		}
 		else if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
 		{
@@ -68,18 +53,12 @@ char	*expand_node_single(char **env, char *str)
 		}
 		else
 		{
-			//join 1 par 1 (jusqu a ce qu on rencontre quote Dquote ou $, mais la 
-			//boucle le fait tout seul)
-			
 			block = cpy_block(&str[i], find_next_block(&str[i]));
 			i += find_next_single_block(&str[i]);
 		}
 		expanded = ft_strjoin_free(expanded, block, 1);
 		free(block);
-		//i++;
-
 	}
-	//ATTENTION LE FREE
 	free(str);
 	return (expanded);
 

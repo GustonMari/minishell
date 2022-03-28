@@ -78,12 +78,10 @@ int	manage_chv_l(t_command *all_cmd, char **env)
 	g_status = 0;
 	if (manage_single_chv_l(all_cmd) < 0)
 		return (-2);
-	//if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
-	//	launch_heredoc(all_cmd, env);
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 	{
-		fd = open(".tmp", O_RDONLY, 00777);
+		fd = open(".tmp", O_WRONLY | O_CREAT | O_TRUNC, 00777);
 		dup2(fd, 1);
 		close(fd);
 		redirection_error(file_name);

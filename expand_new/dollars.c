@@ -13,7 +13,8 @@ char	*cut_dollar(char *str)
 	i = 1;
 	while (str[i] && !ft_is_space(str[i])
 		&& is_operator(&str[i]) == 0
-		&& str[i] != '$' && str[i] != '\'' && str[i] != '\"')
+		&& str[i] != '$' && str[i] != '\'' && str[i] != '\"'
+		&& ft_isalnum(str[i]))
 		i++;
 	var_name = malloc(sizeof(char) * (i));
 	if (!var_name)
