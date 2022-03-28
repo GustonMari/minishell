@@ -19,9 +19,10 @@ char	*expand_node_single(char **env, char *str)
 	int		i;
 	char	*block;
 	char	*expanded;
-	(void)env;
+	int		not_expand;
 
 	block = NULL;
+	not_expand = 0;
 	expanded = ft_strdup("");
 	if (!expanded)
 		return (NULL);
@@ -41,8 +42,9 @@ char	*expand_node_single(char **env, char *str)
 		else if (str[i] == '$')
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
-			if (str[i + 1] != '\0')
+			if (str[i + 1] != '\0' && not_expand == 0)
 				block = expand_single_dollar(env, block);
+			not_expand = 0;
 			i += find_next_quote(&str[i]);
 		}
 		else if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
@@ -54,12 +56,19 @@ char	*expand_node_single(char **env, char *str)
 		else
 		{
 			block = cpy_block(&str[i], find_next_block(&str[i]));
+			if (ft_find_d_chv_l_str(block, "<<", 2) == TRUE)
+			{
+				printf("not_expand\n");
+				not_expand = 1;
+			}
+				
 			i += find_next_single_block(&str[i]);
 		}
 		expanded = ft_strjoin_free(expanded, block, 1);
 		free(block);
 	}
 	free(str);
+	printf("expanded = %s\n", expanded);
 	return (expanded);
 
 }

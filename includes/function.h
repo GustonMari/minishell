@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/28 11:08:16 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/28 14:08:57 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int		ft_strlen(char *str);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 char	**shell_lvl(char **env);
+int		ft_find_d_chv_l_str(char *str, char *c, int size);
+
 
 /*
 --------------- UTILS 2 ----------------
