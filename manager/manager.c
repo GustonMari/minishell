@@ -22,16 +22,20 @@ char	**manage_line(char **env, char *line)
 	}
 	expanded = expand_all(env, tmp);
 	cmd_all = token_to_cmd(expanded);
-	if (manage_heredoc(&cmd_all, env) < 0)
+	clean = malloc(sizeof(clean) * 3);
+	clean->token_begin = expanded;
+	clean->command_begin = cmd_all;
+	clean->env = env;
+	if (manage_heredoc(&cmd_all, env, clean) < 0)
 	{
 		//On doit exit, erreur malloc
 		delete_heredoc_file(cmd_all);
 		return (env);
 	}
-	clean = malloc(sizeof(clean) * 3);
-	clean->token_begin = expanded;
-	clean->command_begin = cmd_all;
-	clean->env = env;
+	// clean = malloc(sizeof(clean) * 3);
+	// clean->token_begin = expanded;
+	// clean->command_begin = cmd_all;
+	// clean->env = env;
 	env = ft_dispatch(cmd_all, clean, env);
 	if (delete_heredoc_file(cmd_all) < 0)
 	{

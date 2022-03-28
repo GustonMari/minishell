@@ -99,7 +99,7 @@ char	**create_tab_stop(t_command *all_cmd)
 	return (stop);
 }
 
-int	launch_heredoc(t_command **all_cmd, char **env, char *name)
+int	launch_heredoc(t_command **all_cmd, char **env, char *name, t_to_clean *clean)
 {
 	char	**stop;
 	int		is_expand;
@@ -125,6 +125,8 @@ int	launch_heredoc(t_command **all_cmd, char **env, char *name)
 		if (!stop)
 			return (-1);
 		fill_heredoc_file(stop, env, is_expand, name);
+		ft_clean_exit(clean);
+		free(name);
 		exit(g_status);
 	}
 	else
@@ -200,7 +202,7 @@ int	replace_heredoc(t_command **all_cmd, char *name)
 
 /*Fonction qui manage le heredoc*/
 
-int	manage_heredoc(t_command **all_cmd, char **env)
+int	manage_heredoc(t_command **all_cmd, char **env, t_to_clean *clean)
 {
 	int			ret;
 	t_command	*tmp;
@@ -215,7 +217,7 @@ int	manage_heredoc(t_command **all_cmd, char **env)
 			name = find_heredoc_name();
 			if (!name)
 				return (-1);
-			ret = launch_heredoc(&tmp, env, name);
+			ret = launch_heredoc(&tmp, env, name, clean);
 			replace_heredoc(&tmp, name);
 			if (ret < 0)
 				return (ret);
