@@ -74,6 +74,7 @@ int main(int ac, char **av, char **envp)
 	g_status = errno;
 	//g_status = 0;
 	env = ft_create_env(envp);
+	env = shell_lvl(env);
 	while (42)
 	{
 		if (signal(SIGINT, &exit_process) == SIG_ERR)
