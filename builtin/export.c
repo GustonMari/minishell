@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:52:01 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/28 11:02:18 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/28 16:12:52 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ char	**ft_export(char **env, char *str)
 	else
 		env = ft_export_change(env, str, name);
 	free(ret);
+	//A VOIR SI CA FOUT PAS LA MERDE
+	free(name);
 	return (env);
 }
 

@@ -74,7 +74,7 @@ int main(int ac, char **av, char **envp)
 	g_status = errno;
 	//g_status = 0;
 	env = ft_create_env(envp);
-	env = shell_lvl(env);
+	//env = shell_lvl(env);
 	while (42)
 	{
 		if (signal(SIGINT, &exit_process) == SIG_ERR)
@@ -87,7 +87,9 @@ int main(int ac, char **av, char **envp)
 		if (!line)
 		{
 			//clear history si il y en avait un
-			write(2, "\n\e[0;35mctrl+D used\n", 21);
+			write(2, "\n", 1);
+			rl_clear_history();
+			ft_free_tab_2d(env);
 			break ;
 		}
 /* 		if (!ft_strcmp(line, "exit"))

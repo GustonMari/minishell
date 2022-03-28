@@ -7,6 +7,7 @@ char	**ft_free_tab_2d(char **tab)
 	i = 0;
 	while (tab[i])
 	{
+		//if (tab[i])
 		free(tab[i]);
 		i++;
 	}

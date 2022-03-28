@@ -1,12 +1,13 @@
 #include "../includes/function.h"
 
-char	**shell_lvl(char **env)
+char	**shell_lvl(char **envp)
 {
 	char	*number;
 	char	*ret;
 	char	*to_export;
+	char	**env;
 
-	ret  = find_val_in_tab(env, "SHLVL");
+	ret  = find_val_in_tab(envp, "SHLVL");
 	if (ret == NULL)
 	{
 		number = ft_itoa(0);
@@ -25,6 +26,9 @@ char	**shell_lvl(char **env)
 			return (NULL);
 	free(ret);
 	printf("to export= %s\n", to_export);
-	ft_export(env, to_export);
+	env = ft_export(envp, to_export);
+	free(to_export);
+	//print_tab_2d(env);
+	//ft_free_tab_2d(envp);
 	return (env);
 }

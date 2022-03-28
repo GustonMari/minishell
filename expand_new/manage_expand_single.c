@@ -57,18 +57,13 @@ char	*expand_node_single(char **env, char *str)
 		{
 			block = cpy_block(&str[i], find_next_block(&str[i]));
 			if (ft_find_d_chv_l_str(block, "<<", 2) == TRUE)
-			{
-				printf("not_expand\n");
 				not_expand = 1;
-			}
-				
 			i += find_next_single_block(&str[i]);
 		}
 		expanded = ft_strjoin_free(expanded, block, 1);
 		free(block);
 	}
 	free(str);
-	printf("expanded = %s\n", expanded);
 	return (expanded);
 
 }

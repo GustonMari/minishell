@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:00:48 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/24 19:17:51 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/28 14:35:24 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,18 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 			//g_status = 112;
 			//exit(112);
 		}
+		//if (ft_count_line(all->cmd_to_exec) == 0)
+		if (ft_strcmp(all->cmd_to_exec[0], "") == TRUE)
+		{
+			ft_putstr_fd(BRED "minishell: : command not found\n" CRESET, 2);
+			g_status = 127;
+			exit(g_status);
+		}
 		if (execve(path, all->cmd_to_exec, env) < 0)
 		{
 			perror("execve");
 			g_status = errno;
-			exit(1);
+			exit(g_status);
 		}
 		free(path);
 		return (0);

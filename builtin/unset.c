@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:46:12 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/23 09:46:48 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/03/28 16:08:50 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	check_already_exists(char **env, char *to_del, size_t n)
 	while (++j < line)
 	{
 		if (!is_var_in_line_unset(env[j], to_del, n))
-			return (0);
+			return (TRUE);
 	}
-	return (1);
+	return (FALSE);
 }
 
 /*
@@ -66,7 +66,7 @@ char	**ft_unset_line(char **env, char *to_del)
 
 	i = 0;
 	line = ft_count_line(env);
-	if (check_already_exists(env, to_del, ft_strlen(to_del)) == 1)
+	if (check_already_exists(env, to_del, ft_strlen(to_del)) == FALSE)
 		return (env);
 	dest = malloc(sizeof(char *) * (line));
 	if (!dest)
@@ -83,6 +83,8 @@ char	**ft_unset_line(char **env, char *to_del)
 		}
 	}
 	dest[i] = NULL;
+	// a voir si ok ????
+	ft_free_tab_2d(env);
 	return (dest);
 }
 
