@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:48:33 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/23 09:50:12 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/03/28 16:18:11 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,18 @@ int	prio_exit(t_command *all)
 	t_command	*last;
 
 	tmp = all;
-	while(tmp)
+	while (tmp)
 	{	
 		last = tmp;
 		tmp = tmp->next;
 	}
 	if (ft_strcmp("exit", last->cmd_to_exec[0]) == 0
 		&& last->cmd_to_exec[1] && !is_str_digit(last->cmd_to_exec[1])
-			&& ft_count_line(last->cmd_to_exec) == 2)
+		&& ft_count_line(last->cmd_to_exec) == 2)
 	{
 		g_status = ft_atoi(last->cmd_to_exec[1]);
 		return (TRUE);
 	}
-		
 	return (FALSE);
 }
 
@@ -94,4 +93,3 @@ int	main()
 	while(1);
 	return (0);
 } */
-

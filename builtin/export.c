@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:52:01 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/28 16:12:52 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/28 17:09:05 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**ft_export_change(char **env, char *str, char *name)
 
 	val = find_val_in_line(str);
 	ft_change_env_val_export(env, name, val);
-	free(name);
+	//free(name);
 	free(val);
 	return (env);
 }
@@ -82,7 +82,8 @@ char	**ft_export(char **env, char *str)
 		env = ft_export_change(env, str, name);
 	free(ret);
 	//A VOIR SI CA FOUT PAS LA MERDE
-	free(name);
+	if (name)
+		free(name);
 	return (env);
 }
 
@@ -104,6 +105,8 @@ char	**manage_export(char **env, char **full_cmd)
 	}
 	return (env);
 }
+
+
 /* int main(int ac, char **av, char **envp)
 {
 	(void)ac;

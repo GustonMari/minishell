@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 09:39:43 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/24 09:44:03 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/28 17:26:54 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,9 +152,9 @@ int	manage_chv_r(t_command **all_cmd)
 	fd = manage_open_r(all_cmd, file_name);
 	if (fd == -1)
 	{
-		dup2(fd, 1);
-		close(fd);
 		redirection_error(file_name);
+		//dup2(fd, 1);
+		//close(fd);
 		return (-2);
 	}
 	dup2(fd, 1);

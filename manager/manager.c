@@ -20,13 +20,7 @@ char	**manage_line(char **env, char *line)
 		ft_lstclear(&tmp, free);
 		return (env);
 	}
-	/* printf("------------------\n");
-	print_token(&tmp);
-	printf("------------------\n"); */
 	expanded = expand_all(env, tmp);
-	/* printf("AFTER------------------\n");
-	print_token(&tmp);
-	printf("------------------\n"); */
 	cmd_all = token_to_cmd(expanded);
 	if (manage_heredoc(&cmd_all, env) < 0)
 	{
@@ -34,9 +28,6 @@ char	**manage_line(char **env, char *line)
 		delete_heredoc_file(cmd_all);
 		return (env);
 	}
-	/* printf("AFTER------------------\n");
-	print_cmd(&cmd_all);
-	printf("------------------\n"); */
 	clean = malloc(sizeof(clean) * 3);
 	clean->token_begin = expanded;
 	clean->command_begin = cmd_all;
