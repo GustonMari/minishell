@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:00:48 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/29 14:30:51 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/29 14:44:51 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ char	*find_path_cmd(char *cmd_to_join, char *tmp)
 	char	*cmd;
 
 	if (ft_strncmp(cmd_to_join, "./", 2) == TRUE)
+	{
 		return (NULL);
+	}	
 	cmd = ft_strjoin("/", cmd_to_join);
 	if (!cmd)
 		return (NULL);
@@ -62,7 +64,6 @@ char	*find_path_cmd(char *cmd_to_join, char *tmp)
 		{
 			free(cmd);
 			ft_free_tab_2d(all_cmd_path);
-			fprintf(stderr, "aaa path = %s", path);
 			return (path);
 		}
 		free(path);
@@ -114,6 +115,7 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 		{
 			ft_print_error(1, all->cmd_to_exec[0], ": command not found", NULL);
 			g_status = 127;
+			ft_clean_exit(clean);
 			exit(127);
 		}
 		path = chose_ath_cmd(all->cmd_to_exec[0], tmp);
@@ -129,6 +131,7 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 				ft_print_error(1, all->cmd_to_exec[0], ": command not found", NULL);
 				g_status = 127;
 			}
+			ft_clean_exit(clean);
 			exit(g_status);
 		}
 		if (ft_strcmp(all->cmd_to_exec[0], "") == TRUE)
@@ -136,6 +139,7 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 			ft_putstr_fd(BRED "minishell: : command not found\n" CRESET, 2);
 			fprintf(stderr, "aa\n");
 			g_status = 127;
+			ft_clean_exit(clean);
 			exit(g_status);
 		}
 		if (execve(path, all->cmd_to_exec, env) < 0)
@@ -143,6 +147,7 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 			ft_print_error(1, all->cmd_to_exec[0], ": Is a directory", NULL);
 			g_status = 126;
 			free(path);
+			ft_clean_exit(clean);
 			exit(g_status);
 		}
 		free(path);
