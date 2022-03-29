@@ -1,7 +1,7 @@
 #ifndef DEFINE_H
 # define DEFINE_H
 
-# define BUFFER_SIZE 2048
+# define BUFFER_SIZE 2049
 # define FALSE 1
 # define TRUE 0
 

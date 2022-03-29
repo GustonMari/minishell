@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:00:48 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/29 14:44:51 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/29 15:35:42 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 	char	*path;
 	char	*tmp;
 	int		pid;
+	
 	(void)clean;
 
 	prio_exit(all);
@@ -144,6 +145,7 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 		}
 		if (execve(path, all->cmd_to_exec, env) < 0)
 		{
+			//REGARDER SI C EST UN DIRECTORY
 			ft_print_error(1, all->cmd_to_exec[0], ": Is a directory", NULL);
 			g_status = 126;
 			free(path);

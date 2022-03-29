@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:46:12 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/28 16:08:50 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/29 14:53:29 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ char	**ft_unset_line(char **env, char *to_del)
 		}
 	}
 	dest[i] = NULL;
-	// a voir si ok ????
 	ft_free_tab_2d(env);
 	return (dest);
 }

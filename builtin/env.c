@@ -6,40 +6,12 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:27:53 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/28 14:51:43 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/29 14:51:13 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "function.h"
 #include "../includes/function.h"
-/* int main(void)
-{
-	char	*buff = NULL;
-	char	*ret;
-	
-	if (chdir("/Users/gustavemary/Documents
-		/ProjetCode/VIM/CURSUS/r3/minishell/testopen") == -1)
-		printf("Error");
-	ret = getcwd(buff, BUFFER_SIZE);
-	//"/mnt/nfs/homes/gmary/Documents/TAFF/minishell";
-	//if (getcwd(buff, BUFFER_SIZE) == NULL)
-	if (ret == NULL)
-	{
-		if (errno == ERANGE)
-			printf("ERANGE ERROR");
-		exit(0);
-	}
-	else
-		printf("getcwd %s\n", ret);
-	
-	printf("getenv %s\n", getenv("PWD"));
-	//et = getcwd(buff, BUFFER_SIZE);
-		//printf("%s\n", buff);
-	free(buff);
-	free(ret);
-	return (0);
-}
- */
+
 /* Permet de trouver le PREMIER egal dans une ligne mais*/
 
 int	find_equal_in_line(char *str)

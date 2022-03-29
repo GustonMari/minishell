@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:46:57 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/23 09:47:34 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/03/29 16:38:16 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,20 @@ int	ft_echo_n(char *str)
 	return (0);
 }
 
+int	manage_echo_n(char **full_cmd)
+{
+	int	i;
+
+	i = 1;
+	while (full_cmd[i])
+	{
+		if (ft_echo_n(full_cmd[i]) == 1)
+			break ;
+		i++;
+	}
+	return (i);
+}
+
 void	ft_echo(char **full_cmd)
 {
 	int	i;
@@ -40,10 +54,9 @@ void	ft_echo(char **full_cmd)
 		ft_putchar_fd('\n', 1);
 		return ;
 	}
-	n = ft_echo_n(full_cmd[1]);
-	i = 1;
-	if (n == 0)
-		i++;
+	i = 0;
+	i = manage_echo_n(full_cmd);
+	n = i;
 	while (full_cmd[i])
 	{
 		j = 0;
