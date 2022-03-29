@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 09:39:43 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/28 17:26:54 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/29 13:09:22 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	manage_single_chv_r(t_command **all_cmd)
 				O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		if (fd < 0)
 		{
+			redirection_error(strerror(errno));
+			g_status = errno;
 			close(fd);
 			return (-2);
 		}
@@ -63,6 +65,7 @@ int	manage_single_chv_r(t_command **all_cmd)
 				O_CREAT | O_APPEND | O_WRONLY, 0644);
 		if (fd < 0)
 		{
+			redirection_error(strerror(errno));
 			close(fd);
 			return (-2);
 		}
