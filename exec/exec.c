@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:00:48 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/29 11:36:57 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/29 14:02:45 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,20 +116,31 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 		path = chose_ath_cmd(all->cmd_to_exec[0], tmp);
 		if (!path)
 		{
-			ft_print_error(1, all->cmd_to_exec[0], ": command not found", NULL);
-			g_status = 127;
-			exit(127);
+			if (ft_strncmp((all->cmd_to_exec[0]), "./", 2) == TRUE)
+			{
+				redirection_error(ft_strdup(all->cmd_to_exec[0]));
+				g_status = errno;
+			}
+			else
+			{
+				ft_print_error(1, all->cmd_to_exec[0], ": command not found", NULL);
+				g_status = 127;
+			}
+			exit(g_status);
 		}
 		if (ft_strcmp(all->cmd_to_exec[0], "") == TRUE)
 		{
 			ft_putstr_fd(BRED "minishell: : command not found\n" CRESET, 2);
+			fprintf(stderr, "aa\n");
 			g_status = 127;
 			exit(g_status);
 		}
+		fprintf(stderr, "path = %s\n", path);
 		if (execve(path, all->cmd_to_exec, env) < 0)
 		{
 			perror("execve");
 			g_status = errno;
+			free(path);
 			exit(g_status);
 		}
 		free(path);
