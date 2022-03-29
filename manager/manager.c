@@ -33,7 +33,6 @@ char	**manage_line(char **env, char *line)
 		return (env);
 	}
 	remix_2(&cmd_all);
-	print_cmd(&cmd_all);
 	// clean = malloc(sizeof(clean) * 3);
 	// clean->token_begin = expanded;
 	// clean->command_begin = cmd_all;

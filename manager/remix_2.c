@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:26:18 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/29 10:19:15 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/29 10:44:58 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,24 @@ void	suppress_one(t_command **all_cmd)
 void	remix_2(t_command **all_cmd)
 {
 	t_command	*error;
+	t_command	*tmp;
 
-	error = check_file_valid(all_cmd);
-	if (!error)
-		return ;
-	else
+	tmp = *all_cmd;
+	while (42)
 	{
-		if (error->next)
-			suppress_one(&error);
+		error = check_file_valid(&tmp);
+		if (!error)
+			return ;
+		else
+		{
+			if (error->next)
+				suppress_one(&error);
+		}
+		if (error == NULL)
+			break ;
+		else
+			count_all_between_pipe(&tmp);
 	}
+
 		
 }
