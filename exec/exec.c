@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:00:48 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/28 14:35:24 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/29 11:36:57 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,17 +108,18 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 		g_status = 0;
 		tmp = find_val_in_tab(env, "PATH");
 		if (!tmp)
-			return (-1);
+		{
+			ft_print_error(1, all->cmd_to_exec[0], ": command not found", NULL);
+			g_status = 127;
+			exit(127);
+		}
 		path = chose_ath_cmd(all->cmd_to_exec[0], tmp);
 		if (!path)
 		{
 			ft_print_error(1, all->cmd_to_exec[0], ": command not found", NULL);
 			g_status = 127;
 			exit(127);
-			//g_status = 112;
-			//exit(112);
 		}
-		//if (ft_count_line(all->cmd_to_exec) == 0)
 		if (ft_strcmp(all->cmd_to_exec[0], "") == TRUE)
 		{
 			ft_putstr_fd(BRED "minishell: : command not found\n" CRESET, 2);
@@ -136,42 +137,6 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 	}
 	return (0);
 }
-
-/* int	ft_exec_cmd(char **env, t_to_clean *clean, char **full_cmd, int out)
-{
-	char	*path;
-	char	*tmp;
-	int		pid;
-	(void)clean;
-
-	signal_manager2();
-	pid = fork();
-	if (pid == 0)
-	{
-		if (out != -1)
-			close(out);
-		g_status = 0;
-		tmp = find_val_in_tab(env, "PATH");
-		if (!tmp)
-			return (-1);
-		path = chose_ath_cmd(full_cmd[0], tmp);
-		if (!path)
-		{
-			ft_print_error(1, full_cmd[0], ": command not found", NULL);
-			g_status = 127;
-			exit(127);
-		}
-		if (execve(path, full_cmd, env) < 0)
-		{
-			perror("execve");
-			g_status = errno;
-			exit(1);
-		}
-		free(path);
-		return (0);
-	}
-	return (0);
-} */
 
 char	**ft_exec_builtin(char **env, t_to_clean *clean, char **full_cmd, int builtin)
 {
@@ -201,10 +166,7 @@ int	ft_exec(char **env, t_command *all_cmd, t_to_clean *clean, int out)
 
 	builtin = is_builtin(all_cmd->cmd_to_exec[0]);
 	if (builtin)
-	{
 		env = ft_exec_builtin(env, clean, all_cmd->cmd_to_exec, builtin);
-		//exit(0);
-	}
 	else
 		ft_exec_cmd(env, clean, all_cmd, out);
 	return (0);
