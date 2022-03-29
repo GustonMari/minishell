@@ -1,2 +1,0 @@
-Pour tcgetattr et tcseattr ne pas oublier que si on modifie les attributs du terminals,
-il faut en faire une copie avant de les transformer pour pouvoir les restituer en fin de programme
