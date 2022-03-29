@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/28 17:54:54 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/29 10:16:41 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int		is_var_in_env_export_2(char **env, char *var, size_t n);
 char	**ft_free_tab_2d(char **tab);
 void	ft_lstclear(t_token **lst, void (*del)(void *));
 void	ft_cmd_clear(t_command **lst);
+t_command	*ft_cmdclear_between_pipe(t_command **lst);
 
 /*
 ------------------ UNSET ----------------
@@ -166,6 +167,12 @@ int		count_word_btw_two_op(t_token *all);
 void	remix_manager(t_token **all);
 int		token_is_redir(t_token *tmp_token);
 
+
+/*
+--------------REMIX 2-----------------
+*/
+
+void	remix_2(t_command **all_cmd);
 
 /*
 ------------------QUOTE ----------------
