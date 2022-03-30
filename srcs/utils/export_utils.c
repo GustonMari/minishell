@@ -44,8 +44,18 @@ char	*find_name_val(char *str)
 
 	i = 0;
 	j = 0;
-	while (str[i] && str[i] != '=')
+	while ((str[i] && str[i] != '+' && str[i + 1] && str[i + 1] != '='))
 		i++;
+	while (str[i])
+	{
+		if (str[i] == '=')
+			break ;
+		if (str[i] == '+' && str[i + 1] && str[i + 1] == '=')
+			break ;
+		i++;
+	}
+	// while (str[i] && str[i] != '=')
+	// 	i++;
 	name = malloc(sizeof(char) * (i + 1));
 	if (!name)
 		return (NULL);

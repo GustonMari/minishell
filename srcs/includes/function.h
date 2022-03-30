@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/30 11:23:25 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/30 13:00:19 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char	*find_name_val(char *str);
 char	*find_val_in_line(char *str);
 int		is_var_in_line_export(char *str, char *var, size_t n);
 int		is_var_in_env_export(char **env, char *var, size_t n);
-int		ft_change_env_val_export(char **env, char *var, char *new_val);
+int		ft_change_env_val_export(char **env, char *var, char *new_val, char *str);
 int		is_var_in_env_export_2(char **env, char *var, size_t n);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:50:23 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/30 09:58:17 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/30 13:20:39 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,54 @@ int	is_equal_in_line(char *str)
 	return (1);
 }
 
-char	*ft_rpl_val_var_env_export(char *var, char *new_val)
+/*Va checker si on a un += dans str, si oui, on va joinvar et new_val
+pour pouvoir faire un join dans le cas --> export lol+=salut par exemple*/
+
+char	*join_export(char *var, char *new_val, char *str, int *change)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '=')
+			break ;
+		if (str[i] == '+' && str[i + 1] && str[i + 1] == '=')
+		{
+			var = ft_strjoin_free(var, new_val, 1);
+			if (!var)
+				return (NULL);
+			*change = 1;
+		}
+		i++;
+	}
+	fprintf(stderr, "nouvellleeeeee var = %s\n", var);
+	return (var);
+}
+
+
+char	*ft_rpl_val_var_env_export(char *var, char *new_val, char *str)
 {
 	int		i;
 	char	*ret;
+	int		change;
 
+	change = 0;
 	i = 0;
 	if (is_equal_in_line(var) == 0)
 	{
-		while (var[i] != '=')
-		i++;
-		var[i + 1] = '\0';
-		ret = ft_strjoin(var, new_val);
+		fprintf(stderr, "var = %s\nnew_val = %s\n", var, new_val);
+		var = join_export(var ,new_val, str, &change);
+		if (change == 0)
+		{
+			while (var[i] != '=')
+			i++;
+			var[i + 1] = '\0';
+			ret = ft_strjoin(var, new_val);
+		}
+		else
+			ret = ft_strdup(var);
+		
 	}
 	else
 	{
@@ -50,16 +86,17 @@ char	*ft_rpl_val_var_env_export(char *var, char *new_val)
 	return (ret);
 }
 
-int	ft_change_env_val_export(char **env, char *var, char *new_val)
+int	ft_change_env_val_export(char **env, char *var, char *new_val, char *str)
 {
 	int		i;
+	(void)str;
 
 	i = 0;
 	while (env[i])
 	{
 		if (!is_var_in_line_unset(env[i], var, ft_strlen(var)))
 		{
-			env[i] = ft_rpl_val_var_env_export(env[i], new_val);
+			env[i] = ft_rpl_val_var_env_export(env[i], new_val, str);
 			return (0);
 		}
 		i++;

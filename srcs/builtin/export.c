@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:52:01 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/30 09:59:07 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/30 12:56:14 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,11 @@ char	**ft_export_change(char **env, char *str, char *name)
 {
 	char	*val;
 
+	
 	val = find_val_in_line(str);
-	ft_change_env_val_export(env, name, val);
+	fprintf(stderr, "ici val = %s\n", val);
+	fprintf(stderr, "str = %s\n", str);
+	ft_change_env_val_export(env, name, val, str);
 	//free(name);
 	free(val);
 	return (env);
@@ -74,12 +77,14 @@ char	**ft_export(char **env, char *str)
 		free(name);
 		return (env);
 	}
+	fprintf(stderr, "heeeeeeeeey\n");
 	ret = find_val_in_tab(env, name);
 	if (ret == NULL
 		&& !is_var_in_env_export(env, name, ft_strlen(name)) == 0)
 		env = ft_export_add(env, str);
 	else
 		env = ft_export_change(env, str, name);
+	fprintf(stderr, "huhu\n");
 	free(ret);
 	//A VOIR SI CA FOUT PAS LA MERDE
 	if (name)
