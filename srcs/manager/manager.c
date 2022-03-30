@@ -36,8 +36,10 @@ char	**manage_line(char **env, char *line)
 	clean->env = env;
 	if (manage_heredoc(&cmd_all, env, clean) < 0)
 	{
-		//On doit exit, erreur malloc
 		delete_heredoc_file(cmd_all);
+		ft_lstclear(&expanded, free);
+		ft_cmd_clear(&cmd_all);
+		free(clean);
 		return (env);
 	}
 	remix_2(&cmd_all);
