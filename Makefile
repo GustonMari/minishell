@@ -7,8 +7,8 @@ OBJDIR = objs
 INCDIR = includes
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-MEM = -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g
+MEM = # -fsanitize=address
 
 ifeq ($(TMEM),0)
 MEM =

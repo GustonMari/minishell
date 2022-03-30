@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:52:01 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/30 12:56:14 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/30 14:12:36 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,39 @@ void	ft_export_no_arg(char **env)
 		return ;
 	ft_print_export_no_arg(env_sorted);
 	ft_free_tab_2d(env_sorted);
+}
+
+
+
+char	*add_join_export(char *str)
+{
+	int		i;
+	char	*new_str;
+
+	new_str = NULL;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '=')
+		{
+			new_str = ft_strdup(str);
+			if (!new_str)
+				return (NULL);
+			fprintf(stderr, "1 %s\n", new_str);
+			return (new_str);
+		}
+		if (str[i + 1] && str[i] == '+' && str[i + 1] == '=')
+		{
+			new_str = remove_char_if(str, '+', '=');
+			if (!new_str)
+				return (NULL);
+			fprintf(stderr, "1 %s\n", new_str);
+			return (new_str);
+		}
+		i++;
+	}
+	fprintf(stderr, "1 %s\n", new_str);
+	return (new_str);
 }
 
 char	**ft_export_add(char **env, char *str)
@@ -44,7 +77,8 @@ char	**ft_export_add(char **env, char *str)
 		}
 		i++;
 	}
-	new_env[i] = ft_strdup(str);
+	//new_env[i] = ft_strdup(str);
+	new_env[i] = add_join_export(str);
 	new_env[i + 1] = NULL;
 	ft_free_tab_2d(env);
 	return (new_env);

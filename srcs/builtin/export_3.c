@@ -71,6 +71,8 @@ int	ft_check_export(char *str)
 			return (1);
 		}
 		i++;
+		if (str[i] && str[i] == '=')
+			break ;
 		if (str[i] == '+' && str[i + 1] && str[i + 1] == '=')
 			i++;
 		if (str[i] && str[i] == '=')

@@ -24,8 +24,12 @@ char	*expand_node_single(char **env, char *str)
 	block = NULL;
 	not_expand = 0;
 	expanded = ft_strdup("");
+	// ADDD PAR GUGUS LE FREE A VOIR SI C BON
 	if (!expanded)
+	{
+		//free(str);
 		return (NULL);
+	}
 	i = 0;
 	while (str[i])
 	{
