@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:48:33 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/30 11:17:04 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/30 11:23:33 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ft_exit(t_command *all, t_to_clean *clean)
 	}
 	else if (ft_count_line(all->cmd_to_exec) == 2)
 	{
-		if (is_str_digit(all->cmd_to_exec[1]))
+		if (is_str_digit_special(all->cmd_to_exec[1]))
 		{
 			exit_error(all->cmd_to_exec[1]);
 			g_status = 2;

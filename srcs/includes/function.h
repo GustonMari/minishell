@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/30 11:04:16 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/30 11:23:25 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			ft_putstr_fd(char *s, int fd);
 void			ft_putchar_fd(char c, int fd);
 char			**shell_lvl(char **env);
 int				ft_find_d_chv_l_str(char *str, char *c, int size);
-long long	ft_atolll(char *str);
+long long		ft_atolll(char *str);
 
 
 /*
@@ -334,6 +334,8 @@ int			ft_lennum(int n);
 ------------------ IS_DIGIT ------------------
 */
 int			is_str_digit(char *str);
+int			is_str_digit_special(char *str);
+
 
 /* 
 ------------------ EXIT_ERROR ------------------
