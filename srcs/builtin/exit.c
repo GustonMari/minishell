@@ -76,7 +76,7 @@ void	exit_overflow(char *number, t_to_clean *clean)
 	ft_putstr_fd("exit\n", 2);
 	if (ft_strlen(number) > 19)
 	{
-		ft_putstr_fd(BRED "bash: exit: ", 2);
+		ft_putstr_fd(BRED "minishell: exit: ", 2);
 		ft_putstr_fd(number, 2);
 		ft_putstr_fd(": numeric argument required" CRESET, 2);
 	}

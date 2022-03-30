@@ -138,7 +138,6 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 		if (ft_strcmp(all->cmd_to_exec[0], "") == TRUE)
 		{
 			ft_putstr_fd(BRED "minishell: : command not found\n" CRESET, 2);
-			fprintf(stderr, "aa\n");
 			g_status = 127;
 			ft_clean_exit(clean);
 			exit(g_status);

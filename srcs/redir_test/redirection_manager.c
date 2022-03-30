@@ -22,14 +22,14 @@ int	erase_file(t_command *all_cmd, char *file_error)
 			previous = tmp;
 		tmp = tmp->next;
 	}
-	while (tmp && tmp->type != PIPE)
-	{
-		if (tmp->type == WORD && (previous->type == CHV_R || previous->type == D_CHV_R))
-			unlink(tmp->cmd_to_exec[0]);
-		else 
-			previous = tmp;
-		tmp = tmp->next;
-	}
+	// while (tmp && tmp->type != PIPE)
+	// {
+	// 	if (tmp->type == WORD && (previous->type == CHV_R || previous->type == D_CHV_R))
+	// 		unlink(tmp->cmd_to_exec[0]);
+	// 	else 
+	// 		previous = tmp;
+	// 	tmp = tmp->next;
+	// }
 	return (0);
 }
 
@@ -76,8 +76,8 @@ int	redirection_clean(t_command *all_cmd)
 				file_error = ft_strdup((tmp->cmd_to_exec[0]));
 				if (!file_error)
 					return (-1);
-				//fprintf(stderr, "file_error = %s\n", file_error);
-				erase_file(all_cmd, file_error);
+				//erase_file(all_cmd, file_error);
+				free(file_error);
 				return (1);
 			}
 		}
