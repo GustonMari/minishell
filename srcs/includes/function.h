@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/29 10:16:41 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/30 11:04:16 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ int		ft_lstsize(t_token *lst);
 --------------- UTILS ----------------
 */
 
-int		ft_strcmp(char *s1, char *s2);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		ft_strlen(char *str);
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putchar_fd(char c, int fd);
-char	**shell_lvl(char **env);
-int		ft_find_d_chv_l_str(char *str, char *c, int size);
+int				ft_strcmp(char *s1, char *s2);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+int				ft_strlen(char *str);
+void			ft_putstr_fd(char *s, int fd);
+void			ft_putchar_fd(char c, int fd);
+char			**shell_lvl(char **env);
+int				ft_find_d_chv_l_str(char *str, char *c, int size);
+long long	ft_atolll(char *str);
 
 
 /*

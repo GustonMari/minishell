@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:48:33 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/28 16:18:11 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/30 11:17:04 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_exit_2(char **full_cmd, t_to_clean *clean)
 		exit_error(full_cmd[1]);
 		g_status = 2;
 		ft_clean_exit(clean);
+		ft_putstr_fd("exit\n", 2);
 		exit(2);
 	}
 }
@@ -59,11 +60,36 @@ int	prio_exit(t_command *all)
 	return (FALSE);
 }
 
+void	exit_overflow(char *number, t_to_clean *clean)
+{
+	long long	num;
+
+	num = ft_atolll(number);
+
+	if (num < 0)
+	{
+		num %= 256;
+		num = 256 - num;
+	} 
+	else
+		num %= 256;
+	ft_putstr_fd("exit\n", 2);
+	if (ft_strlen(number) > 19)
+	{
+		ft_putstr_fd(BRED "bash: exit: ", 2);
+		ft_putstr_fd(number, 2);
+		ft_putstr_fd(": numeric argument required" CRESET, 2);
+	}
+	ft_clean_exit(clean);
+	exit (num);
+}
+
 void	ft_exit(t_command *all, t_to_clean *clean)
 {
 	if (ft_count_line(all->cmd_to_exec) == 1)
 	{
 		ft_clean_exit(clean);
+		ft_putstr_fd("exit\n", 2);
 		exit (g_status);
 	}
 	else if (ft_count_line(all->cmd_to_exec) == 2)
@@ -73,10 +99,13 @@ void	ft_exit(t_command *all, t_to_clean *clean)
 			exit_error(all->cmd_to_exec[1]);
 			g_status = 2;
 			ft_clean_exit(clean);
+			//ft_putstr_fd("exit\n", 2);
 			exit(2);
 		}
-		ft_clean_exit(clean);
-		exit(g_status);
+		exit_overflow(all->cmd_to_exec[1], clean);
+		//g_status = ft_atoi(all->cmd_to_exec[1]);
+		//ft_clean_exit(clean);
+		//exit(g_status);
 	}
 	else
 		ft_exit_2(all->cmd_to_exec, clean);

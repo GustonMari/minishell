@@ -8,7 +8,7 @@ INCDIR = includes
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-MEM = -fsanitize=address
+MEM = #-fsanitize=address
 
 ifeq ($(TMEM),0)
 MEM =
@@ -75,7 +75,8 @@ SRC =	srcs/main.c \
 		srcs/utils/utils_1.c \
 		srcs/utils/utils_2.c \
 		srcs/utils/utils_3.c \
-		srcs/utils/utils_4.c
+		srcs/utils/utils_4.c \
+		srcs/utils/ft_atol.c
 
 OBJS = $(addprefix ${OBJDIR}/,${SRC:.c=.o})
 

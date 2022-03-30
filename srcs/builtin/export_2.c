@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:50:23 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/28 16:20:39 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/30 09:58:17 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	ft_change_env_val_export(char **env, char *var, char *new_val)
 	}
 	return (1);
 }
-
 
 /*Affiche une ligne de export en ajoutant des quotes pour
 la valeur des variables d'env pour reproduire export.

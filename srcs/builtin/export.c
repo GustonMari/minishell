@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:52:01 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/28 17:09:05 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/30 09:59:07 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ char	**manage_export(char **env, char **full_cmd)
 	}
 	return (env);
 }
-
 
 /* int main(int ac, char **av, char **envp)
 {
