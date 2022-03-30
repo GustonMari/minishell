@@ -5,7 +5,7 @@
 /*Cette fonction permet de remplir le fichier 
 temporaire tout en respecant les regles de priorite du heredoc*/
 
-void	fill_heredoc_file(char **stop, char **env, int is_expand, char *name)
+void	fill_heredoc_file(char **stop, char **env, int is_expand, char *name, t_to_clean *clean)
 {
 	char	*line;
 	int		fd;
@@ -21,6 +21,9 @@ void	fill_heredoc_file(char **stop, char **env, int is_expand, char *name)
 		line = readline("> ");
 		if (!line)
 		{
+			ft_clean_exit(clean);
+			ft_free_tab_2d(stop);
+			free(name);
 			ft_putstr_fd("Quit (core dumped)\n", 2);
 			g_status = 0;
 			exit(g_status);
@@ -124,7 +127,7 @@ int	launch_heredoc(t_command **all_cmd, char **env, char *name, t_to_clean *clea
 		stop = trim_quote_stop(stop);
 		if (!stop)
 			return (-1);
-		fill_heredoc_file(stop, env, is_expand, name);
+		fill_heredoc_file(stop, env, is_expand, name, clean);
 		ft_clean_exit(clean);
 		free(name);
 		exit(g_status);
