@@ -48,10 +48,13 @@ void	exit_heredoc(int sig)
 
 void	manage_heredoc_signal(int sig)
 {
+	const char *tab[20] = {"clean_heredoc", NULL};
+
 	if (sig == SIGINT)
 	{
 		g_status = 130;
 		write(1, "\n", 1);
+		execve("srcs/heredoc/clean_heredoc", (char **const)tab, NULL);
 		exit(255);
 	}
 }

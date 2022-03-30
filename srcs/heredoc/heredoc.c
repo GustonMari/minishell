@@ -133,10 +133,12 @@ int	launch_heredoc(t_command **all_cmd, char **env, char *name, t_to_clean *clea
 		wait_pipe();
 	if (g_status == 255)
 	{
+		fprintf(stderr, "pouet\n");
+		ft_clean_exit(clean);
+		free(name);
 		g_status = 130;
 		return (-2);
-	}
-		
+	}	
 	return (0);
 }
 
