@@ -81,7 +81,7 @@ int main(int ac, char **av, char **envp)
 			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
 		if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-		else 
+		else
 			line = readline(BBLU "minishell> " CRESET);
 		//obligatoire sinon segfault pour ctrl D est-ce que lon peut considerer ceci comme un sighandler
 		if (!line)

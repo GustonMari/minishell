@@ -66,14 +66,14 @@ int	find_next_quote(char *str)
 	int	i;
 
 	i = 0;
-	if (str[0] == D_QUOTE)
+	if (str[0] && str[0] == D_QUOTE)
 	{
 		i++;
 		while (str[i] != D_QUOTE && str[i])
 			i++;
 		i++;
 	}
-	else if (str[0] == QUOTE)
+	else if (str[0] && str[0] == QUOTE)
 	{
 		i++;
 		while (str[i] != QUOTE && str[i])
@@ -82,7 +82,7 @@ int	find_next_quote(char *str)
 	}
 	else
 	{
-		while (str[i] != D_QUOTE && str[i] != QUOTE && str[i])
+		while (str[i] && str[i] != D_QUOTE && str[i] != QUOTE && str[i])
 			i++;
 	}
 	return (i);

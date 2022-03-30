@@ -10,6 +10,13 @@ char	**manage_line(char **env, char *line)
 	cmd_all = NULL;
 	tmp = NULL;
 	clean = NULL;
+
+	if (check_quote(line) == FALSE)
+	{
+		ft_putstr_fd(BRED"minishell: you should close quote\n"CRESET, 2);
+		free(line);
+		return (env);
+	}
 	line = expand_node_single(env, line);
 	tmp = lexer(line);
 	if (!tmp)
