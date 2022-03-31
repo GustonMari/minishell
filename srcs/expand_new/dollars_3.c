@@ -54,7 +54,7 @@ char	*expand_single_dollar(char **env, char *str, t_to_clean *clean)
 		return (str);
 	}
 	if (str[i] == '$' && str[i + 1] == '?')
-		str = replace_interrogation(str, i, clean);
+		str = replace_interrogation(str, i, clean, var_name);
 	else
 	{
 		if (ft_find_env_line(env, var_name) && str[i + 1] != '$')

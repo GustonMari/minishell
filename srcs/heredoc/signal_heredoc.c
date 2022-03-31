@@ -23,10 +23,6 @@ int	signal_heredoc(void)
 
 int	signal_launch_heredoc(void)
 {
-	/* if (signal(SIGINT, SIG_IGN) == SIG_ERR)
-		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
-		return (fprintf(stderr, "Error: %s\n", strerror(errno))); */
 	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
 	{
 		ft_putstr_fd("Error: ", 2);

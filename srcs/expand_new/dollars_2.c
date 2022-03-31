@@ -49,14 +49,19 @@ char	*replace_interrogation_bis(char *dest, char *str, int pos, char *status)
 			replace_interrogation_ter(dest, str, &i, &k);
 	}
 	dest[k] = '\0';
+	free(status);
+	free(str);
 	return (dest);
 }
 
-char	*replace_interrogation(char *str, int pos, t_to_clean *clean)
+char	*replace_interrogation(char *str, int pos,
+	t_to_clean *clean, char *var_name)
 {
 	char	*dest;
 	char	*status;
 
+	if (var_name)
+		free(var_name);
 	status = ft_itoa(g_status);
 	if (!status)
 	{
@@ -66,6 +71,7 @@ char	*replace_interrogation(char *str, int pos, t_to_clean *clean)
 	dest = malloc(sizeof(char) * (ft_strlen(str) - 1 + ft_strlen(status)));
 	if (!dest)
 	{
+		free(status);
 		free(str);
 		return (ft_clean_error_malloc(clean));
 	}

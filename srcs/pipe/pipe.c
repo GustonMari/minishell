@@ -94,7 +94,7 @@ int execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env, int in)
 	{
 		save[0] = dup(0);
 		save[1] = dup(1);
-		//if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
+		//if (count_nb_d_chv_l_between_pipe(all_cmd) != 0)
 		//	launch_heredoc(all_cmd, env);
 		ft_pipe(i == 0, is_last_cmd(all_cmd), &out);
 		ret = redirection_manager(&all_cmd, env);

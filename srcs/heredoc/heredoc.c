@@ -24,7 +24,7 @@ char	**create_tab_stop(t_command *all_cmd)
 	i = 0;
 	tmp = all_cmd;
 	stop = NULL;
-	stop = malloc(sizeof(char *) * (count_nb_D_CHV_L_between_pipe(tmp) + 1));
+	stop = malloc(sizeof(char *) * (count_nb_d_chv_l_between_pipe(tmp) + 1));
 	if (!stop)
 		return (NULL);
 	while (tmp && tmp->type != PIPE)

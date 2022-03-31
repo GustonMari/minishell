@@ -16,7 +16,7 @@
 est un double chevron a gauche.
 Si c'est un Double chevron gauche, ca renvoi 0*/
 
-int	priorities_D_CHV_L(t_command *all_cmd)
+int	priorities_d_chv_l(t_command *all_cmd)
 {
 	t_command	*tmp;
 	int			type;
@@ -36,7 +36,7 @@ int	priorities_D_CHV_L(t_command *all_cmd)
 
 /*Compte le nombre de D_CHV_L entre deux pipe*/
 
-int	count_nb_D_CHV_L_between_pipe(t_command *all_cmd)
+int	count_nb_d_chv_l_between_pipe(t_command *all_cmd)
 {
 	t_command	*tmp;
 	int			i;

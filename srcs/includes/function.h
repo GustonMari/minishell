@@ -213,7 +213,7 @@ int		check_t_cmd(char **env, t_command *all);
 ------------------ $$ DOLLARZ $$ ----------------
 */
 char	*replace_dollar_3(char *str, char *new_var, char *ret);
-char	*replace_interrogation(char *str, int pos, t_to_clean *clean);
+char	*replace_interrogation(char *str, int pos, t_to_clean *clean, char *var_name);
 char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos);
 
 
@@ -291,14 +291,14 @@ void		exit_pipe_process(int sig);
 ------------------ HEREDOC ------------------
 */
 
-int			priorities_D_CHV_L(t_command *all_cmd);
+int			priorities_d_chv_l(t_command *all_cmd);
 //int			launch_heredoc(t_command **all_cmd, char **env, char *name, t_to_clean *clean);
 int			launch_heredoc(t_command **all_cmd, char *name, t_to_clean *clean);
 //int			manage_heredoc(t_command **all_cmd, char **env, t_to_clean *clean);
 int			manage_heredoc(t_command **all_cmd, t_to_clean *clean);
 
 int			delete_heredoc_file(t_command *all_cmd);
-int			count_nb_D_CHV_L_between_pipe(t_command *all_cmd);
+int			count_nb_d_chv_l_between_pipe(t_command *all_cmd);
 int			create_heredoc_file(char *name);
 int			start_heredoc_one(char **stop, int begin);
 int			start_heredoc_more(char **stop, int i);

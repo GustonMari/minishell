@@ -36,7 +36,7 @@ char	*allocate_block(char *block, char *str, t_to_clean *clean)
 char	*expand_dollar_bis(char *str, char *var_name, int i, t_to_clean *clean)
 {
 	if (str[i] == '$' && str[i + 1] == '?')
-		str = replace_interrogation(str, i, clean);
+		str = replace_interrogation(str, i, clean, var_name);
 	else
 	{
 		var_name = cut_dollar(&str[i], clean);
