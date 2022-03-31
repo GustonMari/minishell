@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:52:01 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/30 14:12:36 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/31 14:07:40 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ char	**ft_export(char **env, char *str)
 	fprintf(stderr, "heeeeeeeeey\n");
 	ret = find_val_in_tab(env, name);
 	if (ret == NULL
-		&& !is_var_in_env_export(env, name, ft_strlen(name)) == 0)
+		&& ((!is_var_in_env_export(env, name, ft_strlen(name))) == 0))
 		env = ft_export_add(env, str);
 	else
 		env = ft_export_change(env, str, name);
