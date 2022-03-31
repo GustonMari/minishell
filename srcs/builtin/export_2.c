@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:50:23 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/30 13:20:39 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/31 14:38:16 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
-
-/*Renvoi 0 si on trouve un = dans str*/
-
-int	is_equal_in_line(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '=')
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 /*Va checker si on a un += dans str, si oui, on va joinvar et new_val
 pour pouvoir faire un join dans le cas --> export lol+=salut par exemple*/
@@ -53,7 +37,6 @@ char	*join_export(char *var, char *new_val, char *str, int *change)
 	return (var);
 }
 
-
 char	*ft_rpl_val_var_env_export(char *var, char *new_val, char *str)
 {
 	int		i;
@@ -64,8 +47,7 @@ char	*ft_rpl_val_var_env_export(char *var, char *new_val, char *str)
 	i = 0;
 	if (is_equal_in_line(var) == 0)
 	{
-		fprintf(stderr, "var = %s\nnew_val = %s\n", var, new_val);
-		var = join_export(var ,new_val, str, &change);
+		var = join_export(var, new_val, str, &change);
 		if (change == 0)
 		{
 			while (var[i] != '=')
@@ -75,7 +57,6 @@ char	*ft_rpl_val_var_env_export(char *var, char *new_val, char *str)
 		}
 		else
 			ret = ft_strdup(var);
-		
 	}
 	else
 	{
@@ -89,7 +70,6 @@ char	*ft_rpl_val_var_env_export(char *var, char *new_val, char *str)
 int	ft_change_env_val_export(char **env, char *var, char *new_val, char *str)
 {
 	int		i;
-	(void)str;
 
 	i = 0;
 	while (env[i])

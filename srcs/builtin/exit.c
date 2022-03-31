@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:48:33 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/30 11:23:33 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/31 14:42:29 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,11 @@ void	exit_overflow(char *number, t_to_clean *clean)
 	long long	num;
 
 	num = ft_atolll(number);
-
 	if (num < 0)
 	{
 		num %= 256;
 		num = 256 - num;
-	} 
+	}
 	else
 		num %= 256;
 	ft_putstr_fd("exit\n", 2);
@@ -103,26 +102,11 @@ void	ft_exit(t_command *all, t_to_clean *clean)
 			exit_error(all->cmd_to_exec[1]);
 			g_status = 2;
 			ft_clean_exit(clean);
-			//ft_putstr_fd("exit\n", 2);
 			exit(2);
 		}
 		exit_overflow(all->cmd_to_exec[1], clean);
-		//g_status = ft_atoi(all->cmd_to_exec[1]);
-		//ft_clean_exit(clean);
-		//exit(g_status);
 	}
 	else
 		ft_exit_2(all->cmd_to_exec, clean);
 	return ;
 }
-
-/* int	g_status;
-
-int	main()
-{
-	char *tab[] ={"exit", "90", "400", NULL};
-
-	ft_exit(tab);
-	while(1);
-	return (0);
-} */

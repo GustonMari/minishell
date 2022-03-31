@@ -1,4 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_3.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/31 14:58:37 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/03/31 14:58:38 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
+
+/*Renvoi 0 si on trouve un = dans str*/
+
+int	is_equal_in_line(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 /*Permet de savoir si la variable var existe dans la chaine str
 et qu'elle n'a pas de valeur, si elle existe et qu'elle n'a pas de valeur

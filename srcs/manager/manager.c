@@ -42,7 +42,7 @@ char	**manage_line(char **env, char *line)
 	clean->token_begin = expanded;
 	cmd_all = token_to_cmd(expanded, clean);
 	clean->command_begin = cmd_all;
-	if (manage_heredoc(&cmd_all, env, clean) < 0)
+	if (manage_heredoc(&cmd_all, clean) < 0)
 	{
 		delete_heredoc_file(cmd_all);
 		ft_lstclear(&expanded, free);

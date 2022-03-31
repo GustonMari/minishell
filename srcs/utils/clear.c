@@ -1,6 +1,6 @@
 #include "../includes/function.h"
 
-char	**ft_free_tab_2d(char **tab)
+void	*ft_free_tab_2d(char **tab)
 {
 	int	i;
 

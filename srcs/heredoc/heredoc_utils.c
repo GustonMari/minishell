@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/31 15:50:45 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/03/31 15:52:31 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 /*Permet de creer le fichier .heredoc ou que l'on va
@@ -19,8 +31,8 @@ heredoc*/
 int	start_heredoc_one(char **stop, int begin)
 {
 	int	start;
+
 	start = 0;
-	
 	if (begin == 1)
 		return (1);
 	start = ft_count_line(stop);
@@ -32,7 +44,7 @@ int	start_heredoc_one(char **stop, int begin)
 int	start_heredoc_more(char **stop, int i)
 {
 	int	start;
-	
+
 	start = ft_count_line(stop);
 	if (i == start - 1)
 		return (1);
@@ -45,10 +57,9 @@ void	exit_heredoc(int sig)
 	g_status = 130;
 }
 
-
 void	manage_heredoc_signal(int sig)
 {
-	const char *tab[20] = {"clean_heredoc", NULL};
+	const char	*tab[20] = {"clean_heredoc", NULL};
 
 	if (sig == SIGINT)
 	{
@@ -58,33 +69,3 @@ void	manage_heredoc_signal(int sig)
 		exit(255);
 	}
 }
-
-int	signal_heredoc(void)
-{
-	if (signal(SIGINT, &manage_heredoc_signal) == SIG_ERR)
-		return (1);
-	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
-		return (1);
-	return (0);
-}
-
-/* int	signal_heredoc(char **stop, char *line)
-{
-	//int		status;
-	(void)stop;
-	// gerer ctrl backslash et status aussi !!!!!!
-	printf("salut\n");
-	if (signal(SIGINT, &exit_heredoc) == SIG_ERR)
-	{
-		printf("SIGINT");
-		return (1);
-	}
-	if (!line)
-	{
-		//clear history si il y en avait un
-		//write(2, "\n\e[0;35mctrl+D used\n", 21);
-		write(1, "\n", 1);
-		return (1);
-	}
-	return (0);
-} */

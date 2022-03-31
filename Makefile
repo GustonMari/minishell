@@ -77,7 +77,15 @@ SRC =	srcs/main.c \
 		srcs/utils/utils_3.c \
 		srcs/utils/utils_4.c \
 		srcs/utils/ft_atol.c \
-		srcs/clean_malloc/clean_malloc_1.c
+		srcs/clean_malloc/clean_malloc_1.c \
+		srcs/builtin/unset_2.c \
+		srcs/builtin/manage_export.c \
+		srcs/exec/exec_2.c \
+		srcs/exec/exec_cmd.c \
+		srcs/heredoc/heredoc_utils_2.c \
+		srcs/heredoc/signal_heredoc.c \
+		srcs/heredoc/heredoc_bis_2.c \
+		srcs/heredoc/heredoc_bis.c
 
 OBJS = $(addprefix ${OBJDIR}/,${SRC:.c=.o})
 

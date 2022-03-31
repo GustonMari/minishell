@@ -234,6 +234,7 @@ char	*expand_dollar(char **env, char *str, t_to_clean *clean)
 
 	while (str[i])
 	{
+		//fprintf(stderr, "str = |%s| && str[i] = %c\n", str, str[i]);
 		if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
 		{
 			str = del_one_back_slash(str, clean);
@@ -256,7 +257,8 @@ char	*expand_dollar(char **env, char *str, t_to_clean *clean)
 			}
 			i = 0;
 		}
-		i++;
+		if (str[i] != BACK_SLASH)
+			i++;
 	}
 	return (str);
 }

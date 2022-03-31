@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_2.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/31 17:20:03 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/03/31 17:20:28 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 /*Permet de supprimer les fichiers temporaires .heredoc*/
@@ -7,7 +19,7 @@ int	delete_heredoc_file(t_command *all_cmd)
 	t_command	*tmp;
 
 	tmp = all_cmd;
-	while(tmp)
+	while (tmp)
 	{
 		if (tmp->to_del == 1)
 		{
@@ -95,7 +107,6 @@ char	**trim_quote_stop(char **strs)
 {
 	char	**ret;
 	int		i;
-	(void)i;
 
 	i = 0;
 	ret = NULL;

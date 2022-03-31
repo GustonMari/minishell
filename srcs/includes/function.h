@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/30 14:08:47 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/31 16:44:13 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ char	*remove_char_if(char *str, char c, char no);
 ------------------ CLEAR ----------------
 */
 
-char	**ft_free_tab_2d(char **tab);
+//char	**ft_free_tab_2d(char **tab);
+void	*ft_free_tab_2d(char **tab);
 void	ft_lstclear(t_token **lst, void (*del)(void *));
 void	ft_cmd_clear(t_command **lst);
 t_command	*ft_cmdclear_between_pipe(t_command **lst);
@@ -118,7 +119,6 @@ t_command	*ft_cmdclear_between_pipe(t_command **lst);
 int		is_var_in_line(char *str, char *to_del, size_t n);
 char	**ft_unset(char **env, char **full_cmd);
 int		is_var_in_line_unset(char *str, char *to_del, size_t n);
-
 
 /*
 ------------------ PWD ----------------
@@ -294,8 +294,11 @@ void		exit_pipe_process(int sig);
 */
 
 int			priorities_D_CHV_L(t_command *all_cmd);
-int			launch_heredoc(t_command **all_cmd, char **env, char *name, t_to_clean *clean);
-int			manage_heredoc(t_command **all_cmd, char **env, t_to_clean *clean);
+//int			launch_heredoc(t_command **all_cmd, char **env, char *name, t_to_clean *clean);
+int			launch_heredoc(t_command **all_cmd, char *name, t_to_clean *clean);
+//int			manage_heredoc(t_command **all_cmd, char **env, t_to_clean *clean);
+int			manage_heredoc(t_command **all_cmd, t_to_clean *clean);
+
 int			delete_heredoc_file(t_command *all_cmd);
 int			count_nb_D_CHV_L_between_pipe(t_command *all_cmd);
 int			create_heredoc_file(char *name);
@@ -351,8 +354,21 @@ void	signal_cmd(int sig);
 
 char	*exit_expand_node_single(t_to_clean *clean, char **env, char *str, char *expanded);
 void	*ft_clean_error_malloc(t_to_clean *clean);
+int		prio_exit(t_command *all);
 
+/* 
+------------------ NOE ------------------
+*/
 
-int	prio_exit(t_command *all);
-
+//In export
+int		is_equal_in_line(char *str);
+void	ft_export_no_arg(char **env);
+//In unset
+int	check_already_exists(char **env, char *to_del, size_t n);
+//In heredoc
+void	manage_heredoc_signal(int sig);
+void	fill_heredoc_file(char **stop, int is_expand
+	, char *name, t_to_clean *clean);
+int		replace_heredoc(t_command **all_cmd, char *name);
+int		signal_launch_heredoc(void);
 #endif

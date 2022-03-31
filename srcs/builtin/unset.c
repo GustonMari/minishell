@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:46:12 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/29 14:53:29 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/31 14:53:15 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,41 +33,19 @@ int	is_var_in_line_unset(char *str, char *to_del, size_t n)
 		return (1);
 }
 
-/*Permet de savoir si la variable existe dans l'environnement,
-on retourne 0 si elle existe*/
-
-int	check_already_exists(char **env, char *to_del, size_t n)
-{
-	int		j;
-	int		line;
-
-	j = -1;
-	line = ft_count_line(env);
-	while (++j < line)
-	{
-		if (!is_var_in_line_unset(env[j], to_del, n))
-			return (TRUE);
-	}
-	return (FALSE);
-}
-
 /*
 	copie tt le tab en sautant une ligne indique au prealable
 	 (supprime la variable env envoye en param)
 	et return le nouveau tab d'env
 */
 
-char	**ft_unset_line(char **env, char *to_del)
+char	**ft_unset_line_bis(char **env, char *to_del, int line)
 {
-	int		i;
-	int		line;
 	char	**dest;
+	int		i;
 	int		j;
 
 	i = 0;
-	line = ft_count_line(env);
-	if (check_already_exists(env, to_del, ft_strlen(to_del)) == FALSE)
-		return (env);
 	dest = malloc(sizeof(char *) * (line));
 	if (!dest)
 		return (NULL);
@@ -83,6 +61,20 @@ char	**ft_unset_line(char **env, char *to_del)
 		}
 	}
 	dest[i] = NULL;
+	return (dest);
+}
+
+char	**ft_unset_line(char **env, char *to_del)
+{
+	int		line;
+	char	**dest;
+
+	line = ft_count_line(env);
+	if (check_already_exists(env, to_del, ft_strlen(to_del)) == FALSE)
+		return (env);
+	dest = ft_unset_line_bis(env, to_del, line);
+	if (!dest)
+		return (NULL);
 	ft_free_tab_2d(env);
 	return (dest);
 }
@@ -125,17 +117,3 @@ char	**ft_unset(char **env, char **full_cmd)
 	}
 	return (env);
 }
-
-/* int main(int ac, char **av, char **envp)
-{
-	(void)ac;
-	(void)av;
-	char	**env;
-	char *full_cmd[] = {"unset", "PWD", NULL};
-
-	env = ft_create_env(envp);
-	env = ft_unset(env, full_cmd);
-	ft_print_env(env);
-	//ft_print_env(ft_unset(env, full_cmd));
-	ft_free_tab_2d(env);
-} */

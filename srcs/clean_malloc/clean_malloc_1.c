@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clean_malloc_1.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/31 15:10:52 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/03/31 15:11:08 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
-char	*exit_expand_node_single(t_to_clean *clean, char **env, char *str, char *expanded)
+char	*exit_expand_node_single(t_to_clean *clean
+	, char **env, char *str, char *expanded)
 {
 	free(str);
 	free(expanded);
