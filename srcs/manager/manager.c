@@ -40,7 +40,7 @@ char	**manage_line(char **env, char *line)
 	}
 	expanded = expand_all(env, tmp, clean);
 	clean->token_begin = expanded;
-	cmd_all = token_to_cmd(expanded);
+	cmd_all = token_to_cmd(expanded, clean);
 	clean->command_begin = cmd_all;
 	if (manage_heredoc(&cmd_all, env, clean) < 0)
 	{
@@ -57,10 +57,7 @@ char	**manage_line(char **env, char *line)
 	// clean->env = env;
 	env = ft_dispatch(cmd_all, clean, env);
 	if (delete_heredoc_file(cmd_all) < 0)
-	{
-		//On doit exit, erreur malloc
-		return (env);
-	}
+		ft_clean_error_malloc(clean);
 	ft_lstclear(&expanded, free);
 	ft_cmd_clear(&cmd_all);
 	free(clean);

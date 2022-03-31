@@ -55,7 +55,6 @@ void	suppress_one(t_command **all_cmd)
 
 	prev_node = *all_cmd;
 	next_node = ft_cmdclear_between_pipe(&(*all_cmd)->next);
-	//need to do something else for next node
 	prev_node->next = next_node;
 	
 }

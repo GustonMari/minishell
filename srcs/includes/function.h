@@ -245,11 +245,11 @@ char	*expand_single_dollar(char **env, char *str, t_to_clean *clean);
 char		**ft_split_special(char *str);
 char		*ft_strtrim_space(char *s1, char *set);
 t_token		*trim_all(t_token **all);
-t_command	*token_to_cmd(t_token *all);
+t_command	*token_to_cmd(t_token *all, t_to_clean *clean);
 int			cmd_len(t_token *tokens);
-char		**token_to_tab(t_token *tokens);
-char		**token_op_to_tab(t_token *tokens);
-t_command	*create_new_cmd_node(char **strs, t_token *all);
+char		**token_to_tab(t_token *tokens, t_to_clean *clean);
+char		**token_op_to_tab(t_token *tokens, t_to_clean *clean);
+t_command	*create_new_cmd_node(char **strs, t_token *all, t_to_clean *clean);
 void		ft_add_back_cmd(t_command **alst, t_command *new);
 int			token_is_operator(t_token *tmp_token);
 
@@ -260,13 +260,6 @@ int			token_is_operator(t_token *tmp_token);
 */
 
 void		*ft_calloc(size_t nmemb, size_t size);
-
-
-/* 
------------------- TOKEN_TO_CMD ----------------
-*/
-
-t_command	*token_to_cmd(t_token *all);
 
 /* 
 ------------------ MANAGER ----------------

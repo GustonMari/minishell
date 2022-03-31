@@ -16,23 +16,10 @@ int	cmd_len(t_token *tokens)
 	return (count);
 }
 
-/* int	cmd_len(t_token *tokens)
-{
-	int	count;
-
-	count = 0;
-	while (tokens && !is_operator(tokens->content))
-	{
-		tokens = tokens->next;
-		count++;
-	}
-	return (count);
-} */
-
 /* Cree un tab a deux dimmensions avec un NULL
  a la fin pour une commande et ses arguments*/
 
-char	**token_to_tab(t_token *tokens)
+char	**token_to_tab(t_token *tokens, t_to_clean *clean)
 {
 	char	**strs;
 	int		i;
@@ -40,12 +27,16 @@ char	**token_to_tab(t_token *tokens)
 	i = 0;
 	strs = ft_calloc(sizeof(char *), (cmd_len(tokens) + 1));
 	if (!strs)
-		return (NULL);
+		return (ft_clean_error_malloc(clean));
 	while (tokens && !token_is_operator(tokens))
 	{
 		strs[i] = ft_strdup(tokens->content);
 		if (!strs[i])
-			return (ft_free_tab_2d(strs));
+		{
+			strs[i] = NULL;
+			ft_free_tab_2d(strs);
+			return (ft_clean_error_malloc(clean));
+		}
 		tokens = tokens->next;
 		i++;
 	}
@@ -55,16 +46,19 @@ char	**token_to_tab(t_token *tokens)
 
 /* Cree un tab a deux dimmensions avec un NULL a la fin pour un operateur*/
 
-char	**token_op_to_tab(t_token *tokens)
+char	**token_op_to_tab(t_token *tokens, t_to_clean *clean)
 {
 	char	**strs;
 
 	strs = ft_calloc(sizeof(char *), (2));
 	if (!strs)
-		return (NULL);
+		return (ft_clean_error_malloc(clean));
 	strs[0] = ft_strdup(tokens->content);
 	if (!strs[0])
-		return (ft_free_tab_2d(strs));
+	{
+		free(strs);
+		ft_clean_error_malloc(clean);
+	}
 	strs[1] = NULL;
 	return (strs);
 }
@@ -72,13 +66,16 @@ char	**token_op_to_tab(t_token *tokens)
 /*Cree un Node de cmd, assigne le type 
 et fait pointer vers son tab a deux dimmensions*/
 
-t_command	*create_new_cmd_node(char **strs, t_token *all)
+t_command	*create_new_cmd_node(char **strs, t_token *all, t_to_clean *clean)
 {
 	t_command	*new_cmd;
 
 	new_cmd = malloc(sizeof(t_command));
 	if (!new_cmd)
-		return (NULL);
+	{
+		ft_free_tab_2d(strs);
+		return (ft_clean_error_malloc(clean));
+	}
 	new_cmd->cmd_to_exec = strs;
 	if (!new_cmd->cmd_to_exec)
 		return (NULL);
