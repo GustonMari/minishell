@@ -43,12 +43,12 @@ char	*expand_node_single(t_to_clean *clean, char **env, char *str)
 				return (exit_expand_node_single(clean, env, str, expanded));
 			i += find_next_quote(&str[i]);
 		}
-		else if (str[i] == '$')
+		else if (str[i] == '$' && str[i + 1])
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]), clean);
 			if (!block)
 				return (exit_expand_node_single(clean, env, str, expanded));
-			if (str[i + 1] != '\0' && not_expand == 0)
+			if (str[i + 1] != '\0' && not_expand == 0 && !ft_is_space(str[i + 1]))
 				block = expand_single_dollar(env, block, clean);
 			not_expand = 0;
 			i += find_next_quote(&str[i]);
