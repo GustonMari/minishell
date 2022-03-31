@@ -85,7 +85,11 @@ SRC =	srcs/main.c \
 		srcs/heredoc/heredoc_utils_2.c \
 		srcs/heredoc/signal_heredoc.c \
 		srcs/heredoc/heredoc_bis_2.c \
-		srcs/heredoc/heredoc_bis.c
+		srcs/heredoc/heredoc_bis.c \
+		srcs/expand_new/dollars_3.c \
+		srcs/expand_new/dollars_4.c \
+		srcs/expand_new/manage_expand_2.c \
+		srcs/expand_new/manage_expand_3.c
 
 OBJS = $(addprefix ${OBJDIR}/,${SRC:.c=.o})
 

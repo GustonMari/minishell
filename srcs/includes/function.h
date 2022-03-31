@@ -212,8 +212,6 @@ int		check_t_cmd(char **env, t_command *all);
 /*
 ------------------ $$ DOLLARZ $$ ----------------
 */
-
-char	*expand_dollar(char **env, char *str, t_to_clean *clean);
 char	*replace_dollar_3(char *str, char *new_var, char *ret);
 char	*replace_interrogation(char *str, int pos, t_to_clean *clean);
 char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos);
@@ -371,4 +369,18 @@ void	fill_heredoc_file(char **stop, int is_expand
 	, char *name, t_to_clean *clean);
 int		replace_heredoc(t_command **all_cmd, char *name);
 int		signal_launch_heredoc(void);
+
+/*
+------------------------------------------	GUSTAVE ADDD -----------------------------------
+*/
+
+char	*del_dollar(char *str, char *var_name, int len, t_to_clean *clean);
+char	*cut_dollar(char *str, t_to_clean *clean);
+char	*allocate_block(char *block, char *str, t_to_clean *clean);
+char	*expand_dollar(char *str, t_to_clean *clean); //change
+char	*expand_dollar_bis(char *str, char *var_name, int i, t_to_clean *clean);
+char	*replace_dollar(char *str, char *var_name, int pos, t_to_clean *clean);
+char	*cpy_block_special(char	*str, int size, t_to_clean *clean);
+char	*expand_node(char **env, char *str, t_to_clean *clean);
+
 #endif
