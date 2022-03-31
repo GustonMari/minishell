@@ -48,7 +48,6 @@ long long		ft_atolll(char *str);
 
 char	*ft_strdup(char *src);
 char	**ft_strdup_2d(char **srcs);
-//char	**ft_export(char **env, char *str);
 int		ft_count_line(char **tab);
 int		ft_is_space(char c);
 
@@ -70,9 +69,6 @@ char	*ft_strtrim(char *s1, char *set);
 void	print_tab_2d(char **strs);
 int		ft_isalnum(int c);
 
-
-
-
 /*
 --------------- ft_cd.c ----------------
 */
@@ -83,8 +79,7 @@ int		ft_home(char **env);
 /*
 ------------------ ENV ----------------
 */
-/* t_token	**ft_create_env(char **envp);
-int	ft_print_env(t_token **env); */
+
 char	**ft_create_env(char **envp);
 int		ft_print_env(char **env);
 
@@ -237,11 +232,9 @@ int		find_next_block(char *str);
 ------------------ PARSING ----------------
 */
 
-//NEW TRIM QUOTE
 char	*trim_quote(char *str, int *i, t_to_clean *clean);
 char	*expand_single_dollar(char **env, char *str, t_to_clean *clean);
 
-//char		*trim_quote(char *str);
 char		**ft_split_special(char *str);
 char		*ft_strtrim_space(char *s1, char *set);
 t_token		*trim_all(t_token **all);
@@ -252,8 +245,6 @@ char		**token_op_to_tab(t_token *tokens, t_to_clean *clean);
 t_command	*create_new_cmd_node(char **strs, t_token *all, t_to_clean *clean);
 void		ft_add_back_cmd(t_command **alst, t_command *new);
 int			token_is_operator(t_token *tmp_token);
-
-
 
 /* 
 ------------------ CALLOC ----------------
@@ -271,7 +262,6 @@ char		**manage_line(char **env, char *line);
 ------------------ PIPE ------------------
 */
 
-//int execute_pipe(t_command *all_cmd, char **env, int nb_cmd);
 int 		execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env, int in);
 int			count_cmd_list(t_command *all_cmd);
 int			count_all_between_pipe(t_command **all_cmd);
@@ -317,7 +307,6 @@ char		**create_tab_stop(t_command *all_cmd);
 char		**trim_quote_stop(char **strs);
 int			is_expand_heredoc(char **stop);
 
-
 /* 
 ------------------ ITOA ------------------
 */
@@ -329,7 +318,6 @@ int			ft_lennum(int n);
 */
 int			is_str_digit(char *str);
 int			is_str_digit_special(char *str);
-
 
 /* 
 ------------------ EXIT_ERROR ------------------
