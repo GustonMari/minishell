@@ -89,7 +89,9 @@ SRC =	srcs/main.c \
 		srcs/expand_new/dollars_3.c \
 		srcs/expand_new/dollars_4.c \
 		srcs/expand_new/manage_expand_2.c \
-		srcs/expand_new/manage_expand_3.c
+		srcs/expand_new/manage_expand_3.c \
+		srcs/lexer/lexer_2.c \
+		srcs/redir_test/redirection_test_right_2.c
 
 OBJS = $(addprefix ${OBJDIR}/,${SRC:.c=.o})
 

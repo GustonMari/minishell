@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/31 16:44:13 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/03/31 23:37:34 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ int		is_var_in_line_export(char *str, char *var, size_t n);
 int		is_var_in_env_export(char **env, char *var, size_t n);
 int		ft_change_env_val_export(char **env, char *var, char *new_val, char *str);
 int		is_var_in_env_export_2(char **env, char *var, size_t n);
-char	*remove_char_if(char *str, char c, char no);
+//char	*remove_char_if(char *str, char c, char no);
+char	*remove_char_if(char *str, char c, char no, int first);
 
 /*
 ------------------ CLEAR ----------------
@@ -132,13 +133,15 @@ char	*ft_pwd_return(void);
 */
 
 int		redirection_to_file(char *file_name, char *str);
-int		manage_chv_l(t_command *all_cmd, char **env);
+//int		manage_chv_l(t_command *all_cmd, char **env);
+int		manage_chv_l(t_command *all_cmd);
 int		manage_chv_r(t_command **all_cmd);
 int		redirection(t_command *all_cmd, int *in, int *out, char **env);
 int		is_redirection_type(t_command *op);
 int		count_cmd_between_pipe(t_command *all_cmd);
 int		count_redir(t_command *all_cmd);
-int		redirection_manager(t_command **all_cmd, char **env);
+//int		redirection_manager(t_command **all_cmd, char **env);
+int		redirection_manager(t_command **all_cmd);
 int		redirection_clean(t_command *all_cmd);
 
 /*
@@ -260,7 +263,8 @@ char		**manage_line(char **env, char *line);
 ------------------ PIPE ------------------
 */
 
-int 		execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env, int in);
+// int 		execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env, int in);
+int 		execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env);
 int			count_cmd_list(t_command *all_cmd);
 int			count_all_between_pipe(t_command **all_cmd);
 
@@ -369,6 +373,11 @@ void	fill_heredoc_file(char **stop, int is_expand
 	, char *name, t_to_clean *clean);
 int		replace_heredoc(t_command **all_cmd, char *name);
 int		signal_launch_heredoc(void);
+//In lexer
+int		create_op(t_to_clean *clean, t_token **begin, int op);
+int		remix_size_three(t_token *lst);
+//redir_test
+int		manage_open_r(t_command **all_cmd, char *last_redir);
 
 /*
 ------------------------------------------	GUSTAVE ADDD -----------------------------------

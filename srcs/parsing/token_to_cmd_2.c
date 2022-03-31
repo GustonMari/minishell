@@ -1,5 +1,16 @@
-#include "../includes/function.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token_to_cmd_2.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/31 21:42:36 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/03/31 21:43:06 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../includes/function.h"
 
 int	token_is_redir(t_token *tmp_token)
 {
@@ -42,12 +53,14 @@ t_command	*token_to_cmd(t_token *all, t_to_clean *clean)
 	{	
 		if (!token_is_operator(tmp_token))
 			ft_add_back_cmd(&cmd_all,
-				create_new_cmd_node(token_to_tab(tmp_token, clean), tmp_token, clean));
+				create_new_cmd_node(token_to_tab(tmp_token, clean),
+					tmp_token, clean));
 		while (tmp_token && !token_is_operator(tmp_token))
 			tmp_token = tmp_token->next;
 		if (tmp_token && token_is_operator(tmp_token))
 			ft_add_back_cmd(&cmd_all,
-				create_new_cmd_node(token_op_to_tab(tmp_token, clean), tmp_token, clean));
+				create_new_cmd_node(token_op_to_tab(tmp_token, clean),
+					tmp_token, clean));
 		if (tmp_token)
 			tmp_token = tmp_token->next;
 	}

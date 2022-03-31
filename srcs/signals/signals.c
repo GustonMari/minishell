@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 09:38:07 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/24 19:19:16 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/31 23:43:47 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,35 @@ void	signal_cmd(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		g_status = 130;
-		//exit(g_status);
 	}
 	if (sig == SIGQUIT)
 	{
 		ft_putstr_fd("Quit (core dumped)\n", 2);
 		g_status = 131;
-		//exit(g_status);
 	}
 }
 
 void	signal_manager2(void)
+{
+	if (signal(SIGINT, &signal_cmd) == SIG_ERR)
+	{
+		ft_putstr_fd("Error: ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
+	}
+	if (signal(SIGQUIT, &signal_cmd) == SIG_ERR)
+	{
+		ft_putstr_fd("Error: ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
+	}
+}
+
+/* void	signal_manager2(void)
 {
 
 	if (signal(SIGINT, &signal_cmd) == SIG_ERR)
 		fprintf(stderr, "Error: %s\n", strerror(errno));
 	if (signal(SIGQUIT, &signal_cmd) == SIG_ERR)
 		fprintf(stderr, "Error: %s\n", strerror(errno));
-}
+} */

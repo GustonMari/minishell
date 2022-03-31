@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   remix_lexer_2.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/31 21:13:18 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/03/31 21:41:30 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
-
 /*
-fonction qui permet de check si il y a plus dun mots apres un CHV_L et avant le prochain op
+fonction qui permet de check si il y a plus dun mots apres un CHV_L
+et avant le prochain op
 ex:
 < ok wc -l < yes => ici on a trois WORD
 */
@@ -14,7 +26,6 @@ int	count_word_btw_two_op(t_token *all)
 
 	tmp = all;
 	count = 0;
-	//permet de zapper le chv_l
 	tmp = tmp->next;
 	while (tmp && !token_is_operator(tmp))
 	{
@@ -31,26 +42,16 @@ int	count_word_btw_two_op(t_token *all)
 
 void	mv_word_left(t_token *all)
 {
+	t_token	*tmp;
+	t_token	*forward;
+	t_token	*word;
 
-	t_token	*tmp = NULL;
-	t_token	*forward = NULL;
-	t_token	*word = NULL;
-
-	//all serra ici toujours "<"
 	tmp = all;
-	//foward pointe sur -l
 	forward = tmp->next->next;
-	// word sur ok
 	word = tmp->next;
-	// tmp est sur le chevron et on veut link le chevron et le WORD + 1 ex: < ok -l on link < et -l
-	//if (tmp->type != CHV_L)
-	// tmp = tmp->next;
-	// on link le chv_l et -l
 	tmp->next = forward;
-	//if (tmp-> type != CHV_L)
-	//if (tmp->next->next->type != CHV_L)
 	tmp = tmp->next;
-	while (tmp /* && !token_is_operator(tmp) */)
+	while (tmp)
 	{
 		if ((tmp->next == NULL) || (token_is_operator(tmp->next)))
 		{
@@ -65,35 +66,14 @@ void	mv_word_left(t_token *all)
 	}
 }
 
-/*
-	deplace chv_l avant le mot
-*/
-
-void	mv_chv_l(t_token *all)
+void	mv_chv_l_bis(t_token *tmp, t_token *word)
 {
-
-	t_token	*tmp = NULL;
-	t_token	*forward = NULL;
-	t_token	*word = NULL;
-
-	//all serra ici toujours le noead avant chv_l
-	tmp = all;
-	//foward pointe sur -l
-	forward = tmp->next->next;
-	// word sur ok
-	word = tmp->next;
-	// tmp est sur le chevron et on veut link le chevron et le WORD + 1 ex: < ok -l on link < et -l
-	//if (tmp->type != CHV_L)
-	// tmp = tmp->next;
-	// on link le chv_l et -l
-	tmp->next = forward;
-	//if (tmp-> type != CHV_L)
-	tmp = tmp->next;
-	while (tmp /* && !token_is_operator(tmp) */)
+	while (tmp)
 	{
 		if (tmp->next)
 		{
-			if ((tmp->next->next == NULL) || (token_is_operator(tmp->next->next)))
+			if ((tmp->next->next == NULL)
+				|| (token_is_operator(tmp->next->next)))
 			{
 				if (tmp->next)
 					word->next = tmp->next;
@@ -105,4 +85,37 @@ void	mv_chv_l(t_token *all)
 		}
 		tmp = tmp->next;
 	}
+}
+
+/*
+	deplace chv_l avant le mot
+*/
+
+void	mv_chv_l(t_token *all)
+{
+	t_token	*tmp;
+	t_token	*forward;
+	t_token	*word;
+
+	tmp = all;
+	forward = tmp->next->next;
+	word = tmp->next;
+	tmp->next = forward;
+	tmp = tmp->next;
+	mv_chv_l_bis(tmp, word);
+}
+
+/*
+	check la taille si lon commence par un <
+	jusqua a la fin de la liste ou au prochain op
+*/
+
+int	remix_size_three(t_token *lst)
+{
+	if (lst->next)
+		lst = lst->next;
+	if (token_is_redir(lst) && count_word_btw_two_op(lst) == 1)
+		return (1);
+	else
+		return (0);
 }

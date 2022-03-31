@@ -1,34 +1,16 @@
-#include "../includes/function.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/31 21:18:03 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/03/31 21:29:40 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	create_op(t_to_clean *clean, t_token **begin, int op)
-{
-	if (op == PIPE)
-	{
-		ft_lstadd_back(begin, ft_lstnew(ft_strdup("|"), PIPE, clean));
-		return (1);
-	}
-	else if (op == CHV_R)
-	{
-		ft_lstadd_back(begin, ft_lstnew(ft_strdup(">"), CHV_R, clean));
-		return (1);
-	}
-	else if (op == CHV_L)
-	{
-		ft_lstadd_back(begin, ft_lstnew(ft_strdup("<"), CHV_L, clean));
-		return (1);
-	}
-	else if (op == D_CHV_R)
-	{
-		ft_lstadd_back(begin, ft_lstnew(ft_strdup(">>"), D_CHV_R, clean));
-		return (2);
-	}
-	else if (op == D_CHV_L)
-	{
-		ft_lstadd_back(begin, ft_lstnew(ft_strdup("<<"), D_CHV_L, clean));
-		return (2);
-	}
-	return (0);
-}
+#include "../includes/function.h"
 
 char	*cpy_word(char *arg, int end)
 {
@@ -64,19 +46,14 @@ int	create_word(char *arg, t_token **begin, t_to_clean *clean)
 	return (i);
 }
 
-t_token	*lexer(t_to_clean *clean, char *arg)
+t_token	*lexer_bis(t_to_clean *clean, char *arg)
 {
-	t_token	*begin = NULL;
+	t_token	*begin;
 	int		i;
 	int		op;
 
 	i = 0;
-	if (check_quote(arg))
-	{
-		ft_putstr_fd(BRED"minishell: you should close quote\n"CRESET, 2);
-		g_status = 1;
-		return (NULL);
-	}
+	begin = NULL;
 	while (arg[i])
 	{
 		op = is_operator(&arg[i]);
@@ -91,13 +68,17 @@ t_token	*lexer(t_to_clean *clean, char *arg)
 	return (begin);
 }
 
-/* int main()
+t_token	*lexer(t_to_clean *clean, char *arg)
 {
-	char	*enter = ft_strdup(" \"ca\" <|> >> \'va  <<   \' << toi\"$USER\" > \"oui\'ii\"");
-	t_token	*begin = NULL;
-	(void)begin;
+	t_token	*begin;
 
-	begin = lexer(enter);
-	print_token(&begin);
-	ft_lstclear(&begin, free);
-} */
+	begin = NULL;
+	if (check_quote(arg))
+	{
+		ft_putstr_fd(BRED"minishell: you should close quote\n"CRESET, 2);
+		g_status = 1;
+		return (NULL);
+	}
+	begin = lexer_bis(clean, arg);
+	return (begin);
+}

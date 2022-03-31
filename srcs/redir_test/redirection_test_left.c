@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirection_test_left.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/31 21:44:34 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/03/31 22:07:20 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 /* Count le nombre de redirections gauche qu'il y a entre deux pipe*/
@@ -11,7 +23,7 @@ int	count_redir_l(t_command *all_cmd)
 	tmp = all_cmd;
 	while (tmp && tmp->type != PIPE)
 	{
-		if (tmp->type == CHV_L/*  || tmp->type == D_CHV_L */)
+		if (tmp->type == CHV_L)
 			nb_redir++;
 		tmp = tmp->next;
 	}
@@ -52,7 +64,8 @@ int	manage_single_chv_l(t_command *all_cmd)
 {
 	if (all_cmd->type == CHV_L)
 	{
-		if (all_cmd->next && (access((all_cmd->next->cmd_to_exec[0]), F_OK | R_OK) < 0))
+		if (all_cmd->next && (access((all_cmd->next->cmd_to_exec[0]),
+					F_OK | R_OK) < 0))
 		{
 			ft_putstr_fd(BRED"minishell: ", 2);
 			ft_putstr_fd(all_cmd->next->cmd_to_exec[0], 2);
@@ -63,11 +76,10 @@ int	manage_single_chv_l(t_command *all_cmd)
 	return (0);
 }
 
-int	manage_chv_l(t_command *all_cmd, char **env)
+int	manage_chv_l(t_command *all_cmd)
 {
 	char		*file_name;
 	int			fd;
-	(void)env;
 
 	file_name = NULL;
 	if (count_redir_l(all_cmd) == 0)

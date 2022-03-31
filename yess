@@ -1,12 +1,14 @@
+Makefile
+a.out
 a.out.dSYM
 hey.c
-Makefile
 minishell
-noright
 objs
-ok
+ok.pub
 salaud
 salut
 srcs
 valgrind-out.txt
 valgrind_readline_leaks_ignore.txt
+yes
+yess
