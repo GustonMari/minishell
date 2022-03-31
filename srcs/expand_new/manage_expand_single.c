@@ -7,14 +7,14 @@ int	find_next_single_block(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == QUOTE || str[i] == D_QUOTE || str[i] == '$'/*  || str[i] == BACK_SLASH */)
+		if (str[i] == QUOTE || str[i] == D_QUOTE || str[i] == '$')
 			return (i);
 		i++;
 	}
 	return (i);
 }
 
-char	*expand_node_single(char **env, char *str)
+char	*expand_node_single(t_to_clean *clean, char **env, char *str)
 {
 	int		i;
 	char	*block;
@@ -24,28 +24,30 @@ char	*expand_node_single(char **env, char *str)
 	block = NULL;
 	not_expand = 0;
 	expanded = ft_strdup("");
-	// ADDD PAR GUGUS LE FREE A VOIR SI C BON
 	if (!expanded)
-	{
-		//free(str);
-		return (NULL);
-	}
+		return (exit_expand_node_single(clean, env, str, expanded));
 	i = 0;
 	while (str[i])
 	{
 		if (str[i] == QUOTE)
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
+			if (!block)
+				return (exit_expand_node_single(clean, env, str, expanded));
 			i += find_next_quote(&str[i]);
 		}
 		else if (str[i] == D_QUOTE)
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
+			if (!block)
+				return (exit_expand_node_single(clean, env, str, expanded));
 			i += find_next_quote(&str[i]);
 		}
 		else if (str[i] == '$')
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]));
+			if (!block)
+				return (exit_expand_node_single(clean, env, str, expanded));
 			if (str[i + 1] != '\0' && not_expand == 0)
 				block = expand_single_dollar(env, block);
 			not_expand = 0;
@@ -55,44 +57,27 @@ char	*expand_node_single(char **env, char *str)
 		{
 			i++;
 			block = cpy_block(&str[i], find_next_block(&str[i]));
+			if (!block)
+				return (exit_expand_node_single(clean, env, str, expanded));
 			i += find_next_block(&str[i]);
 		}
 		else
 		{
 			block = cpy_block(&str[i], find_next_block(&str[i]));
+			if (!block)
+				return (exit_expand_node_single(clean, env, str, expanded));
 			if (ft_find_d_chv_l_str(block, "<<", 2) == TRUE)
 				not_expand = 1;
 			i += find_next_single_block(&str[i]);
 		}
 		expanded = ft_strjoin_free(expanded, block, 1);
+		if (!expanded)
+		{
+			free(block);
+			return (exit_expand_node_single(clean, env, str, expanded));
+		}
 		free(block);
 	}
 	free(str);
 	return (expanded);
-
 }
-
-
-
-/* t_token	*expand_single(char **env, t_token *all)
-{
-	t_token	*tmp;
-	int		expand;
-
-	expand = 1;
-	tmp = all;
-	while (tmp)
-	{
-		if (expand)
-		{
-			tmp = expand_node_single(env, tmp);
-			if (!tmp->content)
-				return (NULL);
-		}
-		expand = 1;
-		if (tmp->type == D_CHV_L)
-			expand = 0;
-		tmp = tmp->next;
-	}
-	return (all);
-} */

@@ -5,7 +5,7 @@ On commence a i = 1 pour etre sur le debut du nom de la var d'env. On veut copie
 USER et le renvoyer.
 */
 
-char	*cut_dollar(char *str)
+char	*cut_dollar(char *str, t_to_clean *clean)
 {
 	int		i;
 	char	*var_name;
@@ -18,7 +18,10 @@ char	*cut_dollar(char *str)
 		i++;
 	var_name = malloc(sizeof(char) * (i));
 	if (!var_name)
-		return (NULL);
+	{
+		free(str);
+		return (ft_clean_error_malloc(clean));
+	}
 	var_name = ft_strncpy(var_name, &str[1], i - 1);
 	return (var_name);
 }
@@ -58,14 +61,20 @@ char	*del_dollar_2(char *str, char *var_name, char *ret, int len)
 	return (ret);
 }
 
-char	*del_dollar(char *str, char *var_name, int len)
+char	*del_dollar(char *str, char *var_name, int len, t_to_clean *clean)
 {
 	char	*ret;
 
 	ret = NULL;
 	ret = malloc(sizeof(char) * (ft_strlen(str) - len + 1));
 	if (!ret)
-		return (NULL);
+	{
+		if (str)
+			free(str);
+		if (var_name)
+			free(var_name);
+		return (ft_clean_error_malloc(clean));
+	}
 	return (del_dollar_2(str, var_name, ret, len));
 }
 
@@ -126,20 +135,24 @@ char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos)
 	return (ret);
 }
 
-char	*replace_dollar(char **env, char *str, char *var_name, int pos)
+char	*replace_dollar(char *str, char *var_name, int pos, t_to_clean *clean)
 {
 	char	*new_var;
 	char	*ret;
 
 	new_var = NULL;
 	ret = NULL;
-	new_var = find_val_in_tab(env, var_name);
+	new_var = find_val_in_tab(clean->env, var_name);
 	if (!new_var)
 		return (NULL);
-	str = del_dollar(str, var_name, ft_strlen(var_name));
+	str = del_dollar(str, var_name, ft_strlen(var_name), clean);
 	ret = malloc(sizeof(char) * ((ft_strlen(str) + ft_strlen(new_var) + 1)));
 	if (!ret)
-		return (NULL);
+	{
+		free(str);
+		free(var_name);
+		return (ft_clean_error_malloc(clean));
+	}
 	free(var_name);
 	if (ft_strlen(str) == 0)
 	{
@@ -148,36 +161,36 @@ char	*replace_dollar(char **env, char *str, char *var_name, int pos)
 	return (replace_dollar_2(str, new_var, ret, pos));
 }
 
-char	*expand_single_dollar(char **env, char *str)
+char	*expand_single_dollar(char **env, char *str, t_to_clean *clean)
 {
 	int		i;
 	char	*var_name;
 
 	i = 0;
 	var_name = NULL;
-	var_name = cut_dollar(&str[i]);
+	var_name = cut_dollar(&str[i], clean);
 	if (!var_name)
 		return (NULL);
 	if (ft_strlen(str) == 1)
 	{
-		str = del_dollar(str, var_name, ft_strlen(var_name));
+		str = del_dollar(str, var_name, ft_strlen(var_name), clean);
 		return (str);
 	}
 	if (str[i] == '$' && str[i + 1] == '?')
-		str = replace_interrogation(str, i);
+		str = replace_interrogation(str, i, clean);
 	else
 	{
 		if (ft_find_env_line(env, var_name) && str[i + 1] != '$')
-			str = replace_dollar(env, str, var_name, i);
+			str = replace_dollar(str, var_name, i, clean);
 		else
-			str = del_dollar(str, var_name, ft_strlen(var_name));
+			str = del_dollar(str, var_name, ft_strlen(var_name), clean);
 	}
 	return (str);
 }
 
 /*supprime UN backslash a l'endroit ou il est*/
 
-char	*del_one_back_slash(char *str)
+char	*del_one_back_slash(char *str, t_to_clean *clean)
 {
 	int		done;
 	int		i;
@@ -189,7 +202,11 @@ char	*del_one_back_slash(char *str)
 	done = 0;
 	block = malloc(sizeof(char) * (ft_strlen(str)));
 	if (!block)
-		return (NULL);
+	{
+		free(str);
+		return (ft_clean_error_malloc(clean));
+	}
+		
 	i = 0;
 	while (str[i])
 	{
@@ -207,7 +224,7 @@ char	*del_one_back_slash(char *str)
 	return (block);
 }
 
-char	*expand_dollar(char **env, char *str)
+char	*expand_dollar(char **env, char *str, t_to_clean *clean)
 {
 	int		i;
 	char	*var_name;
@@ -219,23 +236,23 @@ char	*expand_dollar(char **env, char *str)
 	{
 		if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
 		{
-			str = del_one_back_slash(str);
+			str = del_one_back_slash(str, clean);
 			i++;
 		}
 		if (str[i] == '$' && !ft_is_space(str[i + 1])
 			&& str[i + 1] != '\0' && str[i + 1] != '$')
 		{
 			if (str[i] == '$' && str[i + 1] == '?')
-				str = replace_interrogation(str, i);
+				str = replace_interrogation(str, i, clean);
 			else
 			{
-				var_name = cut_dollar(&str[i]);
+				var_name = cut_dollar(&str[i], clean);
 				if (!var_name)
 					return (NULL);
 				if (ft_find_env_line(env, var_name) && str[i + 1] != '$')
-					str = replace_dollar(env, str, var_name, i);
+					str = replace_dollar(str, var_name, i, clean);
 				else
-					str = del_dollar(str, var_name, ft_strlen(var_name));
+					str = del_dollar(str, var_name, ft_strlen(var_name), clean);
 			}
 			i = 0;
 		}

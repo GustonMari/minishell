@@ -10,30 +10,38 @@ char	**manage_line(char **env, char *line)
 	cmd_all = NULL;
 	tmp = NULL;
 	clean = NULL;
-
+	clean = malloc(sizeof(clean) * 4);
+	if (!clean)
+	{
+		free(line);
+		free(clean);
+		exit(errno);
+	}
+	clean->env = env;
+	clean->token_begin = NULL;
+	clean->command_begin = NULL;
 	if (check_quote(line) == FALSE)
 	{
 		ft_putstr_fd(BRED"minishell: you should close quote\n"CRESET, 2);
+		free(clean);
 		free(line);
 		return (env);
 	}
-	line = expand_node_single(env, line);
-	tmp = lexer(line);
+	line = expand_node_single(clean, env, line);
+	tmp = lexer(clean, line);
 	if (!tmp)
 		return (env);
 	remix_manager(&tmp);
 	if(check_cmd_list(tmp) < 0)
 	{
-		//free(line);
 		ft_lstclear(&tmp, free);
+		free(clean);
 		return (env);
 	}
-	expanded = expand_all(env, tmp);
-	cmd_all = token_to_cmd(expanded);
-	clean = malloc(sizeof(clean) * 3);
+	expanded = expand_all(env, tmp, clean);
 	clean->token_begin = expanded;
+	cmd_all = token_to_cmd(expanded);
 	clean->command_begin = cmd_all;
-	clean->env = env;
 	if (manage_heredoc(&cmd_all, env, clean) < 0)
 	{
 		delete_heredoc_file(cmd_all);

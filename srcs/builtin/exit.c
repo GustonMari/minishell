@@ -14,10 +14,14 @@
 
 void	ft_clean_exit(t_to_clean *clean)
 {
-	ft_lstclear(&(clean->token_begin), free);
-	ft_cmd_clear(&(clean->command_begin));
-	ft_free_tab_2d(clean->env);
-	free(clean);
+	if (clean->token_begin)
+		ft_lstclear(&(clean->token_begin), free);
+	if (clean->command_begin)
+		ft_cmd_clear(&(clean->command_begin));
+	if (clean->env)
+		ft_free_tab_2d(clean->env);
+	if (clean)
+		free(clean);
 	rl_clear_history();
 }
 

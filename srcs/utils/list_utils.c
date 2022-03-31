@@ -15,15 +15,14 @@ void	ft_lstadd_back(t_token **alst, t_token *new)
 	temp->next = new;
 }
 
-t_token	*ft_lstnew(char *content, t_tokentype param)
+t_token	*ft_lstnew(char *content, t_tokentype param, t_to_clean *clean)
 {
 	t_token	*new;
 
 	new = malloc(sizeof(t_token));
 	if (!new)
-		return (NULL);
+		return (ft_clean_error_malloc(clean));
 	new->content = content;
-	//new->to_del = 0;
 	if (!new->content)
 		return (NULL);
 	new->type = param;

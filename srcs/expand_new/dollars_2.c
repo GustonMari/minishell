@@ -1,6 +1,6 @@
 #include "../includes/function.h"
 
-char	*replace_interrogation(char *str, int pos)
+char	*replace_interrogation(char *str, int pos, t_to_clean *clean)
 {
 	char	*dest;
 	char	*status;
@@ -12,9 +12,17 @@ char	*replace_interrogation(char *str, int pos)
 	j = 0;
 	k = 0;
 	status = ft_itoa(g_status);
+	if (!status)
+	{
+		free(str);
+		return (ft_clean_error_malloc(clean));
+	}
 	dest = malloc(sizeof(char) * (ft_strlen(str) - 1 + ft_strlen(status)));
 	if (!dest)
-		return (NULL);
+	{
+		free(str);
+		return (ft_clean_error_malloc(clean));
+	}
 	while (str[i])
 	{
 		if (i == pos)

@@ -6,23 +6,12 @@
 
 int	remix_size_three(t_token *lst)
 {
-	// int	i;
-
-	// i = 1;
 	if (lst->next)
 		lst = lst->next;
 	if (token_is_redir(lst) && count_word_btw_two_op(lst) == 1)
 		return (1);
-	/* if ((lst->type == CHV_L || lst->type == D_CHV_L) && count_word_btw_two_op(lst) ==1)
-		return (1); */
 	else
 		return (0);
-	/* while (lst && lst->type != CHV_L)
-	{
-		lst = lst->next;
-		i++;
-	}
-	return (i); */
 }
 
 /*
@@ -33,15 +22,12 @@ void	ft_sa(t_token **head)
 	t_token	*temp;
 	t_token	*forward;
 
-	//if (!*head || ft_lstsize(*head) == 1)
-	//	return ;
 	temp = *head;
 	forward = temp;
 	forward = forward->next;
 	temp->next = forward->next;
 	forward->next = temp;
 	*head = forward;
-	//ft_addback_operation(head_op, ft_create_new_operation("sa"));
 }
 
 /*
@@ -59,10 +45,8 @@ void	remix_lexer(t_token **all)
 	t_token	*before_chv_l;
 
 	tmp = *all;
-	//function si < en premier position de cmd_line
 	if (token_is_redir(tmp) && (count_word_btw_two_op(tmp) > 1))
 	{
-		//ft_sa(&tmp);
 		mv_word_left(tmp);
 		ft_sa(&tmp);
 		if (!remix_size_three(tmp))
@@ -70,9 +54,6 @@ void	remix_lexer(t_token **all)
 		*all = tmp;
 		return ;
 	}
-	// printf("------- AFTER rmeix -----------\n");
-	// print_token(all);
-	// printf("------------------\n");
 	before_chv_l = *all;
 	while (tmp)
 	{
@@ -80,12 +61,8 @@ void	remix_lexer(t_token **all)
 		{
 				if (count_word_btw_two_op(tmp) > 1)
 				{
-					//printf("NOOOON");
 					mv_word_left(tmp);
 					mv_chv_l(before_chv_l);
-					//tmp = mv_redir_left(before_chv_l);
-					// on se retrouve apres substitution au noed avant lancienne position de chvr_l
-					//while (tmp && tmp->type != CHV_L)
 					while (tmp && !token_is_operator(tmp))
 						tmp = tmp->next;
 				}
@@ -93,10 +70,6 @@ void	remix_lexer(t_token **all)
 		before_chv_l = tmp;
 		tmp = tmp->next;
 	}
-	//tmp = *all;
-	// printf("------- AFTER rmeix -----------\n");
-	// print_token(all);
-	// printf("------------------\n");
 }
 
 int	ft_need_remix(t_token **all)
@@ -122,9 +95,6 @@ int	ft_need_remix(t_token **all)
 
 void	remix_manager(t_token **all)
 {
-	//t_token *tmp;
-
-	//tmp = all;
 	if (ft_need_remix(all) == 0)
 		return ;
 	else

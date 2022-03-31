@@ -1,30 +1,30 @@
 #include "../includes/function.h"
 
-int	create_op(t_token **begin, int op)
+int	create_op(t_to_clean *clean, t_token **begin, int op)
 {
 	if (op == PIPE)
 	{
-		ft_lstadd_back(begin, ft_lstnew(ft_strdup("|"), PIPE));
+		ft_lstadd_back(begin, ft_lstnew(ft_strdup("|"), PIPE, clean));
 		return (1);
 	}
 	else if (op == CHV_R)
 	{
-		ft_lstadd_back(begin, ft_lstnew(ft_strdup(">"), CHV_R));
+		ft_lstadd_back(begin, ft_lstnew(ft_strdup(">"), CHV_R, clean));
 		return (1);
 	}
 	else if (op == CHV_L)
 	{
-		ft_lstadd_back(begin, ft_lstnew(ft_strdup("<"), CHV_L));
+		ft_lstadd_back(begin, ft_lstnew(ft_strdup("<"), CHV_L, clean));
 		return (1);
 	}
 	else if (op == D_CHV_R)
 	{
-		ft_lstadd_back(begin, ft_lstnew(ft_strdup(">>"), D_CHV_R));
+		ft_lstadd_back(begin, ft_lstnew(ft_strdup(">>"), D_CHV_R, clean));
 		return (2);
 	}
 	else if (op == D_CHV_L)
 	{
-		ft_lstadd_back(begin, ft_lstnew(ft_strdup("<<"), D_CHV_L));
+		ft_lstadd_back(begin, ft_lstnew(ft_strdup("<<"), D_CHV_L, clean));
 		return (2);
 	}
 	return (0);
@@ -46,7 +46,7 @@ char	*cpy_word(char *arg, int end)
 	return (word);
 }
 
-int	create_word(char *arg, t_token **begin)
+int	create_word(char *arg, t_token **begin, t_to_clean *clean)
 {
 	int		i;
 	char	*word;
@@ -60,25 +60,11 @@ int	create_word(char *arg, t_token **begin)
 			i++;
 	}
 	word = cpy_word(arg, i);
-	ft_lstadd_back(begin, ft_lstnew(word, WORD));
+	ft_lstadd_back(begin, ft_lstnew(word, WORD, clean));
 	return (i);
 }
 
-/* int	is_empty(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_is_space(str[i]) == 0)
-			return (1);
-		i++;
-	}
-	return (0);
-} */
-
-t_token	*lexer(char *arg)
+t_token	*lexer(t_to_clean *clean, char *arg)
 {
 	t_token	*begin = NULL;
 	int		i;
@@ -95,9 +81,9 @@ t_token	*lexer(char *arg)
 	{
 		op = is_operator(&arg[i]);
 		if (op)
-			i += create_op(&begin, op);
+			i += create_op(clean, &begin, op);
 		else if (!op && (!ft_is_space(arg[i])))
-			i += create_word(&arg[i], &begin);
+			i += create_word(&arg[i], &begin, clean);
 		else if (ft_is_space(arg[i]))
 			i++;
 	}

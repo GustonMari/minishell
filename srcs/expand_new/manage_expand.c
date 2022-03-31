@@ -11,7 +11,10 @@ char	*del_quote(char *str, int pos_a, int pos_b)
 	j = 0;
 	ret = ft_calloc(sizeof(char), (ft_strlen(str) + 2));
 	if (!ret)
+	{
+		free(str);
 		return (NULL);
+	}
 	while (str[i])
 	{
 		if (i == pos_a && str[i])
@@ -31,7 +34,7 @@ char	*del_quote(char *str, int pos_a, int pos_b)
 	return (ret);
 }
 
-char	*trim_quote(char *str, int *i)
+char	*trim_quote(char *str, int *i, t_to_clean *clean)
 {
 	int	k;
 	int	j;
@@ -43,7 +46,7 @@ char	*trim_quote(char *str, int *i)
 		j = find_next_quote(str);
 		str = del_quote(str, k, (j + k - 1));
 		if (!str)
-			return (NULL);
+			return (ft_clean_error_malloc(clean));
 		
 		*i += (j);
 	}
@@ -51,13 +54,16 @@ char	*trim_quote(char *str, int *i)
 }
 
 
-char	*cpy_block_special(char	*str, int size)
+char	*cpy_block_special(char	*str, int size, t_to_clean *clean)
 {
 	char	*block;
 
 	block = malloc(sizeof(char) * (size));
 	if (!block)
-		return (NULL);
+	{
+		free(str);
+		return (ft_clean_error_malloc(clean));
+	}
 	block = ft_strncpy(block, str, ((unsigned int)size));
 	return (block);
 }
@@ -66,13 +72,13 @@ char	*cpy_block_special(char	*str, int size)
 		permet de copier une block, par exemple un block entre "" ou ''
 */
 
-char	*cpy_block(char	*str, int size)
+char	*cpy_block(char	*str, int size, t_to_clean *clean)
 {
 	char	*block;
 
 	block = malloc(sizeof(char) * (size + 2));
 	if (!block)
-		return (NULL);
+		return (ft_clean_error_malloc(clean));
 	block = ft_strncpy(block, str, (unsigned int)size);
 	return (block);
 }
@@ -129,7 +135,7 @@ int	nb_dollar(char *str)
 	return (nb);
 }
 
-char	*add_echapment(char *str)
+char	*add_echapment(char *str, t_to_clean *clean)
 {
 	char	*new;
 	int		i;
@@ -138,6 +144,11 @@ char	*add_echapment(char *str)
 	i = 0;
 	j = 0;
 	new = malloc(sizeof(char) * (ft_strlen(str) + nb_dollar(str) + 1));
+	if (!new)
+	{
+		free(str);
+		return (ft_clean_error_malloc(clean));
+	}
 	while (str[i])
 	{
 		if (str[i] == '$')
@@ -156,7 +167,7 @@ char	*add_echapment(char *str)
 
 /*Supprime tous les backslash devant un dollar dans la string*/
 
-char	*del_back_slash(char *str)
+char	*del_back_slash(char *str, t_to_clean *clean)
 {
 	int		i;
 	int		j;
@@ -169,7 +180,11 @@ char	*del_back_slash(char *str)
 	nb = nb_back_slash(str);
 	block = malloc(sizeof(char) * (ft_strlen(str) + 1 - nb));
 	if (!block)
-		return (NULL);
+	{
+		free(str);
+		return (ft_clean_error_malloc(clean));
+	}
+		
 	i = 0;
 	while (str[i])
 	{
@@ -186,7 +201,7 @@ char	*del_back_slash(char *str)
 
 /*Expand un maillon */
 
-char	*expand_node(char **env, char *str)
+char	*expand_node(char **env, char *str, t_to_clean *clean)
 {
 	int		i;
 	char	*block;
@@ -196,42 +211,48 @@ char	*expand_node(char **env, char *str)
 	block = NULL;
 	expanded = ft_strdup("");
 	if (!expanded)
-		return (NULL);
+		return (ft_clean_error_malloc(clean));
 	i = 0;
 	while (str[i])
 	{
 		if (str[i] == QUOTE)
 		{
-			block = cpy_block(&str[i], find_next_quote(&str[i]));
-			block = trim_quote(block, &i);
-			block = add_echapment(block);
+			block = cpy_block(&str[i], find_next_quote(&str[i]), clean);
+			block = trim_quote(block, &i, clean);
+			block = add_echapment(block, clean);
 		}
 		else if (str[i] == D_QUOTE)
 		{
-			block = cpy_block(&str[i], find_next_quote(&str[i]));
-			block = trim_quote(block, &i);
-			block = expand_dollar(env, block);
+			block = cpy_block(&str[i], find_next_quote(&str[i]), clean);
+			block = trim_quote(block, &i, clean);
+			block = expand_dollar(env, block, clean);
 		}
 		else if (str[i] == '$')
 		{
-			block = cpy_block(&str[i], find_next_quote(&str[i]));
+			block = cpy_block(&str[i], find_next_quote(&str[i]), clean);
 			if (str[i + 1] != '\0')
-				block = expand_single_dollar(env, block);
-			block = del_back_slash(block);
+				block = expand_single_dollar(env, block, clean);
+			block = del_back_slash(block, clean);
 			i += find_next_quote(&str[i]);
 		}
 		else if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
 		{
 			i++;
-			block = cpy_block_special(&str[i], find_next_block(&str[i]));
+			block = cpy_block_special(&str[i], find_next_block(&str[i]), clean);
 			i += find_next_block(&str[i]);
 		}
 		else
 		{
-			block = cpy_block(&str[i], find_next_block(&str[i]));
+			block = cpy_block(&str[i], find_next_block(&str[i]), clean);
 			i += find_next_block(&str[i]);
 		}
 		expanded = ft_strjoin_free(expanded, block, 1);
+		if (!expanded)
+		{
+			free(str);
+			free(block);
+			return (ft_clean_error_malloc(clean));
+		}
 		free(block);
 	}
 	free(str);
@@ -239,7 +260,7 @@ char	*expand_node(char **env, char *str)
 
 }
 
-t_token	*expand_all(char **env, t_token *all)
+t_token	*expand_all(char **env, t_token *all, t_to_clean *clean)
 {
 	t_token	*tmp;
 	int		expand;
@@ -251,7 +272,7 @@ t_token	*expand_all(char **env, t_token *all)
 	{
 		if (expand)
 		{
-			tmp->content = expand_node(env, tmp->content);
+			tmp->content = expand_node(env, tmp->content, clean);
 			if (!tmp->content)
 				return (NULL);
 		}

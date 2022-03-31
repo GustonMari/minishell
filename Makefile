@@ -76,7 +76,8 @@ SRC =	srcs/main.c \
 		srcs/utils/utils_2.c \
 		srcs/utils/utils_3.c \
 		srcs/utils/utils_4.c \
-		srcs/utils/ft_atol.c
+		srcs/utils/ft_atol.c \
+		srcs/clean_malloc/clean_malloc_1.c
 
 OBJS = $(addprefix ${OBJDIR}/,${SRC:.c=.o})
 

@@ -88,28 +88,3 @@ int	check_cmd_list(t_token *all)
 	return (0);
 }
 
-/* int	check_cmd_list(t_token *all)
-{
-	t_token	*tmp;
-
-	tmp = all;
-	if (token_is_operator(tmp))
-		return (-1);
-	while (tmp->next)
-	{
-		if (token_is_operator(tmp))
-		{
-			if (token_is_operator(tmp->next))
-			{
-				ft_print_error(1, NULL,
-					"syntax error near unexpected token ", tmp->next->content);
-				g_status = 2;
-				return (-1);
-			}
-		}
-		tmp = tmp->next;
-	}
-	if (token_is_operator(tmp))
-		return (-1);
-	return (0);
-} */

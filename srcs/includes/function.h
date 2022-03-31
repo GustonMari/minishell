@@ -21,7 +21,7 @@
 --------------- LIST UTILS ----------------
 */
 
-t_token	*ft_lstnew(char *content, t_tokentype type);
+t_token	*ft_lstnew(char *content, t_tokentype param, t_to_clean *clean);
 void	ft_lstadd_back(t_token **alst, t_token *new);
 void	print_token(t_token **begin_list);
 void	print_cmd(t_command **begin_list);
@@ -161,7 +161,7 @@ char	**ft_split(char const *s, char c);
 ------------------ LEXER ----------------
 */
 
-t_token	*lexer(char *arg);
+t_token	*lexer(t_to_clean *clean, char *arg);
 int		count_word_btw_two_op(t_token *all);
 void	mv_word_left(t_token *all);
 void	mv_chv_l(t_token *all);
@@ -218,9 +218,9 @@ int		check_t_cmd(char **env, t_command *all);
 ------------------ $$ DOLLARZ $$ ----------------
 */
 
-char	*expand_dollar(char **env, char *str);
+char	*expand_dollar(char **env, char *str, t_to_clean *clean);
 char	*replace_dollar_3(char *str, char *new_var, char *ret);
-char	*replace_interrogation(char *str, int pos);
+char	*replace_interrogation(char *str, int pos, t_to_clean *clean);
 char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos);
 
 
@@ -228,9 +228,9 @@ char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos);
 ------------------ EXPAND ----------------
 */
 
-t_token	*expand_all(char **env, t_token *all);
-char	*cpy_block(char	*str, int size);
-char	*expand_node_single(char **env, char *str);
+t_token	*expand_all(char **env, t_token *all, t_to_clean *clean);
+char	*cpy_block(char	*str, int size, t_to_clean *clean);
+char	*expand_node_single(t_to_clean *clean, char **env, char *str);
 int		find_next_block(char *str);
 
 /*
@@ -238,8 +238,8 @@ int		find_next_block(char *str);
 */
 
 //NEW TRIM QUOTE
-char		*trim_quote(char *str, int *i);
-char		*expand_single_dollar(char **env, char *str);
+char	*trim_quote(char *str, int *i, t_to_clean *clean);
+char	*expand_single_dollar(char **env, char *str, t_to_clean *clean);
 
 //char		*trim_quote(char *str);
 char		**ft_split_special(char *str);
@@ -364,8 +364,12 @@ void	signal_in_cmd(void);
 void	signal_manager2(void);
 void	signal_cmd(int sig);
 
+/* 
+------------------ EXIT_MALLOC ------------------
+*/
 
-
+char	*exit_expand_node_single(t_to_clean *clean, char **env, char *str, char *expanded);
+void	*ft_clean_error_malloc(t_to_clean *clean);
 
 
 int	prio_exit(t_command *all);
