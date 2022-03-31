@@ -38,7 +38,7 @@ void	fill_heredoc_file(char **stop, char **env, int is_expand, char *name, t_to_
 			i++;
 		}
 		if (is_expand == TRUE)
-			line = expand_dollar(env, line);
+			line = expand_dollar(env, line, clean);
 		begin = start_heredoc_one(stop, begin);
 		if (begin == 1)
 		{

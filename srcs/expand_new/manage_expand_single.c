@@ -31,39 +31,39 @@ char	*expand_node_single(t_to_clean *clean, char **env, char *str)
 	{
 		if (str[i] == QUOTE)
 		{
-			block = cpy_block(&str[i], find_next_quote(&str[i]));
+			block = cpy_block(&str[i], find_next_quote(&str[i]), clean);
 			if (!block)
 				return (exit_expand_node_single(clean, env, str, expanded));
 			i += find_next_quote(&str[i]);
 		}
 		else if (str[i] == D_QUOTE)
 		{
-			block = cpy_block(&str[i], find_next_quote(&str[i]));
+			block = cpy_block(&str[i], find_next_quote(&str[i]), clean);
 			if (!block)
 				return (exit_expand_node_single(clean, env, str, expanded));
 			i += find_next_quote(&str[i]);
 		}
 		else if (str[i] == '$')
 		{
-			block = cpy_block(&str[i], find_next_quote(&str[i]));
+			block = cpy_block(&str[i], find_next_quote(&str[i]), clean);
 			if (!block)
 				return (exit_expand_node_single(clean, env, str, expanded));
 			if (str[i + 1] != '\0' && not_expand == 0)
-				block = expand_single_dollar(env, block);
+				block = expand_single_dollar(env, block, clean);
 			not_expand = 0;
 			i += find_next_quote(&str[i]);
 		}
 		else if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
 		{
 			i++;
-			block = cpy_block(&str[i], find_next_block(&str[i]));
+			block = cpy_block(&str[i], find_next_block(&str[i]), clean);
 			if (!block)
 				return (exit_expand_node_single(clean, env, str, expanded));
 			i += find_next_block(&str[i]);
 		}
 		else
 		{
-			block = cpy_block(&str[i], find_next_block(&str[i]));
+			block = cpy_block(&str[i], find_next_block(&str[i]), clean);
 			if (!block)
 				return (exit_expand_node_single(clean, env, str, expanded));
 			if (ft_find_d_chv_l_str(block, "<<", 2) == TRUE)
