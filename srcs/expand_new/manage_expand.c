@@ -232,6 +232,7 @@ char	*expand_node(char **env, char *str, t_to_clean *clean)
 		else if (str[i] == '$')
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]), clean);
+			//WARNING add EXPANDED
 			if (str[i + 1] != '\0')
 				block = expand_single_dollar(env, block, clean);
 			block = del_back_slash(block, clean);

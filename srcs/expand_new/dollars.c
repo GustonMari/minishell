@@ -175,6 +175,7 @@ char	*expand_single_dollar(char **env, char *str, t_to_clean *clean)
 
 	i = 0;
 	var_name = NULL;
+	//WARNING remettre cut_dollar
 	var_name = cut_dollar(&str[i], clean);
 	if (!var_name)
 		return (NULL);
@@ -184,7 +185,7 @@ char	*expand_single_dollar(char **env, char *str, t_to_clean *clean)
 		return (str);
 	}
 	if (str[i] == '$' && str[i + 1] == '?')
-		str = replace_interrogation(str, i, clean);
+		str = replace_interrogation(str, i, clean, var_name);
 	else
 	{
 		if (ft_find_env_line(env, var_name) && str[i + 1] != '$')
@@ -238,7 +239,6 @@ char	*expand_dollar(char **env, char *str, t_to_clean *clean)
 
 	i = 0;
 	var_name = NULL;
-
 	while (str[i])
 	{
 		if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
@@ -251,7 +251,7 @@ char	*expand_dollar(char **env, char *str, t_to_clean *clean)
 			&& str[i + 1] != '\0' && str[i + 1] != '$')
 		{
 			if (str[i] == '$' && str[i + 1] == '?')
-				str = replace_interrogation(str, i, clean);
+				str = replace_interrogation(str, i, clean, var_name);
 			else
 			{
 				var_name = cut_dollar(&str[i], clean);
@@ -262,6 +262,7 @@ char	*expand_dollar(char **env, char *str, t_to_clean *clean)
 				else
 					str = del_dollar(str, var_name, ft_strlen(var_name), clean);
 			}
+
 			//i = 0;
 		}
 		//ATTENTION

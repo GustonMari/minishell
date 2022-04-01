@@ -1,6 +1,6 @@
 #include "../includes/function.h"
 
-char	*replace_interrogation(char *str, int pos, t_to_clean *clean)
+char	*replace_interrogation(char *str, int pos, t_to_clean *clean, char *var_name)
 {
 	char	*dest;
 	char	*status;
@@ -14,6 +14,8 @@ char	*replace_interrogation(char *str, int pos, t_to_clean *clean)
 	status = ft_itoa(g_status);
 	if (!status)
 	{
+		//WARNING
+		free(var_name);
 		free(str);
 		return (ft_clean_error_malloc(clean));
 	}
@@ -43,8 +45,11 @@ char	*replace_interrogation(char *str, int pos, t_to_clean *clean)
 		}
 	}
 	dest[k] = '\0';
-	//WARNING
+	//WARNING status et str ETTTTTTT VAR_NAME 
 	free(status);
+	free(str);
+	//if (var_name)
+	//	free(var_name);
 	return (dest);
 }
 

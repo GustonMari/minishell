@@ -17,6 +17,7 @@ void	ft_exec_cmd_bis_3(t_to_clean *clean, t_command *all, char *path)
 	if (ft_strcmp(all->cmd_to_exec[0], "") == TRUE)
 	{
 		//WARNING
+		//(void)path;
 		free(path);
 		ft_putstr_fd(BRED "minishell: : command not found\n" CRESET, 2);
 		g_status = 127;
@@ -44,8 +45,8 @@ char	*ft_exec_cmd_bis_2(t_to_clean *clean, t_command *all, char *tmp)
 			g_status = 127;
 		}
 		//WARNING
-		if (tmp)
-			free(tmp);
+		//if (tmp)
+		//	free(tmp);
 		ft_clean_exit(clean);
 		exit(g_status);
 	}
@@ -74,7 +75,8 @@ char	*ft_exec_cmd_bis(char **env
 		g_status = 127;
 		ft_clean_exit(clean);
 		//WARNING
-		free(tmp);
+		if (tmp)
+			free(tmp);
 		exit(127);
 	}
 	return (tmp);

@@ -48,6 +48,7 @@ char	*expand_node_single(t_to_clean *clean, char **env, char *str)
 			block = cpy_block(&str[i], find_next_quote(&str[i]), clean);
 			if (!block)
 				return (exit_expand_node_single(clean, env, str, expanded));
+			//WARNING EXPANDED DANS EXPAND SINGLE DOLLARS
 			if (str[i + 1] != '\0' && not_expand == 0 && !ft_is_space(str[i + 1]))
 				block = expand_single_dollar(env, block, clean);
 			not_expand = 0;

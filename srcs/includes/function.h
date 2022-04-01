@@ -215,7 +215,7 @@ int		check_t_cmd(char **env, t_command *all);
 
 char	*expand_dollar(char **env, char *str, t_to_clean *clean);
 char	*replace_dollar_3(char *str, char *new_var, char *ret);
-char	*replace_interrogation(char *str, int pos, t_to_clean *clean);
+char	*replace_interrogation(char *str, int pos, t_to_clean *clean, char *var_name);
 char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos);
 
 
@@ -234,6 +234,7 @@ int		find_next_block(char *str);
 
 char	*trim_quote(char *str, int *i, t_to_clean *clean);
 char	*expand_single_dollar(char **env, char *str, t_to_clean *clean);
+
 
 char		**ft_split_special(char *str);
 char		*ft_strtrim_space(char *s1, char *set);
@@ -371,4 +372,5 @@ void	fill_heredoc_file(char **stop, int is_expand
 	, char *name, t_to_clean *clean);
 int		replace_heredoc(t_command **all_cmd, char *name);
 int		signal_launch_heredoc(void);
+
 #endif
