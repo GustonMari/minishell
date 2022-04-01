@@ -73,7 +73,12 @@ char	**ft_export_add(char **env, char *str)
 			return (NULL);
 		i++;
 	}
-	new_env[i] = add_join_export(str);
+	if (is_equal_in_line(str) == FALSE)
+	{
+		new_env[i] = ft_strdup(str);
+	}
+	else
+		new_env[i] = add_join_export(str);
 	new_env[i + 1] = NULL;
 	ft_free_tab_2d(env);
 	return (new_env);
