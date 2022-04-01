@@ -31,6 +31,8 @@ char	*del_quote(char *str, int pos_a, int pos_b)
 		j++;
 	}
 	ret[j] = '\0';
+	//WARNING
+	free(str);
 	return (ret);
 }
 

@@ -12,11 +12,12 @@
 
 #include "../includes/function.h"
 
-void	ft_exec_cmd_bis_3(t_to_clean *clean, t_command *all)
+void	ft_exec_cmd_bis_3(t_to_clean *clean, t_command *all, char *path)
 {
 	if (ft_strcmp(all->cmd_to_exec[0], "") == TRUE)
 	{
-		//ATTENTION VERIFIER QUE DANS FT_EXEC_CMD ON AI PAS BESOIN DE FREE PATH ICI
+		//WARNING
+		free(path);
 		ft_putstr_fd(BRED "minishell: : command not found\n" CRESET, 2);
 		g_status = 127;
 		ft_clean_exit(clean);
@@ -42,6 +43,9 @@ char	*ft_exec_cmd_bis_2(t_to_clean *clean, t_command *all, char *tmp)
 				all->cmd_to_exec[0], ": command not found", NULL);
 			g_status = 127;
 		}
+		//WARNING
+		if (tmp)
+			free(tmp);
 		ft_clean_exit(clean);
 		exit(g_status);
 	}
@@ -53,6 +57,7 @@ char	*ft_exec_cmd_bis(char **env
 {
 	char	*tmp;
 
+	tmp = NULL;
 	if (*out != -1)
 		close(*out);
 	if (ft_strcmp(all->cmd_to_exec[0], "exit") == 0)
@@ -68,6 +73,8 @@ char	*ft_exec_cmd_bis(char **env
 		ft_print_error(1, all->cmd_to_exec[0], ": command not found", NULL);
 		g_status = 127;
 		ft_clean_exit(clean);
+		//WARNING
+		free(tmp);
 		exit(127);
 	}
 	return (tmp);
@@ -79,6 +86,7 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 	char	*tmp;
 	int		pid;
 
+	path = NULL;
 	prio_exit(all);
 	signal_manager2();
 	pid = fork();
@@ -86,7 +94,7 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 	{
 		tmp = ft_exec_cmd_bis(env, clean, all, &out);
 		path = ft_exec_cmd_bis_2(clean, all, tmp);
-		ft_exec_cmd_bis_3(clean, all);
+		ft_exec_cmd_bis_3(clean, all, path);
 		if (execve(path, all->cmd_to_exec, env) < 0)
 		{
 			ft_print_error(1, all->cmd_to_exec[0], ": Is a directory", NULL);

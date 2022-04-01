@@ -8,7 +8,7 @@ INCDIR = includes
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
-MEM =  -fsanitize=address
+MEM =  #-fsanitize=address
 
 ifeq ($(TMEM),0)
 MEM =

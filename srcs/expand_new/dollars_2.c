@@ -43,6 +43,8 @@ char	*replace_interrogation(char *str, int pos, t_to_clean *clean)
 		}
 	}
 	dest[k] = '\0';
+	//WARNING
+	free(status);
 	return (dest);
 }
 
