@@ -176,6 +176,39 @@ char	*expand_single_dollar(char **env, char *str, t_to_clean *clean)
 	i = 0;
 	var_name = NULL;
 	//WARNING remettre cut_dollar
+	fprintf(stderr, "salut =%s\n", str);
+	//if (str[i] == '$')
+	//{
+		var_name = cut_dollar(&str[i], clean);
+		if (!var_name)
+			return (NULL);
+		if (ft_strlen(str) == 1)
+		{
+			str = del_dollar(str, var_name, ft_strlen(var_name), clean);
+			return (str);
+		}
+		if (str[i] == '$' && str[i + 1] == '?')
+			str = replace_interrogation(str, i, clean, var_name);
+		else
+		{
+			if (ft_find_env_line(env, var_name) && str[i + 1] != '$')
+				str = replace_dollar(str, var_name, i, clean);
+			else
+				str = del_dollar(str, var_name, ft_strlen(var_name), clean);
+		}
+	//}
+	return (str);
+}
+
+/* char	*expand_single_dollar(char **env, char *str, t_to_clean *clean)
+{
+	int		i;
+	char	*var_name;
+
+	i = 0;
+	var_name = NULL;
+	//WARNING remettre cut_dollar
+	
 	var_name = cut_dollar(&str[i], clean);
 	if (!var_name)
 		return (NULL);
@@ -195,6 +228,7 @@ char	*expand_single_dollar(char **env, char *str, t_to_clean *clean)
 	}
 	return (str);
 }
+ */
 
 /*supprime UN backslash a l'endroit ou il est*/
 

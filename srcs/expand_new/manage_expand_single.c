@@ -1,5 +1,20 @@
 #include "../includes/function.h"
 
+int	find_next_single_block_merde(char *str)
+{
+	int	i;
+
+	i = 0;
+	i++;
+	while (str[i])
+	{
+		if (str[i] == QUOTE || str[i] == D_QUOTE || str[i] == '$')
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
 int	find_next_single_block(char *str)
 {
 	int	i;
@@ -45,14 +60,14 @@ char	*expand_node_single(t_to_clean *clean, char **env, char *str)
 		}
 		else if (str[i] == '$')
 		{
-			block = cpy_block(&str[i], find_next_quote(&str[i]), clean);
+			block = cpy_block(&str[i], find_next_single_block_merde(&str[i]), clean);
 			if (!block)
 				return (exit_expand_node_single(clean, env, str, expanded));
 			//WARNING EXPANDED DANS EXPAND SINGLE DOLLARS
 			if (str[i + 1] != '\0' && not_expand == 0 && !ft_is_space(str[i + 1]))
 				block = expand_single_dollar(env, block, clean);
 			not_expand = 0;
-			i += find_next_quote(&str[i]);
+			i += find_next_single_block_merde(&str[i]);
 		}
 		else if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
 		{

@@ -373,4 +373,11 @@ void	fill_heredoc_file(char **stop, int is_expand
 int		replace_heredoc(t_command **all_cmd, char *name);
 int		signal_launch_heredoc(void);
 
+
+/*
+---------------GUSTAVE-------------
+*/
+int	find_next_single_block_merde(char *str);
+
+
 #endif
