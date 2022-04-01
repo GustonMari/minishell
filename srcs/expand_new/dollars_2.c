@@ -48,8 +48,8 @@ char	*replace_interrogation(char *str, int pos, t_to_clean *clean, char *var_nam
 	//WARNING status et str ETTTTTTT VAR_NAME 
 	free(status);
 	free(str);
-	//if (var_name)
-	//	free(var_name);
+	if (var_name)
+		free(var_name);
 	return (dest);
 }
 
