@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/31 23:37:34 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/03/31 16:44:13 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,7 @@ int		is_var_in_line_export(char *str, char *var, size_t n);
 int		is_var_in_env_export(char **env, char *var, size_t n);
 int		ft_change_env_val_export(char **env, char *var, char *new_val, char *str);
 int		is_var_in_env_export_2(char **env, char *var, size_t n);
-//char	*remove_char_if(char *str, char c, char no);
-char	*remove_char_if(char *str, char c, char no, int first);
+char	*remove_char_if(char *str, char c, char no);
 
 /*
 ------------------ CLEAR ----------------
@@ -133,15 +132,13 @@ char	*ft_pwd_return(void);
 */
 
 int		redirection_to_file(char *file_name, char *str);
-//int		manage_chv_l(t_command *all_cmd, char **env);
-int		manage_chv_l(t_command *all_cmd);
+int		manage_chv_l(t_command *all_cmd, char **env);
 int		manage_chv_r(t_command **all_cmd);
 int		redirection(t_command *all_cmd, int *in, int *out, char **env);
 int		is_redirection_type(t_command *op);
 int		count_cmd_between_pipe(t_command *all_cmd);
 int		count_redir(t_command *all_cmd);
-//int		redirection_manager(t_command **all_cmd, char **env);
-int		redirection_manager(t_command **all_cmd);
+int		redirection_manager(t_command **all_cmd, char **env);
 int		redirection_clean(t_command *all_cmd);
 
 /*
@@ -215,8 +212,10 @@ int		check_t_cmd(char **env, t_command *all);
 /*
 ------------------ $$ DOLLARZ $$ ----------------
 */
+
+char	*expand_dollar(char **env, char *str, t_to_clean *clean);
 char	*replace_dollar_3(char *str, char *new_var, char *ret);
-char	*replace_interrogation(char *str, int pos, t_to_clean *clean, char *var_name);
+char	*replace_interrogation(char *str, int pos, t_to_clean *clean);
 char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos);
 
 
@@ -263,8 +262,7 @@ char		**manage_line(char **env, char *line);
 ------------------ PIPE ------------------
 */
 
-// int 		execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env, int in);
-int 		execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env);
+int 		execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env, int in);
 int			count_cmd_list(t_command *all_cmd);
 int			count_all_between_pipe(t_command **all_cmd);
 
@@ -295,14 +293,14 @@ void		exit_pipe_process(int sig);
 ------------------ HEREDOC ------------------
 */
 
-int			priorities_d_chv_l(t_command *all_cmd);
+int			priorities_D_CHV_L(t_command *all_cmd);
 //int			launch_heredoc(t_command **all_cmd, char **env, char *name, t_to_clean *clean);
 int			launch_heredoc(t_command **all_cmd, char *name, t_to_clean *clean);
 //int			manage_heredoc(t_command **all_cmd, char **env, t_to_clean *clean);
 int			manage_heredoc(t_command **all_cmd, t_to_clean *clean);
 
 int			delete_heredoc_file(t_command *all_cmd);
-int			count_nb_d_chv_l_between_pipe(t_command *all_cmd);
+int			count_nb_D_CHV_L_between_pipe(t_command *all_cmd);
 int			create_heredoc_file(char *name);
 int			start_heredoc_one(char **stop, int begin);
 int			start_heredoc_more(char **stop, int i);
@@ -373,23 +371,4 @@ void	fill_heredoc_file(char **stop, int is_expand
 	, char *name, t_to_clean *clean);
 int		replace_heredoc(t_command **all_cmd, char *name);
 int		signal_launch_heredoc(void);
-//In lexer
-int		create_op(t_to_clean *clean, t_token **begin, int op);
-int		remix_size_three(t_token *lst);
-//redir_test
-int		manage_open_r(t_command **all_cmd, char *last_redir);
-
-/*
-------------------------------------------	GUSTAVE ADDD -----------------------------------
-*/
-
-char	*del_dollar(char *str, char *var_name, int len, t_to_clean *clean);
-char	*cut_dollar(char *str, t_to_clean *clean);
-char	*allocate_block(char *block, char *str, t_to_clean *clean);
-char	*expand_dollar(char *str, t_to_clean *clean); //change
-char	*expand_dollar_bis(char *str, char *var_name, int i, t_to_clean *clean);
-char	*replace_dollar(char *str, char *var_name, int pos, t_to_clean *clean);
-char	*cpy_block_special(char	*str, int size, t_to_clean *clean);
-char	*expand_node(char **env, char *str, t_to_clean *clean);
-
 #endif

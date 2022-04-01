@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:06:41 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/31 14:36:32 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/29 13:14:56 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,3 +81,17 @@ int	is_operator(char *operator)
 		return (CHV_L);
 	return (0);
 }
+
+/* int main(int argc, char **argv, char **envp)
+{
+	(void)argc;
+	(void)argv;
+	char **env;
+
+	env = ft_create_env(envp);
+	printf("ret is_cmd = %d\n", is_cmd(env, "echo"));
+	printf("ret builtin = %d\nret = is_built_cmd = %d", is_builtin("cd"), is_built_cmd(env, "ls"));
+	ft_free_tab_2d(env);
+	//ft_putstr_fd(BRED"salut ca va"CRESET, 1);
+	return (0);
+} */

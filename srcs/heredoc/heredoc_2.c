@@ -145,7 +145,7 @@ char	**trim_quote_stop(char **strs)
 	stop = trim_quote_stop(stop);
 	print_tab_2d(stop);
 	//printf("result = %d\n", is_expand_heredoc(stop));
-	//printf("Prio = %d\n", priorities_d_chv_l(cmd_all));
+	//printf("Prio = %d\n", priorities_D_CHV_L(cmd_all));
     //ft_dispatch(cmd_all, env);
 	ft_lstclear(&expanded, free);
 	ft_cmd_clear(&cmd_all);

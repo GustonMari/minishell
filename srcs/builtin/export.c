@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:52:01 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/31 22:47:07 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/03/31 14:57:11 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ void	ft_export_no_arg(char **env)
 	ft_print_export_no_arg(env_sorted);
 	ft_free_tab_2d(env_sorted);
 }
-
-/*Cette fonction sert quand on fait export lol+=salut
-et que la vsariable d'env lol n'existe pas, on va la 
-creer ici*/
 
 char	*add_join_export(char *str)
 {
@@ -45,7 +41,7 @@ char	*add_join_export(char *str)
 		}
 		if (str[i + 1] && str[i] == '+' && str[i + 1] == '=')
 		{
-			new_str = remove_char_if(str, '+', '=', 0);
+			new_str = remove_char_if(str, '+', '=');
 			if (!new_str)
 				return (NULL);
 			return (new_str);
@@ -73,12 +69,7 @@ char	**ft_export_add(char **env, char *str)
 			return (NULL);
 		i++;
 	}
-	if (is_equal_in_line(str) == FALSE)
-	{
-		new_env[i] = ft_strdup(str);
-	}
-	else
-		new_env[i] = add_join_export(str);
+	new_env[i] = add_join_export(str);
 	new_env[i + 1] = NULL;
 	ft_free_tab_2d(env);
 	return (new_env);

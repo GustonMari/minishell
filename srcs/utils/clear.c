@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   clear.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/31 22:59:40 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/31 22:59:53 by ndormoy          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/function.h"
 
 void	*ft_free_tab_2d(char **tab)
@@ -19,6 +7,7 @@ void	*ft_free_tab_2d(char **tab)
 	i = 0;
 	while (tab[i])
 	{
+		//if (tab[i])
 		free(tab[i]);
 		i++;
 	}
@@ -38,7 +27,7 @@ t_command	*ft_cmdclear_between_pipe(t_command **lst)
 		while (current && current->type != PIPE)
 		{
 			previous = current;
-			current = current->next;
+			current = current->next;		
 			if (current && current->to_del == 1)
 				unlink(current->cmd_to_exec[0]);
 			ft_free_tab_2d(previous->cmd_to_exec);

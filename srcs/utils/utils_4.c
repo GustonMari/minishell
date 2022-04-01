@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils_4.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/31 22:33:26 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/31 22:48:27 by ndormoy          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/function.h"
 
 void	print_tab_2d(char **strs)
@@ -19,7 +7,8 @@ void	print_tab_2d(char **strs)
 	i = 0;
 	while (strs[i])
 	{
-		ft_putstr_fd(strs[i], 2);
+
+		fprintf(stderr,"%s\n", strs[i]);
 		i++;
 	}
 }
@@ -59,7 +48,7 @@ char	*remove_char(char *str, char c)
 	new_str = malloc(sizeof(char) * (ft_strlen(str)));
 	if (!new_str)
 		return (NULL);
-	while (str[i])
+	while(str[i])
 	{
 		if (str[i] == c && first == 0)
 		{
@@ -74,36 +63,7 @@ char	*remove_char(char *str, char c)
 
 /*Enleve le premier char c de str et retourne le nouveau str
 sans ce permier char mais que si on est pas tombe sur le carac no*/
-char	*remove_char_if(char *str, char c, char no, int first)
-{
-	char	*new_str;
-	int		i;
-	int		j;
-
-	j = 0;
-	i = 0;
-	new_str = malloc(sizeof(char) * (ft_strlen(str)));
-	if (!new_str)
-		return (NULL);
-	while (str[i])
-	{
-		if (str[i] == no)
-			first = 1;
-		if (str[i] == c && first == 0)
-		{
-			first = 1;
-			i++;
-		}
-		new_str[j] = str[i];
-		j++;
-		i++;
-	}
-	new_str[j] = '\0';
-	fprintf(stderr, "new_str = %s\n", new_str);
-	return (new_str);
-}
-
-/* char	*remove_char_if(char *str, char c, char no)
+char	*remove_char_if(char *str, char c, char no)
 {
 	char	*new_str;
 	int		i;
@@ -116,7 +76,7 @@ char	*remove_char_if(char *str, char c, char no, int first)
 	new_str = malloc(sizeof(char) * (ft_strlen(str)));
 	if (!new_str)
 		return (NULL);
-	while (str[i])
+	while(str[i])
 	{
 		if (str[i] == no)
 			first = 1;
@@ -131,4 +91,4 @@ char	*remove_char_if(char *str, char c, char no, int first)
 	}
 	new_str[j] = '\0';
 	return (new_str);
-} */
+}

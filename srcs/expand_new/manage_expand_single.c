@@ -43,7 +43,7 @@ char	*expand_node_single(t_to_clean *clean, char **env, char *str)
 				return (exit_expand_node_single(clean, env, str, expanded));
 			i += find_next_quote(&str[i]);
 		}
-		else if (str[i] == '$' && str[i + 1])
+		else if (str[i] == '$')
 		{
 			block = cpy_block(&str[i], find_next_quote(&str[i]), clean);
 			if (!block)

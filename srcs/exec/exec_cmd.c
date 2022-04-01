@@ -12,15 +12,14 @@
 
 #include "../includes/function.h"
 
-void	ft_exec_cmd_bis_3(t_to_clean *clean, t_command *all, char *path)
+void	ft_exec_cmd_bis_3(t_to_clean *clean, t_command *all)
 {
 	if (ft_strcmp(all->cmd_to_exec[0], "") == TRUE)
 	{
+		//ATTENTION VERIFIER QUE DANS FT_EXEC_CMD ON AI PAS BESOIN DE FREE PATH ICI
 		ft_putstr_fd(BRED "minishell: : command not found\n" CRESET, 2);
 		g_status = 127;
 		ft_clean_exit(clean);
-		if (path)
-			free(path);
 		exit(g_status);
 	}
 }
@@ -87,7 +86,7 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 	{
 		tmp = ft_exec_cmd_bis(env, clean, all, &out);
 		path = ft_exec_cmd_bis_2(clean, all, tmp);
-		ft_exec_cmd_bis_3(clean, all, path);
+		ft_exec_cmd_bis_3(clean, all);
 		if (execve(path, all->cmd_to_exec, env) < 0)
 		{
 			ft_print_error(1, all->cmd_to_exec[0], ": Is a directory", NULL);

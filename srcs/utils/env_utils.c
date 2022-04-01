@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/31 23:00:51 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/31 23:00:59 by ndormoy          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/function.h"
 
 char	*ft_cpy_val_var_env(char *var, char *find)
@@ -62,6 +50,7 @@ char	*ft_rpl_val_var_env(char *var, char *new_val)
 	free(var);
 	return (ret);
 }
+
 
 /*
 	change value de PWD et OLDPWD dans 

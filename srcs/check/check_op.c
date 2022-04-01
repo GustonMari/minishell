@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:06:24 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/31 14:46:25 by gmary            ###   ########.fr       */
+/*   Updated: 2022/03/23 15:43:11 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int	check_edge(t_token *all)
 	else if (tmp->type == PIPE && tmp->next
 		&& tmp->next->type == PIPE)
 		return (print_cmd_error("||"));
-	else if (token_is_operator(tmp) && tmp->next
-		&& token_is_operator(tmp->next))
+	else if (token_is_operator(tmp) && tmp->next && token_is_operator(tmp->next))
 		return (print_cmd_error("|"));
 	while (tmp->next)
 		tmp = tmp->next;
@@ -48,8 +47,7 @@ int	check_edge(t_token *all)
 		return (print_cmd_error("newline"));
 	else if (tmp->type == PIPE)
 	{
-		ft_putstr_fd(
-			BRED"minishell: you shouldhave something after pipe\n"CRESET, 2);
+		ft_putstr_fd(BRED"minishell: you should have something after pipe\n"CRESET, 2);
 		return (-2);
 	}
 	return (0);
@@ -64,8 +62,7 @@ int	check_middle(t_token *all)
 	{
 		if (tmp->type == PIPE && tmp->next && tmp->next->type == PIPE)
 		{
-			ft_putstr_fd(BRED
-				"minishell: syntax error near unexpected token `||'\n"CRESET, 2);
+			ft_putstr_fd(BRED "minishell: syntax error near unexpected token `||'\n"CRESET, 2);
 			g_status = 2;
 			return (-1);
 		}
@@ -90,3 +87,4 @@ int	check_cmd_list(t_token *all)
 		return (-1);
 	return (0);
 }
+

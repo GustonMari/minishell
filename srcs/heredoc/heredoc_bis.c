@@ -72,7 +72,7 @@ void	fill_heredoc_file(char **stop, int is_expand
 		if (fill_heredoc_file_bis(stop, line, &i) == FALSE)
 			break ;
 		if (is_expand == TRUE)
-			line = expand_dollar(line, clean);
+			line = expand_dollar(clean->env, line, clean);
 		begin = fill_heredoc_file_bis_2(stop, line, begin, fd);
 		begin = start_heredoc_more(stop, i);
 	}
