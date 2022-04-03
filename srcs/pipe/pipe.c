@@ -1,5 +1,16 @@
-#include "../includes/function.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipe.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/03 13:55:55 by gmary             #+#    #+#             */
+/*   Updated: 2022/04/03 14:09:21 by gmary            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../includes/function.h"
 
 int	count_cmd_list(t_command *all_cmd)
 {
@@ -36,9 +47,9 @@ int	count_cmd_between_pipe(t_command *all_cmd)
 	return (count);
 }
 
-void ft_pipe(int first, int last, int *sortie)
+void	ft_pipe(int first, int last, int *sortie)
 {
-	int pfd[2];
+	int	pfd[2];
 
 	if (!first)
 	{
@@ -47,7 +58,6 @@ void ft_pipe(int first, int last, int *sortie)
 	}
 	if (!last)
 	{
-		//fprintf(stderr, "pouet\n");
 		if (pipe(pfd) == -1)
 			ft_putstr_fd("Erreur pipe\n", 2);
 		else
@@ -76,14 +86,13 @@ int	is_last_cmd(t_command *all_cmd)
 	return (1);
 }
 
-int execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env, int in)
+int	execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env, int in)
 {
-	int		out;
-	int		i;
-	int		save[2];
-	int		ret;
+	int	out;
+	int	i;
+	int	save[2];
+	int	ret;
 	(void)in;
-	(void)clean;
 
 	ret = -1;
 	i = 0;
@@ -94,11 +103,8 @@ int execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env, int in)
 	{
 		save[0] = dup(0);
 		save[1] = dup(1);
-		//if (count_nb_D_CHV_L_between_pipe(all_cmd) != 0)
-		//	launch_heredoc(all_cmd, env);
 		ft_pipe(i == 0, is_last_cmd(all_cmd), &out);
 		ret = redirection_manager(&all_cmd, env);
-		//fprintf(stderr, "allcmd = %s\n", all_cmd->cmd_to_exec[0]);
 		if (ret == -1)
 		{
 			dup2(save[0], 0);
@@ -129,60 +135,3 @@ int execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env, int in)
 	wait_pipe();
 	return (0);
 }
-
-
-/* int execute_pipe(t_command *all_cmd, char **env, int nb_cmd, int in)
-{
-	int		fd[2];
-	int		out;
-	int		i;
-	//int		status;
-	pid_t	pid;
-
-	i = 0;
-	if (!all_cmd)
-		return (0);
-	out = STDOUT_FILENO;
-	while (all_cmd && (i < nb_cmd -1))
-	{
-		if (pipe(fd) < 0)
-			return (-1);
-		pid = fork_pipe(in, fd[1]);
-		if (pid == 0)
-			ft_exec(env, all_cmd->cmd_to_exec);
-		close(fd[1]);
-		in = fd[0];
-		all_cmd = all_cmd->next->next;
-		i++;
-	}
-	redirection(all_cmd, &in, &out, env);
-	execute_last(all_cmd, env, in, out);
-	wait_pipe(nb_cmd);
-	count_all_between_pipe(&all_cmd);
-	if (all_cmd)
-		execute_pipe(all_cmd, env, count_cmd_between_pipe(all_cmd), in);
-	return (0);
-} */
-
-/* int main(int ac, char **av, char **envp)
-{
-    (void)ac;
-    (void)av;
-    t_token *temp = NULL;
-	t_token	*expanded = NULL;
-	t_command *cmd_all = NULL;
-	cmd_all = NULL;
-    char **env = NULL;
-	
-	env = ft_create_env(envp);
-    char *line = ft_strdup("ls >> ls > pouet > lol");
-	temp = lexer(line);
-	expanded = expand_all(env, temp);
-
-	cmd_all = token_to_cmd(expanded);
-    ft_dispatch(cmd_all, env);
-	ft_lstclear(&expanded, free);
-	ft_cmd_clear(&cmd_all);
-	ft_free_tab_2d(env);
-    return (0);
-} */

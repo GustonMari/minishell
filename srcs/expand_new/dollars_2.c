@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dollars_2.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/03 14:04:36 by gmary             #+#    #+#             */
+/*   Updated: 2022/04/03 14:12:40 by gmary            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
-char	*replace_interrogation(char *str, int pos, t_to_clean *clean, char *var_name)
+char	*replace_interrogation(char *str, int pos, t_to_clean *clean,
+	char *var_name)
 {
 	char	*dest;
 	char	*status;
@@ -52,11 +65,3 @@ char	*replace_interrogation(char *str, int pos, t_to_clean *clean, char *var_nam
 		free(var_name);
 	return (dest);
 }
-
-/* int g_status = 4;
-
-int	main()
-{
-	printf("%s\n", replace_interrogation(ft_strdup("  $? $USER"), 2));
-	return (0);
-} */

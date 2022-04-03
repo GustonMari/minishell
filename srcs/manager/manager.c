@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   manager.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/03 13:26:09 by gmary             #+#    #+#             */
+/*   Updated: 2022/04/03 13:30:04 by gmary            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 char	**manage_line(char **env, char *line)
@@ -32,7 +44,7 @@ char	**manage_line(char **env, char *line)
 	if (!tmp)
 		return (env);
 	remix_manager(&tmp);
-	if(check_cmd_list(tmp) < 0)
+	if (check_cmd_list(tmp) < 0)
 	{
 		ft_lstclear(&tmp, free);
 		free(clean);
@@ -51,10 +63,6 @@ char	**manage_line(char **env, char *line)
 		return (env);
 	}
 	remix_2(&cmd_all);
-	// clean = malloc(sizeof(clean) * 3);
-	// clean->token_begin = expanded;
-	// clean->command_begin = cmd_all;
-	// clean->env = env;
 	env = ft_dispatch(cmd_all, clean, env);
 	if (delete_heredoc_file(cmd_all) < 0)
 		ft_clean_error_malloc(clean);

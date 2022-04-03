@@ -6,12 +6,12 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 18:00:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/24 10:06:50 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/03 13:21:09 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#ifndef STRUCT_H
+# define STRUCT_H
 
 typedef enum s_tokentype
 {
@@ -26,17 +26,16 @@ typedef enum s_tokentype
 
 typedef struct s_token
 {
-	t_tokentype	type;
-	char		*content;
-	//int			to_del;
-	struct s_token		*next;
+	t_tokentype		type;
+	char			*content;
+	struct s_token	*next;
 }				t_token;
 
 typedef struct s_command
 {
-	t_tokentype 	type;
-	int				to_del;
-	char		**cmd_to_exec;
+	t_tokentype			type;
+	int					to_del;
+	char				**cmd_to_exec;
 	struct s_command	*next;
 }				t_command;
 

@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:26:18 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/29 10:44:58 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/03 13:32:34 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ t_command	*check_file_valid(t_command **all_cmd)
 	{
 		if (tmp->type == WORD)
 		{
-			if ((access((tmp->cmd_to_exec[0]), F_OK | R_OK) < 0 && previous->type == CHV_L))
+			if ((access((tmp->cmd_to_exec[0]), F_OK | R_OK) < 0
+					&& previous->type == CHV_L))
 				return (tmp);
-			else if (access((tmp->cmd_to_exec[0]), F_OK) >= 0 && (previous->type == CHV_R
+			else if (access((tmp->cmd_to_exec[0]), F_OK) >= 0
+				&& (previous->type == CHV_R
 					|| previous->type == D_CHV_R))
 				if (access((tmp->cmd_to_exec[0]), W_OK) < 0)
 					return (tmp);
@@ -56,7 +58,6 @@ void	suppress_one(t_command **all_cmd)
 	prev_node = *all_cmd;
 	next_node = ft_cmdclear_between_pipe(&(*all_cmd)->next);
 	prev_node->next = next_node;
-	
 }
 
 void	remix_2(t_command **all_cmd)
@@ -80,6 +81,4 @@ void	remix_2(t_command **all_cmd)
 		else
 			count_all_between_pipe(&tmp);
 	}
-
-		
 }
