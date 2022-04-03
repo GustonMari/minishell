@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:04:17 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/03 14:17:12 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/03 14:52:31 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,4 +148,61 @@ char	*expand_dollar(char **env, char *str, t_to_clean *clean)
 		i++;
 	}
 	return (str);
+}
+
+/*
+	replace_dollar_3 sert seulment dans le cas ou str est null
+*/
+char	*replace_dollar_3(char *str, char *new_var, char *ret)
+{
+	int	i;
+
+	i = 0;
+	while (new_var[i])
+	{
+		ret[i] = new_var[i];
+		i++;
+	}
+	ret[i] = '\0';
+	free(new_var);
+	free(str);
+	return (ret);
+}
+
+char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (str[i])
+	{
+		if (i == pos)
+		{
+			while (new_var[k])
+			{
+				ret[j] = new_var[k];
+				k++;
+				j++;
+			}
+		}
+		ret[j++] = str[i];
+		i++;
+	}
+	if (i == pos)
+	{
+		while (new_var[k])
+		{
+			ret[j] = new_var[k];
+			k++;
+			j++;
+		}
+	}
+	ret[j] = '\0';
+	free(new_var);
+	free(str);
+	return (ret);
 }
