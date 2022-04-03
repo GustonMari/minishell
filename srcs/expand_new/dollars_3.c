@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:04:17 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/03 14:52:31 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/03 15:57:20 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,24 @@ char	*expand_single_dollar(char **env, char *str, t_to_clean *clean)
 
 /*supprime UN backslash a l'endroit ou il est*/
 
+char	*ft_allocate_block(char *str, char *block, t_to_clean *clean)
+{
+	block = malloc(sizeof(char) * (ft_strlen(str)));
+	if (!block)
+	{
+		free(str);
+		return (ft_clean_error_malloc(clean));
+	}
+	return (block);
+}
+
+char	*del_one_back_slash_bis(char *str, char *block, int j)
+{
+	block[j] = '\0';
+	free(str);
+	return (block);
+}
+
 char	*del_one_back_slash(char *str, t_to_clean *clean)
 {
 	int		done;
@@ -78,16 +96,13 @@ char	*del_one_back_slash(char *str, t_to_clean *clean)
 	i = 0;
 	j = 0;
 	done = 0;
-	block = malloc(sizeof(char) * (ft_strlen(str)));
-	if (!block)
-	{
-		free(str);
-		return (ft_clean_error_malloc(clean));
-	}
+	block = NULL;
+	block = ft_allocate_block(str, block, clean);
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$' && done == 0)
+		if (str[i] == BACK_SLASH && str[i + 1]
+			&& str[i + 1] == '$' && done == 0)
 		{
 			done = 1;
 			i++;
@@ -96,9 +111,32 @@ char	*del_one_back_slash(char *str, t_to_clean *clean)
 		i++;
 		j++;
 	}
-	block[j] = '\0';
-	free(str);
-	return (block);
+	return (del_one_back_slash_bis(str, block, j));
+}
+
+char	*expand_dollar_bis(char *str, int i, t_to_clean *clean)
+{
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
+		{
+			str = del_one_back_slash(str, clean);
+			i++;
+		}
+		i++;
+	}
+	return (str);
+}
+
+
+void	expand_dollar_ter(char *str, int *i)
+{
+	if (str[*i] == BACK_SLASH && str[*i + 1] && str[*i + 1] == '$')
+	{
+		(*i)++;
+		(*i)++;
+	}
 }
 
 char	*expand_dollar(char **env, char *str, t_to_clean *clean)
@@ -110,11 +148,7 @@ char	*expand_dollar(char **env, char *str, t_to_clean *clean)
 	var_name = NULL;
 	while (str[i])
 	{
-		if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
-		{
-			i++;
-			i++;
-		}
+		expand_dollar_ter(str, &i);
 		if (str[i] == '$' && !ft_is_space(str[i + 1])
 			&& str[i + 1] != '\0' && str[i + 1] != '$')
 		{
@@ -137,17 +171,7 @@ char	*expand_dollar(char **env, char *str, t_to_clean *clean)
 		if (str[i] != BACK_SLASH)
 			i++;
 	}
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
-		{
-			str = del_one_back_slash(str, clean);
-			i++;
-		}
-		i++;
-	}
-	return (str);
+	return (expand_dollar_bis(str, i, clean));
 }
 
 /*
