@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:50:23 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 11:21:07 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 17:53:37 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	*join_export(char *var, char *new_val, char *str, int *change)
 		}
 		i++;
 	}
-	fprintf(stderr, "nouvellleeeeee var = %s\n", var);
 	return (var);
 }
 

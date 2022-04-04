@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:09:17 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/23 10:09:18 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 17:56:23 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,3 @@ int	find_next_quote(char *str)
 	return (i);
 }
 
-/* int main()
-{
-    char *str = "     \'echo\" \'  \"lol  \' pouet\'         ";
-    printf("result = %d\n", check_quote(str));
-    return (0);
-} */

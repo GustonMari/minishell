@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:01:59 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 14:02:16 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 17:57:42 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	print_token(t_token **begin_list)
 	current = *begin_list;
 	while (current)
 	{
-		printf("%s\n", current->content);
+		ft_putstr_fd(current->content, 1);
+		ft_putstr_fd("\n", 1);
 		current = current->next;
 	}
 }

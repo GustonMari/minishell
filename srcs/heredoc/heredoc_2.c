@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:20:03 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 12:57:15 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 17:56:29 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,33 +123,3 @@ char	**trim_quote_stop(char **strs)
 	ft_free_tab_2d(strs);
 	return (ret);
 }
-
-/* int	main(int ac, char **av, char **envp)
-{
-    (void)ac;
-    (void)av;
-    t_token *temp = NULL;
-	t_token	*expanded = NULL;
-	t_command *cmd_all = NULL;
-	cmd_all = NULL;
-    char **env = NULL;
-	char **stop;
-	
-	stop = NULL;
-	env = ft_create_env(envp);
-    char *line = ft_strdup("ls << ls << \"p\"o\"uet\" < lolwesh");
-	temp = lexer(line);
-	expanded = expand_all(env, temp);
-	cmd_all = token_to_cmd(expanded);
-	stop = create_tab_stop(cmd_all);
-	stop = trim_quote_stop(stop);
-	print_tab_2d(stop);
-	//printf("result = %d\n", is_expand_heredoc(stop));
-	//printf("Prio = %d\n", priorities_d_chv_l(cmd_all));
-    //ft_dispatch(cmd_all, env);
-	ft_lstclear(&expanded, free);
-	ft_cmd_clear(&cmd_all);
-	ft_free_tab_2d(env);
-	ft_free_tab_2d(stop);
-    return (0);
-} */

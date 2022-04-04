@@ -20,7 +20,6 @@ INC = 	colors.h \
 		struct.h
 
 SRC =	srcs/main.c \
-		srcs/check_cmd.c \
 		srcs/builtin/echo.c \
   		srcs/builtin/env.c \
 		srcs/builtin/exit.c \
@@ -30,24 +29,44 @@ SRC =	srcs/main.c \
 		srcs/builtin/ft_cd.c \
 		srcs/builtin/pwd.c \
 		srcs/builtin/unset.c \
+		srcs/builtin/unset_2.c \
+		srcs/builtin/manage_export.c \
+		srcs/builtin/export_no_arg.c \
 		srcs/check/check.c \
 		srcs/check/check_op.c \
 		srcs/check/quote.c \
 		srcs/error/error.c \
 		srcs/exec/exec.c \
 		srcs/exec/exec_one.c \
+		srcs/exec/exec_2.c \
+		srcs/exec/exec_cmd.c \
+		srcs/expand_new/dollars_5.c \
+		srcs/expand_new/dollars_4.c \
+		srcs/expand_new/dollars_3.c \
 		srcs/expand_new/dollars_2.c \
 		srcs/expand_new/dollars.c \
+		srcs/expand_new/manage_expand_5.c \
+		srcs/expand_new/manage_expand_4.c \
+		srcs/expand_new/manage_expand_3.c \
+		srcs/expand_new/manage_expand_2.c \
 		srcs/expand_new/manage_expand.c \
+		srcs/expand_new/manage_expand_single_2.c \
+		srcs/expand_new/manage_expand_single_3.c \
 		srcs/expand_new/manage_expand_single.c \
 		srcs/heredoc/heredoc_2.c \
 		srcs/heredoc/heredoc.c \
 		srcs/heredoc/heredoc_utils.c \
+		srcs/heredoc/heredoc_utils_2.c \
+		srcs/heredoc/signal_heredoc.c \
+		srcs/heredoc/heredoc_bis_2.c \
+		srcs/heredoc/heredoc_bis.c \
 		srcs/lexer/lexer.c \
 		srcs/lexer/remix_lexer_2.c \
 		srcs/lexer/remix_lexer.c \
 		srcs/manager/dispatch_cmd.c \
 		srcs/manager/manager.c \
+		srcs/manager/clean_init.c \
+		srcs/manager/manager_2.c \
 		srcs/manager/remix_2.c \
 		srcs/parsing/ft_split_special.c \
 		srcs/parsing/token_to_cmd_2.c \
@@ -58,6 +77,7 @@ SRC =	srcs/main.c \
 		srcs/redir_test/redirection_manager.c \
 		srcs/redir_test/redirection_test_left.c \
 		srcs/redir_test/redirection_test_right.c \
+		srcs/redir_test/redirection_test_right_2.c \
 		srcs/signals/signals.c \
 		srcs/utils/clear.c \
 		srcs/utils/env_utils.c \
@@ -76,17 +96,9 @@ SRC =	srcs/main.c \
 		srcs/utils/utils_2.c \
 		srcs/utils/utils_3.c \
 		srcs/utils/utils_4.c \
+		srcs/utils/utils_5.c \
 		srcs/utils/ft_atol.c \
-		srcs/clean_malloc/clean_malloc_1.c \
-		srcs/builtin/unset_2.c \
-		srcs/builtin/manage_export.c \
-		srcs/exec/exec_2.c \
-		srcs/exec/exec_cmd.c \
-		srcs/heredoc/heredoc_utils_2.c \
-		srcs/heredoc/signal_heredoc.c \
-		srcs/heredoc/heredoc_bis_2.c \
-		srcs/heredoc/heredoc_bis.c \
-		srcs/builtin/export_no_arg.c
+		srcs/clean_malloc/clean_malloc_1.c
 
 OBJS = $(addprefix ${OBJDIR}/,${SRC:.c=.o})
 

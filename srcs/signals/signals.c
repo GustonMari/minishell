@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 09:38:07 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/03 14:02:15 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 17:56:00 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,13 @@ void	signal_cmd(int sig)
 void	signal_manager2(void)
 {
 	if (signal(SIGINT, &signal_cmd) == SIG_ERR)
-		fprintf(stderr, "Error: %s\n", strerror(errno));
+	{
+		ft_putstr_fd("Error Signal\n", 2);
+		return (FALSE);
+	}
 	if (signal(SIGQUIT, &signal_cmd) == SIG_ERR)
-		fprintf(stderr, "Error: %s\n", strerror(errno));
+	{
+		ft_putstr_fd("Error Signal\n", 2);
+		return (FALSE);
+	}
 }

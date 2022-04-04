@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:52:01 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 14:10:40 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 17:53:40 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ char	**ft_export_change(char **env, char *str, char *name)
 	char	*val;
 
 	val = find_val_in_line(str);
-	fprintf(stderr, "ici val = %s\n", val);
-	fprintf(stderr, "str = %s\n", str);
 	ft_change_env_val_export(env, name, val, str);
 	free(val);
 	return (env);

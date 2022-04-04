@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:30:21 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/31 17:20:51 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 17:53:47 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,46 +64,6 @@ int	launch_heredoc(t_command **all_cmd, char *name, t_to_clean *clean)
 	}
 	return (0);
 }
-
-/* int	launch_heredoc(t_command **all_cmd, char *name, t_to_clean *clean)
-{
-	char	**stop;
-	int		is_expand;
-	pid_t	pid;
-
-	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
-		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
-		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-	pid = fork();
-	if (pid == 0)
-	{
-		signal_heredoc();
-		stop = NULL;
-		stop = create_tab_stop(*all_cmd);
-		if (!stop)
-			return (-1);
-		if (is_expand_heredoc(stop) == TRUE)
-			is_expand = TRUE;
-		else
-			is_expand = FALSE;
-		stop = trim_quote_stop(stop);
-		if (!stop)
-			return (-1);
-		fill_heredoc_file(stop, is_expand, name, clean);
-		ft_clean_exit(clean);
-		free(name);
-		exit(g_status);
-	}
-	else
-		wait_pipe();
-	if (g_status == 255)
-	{
-		g_status = 130;
-		return (-2);
-	}
-	return (0);
-} */
 
 int	replace_heredoc_bis(t_command **all_cmd, char *name)
 {

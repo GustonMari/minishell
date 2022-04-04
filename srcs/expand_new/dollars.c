@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollars.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:04:23 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/03 14:52:18 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 17:53:16 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*del_dollar_2(char *str, char *var_name, char *ret, int len)
 		if (str[i] == '$' && !ft_is_space(str[i + 1])
 			&& first == 0 && back != 1)
 		{
-			if (!strncmp(&str[i + 1], var_name, len))
+			if (!ft_strncmp(&str[i + 1], var_name, len))
 				del_dollar_2_ter(&first, &i, &len);
 		}
 		ret[j] = str[i];

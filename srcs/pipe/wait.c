@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:33:26 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/03 13:33:27 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 17:55:31 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,14 @@ int	wait_pipe(void)
 			g_status = WEXITSTATUS(status);
 	}
 	if (signal(SIGINT, SIG_DFL) == SIG_ERR)
-		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
+	{
+		ft_putstr_fd("Error Signal\n", 2);
+		return (FALSE);
+	}
 	if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
-		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
+	{
+		ft_putstr_fd("Error\n", 2);
+		return (FALSE);
+	}
 	return (0);
 }

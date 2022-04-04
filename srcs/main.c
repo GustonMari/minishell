@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:11:10 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 15:25:53 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 17:56:19 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	exit_process(int sig)
 {
 	if (sig == SIGINT)
 	{
-		printf("\n");
+		ft_putstr_fd("\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
@@ -117,45 +117,3 @@ int	main(int ac, char **av, char **envp)
 	}
 	exit (g_status);
 }
-
-/* int	main(int ac, char **av, char **envp)
-{
-	char	*line;
-	char	**env;
-
-	(void)ac;
-	(void)av;
-	env = NULL;
-	line = NULL;
-	if (!envp)
-	{	
-		ft_putstr_fd("\n\e[1;91m- Need ENVP -\e[0m\n", 1);
-		g_status = 1;
-		return (0);
-	}
-	g_status = errno;
-	env = ft_create_env(envp);
-	env = shell_lvl(env);
-	while (42)
-	{
-		if (signal(SIGINT, &exit_process) == SIG_ERR)
-			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-		if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
-			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-		else
-			line = readline(BBLU "minishell> " CRESET);
-		if (!line)
-		{
-			write(2, "\n", 1);
-			rl_clear_history();
-			ft_free_tab_2d(env);
-			break ;
-		}
-		if (line && *line)
-		{	
-			add_history(line);
-			env = manage_line(env, line);
-		}
-	}
-	exit (g_status);
-} */
