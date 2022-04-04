@@ -141,7 +141,7 @@ clean:
 
 fclean: clean
 	@echo  "Removing minishell\c"
-	@rm -rf ${NAME}
+	@rm -rf ${NAME} ${CLEANHEREDOC}
 	@echo "\033[32m\t[OK]\033[0m"
 
 .PHONY : all clean re fclean 
