@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:52:21 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/31 16:50:03 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 12:59:13 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ int	signal_heredoc(void)
 
 int	signal_launch_heredoc(void)
 {
-	/* if (signal(SIGINT, SIG_IGN) == SIG_ERR)
-		return (fprintf(stderr, "Error: %s\n", strerror(errno)));
-	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
-		return (fprintf(stderr, "Error: %s\n", strerror(errno))); */
 	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
 	{
 		ft_putstr_fd("Error: ", 2);

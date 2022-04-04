@@ -6,24 +6,47 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:52:01 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/31 14:57:11 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 12:49:14 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
 
-void	ft_export_no_arg(char **env)
+char	*add_join_export_bis(char *str)
 {
-	char	**env_sorted;
+	char	*new_str;
 
-	env_sorted = bubble_sort_tab_2d(ft_strdup_2d(env));
-	if (!env_sorted)
-		return ;
-	ft_print_export_no_arg(env_sorted);
-	ft_free_tab_2d(env_sorted);
+	new_str = NULL;
+	new_str = ft_strdup(str);
+	if (!new_str)
+		return (NULL);
+	return (new_str);
 }
 
 char	*add_join_export(char *str)
+{
+	int		i;
+	char	*new_str;
+
+	new_str = NULL;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (add_join_export_bis(str));
+		if (str[i + 1] && str[i] == '+' && str[i + 1] == '=')
+		{
+			new_str = remove_char_if(str, '+', '=');
+			if (!new_str)
+				return (NULL);
+			return (new_str);
+		}
+		i++;
+	}
+	return (add_join_export_bis(str));
+}
+
+/* char	*add_join_export(char *str)
 {
 	int		i;
 	char	*new_str;
@@ -49,7 +72,7 @@ char	*add_join_export(char *str)
 		i++;
 	}
 	return (new_str);
-}
+} */
 
 char	**ft_export_add(char **env, char *str)
 {

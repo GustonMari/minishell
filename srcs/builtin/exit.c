@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:48:33 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 10:41:55 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 11:14:24 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	ft_exit_2(char **full_cmd, t_to_clean *clean)
 		exit_error(full_cmd[1]);
 		g_status = 2;
 		ft_clean_exit(clean);
-		//ft_putstr_fd("exit\n", 2);
 		exit(2);
 	}
 }
@@ -76,7 +75,6 @@ void	exit_overflow(char *number, t_to_clean *clean)
 	}
 	else
 		num %= 256;
-	//ft_putstr_fd("exit\n", 2);
 	if (ft_strlen(number) > 19)
 	{
 		ft_putstr_fd(BRED "minishell: exit: ", 2);
@@ -96,7 +94,6 @@ void	ft_exit(t_command *all, t_to_clean *clean)
 	if (ft_count_line(all->cmd_to_exec) == 1)
 	{
 		ft_clean_exit(clean);
-		//ft_putstr_fd("exit\n", 2);
 		exit (g_status);
 	}
 	else if (ft_count_line(all->cmd_to_exec) == 2)

@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 10:32:33 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 12:57:54 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,14 +286,14 @@ void		exit_pipe_process(int sig);
 ------------------ HEREDOC ------------------
 */
 
-int			priorities_D_CHV_L(t_command *all_cmd);
+int			priorities_d_chv_l(t_command *all_cmd);
 //int		launch_heredoc(t_command **all_cmd, char **env, char *name, t_to_clean *clean);
 int			launch_heredoc(t_command **all_cmd, char *name, t_to_clean *clean);
 //int		manage_heredoc(t_command **all_cmd, char **env, t_to_clean *clean);
 int			manage_heredoc(t_command **all_cmd, t_to_clean *clean);
 
 int			delete_heredoc_file(t_command *all_cmd);
-int			count_nb_D_CHV_L_between_pipe(t_command *all_cmd);
+int			count_nb_d_chv_l_between_pipe(t_command *all_cmd);
 int			create_heredoc_file(char *name);
 int			start_heredoc_one(char **stop, int begin);
 int			start_heredoc_more(char **stop, int i);
