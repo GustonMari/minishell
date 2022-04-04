@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 16:52:23 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 17:10:08 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,7 @@ char		*replace_dollar_2(char *str, char *new_var, char *ret, int pos);
 ------------------ EXPAND ----------------
 */
 
-t_token		*expand_all(char **env, t_token *all, t_to_clean *clean);
+t_token		*expand_all(t_token *all, t_to_clean *clean);
 char		*cpy_block(char	*str, int size, t_to_clean *clean);
 char		*expand_node_single(t_to_clean *clean, char **env, char *str);
 int			find_next_block(char *str);
@@ -402,7 +402,7 @@ char		*expand_dollar_six(char *str, int *i, char *var_name,
 char		*cpy_block_special(char	*str, int size, t_to_clean *clean);
 char		*ft_allocate_echapment(char *str, char *new, t_to_clean *clean);
 int			nb_back_slash(char *str);
-char		*expand_node(char **env, char *str, t_to_clean *clean);
+char		*expand_node(char *str, t_to_clean *clean);
 char		*add_echapment(char *str, t_to_clean *clean);
 char		*del_back_slash(char *str, t_to_clean *clean);
 char		*expand_node_dollar(char *str, char *block, t_to_clean *clean,

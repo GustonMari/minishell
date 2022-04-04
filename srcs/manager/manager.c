@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:26:09 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 15:08:49 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 17:10:34 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	manage_line_clean(t_to_clean *clean,
 void	manage_line_bis(t_token **expanded,
 	t_token *tmp, t_command **cmd_all, t_to_clean *clean)
 {
-	(*expanded) = expand_all(clean->env, tmp, clean);
+	(*expanded) = expand_all(tmp, clean);
 	clean->token_begin = *expanded;
 	*cmd_all = token_to_cmd(*expanded, clean);
 	clean->command_begin = *cmd_all;

@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:59:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 16:17:38 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 17:08:38 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,12 @@ char	*expand_node_else(char *str, char *block, t_to_clean *clean, int *i)
 
 /*Expand un maillon */
 
-char	*expand_node(char **env, char *str, t_to_clean *clean)
+char	*expand_node(char *str, t_to_clean *clean)
 {
 	int		i;
 	char	*block;
 	char	*expanded;
 
-	(void)env;
 	block = NULL;
 	expanded = ft_strdup("");
 	if (!expanded)

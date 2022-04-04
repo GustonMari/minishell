@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_expand_3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:45:52 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 13:55:27 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 17:09:42 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*del_back_slash(char *str, t_to_clean *clean)
 	return (block);
 }
 
-t_token	*expand_all(char **env, t_token *all, t_to_clean *clean)
+t_token	*expand_all(t_token *all, t_to_clean *clean)
 {
 	t_token	*tmp;
 	int		expand;
@@ -91,7 +91,7 @@ t_token	*expand_all(char **env, t_token *all, t_to_clean *clean)
 	{
 		if (expand)
 		{
-			tmp->content = expand_node(env, tmp->content, clean);
+			tmp->content = expand_node(tmp->content, clean);
 			if (!tmp->content)
 				return (NULL);
 		}
