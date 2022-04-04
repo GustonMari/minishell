@@ -6,11 +6,23 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:26:18 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/03 13:32:34 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 09:57:21 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
+
+/* t_command	*check_file_valid(t_command **all_cmd)
+{
+	if ((access((tmp->cmd_to_exec[0]), F_OK | R_OK) < 0
+			&& previous->type == CHV_L))
+		return (tmp);
+	else if (access((tmp->cmd_to_exec[0]), F_OK) >= 0
+		&& (previous->type == CHV_R
+			|| previous->type == D_CHV_R))
+		if (access((tmp->cmd_to_exec[0]), W_OK) < 0)
+			return (tmp);
+} */
 
 t_command	*check_file_valid(t_command **all_cmd)
 {
