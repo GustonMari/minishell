@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_expand.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:27:11 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 13:36:41 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 16:58:19 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ char	*ft_allocate_del_quote(char *ret, char *str)
 char	*del_quote_end(char *ret, char *str, int j)
 {
 	ret[j] = '\0';
-	//WARNING
-	free(str);
+	if (str)
+		free(str);
 	return (ret);
 }
 

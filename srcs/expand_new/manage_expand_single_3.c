@@ -6,15 +6,14 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:49:23 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 16:49:49 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 17:00:35 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
 
-
 char	*ft_allocate_exp_single_node(char *expanded, char *block,
-			char * str, t_to_clean *clean)
+			char *str, t_to_clean *clean)
 {
 	expanded = ft_strjoin_free(expanded, block, 1);
 	if (!expanded)
@@ -31,7 +30,6 @@ char	*expand_node_single_bis(char *expanded,
 {
 	char	*block;
 
-	block = NULL;
 	if (str[*i] == QUOTE)
 		block = expand_node_single_quote(str, clean, i, expanded);
 	else if (str[*i] == D_QUOTE)

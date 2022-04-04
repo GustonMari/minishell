@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollars_3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:04:17 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 09:22:43 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 16:56:28 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ char	*expand_single_dollar(char **env, char *str, t_to_clean *clean)
 
 	i = 0;
 	var_name = NULL;
-	//WARNING remettre cut_dollar
 	var_name = cut_dollar(&str[i], clean);
 	if (!var_name)
 		return (NULL);

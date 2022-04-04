@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollars_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:04:36 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 09:21:30 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 16:56:20 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char	*ft_allocate_itoa(char *status, char *str, char *var_name,
 	status = ft_itoa(g_status);
 	if (!status)
 	{
-		//WARNING
 		free(var_name);
 		free(str);
 		return (ft_clean_error_malloc(clean));
@@ -58,7 +57,6 @@ char	*ft_allocate_dest(char *str, char *status, char *dest,
 char	*replace_interrogation_end(char *str, char *status,
 		char *var_name, char *dest)
 {
-	//WARNING status et str ETTTTTTT VAR_NAME 
 	free(status);
 	free(str);
 	if (var_name)

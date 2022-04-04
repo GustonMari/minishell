@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollars_5.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 09:44:12 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 13:26:00 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 16:56:56 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,7 @@ char	*expand_dollar(char **env, char *str, t_to_clean *clean)
 					return (NULL);
 				str = expand_dollar_six(str, &i, var_name, clean);
 			}
-			// gros doute pour le i = 0 si il faut vraiment lenlever
-			//i = 0;
 		}
-		//ATTENTION
 		expand_dollar_quin(str, &i);
 	}
 	return (expand_dollar_bis(str, i, clean));
