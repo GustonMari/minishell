@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   manager.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:26:09 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/03 16:54:24 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 13:22:41 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
-
-t_to_clean *clean_init(t_to_clean *clean, char **env, char *line)
-{
-	clean = malloc(sizeof(clean) * 4);
-	if (!clean)
-	{
-		free(line);
-		free(clean);
-		exit(errno);
-	}
-	clean->env = env;
-	clean->token_begin = NULL;
-	clean->command_begin = NULL;
-	return (clean);
-}
 
 int	manage_check_quote(char *line, t_to_clean *clean)
 {
@@ -50,7 +35,8 @@ int	manage_check_cmd_list(t_token *tmp, t_to_clean *clean)
 	return (TRUE);
 }
 
-int	manage_heredoc_main(t_command *cmd_all, t_to_clean *clean, t_token *expanded)
+int	manage_heredoc_main(t_command *cmd_all,
+	t_to_clean *clean, t_token *expanded)
 {
 	if (manage_heredoc(&cmd_all, clean) < 0)
 	{
@@ -63,7 +49,8 @@ int	manage_heredoc_main(t_command *cmd_all, t_to_clean *clean, t_token *expanded
 	return (TRUE);
 }
 
-void	manage_line_clean(t_to_clean *clean, t_command *cmd_all, t_token *expanded)
+void	manage_line_clean(t_to_clean *clean,
+	t_command *cmd_all, t_token *expanded)
 {
 	if (delete_heredoc_file(cmd_all) < 0)
 		ft_clean_error_malloc(clean);

@@ -6,11 +6,26 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:06:26 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 13:10:40 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 13:19:45 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
+
+/*
+	check la taille si lon commence par un < jusqua a la
+	fin de la liste ou au prochain op
+*/
+
+int	remix_size_three(t_token *lst)
+{
+	if (lst->next)
+		lst = lst->next;
+	if (token_is_redir(lst) && count_word_btw_two_op(lst) == 1)
+		return (1);
+	else
+		return (0);
+}
 
 /*
 fonction qui permet de check si il y a plus dun mots

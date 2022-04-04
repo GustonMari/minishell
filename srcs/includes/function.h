@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 12:57:54 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 13:23:00 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -345,7 +345,8 @@ void		signal_cmd(int sig);
 ------------------ EXIT_MALLOC ------------------
 */
 
-char		*exit_expand_node_single(t_to_clean *clean, char **env, char *str, char *expanded);
+char		*exit_expand_node_single(t_to_clean *clean,
+				char **env, char *str, char *expanded);
 void		*ft_clean_error_malloc(t_to_clean *clean);
 int			prio_exit(t_command *all);
 
@@ -364,6 +365,8 @@ void		fill_heredoc_file(char **stop, int is_expand,
 				char *name, t_to_clean *clean);
 int			replace_heredoc(t_command **all_cmd, char *name);
 int			signal_launch_heredoc(void);
+int			remix_size_three(t_token *lst);
+t_to_clean	*clean_init(t_to_clean *clean, char **env, char *line);
 
 /*
 ---------------GUSTAVE-------------

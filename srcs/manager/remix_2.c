@@ -3,26 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   remix_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:26:18 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 09:57:21 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 13:28:14 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
 
-/* t_command	*check_file_valid(t_command **all_cmd)
+int	check_file_valid_bis(t_command *tmp, t_command *previous)
 {
 	if ((access((tmp->cmd_to_exec[0]), F_OK | R_OK) < 0
 			&& previous->type == CHV_L))
-		return (tmp);
+		return (TRUE);
 	else if (access((tmp->cmd_to_exec[0]), F_OK) >= 0
 		&& (previous->type == CHV_R
 			|| previous->type == D_CHV_R))
 		if (access((tmp->cmd_to_exec[0]), W_OK) < 0)
-			return (tmp);
-} */
+			return (TRUE);
+	return (FALSE);
+}
 
 t_command	*check_file_valid(t_command **all_cmd)
 {
@@ -41,14 +42,8 @@ t_command	*check_file_valid(t_command **all_cmd)
 	{
 		if (tmp->type == WORD)
 		{
-			if ((access((tmp->cmd_to_exec[0]), F_OK | R_OK) < 0
-					&& previous->type == CHV_L))
+			if (check_file_valid_bis(tmp, previous) == TRUE)
 				return (tmp);
-			else if (access((tmp->cmd_to_exec[0]), F_OK) >= 0
-				&& (previous->type == CHV_R
-					|| previous->type == D_CHV_R))
-				if (access((tmp->cmd_to_exec[0]), W_OK) < 0)
-					return (tmp);
 		}
 		else
 			previous = tmp;
