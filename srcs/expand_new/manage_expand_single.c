@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_expand_single.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 09:40:36 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 15:07:52 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 16:10:55 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	find_next_single_block_merde(char *str)
 	i++;
 	while (str[i])
 	{
-		if (str[i] == QUOTE || str[i] == D_QUOTE || str[i] == '$')
+		if (str[i] == QUOTE || str[i] == D_QUOTE || str[i] == '$'
+			|| str[i + 1] == BACK_SLASH)
 			return (i);
 		i++;
 	}
