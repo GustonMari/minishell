@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollars_4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 09:15:34 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 09:45:39 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 11:00:07 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	*expand_dollar(char **env, char *str, t_to_clean *clean)
 			//i = 0;
 		}
 		//ATTENTION
-		if (str[i] != BACK_SLASH)
+		if (str[i] != BACK_SLASH || (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] != '$'))
 			i++;
 	}
 	return (expand_dollar_bis(str, i, clean));
