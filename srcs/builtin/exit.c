@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:48:33 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 10:21:35 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 10:39:25 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	exit_overflow(char *number, t_to_clean *clean)
 
 void	ft_exit(t_command *all, t_to_clean *clean)
 {
-	if (ft_lstsize_cmd(all) == 1)
+	if (ft_lstsize_cmd(clean->command_begin) == 1)
 	{
 		ft_putstr_fd("exit\n", 2);
 	}

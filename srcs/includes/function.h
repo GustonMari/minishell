@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 09:45:23 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 10:32:33 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -383,6 +383,6 @@ char		*replace_interrogation_end(char *str, char *status,
 char		*replace_dollar(char *str, char *var_name, int pos,
 				t_to_clean *clean);
 char		*del_one_back_slash(char *str, t_to_clean *clean);
-
+int			ft_lstsize_cmd(t_command *lst);
 
 #endif
