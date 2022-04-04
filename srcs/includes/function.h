@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 14:11:03 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 14:57:56 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -372,6 +372,7 @@ int			signal_launch_heredoc(void);
 int			remix_size_three(t_token *lst);
 t_to_clean	*clean_init(t_to_clean *clean, char **env, char *line);
 int			manage_open_r(t_command **all_cmd, char *last_redir);
+int			manage_check_quote(char *line, t_to_clean *clean);
 
 /*
 ---------------GUSTAVE-------------

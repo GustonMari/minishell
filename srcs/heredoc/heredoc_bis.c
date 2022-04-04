@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:13:13 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/31 16:28:49 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 14:17:48 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	fill_heredoc_file(char **stop, int is_expand
 			fill_heredoc_file_exit(stop, name, clean);
 		if (fill_heredoc_file_bis(stop, line, &i) == FALSE)
 			break ;
-		//WARNING add dup EXPANDED
 		if (is_expand == TRUE)
 			line = expand_dollar(clean->env, line, clean);
 		begin = fill_heredoc_file_bis_2(stop, line, begin, fd);
