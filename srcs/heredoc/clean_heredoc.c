@@ -6,15 +6,15 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:53:13 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/31 15:54:02 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 18:32:28 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/function.h"
+#include <stdlib.h>
+//#include "../includes/function.h"
 
-/* int	main(void)
+int	main(void)
 {
 	exit(255);
 	return (0);
 }
- */

@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 09:38:07 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 17:56:00 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 18:11:10 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ void	signal_manager2(void)
 	if (signal(SIGINT, &signal_cmd) == SIG_ERR)
 	{
 		ft_putstr_fd("Error Signal\n", 2);
-		return (FALSE);
+		return ;
 	}
 	if (signal(SIGQUIT, &signal_cmd) == SIG_ERR)
 	{
 		ft_putstr_fd("Error Signal\n", 2);
-		return (FALSE);
+		return ;
 	}
 }

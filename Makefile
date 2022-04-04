@@ -1,4 +1,5 @@
 NAME = minishell
+CLEANHEREDOC = srcs/heredoc/clean_heredoc
 
 LIBINC = -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
 
@@ -7,7 +8,7 @@ OBJDIR = objs
 INCDIR = includes
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror #-g
 MEM =  #-fsanitize=address
 
 ifeq ($(TMEM),0)
@@ -102,7 +103,7 @@ SRC =	srcs/main.c \
 
 OBJS = $(addprefix ${OBJDIR}/,${SRC:.c=.o})
 
-all: ${NAME}
+all: ${NAME} ${CLEANHEREDOC}
 
 RED="\033[1;31m"
 GREEN="\033[1;32m"
@@ -123,6 +124,9 @@ $(NAME): ${OBJS}
 #	@echo ${GREEN} "|_| |_| |_|_|_| |_|_|___/_| |_|\\___|_|_|" ${RESET}
 #	@echo
 	${CC} ${CFLAGS} ${MEM} ${OBJS} -I./${INCDIR} -o $@ ${LIBINC}
+
+$(CLEANHEREDOC):
+	${CC} ${CFLAGS} srcs/heredoc/clean_heredoc.c -o $@
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
