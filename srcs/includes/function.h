@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 15:35:36 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 16:52:23 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -414,7 +414,16 @@ char		*expand_node_quote(char *str, char *block, t_to_clean *clean,
 char		*ft_allocate_expanded(char *str, char *block, char *expanded,
 				t_to_clean *clean);
 int			find_next_single_block(char *str);
-
+char		*expand_node_single_quote(char *str, t_to_clean *clean, int *i,
+				char *expanded);
+char		*expand_node_single_d_quote(char *str, t_to_clean *clean, int *i,
+				char *expanded);
+char		*expand_node_single_dollar(char *str, t_to_clean *clean, int *i,
+				char *expanded);
+char		*expand_node_single_backlash(char *str, t_to_clean *clean, int *i,
+				char *expanded);
+char		*expand_node_single_else(char *str, t_to_clean *clean, int *i,
+				char *expanded);
 // int			find_next_single_block_merde(char *str);
 // char		*del_dollar(char *str, char *var_name, int len, t_to_clean *clean);
 // char		*cut_dollar(char *str, t_to_clean *clean);
