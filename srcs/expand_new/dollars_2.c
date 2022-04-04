@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:04:36 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/03 15:33:58 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 09:21:30 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,34 +64,4 @@ char	*replace_interrogation_end(char *str, char *status,
 	if (var_name)
 		free(var_name);
 	return (dest);
-}
-
-char	*replace_interrogation(char *str, int pos, t_to_clean *clean,
-		char *var_name)
-{
-	char	*dest;
-	char	*status;
-	int		i;
-	int		j;
-	int		k;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	status = NULL;
-	dest = NULL;
-	status = ft_allocate_itoa(status, str, var_name, clean);
-	dest = ft_allocate_dest(str, status, dest, clean);
-	while (str[i])
-	{
-		if (i == pos)
-		{
-			replace_interrogation_bis(status, dest, &j, &k);
-			i += 2;
-		}
-		else
-			replace_interrogation_ter(str, dest, &i, &k);
-	}
-	dest[k] = '\0';
-	return (replace_interrogation_end(str, status, var_name, dest));
 }

@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/03 14:08:42 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 09:45:23 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -368,8 +368,21 @@ int			signal_launch_heredoc(void);
 /*
 ---------------GUSTAVE-------------
 */
+
 int			find_next_single_block_merde(char *str);
-char	*del_dollar(char *str, char *var_name, int len, t_to_clean *clean);
-char	*cut_dollar(char *str, t_to_clean *clean);
+char		*del_dollar(char *str, char *var_name, int len, t_to_clean *clean);
+char		*cut_dollar(char *str, t_to_clean *clean);
+char		*ft_allocate_dest(char *str, char *status, char *dest,
+				t_to_clean *clean);
+char		*ft_allocate_itoa(char *status, char *str, char *var_name,
+				t_to_clean *clean);
+void		replace_interrogation_ter(char *str, char *dest, int *i, int *k);
+void		replace_interrogation_bis(char *status, char *dest, int *j, int *k);
+char		*replace_interrogation_end(char *str, char *status,
+				char *var_name, char *dest);
+char		*replace_dollar(char *str, char *var_name, int pos,
+				t_to_clean *clean);
+char		*del_one_back_slash(char *str, t_to_clean *clean);
+
 
 #endif
