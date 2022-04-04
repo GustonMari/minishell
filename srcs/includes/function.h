@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 14:57:56 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 15:35:36 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -393,5 +393,42 @@ char		*replace_dollar(char *str, char *var_name, int pos,
 				t_to_clean *clean);
 char		*del_one_back_slash(char *str, t_to_clean *clean);
 int			ft_lstsize_cmd(t_command *lst);
+char		*expand_dollar(char **env, char *str, t_to_clean *clean); //change
+char		*expand_dollar_bis(char *str, int i, t_to_clean *clean);
+void		expand_dollar_ter(char *str, int *i);
+void		expand_dollar_quin(char *str, int *i);
+char		*expand_dollar_six(char *str, int *i, char *var_name,
+				t_to_clean *clean);
+char		*cpy_block_special(char	*str, int size, t_to_clean *clean);
+char		*ft_allocate_echapment(char *str, char *new, t_to_clean *clean);
+int			nb_back_slash(char *str);
+char		*expand_node(char **env, char *str, t_to_clean *clean);
+char		*add_echapment(char *str, t_to_clean *clean);
+char		*del_back_slash(char *str, t_to_clean *clean);
+char		*expand_node_dollar(char *str, char *block, t_to_clean *clean,
+				int *i);
+char		*expand_node_d_quote(char *str, char *block, t_to_clean *clean,
+				int *i);
+char		*expand_node_quote(char *str, char *block, t_to_clean *clean,
+				int *i);
+char		*ft_allocate_expanded(char *str, char *block, char *expanded,
+				t_to_clean *clean);
+int			find_next_single_block(char *str);
+
+// int			find_next_single_block_merde(char *str);
+// char		*del_dollar(char *str, char *var_name, int len, t_to_clean *clean);
+// char		*cut_dollar(char *str, t_to_clean *clean);
+// char		*ft_allocate_dest(char *str, char *status, char *dest,
+// 				t_to_clean *clean);
+// char		*ft_allocate_itoa(char *status, char *str, char *var_name,
+// 				t_to_clean *clean);
+// void		replace_interrogation_ter(char *str, char *dest, int *i, int *k);
+// void		replace_interrogation_bis(char *status, char *dest, int *j, int *k);
+// char		*replace_interrogation_end(char *str, char *status,
+// 				char *var_name, char *dest);
+// char		*replace_dollar(char *str, char *var_name, int pos,
+// 				t_to_clean *clean);
+// char		*del_one_back_slash(char *str, t_to_clean *clean);
+// int			ft_lstsize_cmd(t_command *lst);
 
 #endif

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   dollars_4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 09:15:34 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 11:06:07 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 13:24:02 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
-
 
 char	*replace_interrogation(char *str, int pos, t_to_clean *clean,
 		char *var_name)
@@ -58,7 +57,6 @@ char	*expand_dollar_bis(char *str, int i, t_to_clean *clean)
 	return (str);
 }
 
-
 void	expand_dollar_ter(char *str, int *i)
 {
 	if (str[*i] == BACK_SLASH && str[*i + 1] && str[*i + 1] == '$')
@@ -68,58 +66,18 @@ void	expand_dollar_ter(char *str, int *i)
 	}
 }
 
-char	*expand_dollar(char **env, char *str, t_to_clean *clean)
+void	expand_dollar_quin(char *str, int *i)
 {
-	int		i;
-	char	*var_name;
-
-	i = 0;
-	var_name = NULL;
-	while (str[i])
-	{
-		expand_dollar_ter(str, &i);
-		if (str[i] == '$' && !ft_is_space(str[i + 1])
-			&& str[i + 1] != '\0' && str[i + 1] != '$')
-		{
-			if (str[i] == '$' && str[i + 1] == '?')
-				str = replace_interrogation(str, i, clean, var_name);
-			else
-			{
-				var_name = cut_dollar(&str[i], clean);
-				if (!var_name)
-					return (NULL);
-				if (ft_find_env_line(env, var_name) && str[i + 1] != '$')
-					str = replace_dollar(str, var_name, i, clean);
-				else
-					str = del_dollar(str, var_name, ft_strlen(var_name), clean);
-			}
-			// gros doute pour le i = 0 si il faut vraiment lenlever
-			//i = 0;
-		}
-		//ATTENTION
-		if (str[i] != BACK_SLASH
-			|| (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] != '$'))
-			i++;
-	}
-	return (expand_dollar_bis(str, i, clean));
+	if (str[*i] != BACK_SLASH
+		|| (str[*i] == BACK_SLASH && str[(*i) + 1] && str[(*i) + 1] != '$'))
+		(*i)++;
 }
 
-/*
-	replace_dollar_3 sert seulment dans le cas ou str est null
-*/
-
-char	*replace_dollar_3(char *str, char *new_var, char *ret)
+char	*expand_dollar_six(char *str, int *i, char *var_name, t_to_clean *clean)
 {
-	int	i;
-
-	i = 0;
-	while (new_var[i])
-	{
-		ret[i] = new_var[i];
-		i++;
-	}
-	ret[i] = '\0';
-	free(new_var);
-	free(str);
-	return (ret);
+	if (ft_find_env_line(clean->env, var_name) && str[(*i) + 1] != '$')
+		str = replace_dollar(str, var_name, *i, clean);
+	else
+		str = del_dollar(str, var_name, ft_strlen(var_name), clean);
+	return (str);
 }
