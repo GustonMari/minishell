@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:48:33 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 11:14:24 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 18:57:35 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_exit_2(char **full_cmd, t_to_clean *clean)
 {
 	if (!is_str_digit(full_cmd[1]))
 	{
-		ft_putstr_fd(BRED"exit\nminishell: exit: too many arguments\n"CRESET, 2);
+		ft_putstr_fd(BRED"minishell: exit: too many arguments\n"CRESET, 2);
 		if (g_status == 0)
 			g_status = 1;
 	}

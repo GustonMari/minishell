@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:09:42 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/03 13:08:30 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/04 18:52:52 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	exit_error(char *filename)
 {
-	ft_putstr_fd(BRED"exit\nminishell: exit: ", 2);
+	ft_putstr_fd(BRED"minishell: exit: ", 2);
 	ft_putstr_fd(filename, 2);
 	ft_putstr_fd(": numeric argument required\n"CRESET, 2);
 }
