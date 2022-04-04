@@ -1,12 +1,12 @@
- /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/07 20:31:34 by gmary             #+#    #+#             */
-/*   Updated: 2022/02/16 11:20:11 by gmary            ###   ########.fr       */
+/*   Created: 2022/04/04 15:11:10 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/04/04 15:25:53 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,72 @@ void	exit_process(int sig)
 	exit(0);
 }
 
-int g_status;
+int	signal_main(void)
+{
+	if (signal(SIGINT, &exit_process) == SIG_ERR)
+	{
+		ft_putstr_fd("Error\n", 2);
+		return (FALSE);
+	}
+	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+	{
+		ft_putstr_fd("Error\n", 2);
+		return (FALSE);
+	}
+	return (TRUE);
+}
 
-int main(int ac, char **av, char **envp)
+char	**main_bis(int ac, char **av, char **envp)
+{
+	char	**env;
+
+	(void)ac;
+	(void)av;
+	env = NULL;
+	if (!envp)
+	{	
+		ft_putstr_fd("\n\e[1;91m- Need ENVP -\e[0m\n", 1);
+		g_status = 1;
+		exit(1);
+	}
+	g_status = errno;
+	env = ft_create_env(envp);
+	env = shell_lvl(env);
+	return (env);
+}
+
+int	g_status;
+
+int	main(int ac, char **av, char **envp)
+{
+	char	*line;
+	char	**env;
+
+	line = NULL;
+	env = main_bis(ac, av, envp);
+	while (42)
+	{
+		if (signal_main() == FALSE)
+			return (0);
+		else
+			line = readline(BBLU "minishell> " CRESET);
+		if (!line)
+		{
+			write(2, "\n", 1);
+			rl_clear_history();
+			ft_free_tab_2d(env);
+			break ;
+		}
+		if (line && *line)
+		{	
+			add_history(line);
+			env = manage_line(env, line);
+		}
+	}
+	exit (g_status);
+}
+
+/* int	main(int ac, char **av, char **envp)
 {
 	char	*line;
 	char	**env;
@@ -95,4 +158,4 @@ int main(int ac, char **av, char **envp)
 		}
 	}
 	exit (g_status);
-}
+} */
