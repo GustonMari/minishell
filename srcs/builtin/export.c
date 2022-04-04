@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:52:01 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 12:49:14 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 14:10:40 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*add_join_export(char *str)
 			return (add_join_export_bis(str));
 		if (str[i + 1] && str[i] == '+' && str[i + 1] == '=')
 		{
-			new_str = remove_char_if(str, '+', '=');
+			new_str = remove_char_if(str, '+', '=', 0);
 			if (!new_str)
 				return (NULL);
 			return (new_str);

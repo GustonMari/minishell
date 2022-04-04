@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/04 14:01:59 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/04/04 14:02:16 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 void	ft_lstadd_back(t_token **alst, t_token *new)
@@ -38,9 +50,6 @@ void	print_token(t_token **begin_list)
 	while (current)
 	{
 		printf("%s\n", current->content);
-		/* ft_putstr_fd(current->content, 1); */
-		//printf("\ntype = %d\n", (int)current->type);
-		/* ft_putchar_fd('\n', 1); */
 		current = current->next;
 	}
 }
@@ -52,10 +61,7 @@ void	print_cmd(t_command **begin_list)
 	current = *begin_list;
 	while (current)
 	{
-		/* printf("%s\n", current->cmd_to_exec); */
 		print_tab_2d(current->cmd_to_exec);
-		//fprintf(stderr,"\ntype = %d\n", (int)current->type);
-		fprintf(stderr,"---------------------------------\n");
 		current = current->next;
 	}
 }

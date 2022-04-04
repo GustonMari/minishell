@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:55:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 13:43:41 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 13:53:45 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	execute_pipe_bis(t_command *all_cmd,
 	int	ret;
 
 	ret = -1;
-	ret = redirection_manager(&all_cmd, clean->env);
+	ret = redirection_manager(&all_cmd);
 	if (ret == -1)
 	{
 		dup_pipe(save);

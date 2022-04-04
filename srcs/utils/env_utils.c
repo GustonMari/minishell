@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/04 14:00:58 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/04/04 14:01:05 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 char	*ft_cpy_val_var_env(char *var, char *find)
@@ -51,7 +63,6 @@ char	*ft_rpl_val_var_env(char *var, char *new_val)
 	return (ret);
 }
 
-
 /*
 	change value de PWD et OLDPWD dans 
 */
@@ -91,25 +102,3 @@ int	is_var_in_line(char *str, char *to_del, size_t n)
 	else
 		return (1);
 }
-
-/* int main(int argc, char **argv, char **envp)
-{
-	char	**env;
-	(void)argc;
-	(void)argv;
-	char *str = "PWD=lolilol";
-	char *name;
-	char *val;
-	char *ret;
-
-	env = ft_create_env(envp);
-	name = find_name_val(str);
-	val = find_val_in_line(str);
-	ret = find_val_in_tab(env, name);
-	ft_change_env_val(env, name, val);
-	ft_print_env(env);
-	free(name);
-	free(val);
-	free(ret);
-	ft_free_tab_2d(env);
-} */

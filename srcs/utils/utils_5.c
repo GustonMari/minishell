@@ -1,51 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   utils_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 10:32:08 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 14:01:36 by ndormoy          ###   ########.fr       */
+/*   Created: 2022/04/04 14:12:22 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/04/04 14:13:02 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
 
-int	ft_isdigit(int c)
-{
-	if (c < '0' || c > '9')
-		return (1);
-	else
-		return (0);
-}
-
-int	is_str_digit(char *str)
+void	print_tab_2d(char **strs)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (strs[i])
 	{
-		if (ft_isdigit(str[i]) == FALSE)
-			return (1);
+		ft_putstr_fd(strs[i], 2);
+		ft_putstr_fd("\n", 2);
 		i++;
 	}
-	return (0);
-}
-
-int	is_str_digit_special(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[i] && (str[i] == '+' || str[i] == '-'))
-		i++;
-	while (str[i])
-	{
-		if (ft_isdigit(str[i]) == FALSE)
-			return (1);
-		i++;
-	}
-	return (0);
 }

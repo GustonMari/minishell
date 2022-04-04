@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 13:23:00 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 14:11:03 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ int			is_var_in_line_export(char *str, char *var, size_t n);
 int			is_var_in_env_export(char **env, char *var, size_t n);
 int			ft_change_env_val_export(char **env, char *var, char *new_val, char *str);
 int			is_var_in_env_export_2(char **env, char *var, size_t n);
-char		*remove_char_if(char *str, char c, char no);
+//char		*remove_char_if(char *str, char c, char no);
+char		*remove_char_if(char *str, char c, char no, int first);
 
 /*
 ------------------ CLEAR ----------------
@@ -130,13 +131,16 @@ char		*ft_pwd_return(void);
 */
 
 int			redirection_to_file(char *file_name, char *str);
-int			manage_chv_l(t_command *all_cmd, char **env);
+//int			manage_chv_l(t_command *all_cmd, char **env);
+int			manage_chv_l(t_command *all_cmd);
+
 int			manage_chv_r(t_command **all_cmd);
 int			redirection(t_command *all_cmd, int *in, int *out, char **env);
 int			is_redirection_type(t_command *op);
 int			count_cmd_between_pipe(t_command *all_cmd);
 int			count_redir(t_command *all_cmd);
-int			redirection_manager(t_command **all_cmd, char **env);
+//int			redirection_manager(t_command **all_cmd, char **env);
+int			redirection_manager(t_command **all_cmd);
 int			redirection_clean(t_command *all_cmd);
 
 /*
@@ -367,6 +371,7 @@ int			replace_heredoc(t_command **all_cmd, char *name);
 int			signal_launch_heredoc(void);
 int			remix_size_three(t_token *lst);
 t_to_clean	*clean_init(t_to_clean *clean, char **env, char *line);
+int			manage_open_r(t_command **all_cmd, char *last_redir);
 
 /*
 ---------------GUSTAVE-------------

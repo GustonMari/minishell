@@ -15,7 +15,7 @@
 //1)brew --prefix readline 2)find the right folder
 /*
 	OR
-	gcc test.c ft_strcmp.c -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
+	-lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
 */
 #include "includes/function.h"
 
@@ -23,7 +23,8 @@
 //Do you want to quit [y/n] ? ca peut etre tres cool
 // pas reussi a gerer bien ctrl=D
 // fork == 0 =>childprocess
-//attention lors dun fork la position des fichier nest pas duppliquer dou gettenv!!
+//attention lors dun fork la position
+//des fichier nest pas duppliquer dou gettenv!!
 /*
 	coller un perror apres le exec pour check si le pgm a bien ete execute
 	en attendant le parent wait() que le le fils se suicide a cause du exec
@@ -40,10 +41,8 @@
 
 void	exit_process(int sig)
 {
-
 	if (sig == SIGINT)
 	{
-		//write(1, "\n\e[1;91m- SIGINT -\n", 20);
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -60,9 +59,9 @@ int main(int ac, char **av, char **envp)
 {
 	char	*line;
 	char	**env;
+
 	(void)ac;
 	(void)av;
-	//Changer ca, pour que ca marche
 	env = NULL;
 	line = NULL;
 	if (!envp)
@@ -72,7 +71,6 @@ int main(int ac, char **av, char **envp)
 		return (0);
 	}
 	g_status = errno;
-	//g_status = 0;
 	env = ft_create_env(envp);
 	env = shell_lvl(env);
 	while (42)
@@ -83,30 +81,18 @@ int main(int ac, char **av, char **envp)
 			return (fprintf(stderr, "Error: %s\n", strerror(errno)));
 		else
 			line = readline(BBLU "minishell> " CRESET);
-		//obligatoire sinon segfault pour ctrl D est-ce que lon peut considerer ceci comme un sighandler
 		if (!line)
 		{
-			//clear history si il y en avait un
 			write(2, "\n", 1);
 			rl_clear_history();
 			ft_free_tab_2d(env);
 			break ;
 		}
-/* 		if (!ft_strcmp(line, "exit"))
-		{
-			//free(line);
-			rl_clear_history();
-			ft_free_tab_2d(env);
-			ft_putstr_fd("\n\e[1;91m- EXIT OK -\e[0m\n", 1);
-			exit(g_status);
-		} */
 		if (line && *line)
 		{	
 			add_history(line);
 			env = manage_line(env, line);
 		}
-		/* if(line)
-			free(line); */
 	}
 	exit (g_status);
 }

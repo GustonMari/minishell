@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/04 14:01:24 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/04/04 14:08:29 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/function.h"
 
 long long	ft_atolll(char *str)
 {
-	unsigned long long atoll;
-	int						neg;
+	unsigned long long	atoll;
+	int					neg;
 
 	neg = 1;
 	atoll = 0;
