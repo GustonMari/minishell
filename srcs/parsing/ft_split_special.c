@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split_special.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/04 13:31:07 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/04/04 13:31:34 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/function.h"
 
@@ -61,17 +72,3 @@ char	**ft_split_special(char *str)
 	tab[i] = NULL;
 	return (tab);
 }
-
-/* Il faudra free str qui sera alloué*/
-
-/* int main()
-{
-	char	*str = " \"ca\" | \'va\' toi\"$USER\" > \"oui\'ii\"";
-	char	**strs;
-
-	strs = ft_split_special(str);
-	print_tab_2d(strs);
-	ft_free_tab_2d(strs);
-
-	return (0);
-} */

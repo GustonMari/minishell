@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token_to_cmd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/04 13:32:04 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/04/04 13:32:18 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 /*Trouve la taille du tableau a deux dimmensions 
@@ -99,30 +111,3 @@ void	ft_add_back_cmd(t_command **alst, t_command *new)
 		temp = temp->next;
 	temp->next = new;
 }
-
-/* int main(int argc, char **argv, char **envp)
-{
-
-	char	**env;
-	(void)argc;
-	(void)argv;
-	t_token *temp;
-	t_token	*expanded;
-	t_command *cmd_all;
-	(void)cmd_all;
-
-
-	char	*arg;
-	env = NULL;
-	arg = ft_strdup(" \"ca\" |	<	><	> \r	sal	ut poe	ut");
-	env = ft_create_env(envp);
-	temp = lexer(arg);
-	expanded = expand_all(env, temp);
-	//trim_all(&expanded);
-	//print_token(&expanded);
-	cmd_all = token_to_cmd(expanded);
-	print_cmd(&cmd_all);
-	ft_lstclear(&expanded, free);
-	ft_cmd_clear(&cmd_all);
-	ft_free_tab_2d(env);
-} */
