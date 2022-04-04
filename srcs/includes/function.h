@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 17:10:08 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/04 17:17:48 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,12 @@ char		*find_name_val(char *str);
 char		*find_val_in_line(char *str);
 int			is_var_in_line_export(char *str, char *var, size_t n);
 int			is_var_in_env_export(char **env, char *var, size_t n);
-int			ft_change_env_val_export(char **env, char *var, char *new_val, char *str);
+int			ft_change_env_val_export(char **env, char *var,
+				char *new_val, char *str);
 int			is_var_in_env_export_2(char **env, char *var, size_t n);
-//char		*remove_char_if(char *str, char c, char no);
 char		*remove_char_if(char *str, char c, char no, int first);
+int			is_equal_in_line(char *str);
+void		ft_export_no_arg(char **env);
 
 /*
 ------------------ CLEAR ----------------
@@ -118,6 +120,7 @@ t_command	*ft_cmdclear_between_pipe(t_command **lst);
 int			is_var_in_line(char *str, char *to_del, size_t n);
 char		**ft_unset(char **env, char **full_cmd);
 int			is_var_in_line_unset(char *str, char *to_del, size_t n);
+int			check_already_exists(char **env, char *to_del, size_t n);
 
 /*
 ------------------ PWD ----------------
@@ -216,7 +219,8 @@ int			check_t_cmd(char **env, t_command *all);
 
 char		*expand_dollar(char **env, char *str, t_to_clean *clean);
 char		*replace_dollar_3(char *str, char *new_var, char *ret);
-char		*replace_interrogation(char *str, int pos, t_to_clean *clean, char *var_name);
+char		*replace_interrogation(char *str, int pos,
+				t_to_clean *clean, char *var_name);
 char		*replace_dollar_2(char *str, char *new_var, char *ret, int pos);
 /*
 ------------------ EXPAND ----------------
@@ -260,7 +264,8 @@ char		**manage_line(char **env, char *line);
 ------------------ PIPE ------------------
 */
 
-int			execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env, int in);
+int			execute_pipe(t_command *all_cmd, t_to_clean *clean,
+				char **env, int in);
 int			count_cmd_list(t_command *all_cmd);
 int			count_all_between_pipe(t_command **all_cmd);
 
@@ -268,7 +273,8 @@ int			count_all_between_pipe(t_command **all_cmd);
 ------------------ ERROR ------------------
 */
 
-void		ft_print_error(int minishell, char *cmd_name, char *error, char *token);
+void		ft_print_error(int minishell, char *cmd_name,
+				char *error, char *token);
 void		cd_error(char *cmd, int to_many_arg);
 int			redirection_error(char *file_name);
 int			print_cmd_error(char *str);
@@ -291,9 +297,8 @@ void		exit_pipe_process(int sig);
 */
 
 int			priorities_d_chv_l(t_command *all_cmd);
-//int		launch_heredoc(t_command **all_cmd, char **env, char *name, t_to_clean *clean);
-int			launch_heredoc(t_command **all_cmd, char *name, t_to_clean *clean);
-//int		manage_heredoc(t_command **all_cmd, char **env, t_to_clean *clean);
+int			launch_heredoc(t_command **all_cmd, char *name,
+				t_to_clean *clean);
 int			manage_heredoc(t_command **all_cmd, t_to_clean *clean);
 
 int			delete_heredoc_file(t_command *all_cmd);
@@ -306,6 +311,15 @@ int			signal_heredoc(void);
 char		**create_tab_stop(t_command *all_cmd);
 char		**trim_quote_stop(char **strs);
 int			is_expand_heredoc(char **stop);
+void		manage_heredoc_signal(int sig);
+void		fill_heredoc_file(char **stop, int is_expand,
+				char *name, t_to_clean *clean);
+int			replace_heredoc(t_command **all_cmd, char *name);
+int			signal_launch_heredoc(void);
+int			remix_size_three(t_token *lst);
+t_to_clean	*clean_init(t_to_clean *clean, char **env, char *line);
+int			manage_open_r(t_command **all_cmd, char *last_redir);
+int			manage_check_quote(char *line, t_to_clean *clean);
 
 /* 
 ------------------ ITOA ------------------
@@ -354,28 +368,8 @@ char		*exit_expand_node_single(t_to_clean *clean,
 void		*ft_clean_error_malloc(t_to_clean *clean);
 int			prio_exit(t_command *all);
 
-/* 
------------------- NOE ------------------
-*/
-
-//In export
-int			is_equal_in_line(char *str);
-void		ft_export_no_arg(char **env);
-//In unset
-int			check_already_exists(char **env, char *to_del, size_t n);
-//In heredoc
-void		manage_heredoc_signal(int sig);
-void		fill_heredoc_file(char **stop, int is_expand,
-				char *name, t_to_clean *clean);
-int			replace_heredoc(t_command **all_cmd, char *name);
-int			signal_launch_heredoc(void);
-int			remix_size_three(t_token *lst);
-t_to_clean	*clean_init(t_to_clean *clean, char **env, char *line);
-int			manage_open_r(t_command **all_cmd, char *last_redir);
-int			manage_check_quote(char *line, t_to_clean *clean);
-
 /*
----------------GUSTAVE-------------
+---------------DOLLAR NORM-------------
 */
 
 int			find_next_single_block_merde(char *str);
@@ -424,20 +418,5 @@ char		*expand_node_single_backlash(char *str, t_to_clean *clean, int *i,
 				char *expanded);
 char		*expand_node_single_else(char *str, t_to_clean *clean, int *i,
 				char *expanded);
-// int			find_next_single_block_merde(char *str);
-// char		*del_dollar(char *str, char *var_name, int len, t_to_clean *clean);
-// char		*cut_dollar(char *str, t_to_clean *clean);
-// char		*ft_allocate_dest(char *str, char *status, char *dest,
-// 				t_to_clean *clean);
-// char		*ft_allocate_itoa(char *status, char *str, char *var_name,
-// 				t_to_clean *clean);
-// void		replace_interrogation_ter(char *str, char *dest, int *i, int *k);
-// void		replace_interrogation_bis(char *status, char *dest, int *j, int *k);
-// char		*replace_interrogation_end(char *str, char *status,
-// 				char *var_name, char *dest);
-// char		*replace_dollar(char *str, char *var_name, int pos,
-// 				t_to_clean *clean);
-// char		*del_one_back_slash(char *str, t_to_clean *clean);
-// int			ft_lstsize_cmd(t_command *lst);
 
 #endif
