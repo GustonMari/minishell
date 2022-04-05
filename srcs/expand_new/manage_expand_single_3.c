@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:49:23 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/05 18:19:43 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/05 18:30:12 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	is_expand_block_node(char *block)
 		i++;
 	while (block[i])
 	{
-		if (ft_isalnum(block[i]) == 0)
+		if (ft_isalnum(block[i]) == 0 && block[1] != '?')
 			return (1);
 		i++;
 	}
