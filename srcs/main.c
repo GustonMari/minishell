@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:11:10 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/05 10:55:33 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/05 17:53:33 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ char	**main_bis(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	env = NULL;
+	if (isatty(STDIN_FILENO) == TRUE)
+	{
+		printf("ADIOS\n");
+		exit (0);
+	}
 	if (!envp)
 	{	
 		ft_putstr_fd("\n\e[1;91m- Need ENVP -\e[0m\n", 1);
@@ -100,7 +105,7 @@ int	main(int ac, char **av, char **envp)
 	{
 		if (signal_main() == FALSE)
 			return (0);
-		else if (isatty(STDIN_FILENO) == 1)
+		else
 			line = readline(BBLU "minishell> " CRESET);
 		if (!line)
 		{

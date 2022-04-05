@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_expand_4.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:53:16 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 16:57:41 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/05 18:24:04 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*expand_node_dollar(char *str, char *block, t_to_clean *clean, int *i)
 {
 	block = cpy_block(&str[*i], find_next_quote(&str[*i]), clean);
-	if (str[(*i) + 1] != '\0')
+	if (str[(*i) + 1] != '\0' && is_expand_block_node(block) == TRUE)
 		block = expand_single_dollar(clean->env, block, clean);
 	block = del_back_slash(block, clean);
 	(*i) += find_next_quote(&str[*i]);

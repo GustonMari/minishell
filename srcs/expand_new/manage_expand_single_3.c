@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_expand_single_3.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:49:23 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 17:00:35 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/05 18:19:43 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,22 @@ char	*ft_allocate_exp_single_node(char *expanded, char *block,
 	return (expanded);
 }
 
+int	is_expand_block_node(char *block)
+{
+	int	i;
+
+	i = 0;
+	if (block[i] && block[i + 1])
+		i++;
+	while (block[i])
+	{
+		if (ft_isalnum(block[i]) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 char	*expand_node_single_bis(char *expanded,
 			char *str, t_to_clean *clean, int *i)
 {
@@ -37,7 +53,7 @@ char	*expand_node_single_bis(char *expanded,
 	else if (str[*i] == '$')
 	{
 		block = expand_node_single_dollar(str, clean, i, expanded);
-		if (str[*i + 1] != '\0'
+		if (str[*i + 1] != '\0' && is_expand_block_node(block) == TRUE
 			&& clean->not_expand == 0 && !ft_is_space(str[*i + 1]))
 			block = expand_single_dollar(clean->env, block, clean);
 		clean->not_expand = 0;

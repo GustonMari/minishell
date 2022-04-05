@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/05 17:14:46 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/05 18:24:23 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -428,5 +428,6 @@ int			ft_lstsize_cmd_pipe(t_command *lst);
 void		exit_overflow(char *number, t_to_clean *clean);
 void		ft_exit_2(char **full_cmd, t_to_clean *clean);
 void		check_if_exit(t_to_clean *clean, t_command *all, t_token *expanded);
+int			is_expand_block_node(char *block);
 
 #endif
