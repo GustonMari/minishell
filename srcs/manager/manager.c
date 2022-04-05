@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:26:09 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/05 12:13:15 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/05 14:15:56 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,6 @@ char	**manage_line(char **env, char *line)
 		return (manage_line_bis_2(cmd_all, clean, env, expanded));
 	remix_2(&cmd_all);
 	env = ft_dispatch(cmd_all, clean, env);
-	if (g_status == 255)
-	{
-		ft_clean_exit(clean);
-		//manage_line_clean(clean, cmd_all, expanded);
-		exit(2);
-	}
-	if (g_status >= 131)
-	{
-		fprintf(stderr, "aaaaaaaaaaaaaaaaaaaaaaaaaaaa\n");
-		fprintf(stderr, "g_status = %d\n", g_status);
-		exit(g_status - 131);
-	}
-	
 	manage_line_clean(clean, cmd_all, expanded);
 	return (env);
 }

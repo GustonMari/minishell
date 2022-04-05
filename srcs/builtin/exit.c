@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:48:33 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/05 12:26:08 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/05 14:19:28 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,30 +36,11 @@ void	ft_exit_2(char **full_cmd, t_to_clean *clean)
 	else
 	{
 		exit_error(full_cmd[1]);
-		g_status = 255;
-		ft_clean_exit(clean);
-		exit(255);
-	}
-}
-
-/* void	ft_exit_2(char **full_cmd, t_to_clean *clean)
-{
-	if (!is_str_digit(full_cmd[1]))
-	{
-		ft_putstr_fd(BRED"minishell: exit: too many arguments\n"CRESET, 2);
-		if (g_status == 0)
-			g_status = 1;
-	}
-	else
-	{
-		fprintf(stderr, "ici\n");
-		exit_error(full_cmd[1]);
 		g_status = 2;
 		ft_clean_exit(clean);
 		exit(2);
 	}
 }
- */
 
 int	prio_exit(t_command *all)
 {	
@@ -100,49 +81,25 @@ void	exit_overflow(char *number, t_to_clean *clean)
 		ft_putstr_fd(number, 2);
 		ft_putstr_fd(": numeric argument required" CRESET, 2);
 	}
-	ft_clean_exit(clean);
-	exit (num);
-}
-
-int	ft_lstsize_cmd_wesh(t_command *lst)
-{
-	t_command	*tmp;
-	int	count;
-
-	tmp = lst;
-	count = 0;
-	//print_cmd(&tmp);
-	while (tmp)
+	if (prio_exit(clean->command_begin))
 	{
-		if (tmp->type == PIPE)
-			count++;
-		tmp = tmp->next;
+		ft_clean_exit(clean);
+		exit (g_status);
 	}
-	//fprintf(stderr, "%d\n", count);
-	return (count);
+	ft_clean_exit(clean);
+	exit(num);
 }
 
 void	ft_exit(t_command *all, t_to_clean *clean)
 {
-	if (ft_lstsize_cmd(clean->command_begin) == 0)
+	if (ft_lstsize_cmd(clean->command_begin) == 1)
 	{
 		ft_putstr_fd("exit\n", 2);
 	}
 	if (ft_count_line(all->cmd_to_exec) == 1)
 	{
-
-		if (ft_lstsize_cmd_wesh(all) > 0)
-		{
-			ft_clean_exit(clean);
-			//fprintf(stderr, "hhhhheyyy\n");
-			exit(g_status);
-		}
-		else
-		{
-			ft_clean_exit(clean);
-			exit (g_status + 131);
-		}
-
+		ft_clean_exit(clean);
+		exit (g_status);
 	}
 	else if (ft_count_line(all->cmd_to_exec) == 2)
 	{
@@ -151,7 +108,7 @@ void	ft_exit(t_command *all, t_to_clean *clean)
 			exit_error(all->cmd_to_exec[1]);
 			g_status = 2;
 			ft_clean_exit(clean);
-			exit(255);
+			exit(2);
 		}
 		exit_overflow(all->cmd_to_exec[1], clean);
 	}

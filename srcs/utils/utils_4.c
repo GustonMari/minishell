@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:03:38 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/05 12:19:06 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/05 14:23:56 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,19 @@ int	ft_isalnum(int c)
 
 int	ft_lstsize_cmd(t_command *lst)
 {
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}
+
+/* int	ft_lstsize_cmd(t_command *lst)
+{
 	t_command	*tmp;
 	int	count;
 
@@ -34,7 +47,7 @@ int	ft_lstsize_cmd(t_command *lst)
 		tmp = tmp->next;
 	}
 	return (count);
-}
+} */
 
 /* int	ft_lstsize_cmd(t_command *lst)
 {
