@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:03:38 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/05 11:02:06 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/05 12:19:06 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,16 @@ int	ft_isalnum(int c)
 
 int	ft_lstsize_cmd(t_command *lst)
 {
-	int	i;
+	t_command	*tmp;
 	int	count;
 
+	tmp = lst;
 	count = 0;
-	i = 0;
-	while (lst)
+	while (tmp)
 	{
-		if (lst->type == PIPE)
+		if (tmp->type == PIPE)
 			count++;
-		lst = lst->next;
-		i++;
+		tmp = tmp->next;
 	}
 	return (count);
 }

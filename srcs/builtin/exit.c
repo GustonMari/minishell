@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:48:33 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/05 11:45:14 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/05 12:26:08 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,24 @@ void	exit_overflow(char *number, t_to_clean *clean)
 	exit (num);
 }
 
+int	ft_lstsize_cmd_wesh(t_command *lst)
+{
+	t_command	*tmp;
+	int	count;
+
+	tmp = lst;
+	count = 0;
+	//print_cmd(&tmp);
+	while (tmp)
+	{
+		if (tmp->type == PIPE)
+			count++;
+		tmp = tmp->next;
+	}
+	//fprintf(stderr, "%d\n", count);
+	return (count);
+}
+
 void	ft_exit(t_command *all, t_to_clean *clean)
 {
 	if (ft_lstsize_cmd(clean->command_begin) == 0)
@@ -112,9 +130,19 @@ void	ft_exit(t_command *all, t_to_clean *clean)
 	}
 	if (ft_count_line(all->cmd_to_exec) == 1)
 	{
-		ft_clean_exit(clean);
-		fprintf(stderr, "hjgjhfhfgfhfhgffh\n");
-		exit (g_status);
+
+		if (ft_lstsize_cmd_wesh(all) > 0)
+		{
+			ft_clean_exit(clean);
+			//fprintf(stderr, "hhhhheyyy\n");
+			exit(g_status);
+		}
+		else
+		{
+			ft_clean_exit(clean);
+			exit (g_status + 131);
+		}
+
 	}
 	else if (ft_count_line(all->cmd_to_exec) == 2)
 	{
