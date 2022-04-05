@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:48:33 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/05 14:19:28 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/05 14:56:34 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ int	prio_exit(t_command *all)
 		&& ft_count_line(last->cmd_to_exec) == 2)
 	{
 		g_status = ft_atoi(last->cmd_to_exec[1]);
+		fprintf(stderr, "g_status = %d\n", g_status);
 		return (TRUE);
 	}
+	fprintf(stderr, "OR -> g_status = %d\n", g_status);
 	return (FALSE);
 }
 
@@ -81,7 +83,7 @@ void	exit_overflow(char *number, t_to_clean *clean)
 		ft_putstr_fd(number, 2);
 		ft_putstr_fd(": numeric argument required" CRESET, 2);
 	}
-	if (prio_exit(clean->command_begin))
+	if (prio_exit(clean->command_begin) == TRUE)
 	{
 		ft_clean_exit(clean);
 		exit (g_status);
@@ -98,6 +100,7 @@ void	ft_exit(t_command *all, t_to_clean *clean)
 	}
 	if (ft_count_line(all->cmd_to_exec) == 1)
 	{
+		prio_exit(all);
 		ft_clean_exit(clean);
 		exit (g_status);
 	}

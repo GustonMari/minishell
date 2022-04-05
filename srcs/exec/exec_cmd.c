@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:48:11 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/05 14:19:57 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/05 14:55:14 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,11 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 	int		pid;
 
 	path = NULL;
-	if (!prio_exit(all))
-		g_status = 0;
+	if (prio_exit(all) == TRUE)
+	{
+		fprintf(stderr, "mini jlfl   jj j \n");
+				g_status = 0;
+	}
 	signal_manager2();
 	pid = fork();
 	if (pid == 0)
