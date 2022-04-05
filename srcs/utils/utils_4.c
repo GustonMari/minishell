@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:03:38 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 14:12:54 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/05 11:02:06 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,23 @@ int	ft_isalnum(int c)
 int	ft_lstsize_cmd(t_command *lst)
 {
 	int	i;
+	int	count;
+
+	count = 0;
+	i = 0;
+	while (lst)
+	{
+		if (lst->type == PIPE)
+			count++;
+		lst = lst->next;
+		i++;
+	}
+	return (count);
+}
+
+/* int	ft_lstsize_cmd(t_command *lst)
+{
+	int	i;
 
 	i = 0;
 	while (lst)
@@ -31,7 +48,7 @@ int	ft_lstsize_cmd(t_command *lst)
 		i++;
 	}
 	return (i);
-}
+} */
 
 int	ft_lstsize(t_token *lst)
 {

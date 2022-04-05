@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:11:10 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 17:56:19 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/05 10:55:33 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	main(int ac, char **av, char **envp)
 	{
 		if (signal_main() == FALSE)
 			return (0);
-		else
+		else if (isatty(STDIN_FILENO) == 1)
 			line = readline(BBLU "minishell> " CRESET);
 		if (!line)
 		{

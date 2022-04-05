@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:26:09 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/05 10:45:14 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/05 11:58:01 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,16 @@ char	**manage_line(char **env, char *line)
 		return (manage_line_bis_2(cmd_all, clean, env, expanded));
 	remix_2(&cmd_all);
 	env = ft_dispatch(cmd_all, clean, env);
+	if (g_status >= 131)
+	{
+		exit(g_status - 131);
+	}
+	// if (g_status == 255)
+	// {
+	// 	ft_clean_exit(clean);
+	// 	//manage_line_clean(clean, cmd_all, expanded);
+	// 	exit(2);
+	// }
 	manage_line_clean(clean, cmd_all, expanded);
 	return (env);
 }
