@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:26:09 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/05 10:16:06 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/05 10:45:14 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,45 @@ char	**manage_line(char **env, char *line)
 		return (env);
 	manage_line_bis(&expanded, tmp, &cmd_all, clean);
 	if (manage_heredoc(&cmd_all, clean) == FALSE)
-	{
-		remix_2(&cmd_all);
-		manage_line_clean(clean, cmd_all, expanded);
-		return (env);
-	}
+		return (manage_line_bis_2(cmd_all, clean, env, expanded));
 	remix_2(&cmd_all);
 	env = ft_dispatch(cmd_all, clean, env);
 	manage_line_clean(clean, cmd_all, expanded);
 	return (env);
 }
+
+/* char	**manage_line(char **env, char *line)
+{
+	t_token		*tmp;
+	t_token		*expanded;
+	t_command	*cmd_all;
+	t_to_clean	*clean;
+
+	cmd_all = NULL;
+	tmp = NULL;
+	clean = NULL;
+	clean = clean_init(clean, env, line);
+	if (manage_check_quote(line, clean) == FALSE)
+		return (env);
+	line = expand_node_single(clean, env, line);
+	tmp = lexer(clean, line);
+	if (!tmp)
+		return (env);
+	remix_manager(&tmp);
+	if (manage_check_cmd_list(tmp, clean) == FALSE)
+		return (env);
+	manage_line_bis(&expanded, tmp, &cmd_all, clean);
+	if (manage_heredoc(&cmd_all, clean) == FALSE)
+	{
+		//remix_2(&cmd_all);
+		//manage_line_clean(clean, cmd_all, expanded);
+		return (manage_line_bis_2(cmd_all, clean, env, expanded));
+	}
+	remix_2(&cmd_all);
+	env = ft_dispatch(cmd_all, clean, env);
+	manage_line_clean(clean, cmd_all, expanded);
+	return (env);
+} */
 
 /* char	**manage_line(char **env, char *line)
 {

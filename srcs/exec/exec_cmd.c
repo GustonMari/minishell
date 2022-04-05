@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:48:11 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 19:10:26 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/05 10:34:28 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,15 @@ char	*ft_exec_cmd_bis(char **env
 	return (tmp);
 }
 
+void	ft_exec_cmd_bis_4(t_to_clean *clean, t_command *all, char *path)
+{
+	ft_print_error(1, all->cmd_to_exec[0], ": Is a directory", NULL);
+	g_status = 126;
+	free(path);
+	ft_clean_exit(clean);
+	exit(g_status);
+}
+
 int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 {
 	char	*path;
@@ -93,13 +102,7 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 		path = ft_exec_cmd_bis_2(clean, all, tmp);
 		ft_exec_cmd_bis_3(clean, all, path);
 		if (execve(path, all->cmd_to_exec, env) < 0)
-		{
-			ft_print_error(1, all->cmd_to_exec[0], ": Is a directory", NULL);
-			g_status = 126;
-			free(path);
-			ft_clean_exit(clean);
-			exit(g_status);
-		}
+			ft_exec_cmd_bis_4(clean, all, path);
 		free(path);
 		return (0);
 	}

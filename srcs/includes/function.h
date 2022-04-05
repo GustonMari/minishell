@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 17:17:48 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/05 10:47:05 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -418,5 +418,8 @@ char		*expand_node_single_backlash(char *str, t_to_clean *clean, int *i,
 				char *expanded);
 char		*expand_node_single_else(char *str, t_to_clean *clean, int *i,
 				char *expanded);
-
+char		**manage_line_bis_2(t_command *cmd_all, t_to_clean *clean,
+				char **env, t_token *expanded);
+void		manage_line_clean(t_to_clean *clean,
+				t_command *cmd_all, t_token *expanded);
 #endif
