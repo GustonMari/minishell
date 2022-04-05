@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:54:58 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 12:57:54 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/05 10:13:33 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	manage_heredoc(t_command **all_cmd, t_to_clean *clean)
 			ret = launch_heredoc(&tmp, name, clean);
 			replace_heredoc(&tmp, name);
 			if (ret < 0)
-				return (ret);
+				return (FALSE);
 			count_all_between_pipe(&tmp);
 		}
 		else

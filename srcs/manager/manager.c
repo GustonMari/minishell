@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manager.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:26:09 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 17:10:34 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/05 10:16:06 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,11 @@ char	**manage_line(char **env, char *line)
 		return (env);
 	manage_line_bis(&expanded, tmp, &cmd_all, clean);
 	if (manage_heredoc(&cmd_all, clean) == FALSE)
+	{
+		remix_2(&cmd_all);
+		manage_line_clean(clean, cmd_all, expanded);
 		return (env);
+	}
 	remix_2(&cmd_all);
 	env = ft_dispatch(cmd_all, clean, env);
 	manage_line_clean(clean, cmd_all, expanded);
