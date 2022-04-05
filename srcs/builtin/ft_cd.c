@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 14:02:11 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/23 09:48:21 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/05 10:21:46 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,28 @@ int	ft_home(char **env)
 {
 	char	*path;
 	char	*old_pwd;
+	char	*pwd_return;
 
 	path = find_val_in_tab(env, "HOME");
 	if (path)
 	{
 		if (ft_check_cd(path))
+		{
+			free(path);
 			return (-1);
+		}
 		chdir(path);
 	}
 	else
 		chdir(getenv("HOME="));
 	old_pwd = find_val_in_tab(env, "PWD");
-	ft_change_env_val(env, "PWD", ft_pwd_return());
+	pwd_return = ft_pwd_return();
+	ft_change_env_val(env, "PWD", pwd_return);
+	if (pwd_return)
+		free(pwd_return);
 	ft_change_env_val(env, "OLDPWD", old_pwd);
 	free(old_pwd);
+	free(path);
 	return (0);
 }
 
@@ -57,6 +65,7 @@ int	ft_home(char **env)
 int	ft_cd(char **full_cmd, char **env)
 {
 	char	*old_pwd;
+	char	*pwd_return;
 
 	if (ft_count_line(full_cmd) > 2)
 	{
@@ -71,7 +80,10 @@ int	ft_cd(char **full_cmd, char **env)
 	old_pwd = find_val_in_tab(env, "PWD");
 	if (chdir(full_cmd[1]) == -1)
 		ft_putstr_fd("Error chdir not working", 2);
-	ft_change_env_val(env, "PWD", ft_pwd_return());
+	pwd_return = ft_pwd_return();
+	ft_change_env_val(env, "PWD", pwd_return);
+	if (pwd_return)
+		free(pwd_return);
 	if (old_pwd)
 		ft_change_env_val(env, "OLDPWD", old_pwd);
 	free(old_pwd);
