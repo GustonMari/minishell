@@ -24,6 +24,7 @@ SRC =	srcs/main.c \
 		srcs/builtin/echo.c \
   		srcs/builtin/env.c \
 		srcs/builtin/exit.c \
+		srcs/builtin/exit_2.c \
 		srcs/builtin/export_2.c \
 		srcs/builtin/export_3.c \
 		srcs/builtin/export.c \
