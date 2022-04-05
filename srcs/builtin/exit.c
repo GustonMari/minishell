@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:48:33 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/05 17:11:01 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/05 17:37:17 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,8 @@ int	prio_exit(t_command *all)
 		&& ft_count_line(last->cmd_to_exec) == 2)
 	{
 		g_status = ft_atoi(last->cmd_to_exec[1]);
-		fprintf(stderr, "g_status = %d\n", g_status);
 		return (TRUE);
 	}
-	fprintf(stderr, "OR -> g_status = %d\n", g_status);
 	return (FALSE);
 }
 
@@ -103,7 +101,6 @@ void	exit_overflow(char *number, t_to_clean *clean)
 	}
 	if (prio_exit(clean->command_begin) == TRUE)
 	{
-		fprintf(stderr, "ON est la -> g_status = %d\n", g_status);
 		ft_clean_exit(clean);
 		exit (g_status);
 	}

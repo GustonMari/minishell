@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_test_left.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:50:34 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 13:59:55 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/05 17:36:24 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	manage_chv_l(t_command *all_cmd)
 	file_name = find_last_redir_l(all_cmd);
 	if (!file_name)
 		return (-1);
-	g_status = 0;
 	if (manage_single_chv_l(all_cmd) < 0)
 		return (-2);
 	fd = open(file_name, O_RDONLY);
