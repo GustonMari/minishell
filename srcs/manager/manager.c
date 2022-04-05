@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:26:09 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/05 14:15:56 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/05 16:11:53 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,16 @@ void	manage_line_bis(t_token **expanded,
 	clean->command_begin = *cmd_all;
 }
 
+void	check_if_exit(t_to_clean *clean, t_command *all, t_token *expanded)
+{
+	prio_exit(all);
+	if ((condition_if_exit(all) == TRUE) && (is_str_digit(all->cmd_to_exec[1]) == FALSE))
+	{
+		manage_line_clean(clean, all, expanded);
+		exit (g_status);
+	}
+}
+
 char	**manage_line(char **env, char *line)
 {
 	t_token		*tmp;
@@ -81,6 +91,7 @@ char	**manage_line(char **env, char *line)
 		return (manage_line_bis_2(cmd_all, clean, env, expanded));
 	remix_2(&cmd_all);
 	env = ft_dispatch(cmd_all, clean, env);
+	check_if_exit(clean, cmd_all, expanded);
 	manage_line_clean(clean, cmd_all, expanded);
 	return (env);
 }

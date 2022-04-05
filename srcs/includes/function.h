@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/05 13:44:09 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/05 15:12:42 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -423,5 +423,7 @@ char		**manage_line_bis_2(t_command *cmd_all, t_to_clean *clean,
 void		manage_line_clean(t_to_clean *clean,
 				t_command *cmd_all, t_token *expanded);
 int			ft_lstsize_cmd_wesh(t_command *lst);
+int			condition_if_exit(t_command *all);
+
 
 #endif
