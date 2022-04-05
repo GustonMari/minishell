@@ -6,11 +6,27 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:48:33 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/05 16:09:04 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/05 16:22:19 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
+
+int	ft_lstsize_cmd_pipe(t_command *lst)
+{
+	int			i;
+	t_command	*tmp;
+
+	i = 0;
+	tmp = lst;
+	while (tmp)
+	{
+		if (tmp->type == PIPE)
+			i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
 
 void	ft_clean_exit(t_to_clean *clean)
 {
@@ -36,9 +52,9 @@ void	ft_exit_2(char **full_cmd, t_to_clean *clean)
 	else
 	{
 		exit_error(full_cmd[1]);
-		if (prio_exit(clean->command_begin) == TRUE)
+		if (prio_exit(clean->command_begin) == FALSE 
+			&& ft_lstsize_cmd_pipe(clean->command_begin) == 0)
 			g_status = 2;
-		ft_clean_exit(clean);
 		ft_clean_exit(clean);
 		exit(g_status);
 	}
@@ -95,21 +111,7 @@ void	exit_overflow(char *number, t_to_clean *clean)
 	exit(num);
 }
 
-int	ft_lstsize_cmd_pipe(t_command *lst)
-{
-	int			i;
-	t_command	*tmp;
 
-	i = 0;
-	tmp = lst;
-	while (tmp)
-	{
-		if (tmp->type == PIPE)
-			i++;
-		tmp = tmp->next;
-	}
-	return (i);
-}
 
 void	ft_exit(t_command *all, t_to_clean *clean)
 {
