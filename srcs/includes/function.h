@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/06 14:36:59 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 14:44:56 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -434,12 +434,11 @@ void		dont_expand_special_char(char *str, int *i);
 void		ft_memdel(void **ptr);
 int			manage_check_cmd_list(t_token *tmp, t_to_clean *clean);
 void		del_dollar_2_quin(char *var_name);
+char		*expand_single_dollar_diff(char **env, char *str,
+				t_to_clean *clean);
+char		*replace_interrogation_diff(char *str, int pos, t_to_clean *clean,
+				char *var_name);
+char		*replace_interrogation_end_diff(char *str, char *status,
+				char *var_name, char *dest);
 
-
-
-char	*expand_single_dollar_diff(char **env, char *str, t_to_clean *clean);
-char	*replace_interrogation_diff(char *str, int pos, t_to_clean *clean,
-		char *var_name);
-char	*replace_interrogation_end_diff(char *str, char *status,
-		char *var_name, char *dest);
 #endif

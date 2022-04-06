@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:04:36 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/06 14:35:41 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 14:43:05 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,6 @@ char	*ft_allocate_dest(char *str, char *status, char *dest,
 	return (dest);
 }
 
-char	*replace_interrogation_end_diff(char *str, char *status,
-		char *var_name, char *dest)
-{
-	if (status)
-		free(status);
-	if (str)
-		free(str);
-	//WARNINGG
-	(void)var_name;
-	if (var_name)
-		free(var_name);
-	return (dest);
-}
-
-
 char	*replace_interrogation_end(char *str, char *status,
 		char *var_name, char *dest)
 {
@@ -78,9 +63,6 @@ char	*replace_interrogation_end(char *str, char *status,
 		free(status);
 	if (str)
 		free(str);
-	//WARNINGG
 	(void)var_name;
-	// if (var_name)
-	// 	free(var_name);
 	return (dest);
 }
