@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:11:10 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/05 17:53:33 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 14:54:00 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	**main_bis(int ac, char **av, char **envp)
 	env = NULL;
 	if (isatty(STDIN_FILENO) == TRUE)
 	{
-		printf("ADIOS\n");
+		ft_putstr_fd("Don't try this please...\n", 2);
 		exit (0);
 	}
 	if (!envp)
