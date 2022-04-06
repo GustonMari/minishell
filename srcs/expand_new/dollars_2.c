@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:04:36 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/06 12:00:04 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 13:47:50 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*replace_interrogation_end(char *str, char *status,
 		free(str);
 	//WARNINGG
 	(void)var_name;
-	//if (var_name)
-	//	free(var_name);
+	if (var_name)
+		free(var_name);
 	return (dest);
 }
