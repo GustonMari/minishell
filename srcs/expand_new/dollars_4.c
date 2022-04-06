@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 09:15:34 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 13:24:02 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 09:35:27 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	expand_dollar_ter(char *str, int *i)
 		(*i)++;
 		(*i)++;
 	}
+	dont_expand_special_char(str, i);
 }
 
 void	expand_dollar_quin(char *str, int *i)

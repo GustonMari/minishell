@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollars_5.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 09:44:12 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 16:56:56 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/06 09:34:13 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,35 @@ char	*expand_dollar(char **env, char *str, t_to_clean *clean)
 	return (expand_dollar_bis(str, i, clean));
 }
 
+/* char	*expand_dollar(char **env, char *str, t_to_clean *clean)
+{
+	int		i;
+	char	*var_name;
+
+	(void)env;
+	i = 0;
+	var_name = NULL;
+	while (str[i])
+	{
+		expand_dollar_ter(str, &i);
+		if (str[i] == '$' && !ft_is_space(str[i + 1])
+			&& str[i + 1] != '\0' && str[i + 1] != '$')
+		{
+			if (str[i] == '$' && str[i + 1] == '?')
+				str = replace_interrogation(str, i, clean, var_name);
+			else
+			{
+				var_name = cut_dollar(&str[i], clean);
+				if (!var_name)
+					return (NULL);
+				str = expand_dollar_six(str, &i, var_name, clean);
+			}
+		}
+		expand_dollar_quin(str, &i);
+	}
+	return (expand_dollar_bis(str, i, clean));
+}
+ */
 /*
 	replace_dollar_3 sert seulment dans le cas ou str est null
 */

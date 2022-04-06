@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollars_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:04:36 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 16:56:20 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/06 10:06:46 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,12 @@ char	*ft_allocate_dest(char *str, char *status, char *dest,
 char	*replace_interrogation_end(char *str, char *status,
 		char *var_name, char *dest)
 {
-	free(status);
-	free(str);
+	if (status)
+		free(status);
+	if (str)
+		free(str);
+	//WARNING
+	//(void)var_name;
 	if (var_name)
 		free(var_name);
 	return (dest);

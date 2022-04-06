@@ -42,6 +42,7 @@ SRC =	srcs/main.c \
 		srcs/exec/exec_one.c \
 		srcs/exec/exec_2.c \
 		srcs/exec/exec_cmd.c \
+		srcs/expand_new/dollars_6.c \
 		srcs/expand_new/dollars_5.c \
 		srcs/expand_new/dollars_4.c \
 		srcs/expand_new/dollars_3.c \
