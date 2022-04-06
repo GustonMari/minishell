@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:49:23 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/05 18:30:12 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 14:34:17 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*expand_node_single_bis(char *expanded,
 		block = expand_node_single_dollar(str, clean, i, expanded);
 		if (str[*i + 1] != '\0' && is_expand_block_node(block) == TRUE
 			&& clean->not_expand == 0 && !ft_is_space(str[*i + 1]))
-			block = expand_single_dollar(clean->env, block, clean);
+			block = expand_single_dollar_diff(clean->env, block, clean);
 		clean->not_expand = 0;
 		*i += find_next_single_block_merde(&str[*i]);
 	}
