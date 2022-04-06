@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_bis.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:13:13 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 14:17:48 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/06 16:58:18 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	fill_heredoc_file_bis(char **stop, char *line, int *i)
 			free(line);
 			return (1);
 		}
-		i++;
+		(*i)++;
 	}
 	return (0);
 }

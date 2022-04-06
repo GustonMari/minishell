@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/06 16:09:59 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 16:25:20 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,7 +293,6 @@ int			wait_pipe(void);
 void		exit_pipe_process(int sig);
 
 /* 
------------------- HEREDOC ------------------
 */
 
 int			priorities_d_chv_l(t_command *all_cmd);
