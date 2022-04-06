@@ -3,33 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   remix_lexer_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 13:06:26 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 13:19:45 by ndormoy          ###   ########.fr       */
+/*   Created: 2022/04/06 15:48:09 by gmary             #+#    #+#             */
+/*   Updated: 2022/04/06 15:48:43 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
 
 /*
-	check la taille si lon commence par un < jusqua a la
-	fin de la liste ou au prochain op
-*/
-
-int	remix_size_three(t_token *lst)
-{
-	if (lst->next)
-		lst = lst->next;
-	if (token_is_redir(lst) && count_word_btw_two_op(lst) == 1)
-		return (1);
-	else
-		return (0);
-}
-
-/*
-fonction qui permet de check si il y a plus dun mots
-apres un CHV_L et avant le prochain op
+fonction qui permet de check si il y a
+plus dun mots apres un CHV_L et avant le prochain op
 ex:
 < ok wc -l < yes => ici on a trois WORD
 */
@@ -57,10 +42,14 @@ int	count_word_btw_two_op(t_token *all)
 
 void	mv_word_left(t_token *all)
 {
+
 	t_token	*tmp;
 	t_token	*forward;
 	t_token	*word;
 
+	tmp = NULL;
+	forward = NULL;
+	word = NULL;
 	tmp = all;
 	forward = tmp->next->next;
 	word = tmp->next;
@@ -81,8 +70,25 @@ void	mv_word_left(t_token *all)
 	}
 }
 
-void	mv_chv_l_bis(t_token *tmp, t_token *word)
+/*
+	deplace chv_l avant le mot
+*/
+
+void	mv_chv_l(t_token *all)
 {
+
+	t_token	*tmp;
+	t_token	*forward;
+	t_token	*word;
+
+	tmp = NULL;
+	forward = NULL;
+	word = NULL;
+	tmp = all;
+	forward = tmp->next->next;
+	word = tmp->next;
+	tmp->next = forward;
+	tmp = tmp->next;
 	while (tmp)
 	{
 		if (tmp->next)
@@ -100,22 +106,4 @@ void	mv_chv_l_bis(t_token *tmp, t_token *word)
 		}
 		tmp = tmp->next;
 	}
-}
-
-/*
-	deplace chv_l avant le mot
-*/
-
-void	mv_chv_l(t_token *all)
-{
-	t_token	*tmp;
-	t_token	*forward;
-	t_token	*word;
-
-	tmp = all;
-	forward = tmp->next->next;
-	word = tmp->next;
-	tmp->next = forward;
-	tmp = tmp->next;
-	mv_chv_l_bis(tmp, word);
 }

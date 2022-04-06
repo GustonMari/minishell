@@ -1,33 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 13:01:48 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 13:06:12 by ndormoy          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/function.h"
 
-int	create_op_bis(t_to_clean *clean, t_token **begin, int op)
-{
-	if (op == D_CHV_R)
-	{
-		ft_lstadd_back(begin, ft_lstnew(ft_strdup(">>"), D_CHV_R, clean));
-		return (2);
-	}
-	else if (op == D_CHV_L)
-	{
-		ft_lstadd_back(begin, ft_lstnew(ft_strdup("<<"), D_CHV_L, clean));
-		return (2);
-	}
-	return (0);
-}
-
-int	create_op(t_to_clean *clean, t_token **begin, int op)
+int	create_op(t_token **begin, int op, t_to_clean *clean)
 {
 	if (op == PIPE)
 	{
@@ -44,8 +17,16 @@ int	create_op(t_to_clean *clean, t_token **begin, int op)
 		ft_lstadd_back(begin, ft_lstnew(ft_strdup("<"), CHV_L, clean));
 		return (1);
 	}
-	if (create_op_bis(clean, begin, op) == 2)
+	else if (op == D_CHV_R)
+	{
+		ft_lstadd_back(begin, ft_lstnew(ft_strdup(">>"), D_CHV_R, clean));
 		return (2);
+	}
+	else if (op == D_CHV_L)
+	{
+		ft_lstadd_back(begin, ft_lstnew(ft_strdup("<<"), D_CHV_L, clean));
+		return (2);
+	}
 	return (0);
 }
 
@@ -83,6 +64,20 @@ int	create_word(char *arg, t_token **begin, t_to_clean *clean)
 	return (i);
 }
 
+/* int	is_empty(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_is_space(str[i]) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+} */
+
 t_token	*lexer(t_to_clean *clean, char *arg)
 {
 	t_token	*begin;
@@ -101,7 +96,7 @@ t_token	*lexer(t_to_clean *clean, char *arg)
 	{
 		op = is_operator(&arg[i]);
 		if (op)
-			i += create_op(clean, &begin, op);
+			i += create_op(&begin, op, clean);
 		else if (!op && (!ft_is_space(arg[i])))
 			i += create_word(&arg[i], &begin, clean);
 		else if (ft_is_space(arg[i]))
@@ -110,3 +105,4 @@ t_token	*lexer(t_to_clean *clean, char *arg)
 	free(arg);
 	return (begin);
 }
+

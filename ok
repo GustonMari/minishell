@@ -1,0 +1,8 @@
+a.out.dSYM
+Makefile
+minishell
+objs
+ok
+srcs
+valgrind-out.txt
+valgrind_readline_leaks_ignore.txt
