@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:04:23 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/06 13:31:07 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 14:08:29 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,7 @@ char	*del_dollar_2(char *str, char *var_name, char *ret, int len)
 	}
 	ret[j] = '\0';
 	free(str);
-	//WARNINGG
-	//PB FREE ICI
-	if (var_name)
-	{
-		memset(var_name, 0, sizeof(char));
-		free(var_name);
-		var_name = NULL;
-	}
+	del_dollar_2_quin(var_name);
 	return (ret);
 }
 

@@ -6,22 +6,11 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:26:09 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/06 10:42:50 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 14:03:11 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
-
-int	manage_check_cmd_list(t_token *tmp, t_to_clean *clean)
-{
-	if (check_cmd_list(tmp) < 0)
-	{
-		ft_lstclear(&tmp, free);
-		free(clean);
-		return (FALSE);
-	}
-	return (TRUE);
-}
 
 int	manage_heredoc_main(t_command *cmd_all,
 	t_to_clean *clean, t_token *expanded)
@@ -56,6 +45,12 @@ void	manage_line_bis(t_token **expanded,
 	clean->command_begin = *cmd_all;
 }
 
+char	**manage_line_not_tmp(char **env, t_to_clean *clean)
+{
+	free(clean);
+	return (env);
+}
+
 char	**manage_line(char **env, char *line)
 {
 	t_token		*tmp;
@@ -72,11 +67,7 @@ char	**manage_line(char **env, char *line)
 	line = expand_node_single(clean, env, line);
 	tmp = lexer(clean, line);
 	if (!tmp)
-	{
-		//WARNINGG
-		free(clean);
-		return (env);
-	}
+		return (manage_line_not_tmp(env, clean));
 	remix_manager(&tmp);
 	if (manage_check_cmd_list(tmp, clean) == FALSE)
 		return (env);

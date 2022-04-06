@@ -6,11 +6,20 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 09:32:39 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/06 09:54:02 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 14:08:44 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
+
+void	del_dollar_2_quin(char *var_name)
+{
+	if (var_name)
+	{
+		free(var_name);
+		var_name = NULL;
+	}
+}
 
 int	ft_isalnum_interogation(int c)
 {

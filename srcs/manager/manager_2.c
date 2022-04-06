@@ -6,11 +6,22 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:57:30 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/05 17:14:32 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 14:03:07 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
+
+int	manage_check_cmd_list(t_token *tmp, t_to_clean *clean)
+{
+	if (check_cmd_list(tmp) < 0)
+	{
+		ft_lstclear(&tmp, free);
+		free(clean);
+		return (FALSE);
+	}
+	return (TRUE);
+}
 
 int	manage_check_quote(char *line, t_to_clean *clean)
 {
