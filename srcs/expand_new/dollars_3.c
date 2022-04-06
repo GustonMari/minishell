@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:04:17 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/06 11:58:55 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 13:40:05 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,21 @@ char	*replace_dollar(char *str, char *var_name, int pos, t_to_clean *clean)
 	if (!ret)
 	{
 		free(str);
-		//  if (var_name)
-		// 	free(var_name);
-		//  //WARNINGG varname = NULL
-		//  var_name = NULL;
+		 if (var_name)
+			free(var_name);
+		 //WARNINGG varname = NULL
+		 var_name = NULL;
 		return (ft_clean_error_malloc(clean));
 	}
+	//WARNINGG varname = NULL
 	//  if (var_name)
 	// 	free(var_name);
-	//WARNINGG varname = NULL
-	var_name = NULL;
+	// var_name = NULL;
 	if (ft_strlen(str) == 0)
 	{
+		//WARNINGG varname = NULL
+		//  if (var_name)
+		// 	free(var_name);
 		return (replace_dollar_3(str, new_var, ret));
 	}
 	return (replace_dollar_2(str, new_var, ret, pos));
@@ -58,9 +61,9 @@ char	*expand_single_dollar(char **env, char *str, t_to_clean *clean)
 	{
 		str = del_dollar(str, var_name, ft_strlen(var_name), clean);
 		//WARNINGG
-		// if (var_name)
-		//  	free(var_name);
-		//  var_name = NULL;
+		if (var_name)
+		 	free(var_name);
+		 var_name = NULL;
 		return (str);
 	}
 	if (str[i] == '$' && str[i + 1] == '?')
@@ -72,10 +75,10 @@ char	*expand_single_dollar(char **env, char *str, t_to_clean *clean)
 		else
 		{
 			str = del_dollar(str, var_name, ft_strlen(var_name), clean);
-			//WARNINGG
-			//  if (var_name)
-			//  	free(var_name);
-			//  var_name = NULL;
+			//WARNINGG DEL
+			// if (var_name)
+			// 	free(var_name);
+			// var_name = NULL;
 		}
 			
 	}

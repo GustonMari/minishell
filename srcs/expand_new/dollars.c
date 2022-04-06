@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:04:23 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/06 11:59:30 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 13:31:07 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,12 @@ char	*del_dollar_2(char *str, char *var_name, char *ret, int len)
 	free(str);
 	//WARNINGG
 	//PB FREE ICI
-	// if (var_name)
-	// {
-	// 	free(var_name);
-	// 	var_name = NULL;
-	// }
+	if (var_name)
+	{
+		memset(var_name, 0, sizeof(char));
+		free(var_name);
+		var_name = NULL;
+	}
 	return (ret);
 }
 
@@ -106,11 +107,11 @@ char	*del_dollar(char *str, char *var_name, int len, t_to_clean *clean)
 	{
 		if (str)
 			free(str);
-		// if (var_name)
-		// {
-		// 	free(var_name);
-		// 	var_name = NULL;
-		// }
+		if (var_name)
+		{
+			free(var_name);
+			var_name = NULL;
+		}
 		return (ft_clean_error_malloc(clean));
 	}
 	return (del_dollar_2(str, var_name, ret, len));
