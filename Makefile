@@ -65,6 +65,7 @@ SRC =	srcs/main.c \
 		srcs/heredoc/heredoc_bis_2.c \
 		srcs/heredoc/heredoc_bis.c \
 		srcs/lexer/lexer.c \
+		srcs/lexer/remix_lexer_3.c \
 		srcs/lexer/remix_lexer_2.c \
 		srcs/lexer/remix_lexer.c \
 		srcs/manager/dispatch_cmd.c \

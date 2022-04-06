@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/06 14:44:56 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 16:09:59 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -440,5 +440,7 @@ char		*replace_interrogation_diff(char *str, int pos, t_to_clean *clean,
 				char *var_name);
 char		*replace_interrogation_end_diff(char *str, char *status,
 				char *var_name, char *dest);
-
+void		remix_manager(t_token **all);
+int			ft_need_remix(t_token **all);
+void		remix_lexer(t_token **all);
 #endif

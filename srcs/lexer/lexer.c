@@ -1,4 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/06 16:02:48 by gmary             #+#    #+#             */
+/*   Updated: 2022/04/06 16:06:11 by gmary            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
+
+int	create_op_bis(t_token **begin, int op, t_to_clean *clean)
+{
+	if (op == D_CHV_R)
+	{
+		ft_lstadd_back(begin, ft_lstnew(ft_strdup(">>"), D_CHV_R, clean));
+		return (2);
+	}
+	else if (op == D_CHV_L)
+	{
+		ft_lstadd_back(begin, ft_lstnew(ft_strdup("<<"), D_CHV_L, clean));
+		return (2);
+	}
+	return (0);
+}
 
 int	create_op(t_token **begin, int op, t_to_clean *clean)
 {
@@ -17,17 +44,8 @@ int	create_op(t_token **begin, int op, t_to_clean *clean)
 		ft_lstadd_back(begin, ft_lstnew(ft_strdup("<"), CHV_L, clean));
 		return (1);
 	}
-	else if (op == D_CHV_R)
-	{
-		ft_lstadd_back(begin, ft_lstnew(ft_strdup(">>"), D_CHV_R, clean));
-		return (2);
-	}
-	else if (op == D_CHV_L)
-	{
-		ft_lstadd_back(begin, ft_lstnew(ft_strdup("<<"), D_CHV_L, clean));
-		return (2);
-	}
-	return (0);
+	else
+		return (create_op_bis(begin, op, clean));
 }
 
 char	*cpy_word(char *arg, int end)
@@ -64,20 +82,6 @@ int	create_word(char *arg, t_token **begin, t_to_clean *clean)
 	return (i);
 }
 
-/* int	is_empty(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_is_space(str[i]) == 0)
-			return (1);
-		i++;
-	}
-	return (0);
-} */
-
 t_token	*lexer(t_to_clean *clean, char *arg)
 {
 	t_token	*begin;
@@ -105,4 +109,3 @@ t_token	*lexer(t_to_clean *clean, char *arg)
 	free(arg);
 	return (begin);
 }
-
