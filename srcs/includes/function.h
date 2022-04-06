@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/06 09:33:41 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 11:45:32 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -431,5 +431,6 @@ void		check_if_exit(t_to_clean *clean, t_command *all, t_token *expanded);
 int			is_expand_block_node(char *block);
 int			ft_isalnum_interogation(int c);
 void		dont_expand_special_char(char *str, int *i);
+void		ft_memdel(void **ptr);
 
 #endif

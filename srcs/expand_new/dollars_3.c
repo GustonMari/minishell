@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollars_3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:04:17 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 16:56:28 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/06 11:58:55 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,16 @@ char	*replace_dollar(char *str, char *var_name, int pos, t_to_clean *clean)
 	if (!ret)
 	{
 		free(str);
-		free(var_name);
+		//  if (var_name)
+		// 	free(var_name);
+		//  //WARNINGG varname = NULL
+		//  var_name = NULL;
 		return (ft_clean_error_malloc(clean));
 	}
-	free(var_name);
+	//  if (var_name)
+	// 	free(var_name);
+	//WARNINGG varname = NULL
+	var_name = NULL;
 	if (ft_strlen(str) == 0)
 	{
 		return (replace_dollar_3(str, new_var, ret));
@@ -51,6 +57,10 @@ char	*expand_single_dollar(char **env, char *str, t_to_clean *clean)
 	if (ft_strlen(str) == 1)
 	{
 		str = del_dollar(str, var_name, ft_strlen(var_name), clean);
+		//WARNINGG
+		// if (var_name)
+		//  	free(var_name);
+		//  var_name = NULL;
 		return (str);
 	}
 	if (str[i] == '$' && str[i + 1] == '?')
@@ -60,7 +70,14 @@ char	*expand_single_dollar(char **env, char *str, t_to_clean *clean)
 		if (ft_find_env_line(env, var_name) && str[i + 1] != '$')
 			str = replace_dollar(str, var_name, i, clean);
 		else
+		{
 			str = del_dollar(str, var_name, ft_strlen(var_name), clean);
+			//WARNINGG
+			//  if (var_name)
+			//  	free(var_name);
+			//  var_name = NULL;
+		}
+			
 	}
 	return (str);
 }

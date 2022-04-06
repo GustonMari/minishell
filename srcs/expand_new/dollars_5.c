@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 09:44:12 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/06 09:34:13 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 11:59:06 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ char	*replace_dollar_2(char *str, char *new_var, char *ret, int pos)
 	return (ret);
 }
 
+void	ft_memdel(void **ptr)
+{
+	if (ptr != NULL && *ptr != NULL)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+}
+
 char	*expand_dollar(char **env, char *str, t_to_clean *clean)
 {
 	int		i;
@@ -68,6 +77,8 @@ char	*expand_dollar(char **env, char *str, t_to_clean *clean)
 				if (!var_name)
 					return (NULL);
 				str = expand_dollar_six(str, &i, var_name, clean);
+				//MAXIWARNING
+				free(var_name);
 			}
 		}
 		expand_dollar_quin(str, &i);

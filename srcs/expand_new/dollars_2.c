@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:04:36 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/06 10:06:46 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/06 12:00:04 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ char	*ft_allocate_itoa(char *status, char *str, char *var_name,
 	status = ft_itoa(g_status);
 	if (!status)
 	{
-		free(var_name);
+		if (var_name)
+			free(var_name);
+		//WARNINGG varname = NULL
+		var_name = NULL;
 		free(str);
 		return (ft_clean_error_malloc(clean));
 	}
@@ -61,9 +64,9 @@ char	*replace_interrogation_end(char *str, char *status,
 		free(status);
 	if (str)
 		free(str);
-	//WARNING
-	//(void)var_name;
-	if (var_name)
-		free(var_name);
+	//WARNINGG
+	(void)var_name;
+	//if (var_name)
+	//	free(var_name);
 	return (dest);
 }
