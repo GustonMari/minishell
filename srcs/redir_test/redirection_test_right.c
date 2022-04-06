@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_test_right.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 09:39:43 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 13:55:40 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/06 17:19:57 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	manage_chv_r(t_command **all_cmd)
 	fd = manage_open_r(all_cmd, file_name);
 	if (fd == -1)
 	{
+		fprintf(stderr, " 1 hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\n");
 		redirection_error(file_name);
 		return (-2);
 	}
