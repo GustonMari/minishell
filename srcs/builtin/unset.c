@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:46:12 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/31 14:53:15 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/07 07:42:26 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	ft_check_unset(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if ((!ft_isalnum(str[i])))
+		if ((!ft_isalnum_export(str[i])) || (str[0] >= '0' && str[0] <= '9'))
 		{
 			ft_putstr_fd(BRED"minishell: unset: `", 2);
 			ft_putstr_fd(str, 2);

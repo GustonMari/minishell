@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 14:58:37 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/31 14:58:38 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/07 07:37:24 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,42 @@ int	is_var_in_env_export(char **env, char *var, size_t n)
 /*Check dans str si avant le = il n'y a que des caracteres
 alphanum, sinon on retourne 1 en affichant un message d'erreur*/
 
+int	ft_isalnum_export(int c)
+{
+	if ((c < 48) || (c > 57 && c < 65) || ((c > 90) && (c < 95))
+		|| ((c > 95) && (c < 97)) || (c > 122))
+		return (0);
+	else
+		return (1);
+}
+
 int	ft_check_export(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if ((!ft_isalnum_export(str[i])) || (str[0] >= '0' && str[0] <= '9'))
+		{
+			ft_putstr_fd(BRED"minishell: export: `", 2);
+			ft_putstr_fd(str, 2);
+			ft_putstr_fd("\': not a valid identifier\n"CRESET, 2);
+			g_status = 1;
+			return (1);
+		}
+		i++;
+		if (str[i] && str[i] == '=')
+			break ;
+		if (str[i] == '+' && str[i + 1] && str[i + 1] == '=')
+			i++;
+		if (str[i] && str[i] == '=')
+			break ;
+	}
+	return (0);
+}
+
+/* int	ft_check_export(char *str)
 {
 	int	i;
 
@@ -108,3 +143,4 @@ int	ft_check_export(char *str)
 	}
 	return (0);
 }
+ */
