@@ -13,8 +13,8 @@
 #include <stdlib.h>
 //#include "../includes/function.h"
 
-/* int	main(void)
+int	main(void)
 {
 	exit(255);
 	return (0);
-} */
+}

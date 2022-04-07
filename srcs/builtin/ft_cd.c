@@ -49,7 +49,7 @@ int	ft_home(char **env)
 	}
 	else
 	{
-		if(chdir(getenv("HOME=")) == -1)
+		if(chdir(getenv("HOME")) == -1)
 			chdir("mnt/nfs/home/"); // POUR LINUX A CHECKER
 	}
 	old_pwd = find_val_in_tab(env, "PWD");

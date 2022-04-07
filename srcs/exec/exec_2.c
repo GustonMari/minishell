@@ -21,7 +21,7 @@ char	*find_absolute_path_cmd(char *cmd, char *tmp)
 	char	**all_cmd_path;
 
 	(void)tmp;
-	all_cmd_path = ft_split(getenv("PATH="), ':');
+	all_cmd_path = ft_split(getenv("PATH"), ':');
 	if (!all_cmd_path)
 		return (NULL);
 	i = -1;
