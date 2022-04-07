@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/07 07:39:58 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/07 14:59:24 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -443,5 +443,6 @@ void		remix_manager(t_token **all);
 int			ft_need_remix(t_token **all);
 void		remix_lexer(t_token **all);
 int			ft_isalnum_export(int c);
+void		remix_3(t_command **all_cmd);
 
 #endif
