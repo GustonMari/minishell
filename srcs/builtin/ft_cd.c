@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 14:02:11 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/05 10:21:46 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/07 07:21:48 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int	ft_home(char **env)
 		chdir(path);
 	}
 	else
-		chdir(getenv("HOME="));
+	{
+		if(chdir(getenv("HOME=")) == -1)
+			chdir("mnt/nfs/home/"); // POUR LINUX A CHECKER
+	}
 	old_pwd = find_val_in_tab(env, "PWD");
 	pwd_return = ft_pwd_return();
 	ft_change_env_val(env, "PWD", pwd_return);
@@ -79,8 +82,16 @@ int	ft_cd(char **full_cmd, char **env)
 		return (-1);
 	old_pwd = find_val_in_tab(env, "PWD");
 	if (chdir(full_cmd[1]) == -1)
+	{
 		ft_putstr_fd("Error chdir not working", 2);
+		//chdir("mnt/nfs/home/"); // POUR LINUX A CHECKER
+	}
 	pwd_return = ft_pwd_return();
+	if (pwd_return == NULL)
+	{
+		free(old_pwd);
+		return (0);
+	}
 	ft_change_env_val(env, "PWD", pwd_return);
 	if (pwd_return)
 		free(pwd_return);
