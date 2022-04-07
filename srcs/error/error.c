@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:09:42 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/04 18:52:52 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/07 18:26:42 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,22 @@ void	exit_error(char *filename)
 
 int	redirection_error(char *file_name)
 {
+	//ajouter bail
+	if (errno != 0)
+	{
+		ft_putstr_fd(BRED"minishell: ", 2);
+		ft_putstr_fd(file_name, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n"CRESET, 2);
+		free(file_name);
+		g_status = errno;
+	}
+	return (1);
+}
+
+/* int	redirection_error(char *file_name)
+{
 	ft_putstr_fd(BRED"minishell: ", 2);
 	ft_putstr_fd(file_name, 2);
 	ft_putstr_fd(": ", 2);
@@ -29,7 +45,7 @@ int	redirection_error(char *file_name)
 	free(file_name);
 	g_status = errno;
 	return (1);
-}
+} */
 
 void	ft_print_error(int minishell, char *cmd_name, char *error, char *token)
 {

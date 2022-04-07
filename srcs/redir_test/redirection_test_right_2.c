@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:55:18 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/07 15:45:28 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/07 17:31:22 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,23 @@ int	manage_open_r(t_command **all_cmd, char *last_redir)
 	if (fd != -1 || fd == -2)
 		return (fd);
 	tmp = *all_cmd;
-	tmp = tmp->next;
+	//WARNING
+	if (tmp && tmp->next && tmp->type == WORD)
+		tmp = tmp->next;
 	return (manage_open_r_bis(tmp, last_redir, fd));
 }
+
+/* 
+int	manage_open_r(t_command **all_cmd, char *last_redir)
+{
+	t_command	*tmp;
+	int			fd;
+
+	fd = -1;
+	fd = manage_single_chv_r(all_cmd, last_redir);
+	if (fd != -1 || fd == -2)
+		return (fd);
+	tmp = *all_cmd;
+	tmp = tmp->next;
+	return (manage_open_r_bis(tmp, last_redir, fd));
+} */

@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:26:18 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/07 15:04:33 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/07 17:16:43 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,4 @@ void	remix_2(t_command **all_cmd)
 		else
 			count_all_between_pipe(&tmp);
 	}
-	//remix_3(all_cmd);
 }
