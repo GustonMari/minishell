@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:23:21 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/03/31 15:25:23 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/07 08:56:17 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*find_absolute_path_cmd(char *cmd, char *tmp)
 	int		i;
 	char	**all_cmd_path;
 
-	all_cmd_path = ft_split(tmp, ':');
+	(void)tmp;
+	all_cmd_path = ft_split(getenv("PATH="), ':');
 	if (!all_cmd_path)
 		return (NULL);
 	i = -1;

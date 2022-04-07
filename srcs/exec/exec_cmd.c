@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:48:11 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/05 17:37:24 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/07 08:52:39 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,6 @@ char	*ft_exec_cmd_bis(char **env
 	}
 	g_status = 0;
 	tmp = find_val_in_tab(env, "PATH");
-	if (!tmp)
-	{
-		ft_print_error(1, all->cmd_to_exec[0], ": command not found", NULL);
-		g_status = 127;
-		ft_clean_exit(clean);
-		if (tmp)
-			free(tmp);
-		exit(127);
-	}
 	return (tmp);
 }
 
