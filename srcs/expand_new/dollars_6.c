@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollars_6.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 09:32:39 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/06 14:08:44 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/08 16:55:45 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	del_dollar_2_quin(char *var_name)
 int	ft_isalnum_interogation(int c)
 {
 	if ((c < 48) || (c > 57 && c < 63) || (c == 64)
-		|| ((c > 90) && (c < 97)) || (c > 122))
+		|| ((c > 90) && (c < 95)) || ((c > 95) && (c < 97)) || (c > 122))
 		return (0);
 	else
 		return (1);

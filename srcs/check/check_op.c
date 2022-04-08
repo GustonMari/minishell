@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:06:24 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/03 13:05:52 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/08 16:41:08 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	check_edge(t_token *all)
 	{
 		ft_putstr_fd(BRED
 			"minishell: you should have something after pipe\n"CRESET, 2);
+		g_status = 1;
 		return (-2);
 	}
 	return (0);

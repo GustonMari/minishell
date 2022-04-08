@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:59:13 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/08 15:02:30 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/08 16:22:43 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,14 +145,8 @@ int	redirection_manager(t_command **all_cmd)
 	value = TRUE;
 	tmp = *all_cmd;
 	tmp2 = *all_cmd;
-	// print_cmd(all_cmd);
-	// fprintf(stderr, "------------------\n");
 	if (is_file_exist(tmp, tmp2) == 0)
 	{
-		// print_cmd(all_cmd);
-		// fprintf(stderr, "------------------\n");
-		//remix_redir(all_cmd);
-		//print_cmd(all_cmd);
 		ret = manage_chv_r(all_cmd);
 		if (ret < 0)
 			value = ret;

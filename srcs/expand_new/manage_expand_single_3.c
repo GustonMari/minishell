@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_expand_single_3.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:49:23 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/06 14:34:17 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/08 17:07:08 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	is_expand_block_node(char *block)
 		i++;
 	while (block[i])
 	{
-		if (ft_isalnum(block[i]) == 0 && block[1] != '?')
+		if (ft_isalnum_export(block[i]) == 0 && block[1] != '?')
 			return (1);
 		i++;
 	}

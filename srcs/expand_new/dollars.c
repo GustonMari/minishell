@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollars.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:04:23 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/06 14:08:29 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/08 17:14:22 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*cut_dollar(char *str, t_to_clean *clean)
 	while (str[i] && !ft_is_space(str[i])
 		&& is_operator(&str[i]) == 0
 		&& str[i] != '$' && str[i] != '\'' && str[i] != '\"'
-		&& ft_isalnum(str[i]))
+		&& ft_isalnum_export(str[i]))
 		i++;
 	var_name = malloc(sizeof(char) * (i));
 	if (!var_name)

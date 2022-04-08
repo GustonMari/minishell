@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/08 14:28:38 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/08 16:27:32 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -447,5 +447,6 @@ void		remix_3(t_command **all_cmd);
 int			is_file_exist(t_command *all_cmd, t_command *head);
 char		*find_file_name_double(t_command *all_cmd);
 void		mv_chv_l_cmd(t_command *all);
+int			wait_pipe_2(int pid);
 
 #endif
