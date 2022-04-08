@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 09:38:07 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/07 16:49:53 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/08 10:00:15 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,22 @@ void	signal_cmd(int sig)
 		g_status = 131;
 	}
 }
+//WARINING:
+/* void	signal_cmd(int sig)
+{
+	if (sig == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		g_status = 130;
+	}
+	if (sig == SIGQUIT)
+	{
+		ft_putstr_fd("Quit (core dumped)\n", 2);
+		g_status = 131;
+	}
+} */
 
 void	signal_manager2(void)
 {

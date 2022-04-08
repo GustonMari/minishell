@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:33:26 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 17:55:31 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/08 10:05:18 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	wait_pipe(void)
 {
 	int		status;
-
+	
 	while (waitpid(-1, &status, 0) != -1)
 	{
 		if (WIFEXITED(status))

@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:48:11 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/07 17:15:27 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/08 10:17:34 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,11 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 		g_status = 0;
 	}
 	signal_manager2();
+	if (ft_strcmp(all->cmd_to_exec[0], "./minishell") == 0)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
 	pid = fork();
 	if (pid == 0)
 	{
@@ -101,3 +106,31 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 	}
 	return (0);
 }
+
+
+/* int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
+{
+	char	*path;
+	char	*tmp;
+	int		pid;
+
+	path = NULL;
+	if (prio_exit(all) == TRUE)
+	{
+		g_status = 0;
+	}
+	signal_manager2();
+	pid = fork();
+	if (pid == 0)
+	{
+		tmp = ft_exec_cmd_bis(env, clean, all, &out);
+		path = ft_exec_cmd_bis_2(clean, all, tmp);
+		ft_exec_cmd_bis_3(clean, all, path);
+		if (execve(path, all->cmd_to_exec, env) < 0)
+			ft_exec_cmd_bis_4(clean, all, path);
+		free(path);
+		return (0);
+	}
+	return (0);
+}
+ */
