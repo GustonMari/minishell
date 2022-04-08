@@ -83,6 +83,7 @@ SRC =	srcs/main.c \
 		srcs/redir_test/redirection_test_left.c \
 		srcs/redir_test/redirection_test_right.c \
 		srcs/redir_test/redirection_test_right_2.c \
+		srcs/redir_test/redir_remix.c \
 		srcs/signals/signals.c \
 		srcs/utils/clear.c \
 		srcs/utils/env_utils.c \

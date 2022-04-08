@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:50:34 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/08 12:06:43 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/08 12:39:08 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int	is_file_exist(t_command *all_cmd, t_command *head)
 
 	ok = 0;
 	file_name = NULL;
+	// if (head->type != CHV_L && head->type != D_CHV_L)
+	// 	return (1);
 	file_name = find_file_name_double(all_cmd);
 	if (!file_name)
 		return (1);

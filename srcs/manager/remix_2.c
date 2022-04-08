@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:26:18 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/07 17:16:43 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/08 15:27:06 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,44 @@ int	check_file_valid_bis(t_command *tmp, t_command *previous)
 		if (access((tmp->cmd_to_exec[0]), W_OK) < 0)
 			return (TRUE);
 	return (FALSE);
+}
+
+int	find_file_name_double_here(t_command *head, t_command *actual)
+{
+	t_command	*tmp;
+
+	tmp = head;
+	while (tmp && tmp->type != PIPE)
+	{
+		if (!ft_strcmp(tmp->cmd_to_exec[0], actual->cmd_to_exec[0])
+			&& tmp->type == WORD
+				&& (count_cmd_list(tmp) != count_cmd_list(actual)))
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
+int	is_file_exist_here(t_command *head, t_command *actual)
+{
+	t_command	*tmp;
+	int			ok;
+
+	ok = 0;
+	tmp = head;
+	if (find_file_name_double_here(head, actual) == 1)
+		return (1);
+	while(tmp && tmp->type != PIPE)
+	{
+		if ((tmp->type == CHV_R || tmp->type == D_CHV_R)&& tmp->next
+			&& ft_strcmp(tmp->next->cmd_to_exec[0], actual->cmd_to_exec[0]) == 0)
+			ok = 1;
+		if (tmp->type == CHV_L && tmp->next && ok == 1
+			&& ft_strcmp(tmp->next->cmd_to_exec[0], actual->cmd_to_exec[0]) == 0)
+				return (0);
+		tmp = tmp->next;
+	}
+	return (1);
 }
 
 t_command	*check_file_valid(t_command **all_cmd)
@@ -42,7 +80,8 @@ t_command	*check_file_valid(t_command **all_cmd)
 	{
 		if (tmp->type == WORD)
 		{
-			if (check_file_valid_bis(tmp, previous) == TRUE)
+			if (check_file_valid_bis(tmp, previous) == TRUE
+				&& is_file_exist_here(*all_cmd, tmp) == 1)
 				return (tmp);
 		}
 		else
@@ -54,7 +93,8 @@ t_command	*check_file_valid(t_command **all_cmd)
 
 /*
 	Permet de upprimer un noeud de la chaine,
-	on enverra TOUJOURS le noeud precedent afin de pouvoir raccorde avec la suite
+	on enverra TOUJOURS le noeud precedent afin
+	de pouvoir raccorde avec la suite
 */
 
 void	suppress_one(t_command **all_cmd)
