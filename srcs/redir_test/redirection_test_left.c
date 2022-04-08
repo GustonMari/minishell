@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:50:34 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/08 10:36:42 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/08 12:06:43 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ int	is_file_exist(t_command *all_cmd, t_command *head)
 
 	ok = 0;
 	file_name = NULL;
-	if (head->type != CHV_L && head->type != D_CHV_L)
-		return (1);
 	file_name = find_file_name_double(all_cmd);
 	if (!file_name)
 		return (1);
@@ -117,6 +115,37 @@ int	is_file_exist(t_command *all_cmd, t_command *head)
 	return (1);
 }
 
+/* int	is_file_exist(t_command *all_cmd, t_command *head)
+{
+	t_command	*tmp;
+	char		*file_name;
+	int			ok;
+
+	ok = 0;
+	file_name = NULL;
+	if (head->type != CHV_L && head->type != D_CHV_L)
+		return (1);
+	file_name = find_file_name_double(all_cmd);
+	if (!file_name)
+		return (1);
+	tmp = head;
+	while(tmp && tmp->type != PIPE)
+	{
+		if ((tmp->type == CHV_R || tmp->type == D_CHV_R)&& tmp->next
+			&& ft_strcmp(tmp->next->cmd_to_exec[0], file_name) == 0)
+			ok = 1;
+		if (tmp->type == CHV_L && tmp->next && ok == 1
+			&& ft_strcmp(tmp->next->cmd_to_exec[0], file_name) == 0)
+			{
+				free(file_name);
+				return (0);
+			}
+		tmp = tmp->next;
+	}
+	free(file_name);
+	return (1);
+} */
+
 int	manage_single_chv_l(t_command *all_cmd)
 {
 	if (all_cmd->type == CHV_L)
@@ -134,6 +163,34 @@ int	manage_single_chv_l(t_command *all_cmd)
 }
 
 int	manage_chv_l(t_command *all_cmd)
+{
+	char		*file_name;
+	int			fd;
+
+	file_name = NULL;
+	if (count_redir_l(all_cmd) == 0)
+		return (1);
+	file_name = find_last_redir_l(all_cmd);
+	if (!file_name)
+		return (-1);
+	if (manage_single_chv_l(all_cmd) < 0)
+		return (-2);
+	fd = open(file_name, O_RDONLY);
+	if (fd == -1)
+	{
+		fd = open(".tmp", O_WRONLY | O_CREAT | O_TRUNC, 00777);
+		dup2(fd, 1);
+		close(fd);
+		redirection_error(file_name);
+		return (-2);
+	}
+	dup2(fd, 0);
+	close(fd);
+	free(file_name);
+	return (0);
+}
+
+/* int	manage_chv_l(t_command *all_cmd)
 {
 	t_command	*head;
 	char		*file_name;
@@ -162,4 +219,4 @@ int	manage_chv_l(t_command *all_cmd)
 	close(fd);
 	free(file_name);
 	return (0);
-}
+} */

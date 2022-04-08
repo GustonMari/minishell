@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:59:13 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/07 17:21:44 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/08 12:15:15 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,32 @@ int	redirection_clean(t_command *all_cmd)
 
 int	redirection_manager(t_command **all_cmd)
 {
+	t_command	*tmp;
+	t_command	*tmp2;
+	int	value;
+	int	ret;
+
+	ret = 0;
+	value = TRUE;
+	tmp = *all_cmd;
+	tmp2 = *all_cmd;
+	if (is_file_exist(tmp, tmp2) == 0)
+	{
+		ret = manage_chv_r(all_cmd);
+		if (ret < 0)
+			value = ret;
+	}
+	ret = manage_chv_l(*all_cmd);
+	if (ret < 0)
+		value = ret;
+	ret = manage_chv_r(all_cmd);
+	if (ret < 0)
+		value = ret;
+	return (value);
+}
+
+/* int	redirection_manager(t_command **all_cmd)
+{
 	int	value;
 	int	ret;
 
@@ -115,4 +141,4 @@ int	redirection_manager(t_command **all_cmd)
 	if (ret < 0)
 		value = ret;
 	return (value);
-}
+} */
