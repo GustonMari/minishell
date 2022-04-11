@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_expand_5.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:59:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/06 11:18:55 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/11 18:16:30 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,29 @@ char	*expand_node_backslash(char *str, char *block, t_to_clean *clean,
 	return (block);
 }
 
+int	find_next_block_modif(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[0] && (str[0] == '$' || str[0] == BACK_SLASH))
+		i++;
+	while (str[i])
+	{
+		if (str[i] == QUOTE || str[i] == D_QUOTE
+			|| str[i] == '$' || str[i] == BACK_SLASH)
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
 char	*expand_node_else(char *str, char *block, t_to_clean *clean, int *i)
 {
-	block = cpy_block(&str[*i], find_next_block(&str[*i]), clean);
-	(*i) += find_next_block(&str[*i]);
+	//WARNINGBIG
+	//find_next_block_modif etait find_next_block
+	block = cpy_block(&str[*i], find_next_block_modif(&str[*i]), clean);
+	(*i) += find_next_block_modif(&str[*i]);
 	return (block);
 }
 

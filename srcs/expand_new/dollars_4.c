@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 09:15:34 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/11 17:35:48 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 18:26:45 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ void	expand_dollar_quin(char *str, int *i)
 {
 	if (str[*i] != BACK_SLASH
 		|| (str[*i] == BACK_SLASH && str[(*i) + 1] && str[(*i) + 1] != '$'))
+		(*i)++;
+	//WARNINGBIG
+	if (str[*i] == BACK_SLASH && str[*i + 1] == '\0')
 		(*i)++;
 }
 
