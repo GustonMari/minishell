@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:48:11 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/11 11:50:48 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 14:27:08 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 		free(path);
 		return (0);
 	}
-	wait_last(pid);
+	wait_last(pid, all);
 	return (0);
 }
 

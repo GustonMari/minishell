@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/11 11:48:49 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 14:01:08 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -450,7 +450,7 @@ void		mv_chv_l_cmd(t_command *all);
 int			wait_pipe_2(int pid);
 int			count_redir_l(t_command *all_cmd);
 int			check_file_valid_bis(t_command *tmp, t_command *previous);
-void		wait_last(int pid);
+void		wait_last(int pid, t_command *all);
 void		signal_minishell(t_command *all);
 
 #endif

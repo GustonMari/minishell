@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:33:26 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/11 11:44:53 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 14:51:13 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,36 @@ int	wait_pipe(void)
 	return (0);
 }
 
-void	wait_last(int pid)
+int	exit_last(t_command *all)
+{	
+	t_command	*tmp;
+	t_command	*last;
+
+	tmp = all;
+	while (tmp)
+	{	
+		last = tmp;
+		tmp = tmp->next;
+	}
+	if (ft_strcmp("exit", last->cmd_to_exec[0]) == 0)
+	{
+		if ((ft_count_line(last->cmd_to_exec) >=2))
+			g_status = 1;
+		if (last->cmd_to_exec[1] && is_str_digit(last->cmd_to_exec[1]))
+			g_status = 2;
+		return (FALSE);
+	}
+	return (TRUE);
+}
+
+void	wait_last(int pid, t_command *all)
 {
 	int		status;
 
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status) > 0)
-		g_status = (WEXITSTATUS(status));
+	if (exit_last(all) == TRUE)
+	{
+		waitpid(pid, &status, 0);
+		if (WIFEXITED(status) > 0)
+			g_status = (WEXITSTATUS(status));
+	}
 }

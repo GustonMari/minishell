@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:48:33 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/05 17:16:00 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/11 14:43:58 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ void	ft_exit(t_command *all, t_to_clean *clean)
 			exit_error(all->cmd_to_exec[1]);
 			if (prio_exit(clean->command_begin) == FALSE
 				&& ft_lstsize_cmd_pipe(clean->command_begin) == 0)
-				g_status = 2;
+					g_status = 2;
 			ft_clean_exit(clean);
+			
 			exit(g_status);
 		}
 		exit_overflow(all->cmd_to_exec[1], clean);
