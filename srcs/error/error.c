@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:09:42 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/08 10:46:10 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 11:51:31 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	exit_error(char *filename)
 
 int	redirection_error(char *file_name)
 {
-	//ajouter bail
 	if (errno != 0)
 	{
 		ft_putstr_fd(BRED"minishell: ", 2);

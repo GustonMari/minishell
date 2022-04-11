@@ -73,6 +73,7 @@ SRC =	srcs/main.c \
 		srcs/manager/clean_init.c \
 		srcs/manager/manager_2.c \
 		srcs/manager/remix_2.c \
+		srcs/manager/remix_3.c \
 		srcs/parsing/ft_split_special.c \
 		srcs/parsing/token_to_cmd_2.c \
 		srcs/parsing/token_to_cmd.c \
@@ -81,6 +82,7 @@ SRC =	srcs/main.c \
 		srcs/pipe/wait.c \
 		srcs/redir_test/redirection_manager.c \
 		srcs/redir_test/redirection_test_left.c \
+		srcs/redir_test/redirection_test_left_2.c \
 		srcs/redir_test/redirection_test_right.c \
 		srcs/redir_test/redirection_test_right_2.c \
 		srcs/redir_test/redir_remix.c \

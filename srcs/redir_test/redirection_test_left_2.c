@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   remix_3.c                                          :+:      :+:    :+:   */
+/*   redirection_test_left_2.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/11 11:40:21 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/11 11:41:28 by ndormoy          ###   ########.fr       */
+/*   Created: 2022/04/11 11:21:57 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/04/11 11:25:25 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
 
-int	check_file_valid_bis(t_command *tmp, t_command *previous)
+/* Count le nombre de redirections gauche qu'il y a entre deux pipe*/
+
+int	count_redir_l(t_command *all_cmd)
 {
-	if ((access((tmp->cmd_to_exec[0]), F_OK | R_OK) < 0
-			&& previous->type == CHV_L))
-		return (TRUE);
-	else if (access((tmp->cmd_to_exec[0]), F_OK) >= 0
-		&& (previous->type == CHV_R
-			|| previous->type == D_CHV_R))
-		if (access((tmp->cmd_to_exec[0]), W_OK) < 0)
-			return (TRUE);
-	return (FALSE);
+	t_command	*tmp;
+	int			nb_redir;
+
+	nb_redir = 0;
+	tmp = all_cmd;
+	while (tmp && tmp->type != PIPE)
+	{
+		if (tmp->type == CHV_L)
+			nb_redir++;
+		tmp = tmp->next;
+	}
+	return (nb_redir);
 }

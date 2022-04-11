@@ -6,24 +6,11 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:26:18 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/08 15:27:06 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 11:41:14 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
-
-int	check_file_valid_bis(t_command *tmp, t_command *previous)
-{
-	if ((access((tmp->cmd_to_exec[0]), F_OK | R_OK) < 0
-			&& previous->type == CHV_L))
-		return (TRUE);
-	else if (access((tmp->cmd_to_exec[0]), F_OK) >= 0
-		&& (previous->type == CHV_R
-			|| previous->type == D_CHV_R))
-		if (access((tmp->cmd_to_exec[0]), W_OK) < 0)
-			return (TRUE);
-	return (FALSE);
-}
 
 int	find_file_name_double_here(t_command *head, t_command *actual)
 {
@@ -34,7 +21,7 @@ int	find_file_name_double_here(t_command *head, t_command *actual)
 	{
 		if (!ft_strcmp(tmp->cmd_to_exec[0], actual->cmd_to_exec[0])
 			&& tmp->type == WORD
-				&& (count_cmd_list(tmp) != count_cmd_list(actual)))
+			&& (count_cmd_list(tmp) != count_cmd_list(actual)))
 			return (0);
 		tmp = tmp->next;
 	}
@@ -50,14 +37,16 @@ int	is_file_exist_here(t_command *head, t_command *actual)
 	tmp = head;
 	if (find_file_name_double_here(head, actual) == 1)
 		return (1);
-	while(tmp && tmp->type != PIPE)
+	while (tmp && tmp->type != PIPE)
 	{
-		if ((tmp->type == CHV_R || tmp->type == D_CHV_R)&& tmp->next
-			&& ft_strcmp(tmp->next->cmd_to_exec[0], actual->cmd_to_exec[0]) == 0)
+		if ((tmp->type == CHV_R || tmp->type == D_CHV_R) && tmp->next
+			&& ft_strcmp(tmp->next->cmd_to_exec[0],
+				actual->cmd_to_exec[0]) == 0)
 			ok = 1;
 		if (tmp->type == CHV_L && tmp->next && ok == 1
-			&& ft_strcmp(tmp->next->cmd_to_exec[0], actual->cmd_to_exec[0]) == 0)
-				return (0);
+			&& ft_strcmp(tmp->next->cmd_to_exec[0],
+				actual->cmd_to_exec[0]) == 0)
+			return (0);
 		tmp = tmp->next;
 	}
 	return (1);

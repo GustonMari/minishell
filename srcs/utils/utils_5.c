@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:12:22 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/05 16:05:52 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/11 13:21:23 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,20 @@ int	condition_if_exit(t_command *all)
 		tmp = tmp->next;
 	}
 	return (TRUE);
+}
+
+/*Renvoi 0 si on trouve un = dans str*/
+
+int	is_equal_in_line(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (0);
+		i++;
+	}
+	return (1);
 }

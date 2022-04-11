@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 09:38:07 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/08 10:00:15 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 11:48:39 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ void	signal_cmd(int sig)
 	{
 		ft_putstr_fd("Quit (core dumped)\n", 2);
 		g_status = 131;
+	}
+}
+
+void	signal_minishell(t_command *all)
+{
+	if (ft_strcmp(all->cmd_to_exec[0], "./minishell") == 0)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 	}
 }
 //WARINING:

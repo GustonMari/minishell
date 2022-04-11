@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 14:02:11 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/07 07:21:48 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/11 13:20:11 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ int	ft_check_cd(char *str)
 	retour au bercail
 */
 
+void	chdir_secure(void)
+{
+	if (chdir(getenv("HOME")) == -1)
+		chdir("mnt/nfs/home/");
+}
+
 int	ft_home(char **env)
 {
 	char	*path;
@@ -48,10 +54,7 @@ int	ft_home(char **env)
 		chdir(path);
 	}
 	else
-	{
-		if(chdir(getenv("HOME")) == -1)
-			chdir("mnt/nfs/home/"); // POUR LINUX A CHECKER
-	}
+		chdir_secure();
 	old_pwd = find_val_in_tab(env, "PWD");
 	pwd_return = ft_pwd_return();
 	ft_change_env_val(env, "PWD", pwd_return);
@@ -61,6 +64,22 @@ int	ft_home(char **env)
 	free(old_pwd);
 	free(path);
 	return (0);
+}
+
+int	ft_cd_bis(char **env, char *pwd_return, char *old_pwd)
+{
+	if (pwd_return == NULL)
+	{
+		free(old_pwd);
+		return (0);
+	}
+	ft_change_env_val(env, "PWD", pwd_return);
+	if (pwd_return)
+		free(pwd_return);
+	if (old_pwd)
+		ft_change_env_val(env, "OLDPWD", old_pwd);
+	free(old_pwd);
+	return (1);
 }
 
 //MAIN CD FUNCTION
@@ -84,20 +103,11 @@ int	ft_cd(char **full_cmd, char **env)
 	if (chdir(full_cmd[1]) == -1)
 	{
 		ft_putstr_fd("Error chdir not working", 2);
-		//chdir("mnt/nfs/home/"); // POUR LINUX A CHECKER
+		chdir("mnt/nfs/home/");
 	}
 	pwd_return = ft_pwd_return();
-	if (pwd_return == NULL)
-	{
-		free(old_pwd);
+	if (ft_cd_bis(env, pwd_return, old_pwd) == 0)
 		return (0);
-	}
-	ft_change_env_val(env, "PWD", pwd_return);
-	if (pwd_return)
-		free(pwd_return);
-	if (old_pwd)
-		ft_change_env_val(env, "OLDPWD", old_pwd);
-	free(old_pwd);
 	return (0);
 }
 
