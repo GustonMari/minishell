@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:23:21 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/07 08:56:17 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/11 16:37:44 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ char	*find_path_cmd(char *cmd_to_join, char *tmp)
 		return (NULL);
 	all_cmd_path = ft_split(tmp, ':');
 	if (!all_cmd_path)
+	{
+		free(cmd);
 		return (NULL);
+	}
 	i = -1;
 	while (all_cmd_path[++i])
 	{
