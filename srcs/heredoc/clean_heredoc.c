@@ -6,15 +6,14 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:53:13 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/11 11:26:58 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 13:22:42 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-//#include "../includes/function.h"
 
-/* int	main(void)
+int	main(void)
 {
 	exit(255);
 	return (0);
-} */
+}
