@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:33:26 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/11 16:53:30 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 17:02:47 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	exit_last(t_command *all)
 	}
 	if (ft_strcmp("exit", last->cmd_to_exec[0]) == 0)
 	{
-		if ((ft_count_line(last->cmd_to_exec) >=2))
+		if ((ft_count_line(last->cmd_to_exec) >= 2))
 			g_status = 1;
 		if (last->cmd_to_exec[1] && is_str_digit(last->cmd_to_exec[1]))
 			g_status = 2;

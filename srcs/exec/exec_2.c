@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:23:21 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/11 16:37:44 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 17:07:37 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,49 @@ char	*find_path_cmd_bis(char *cmd_to_join)
 	return (cmd);
 }
 
+int	find_path_cmd_ter(char **all_cmd_path, char *cmd)
+{
+	if (!all_cmd_path)
+	{
+		free(cmd);
+		return (FALSE);
+	}
+	return (TRUE);
+}
+
 /*Trouve si la cmd en parametre est une cmd
 avec un chemin relatif*/
 
 char	*find_path_cmd(char *cmd_to_join, char *tmp)
+{
+	int		i;
+	char	*path;
+	char	**all_cmd_path;
+	char	*cmd;
+
+	cmd = find_path_cmd_bis(cmd_to_join);
+	if (!cmd)
+		return (NULL);
+	all_cmd_path = ft_split(tmp, ':');
+	if (find_path_cmd_ter(all_cmd_path, cmd) == FALSE)
+		return (NULL);
+	i = -1;
+	while (all_cmd_path[++i])
+	{
+		path = ft_strjoin(all_cmd_path[i], cmd);
+		if (access(path, F_OK | X_OK) == 0)
+		{
+			free(cmd);
+			ft_free_tab_2d(all_cmd_path);
+			return (path);
+		}
+		free(path);
+	}
+	free(cmd);
+	return (ft_free_tab_2d(all_cmd_path));
+}
+
+/* char	*find_path_cmd(char *cmd_to_join, char *tmp)
 {
 	int		i;
 	char	*path;
@@ -82,7 +121,7 @@ char	*find_path_cmd(char *cmd_to_join, char *tmp)
 	}
 	free(cmd);
 	return (ft_free_tab_2d(all_cmd_path));
-}
+} */
 
 /*Va regarder si la commande est une commande
 avec un chemin absolut ou relatif, renvoi le path

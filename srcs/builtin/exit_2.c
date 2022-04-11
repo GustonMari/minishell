@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 09:48:33 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/11 14:43:58 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 17:02:12 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_exit(t_command *all, t_to_clean *clean)
 				&& ft_lstsize_cmd_pipe(clean->command_begin) == 0)
 					g_status = 2;
 			ft_clean_exit(clean);
-			
 			exit(g_status);
 		}
 		exit_overflow(all->cmd_to_exec[1], clean);

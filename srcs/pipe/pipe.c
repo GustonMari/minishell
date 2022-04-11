@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:55:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/11 16:53:38 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 17:02:35 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	dup_pipe(int *save)
 int	execute_pipe_bis(t_command *all_cmd,
 	t_to_clean *clean, int *save, int out)
 {
-	int pid;
+	int	pid;
 	int	ret;
 
 	pid = -1;
