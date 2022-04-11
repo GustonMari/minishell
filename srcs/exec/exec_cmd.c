@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:48:11 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/08 16:39:39 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 10:27:22 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,11 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 	char	*path;
 	char	*tmp;
 	int		pid;
+	int		status;
 
 	path = NULL;
 	if (prio_exit(all) == TRUE)
-	{
 		g_status = 0;
-	}
 	signal_manager2();
 	if (ft_strcmp(all->cmd_to_exec[0], "./minishell") == 0)
 	{
@@ -104,6 +103,9 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 		free(path);
 		return (0);
 	}
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status) > 0)
+		g_status = (WEXITSTATUS(status));
 	return (0);
 }
 
