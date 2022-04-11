@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:33:26 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/11 15:55:48 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 16:53:30 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,8 @@ int	exit_last(t_command *all)
 void	wait_last(int pid, t_command *all)
 {
 	int		status;
-	(void)pid;
 
-	if (exit_last(all) == TRUE)
+	if (exit_last(all) == TRUE && pid != -1)
 	{
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status) > 0)

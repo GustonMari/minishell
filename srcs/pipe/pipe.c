@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:55:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/11 15:49:53 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 16:53:38 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	execute_pipe_bis(t_command *all_cmd,
 	int pid;
 	int	ret;
 
+	pid = -1;
 	ret = -1;
 	ret = redirection_manager(&all_cmd);
 	if (ret == -1)
