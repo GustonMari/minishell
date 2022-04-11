@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:48:11 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/11 15:43:42 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 15:52:42 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)
 		free(path);
 		return (0);
 	}
-	wait_last(pid, clean->command_begin);
-	return (0);
+	return (pid);
 }
 
 /* int	ft_exec_cmd(char **env, t_to_clean *clean, t_command *all, int out)

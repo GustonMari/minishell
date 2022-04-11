@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:33:26 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/11 15:43:39 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 15:55:48 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,8 @@ void	wait_last(int pid, t_command *all)
 
 	if (exit_last(all) == TRUE)
 	{
-		fprintf(stderr, "hey\n");
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status) > 0)
 			g_status = (WEXITSTATUS(status));
-		fprintf(stderr, "mdr\n");
 	}
 }

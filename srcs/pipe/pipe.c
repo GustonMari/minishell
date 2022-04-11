@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 13:55:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/11 10:17:38 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 15:49:53 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ void	dup_pipe(int *save)
 	close(save[1]);
 }
 
-void	execute_pipe_bis(t_command *all_cmd,
+int	execute_pipe_bis(t_command *all_cmd,
 	t_to_clean *clean, int *save, int out)
 {
+	int pid;
 	int	ret;
 
 	ret = -1;
@@ -78,11 +79,13 @@ void	execute_pipe_bis(t_command *all_cmd,
 	}
 	else if (all_cmd && all_cmd->type != CHV_R && all_cmd->type != D_CHV_R
 		&& all_cmd->type != CHV_L && all_cmd->type != D_CHV_L)
-		ft_exec(clean->env, all_cmd, clean, out);
+		pid = ft_exec(clean->env, all_cmd, clean, out);
+	return (pid);
 }
 
 int	execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env, int in)
 {
+	int	pid;
 	int	out;
 	int	i;
 	int	save[2];
@@ -98,12 +101,13 @@ int	execute_pipe(t_command *all_cmd, t_to_clean *clean, char **env, int in)
 		save[0] = dup(0);
 		save[1] = dup(1);
 		ft_pipe(i == 0, is_last_cmd(all_cmd), &out);
-		execute_pipe_bis(all_cmd, clean, save, out);
+		pid = execute_pipe_bis(all_cmd, clean, save, out);
 		redirection_clean(all_cmd);
 		count_all_between_pipe(&all_cmd);
 		dup_pipe(save);
 		i++;
 	}
+	wait_last(pid, clean->command_begin);
 	wait_pipe();
 	return (0);
 }

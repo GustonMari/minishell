@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:00:48 by gmary             #+#    #+#             */
-/*   Updated: 2022/03/31 15:49:37 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/11 15:48:23 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int	ft_exec(char **env, t_command *all_cmd, t_to_clean *clean, int out)
 	if (builtin)
 		env = ft_exec_builtin(env, clean, all_cmd->cmd_to_exec, builtin);
 	else
-		ft_exec_cmd(env, clean, all_cmd, out);
+		return (ft_exec_cmd(env, clean, all_cmd, out));
 	return (0);
 }
