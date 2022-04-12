@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollars_4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 09:15:34 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/11 18:26:45 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/12 13:55:56 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,12 @@ char	*replace_interrogation(char *str, int pos, t_to_clean *clean,
 
 char	*expand_dollar_bis(char *str, int i, t_to_clean *clean)
 {
-	//WARNINGULTRA
 	(void)clean;
 	i = 0;
 	while (str[i])
 	{
 		if (str[i] == BACK_SLASH && str[i + 1] && str[i + 1] == '$')
 		{
-			//str = del_one_back_slash(str, clean);
 			i++;
 		}
 		i++;
@@ -74,7 +72,6 @@ void	expand_dollar_quin(char *str, int *i)
 	if (str[*i] != BACK_SLASH
 		|| (str[*i] == BACK_SLASH && str[(*i) + 1] && str[(*i) + 1] != '$'))
 		(*i)++;
-	//WARNINGBIG
 	if (str[*i] == BACK_SLASH && str[*i + 1] == '\0')
 		(*i)++;
 }

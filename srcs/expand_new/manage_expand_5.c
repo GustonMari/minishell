@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_expand_5.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:59:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/11 18:16:30 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/12 13:54:22 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ int	find_next_block_modif(char *str)
 
 char	*expand_node_else(char *str, char *block, t_to_clean *clean, int *i)
 {
-	//WARNINGBIG
-	//find_next_block_modif etait find_next_block
 	block = cpy_block(&str[*i], find_next_block_modif(&str[*i]), clean);
 	(*i) += find_next_block_modif(&str[*i]);
 	return (block);
