@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_expand_single_2.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:07:18 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/04 16:50:00 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/12 10:44:47 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,19 @@ char	*expand_node_single_else(char *str, t_to_clean *clean, int *i,
 {
 	char	*block;
 
-	block = cpy_block(&str[*i], find_next_block(&str[*i]), clean);
+	block = cpy_block(&str[*i], find_next_block_single_else(&str[*i]), clean);
 	if (!block)
 		return (exit_expand_node_single(clean, clean->env, str, expanded));
 	return (block);
 }
+
+/* char	*expand_node_single_else(char *str, t_to_clean *clean, int *i,
+		char *expanded)
+{
+	char	*block;
+
+	block = cpy_block(&str[*i], find_next_block(&str[*i]), clean);
+	if (!block)
+		return (exit_expand_node_single(clean, clean->env, str, expanded));
+	return (block);
+} */

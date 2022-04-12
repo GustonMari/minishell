@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   manage_expand_single_3.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:49:23 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/08 17:07:08 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/04/12 10:44:27 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
+
+int	find_next_block_single_else(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[0] && str[0] == '$')
+		i++;
+	while (str[i])
+	{
+		if (str[i] == QUOTE || str[i] == D_QUOTE
+			|| str[i] == '$' || (str[i] == BACK_SLASH
+				&& str[i + 1] && str[i + 1] == '$'))
+			return (i);
+		i++;
+	}
+	return (i);
+}
 
 char	*ft_allocate_exp_single_node(char *expanded, char *block,
 			char *str, t_to_clean *clean)
