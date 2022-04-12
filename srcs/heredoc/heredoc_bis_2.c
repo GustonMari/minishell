@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:30:21 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/04/06 16:47:24 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/12 13:40:27 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	launch_heredoc(t_command **all_cmd, char *name, t_to_clean *clean)
 		launch_heredoc_bis_2(stop, name, is_expand, clean);
 	}
 	else
-		wait_pipe();
+		wait_heredoc();
 	if (g_status == 255)
 	{
 		g_status = 130;

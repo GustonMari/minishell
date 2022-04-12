@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:29:31 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/12 10:43:50 by gmary            ###   ########.fr       */
+/*   Updated: 2022/04/12 13:41:25 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -453,5 +453,6 @@ int			check_file_valid_bis(t_command *tmp, t_command *previous);
 void		wait_last(int pid, t_command *all);
 void		signal_minishell(t_command *all);
 int			find_next_block_single_else(char *str);
+int			wait_heredoc(void);
 
 #endif
